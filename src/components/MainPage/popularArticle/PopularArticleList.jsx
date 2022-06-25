@@ -4,10 +4,14 @@ import styled from "styled-components";
 //컴포넌트
 import ArticleImgCard from "../common/ArticleImgCard";
 import PopularText from "../common/PopularText";
+// 훅
+import { useGetPopularArticles } from "../../../custom/reactQuery/useQuery";
 
 const PopularArticleList = () => {
   // 데이터 받기 전 예시 arr
   const data = [1, 2, 3, 4, 5, 6];
+  // 인기 게시글 데이터 받기
+  // const { data = [], isLoading, isError, error } = useGetPopularArticles();
 
   return (
     <ArticleBox>
