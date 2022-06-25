@@ -3,12 +3,14 @@ import React from "react";
 // 컴포넌트
 import MainArticle from "../components/MainPage/MainArticle/MainArticle";
 import PopularArticle from "../components/MainPage/popularArticle/PopularArticle";
+import RichArticle from "../components/MainPage/richArticle/RichArticle";
 
 const MainPage = () => {
   return (
     <div>
       <MainArticle />
       <PopularArticle />
+      <RichArticle />
     </div>
   );
 };
