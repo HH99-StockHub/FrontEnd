@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import MainPage from "./page/MainPage";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
+import AllArticle from "./page/AllArticle";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/total/:category/articles" element={<AllArticle />} />
       </Routes>
     </div>
   );

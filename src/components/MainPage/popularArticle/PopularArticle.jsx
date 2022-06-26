@@ -8,7 +8,7 @@ import PopularArticleList from "./PopularArticleList";
 const PopularArticle = () => {
   return (
     <WrapBox>
-      <ArticleHeader title="인기 게시글" link="popular" />
+      <ArticleHeader title="인기 게시글" link="/total/popular/articles" />
       <PopularArticleList />
     </WrapBox>
   );

@@ -7,7 +7,7 @@ const ArticleHeader = React.memo(({ title, link }) => {
   return (
     <WrapHead>
       <h3>{title}</h3>
-      <Link to={`/${link}`}>
+      <Link to={link}>
         <button> + 더보기</button>
       </Link>
     </WrapHead>
