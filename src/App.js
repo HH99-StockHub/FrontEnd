@@ -5,6 +5,7 @@ import MainPage from "./page/MainPage";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import TotalArticle from "./page/TotalArticle";
+import AddArticle from "./page/AddArticle";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/total/:category/articles" element={<TotalArticle />} />
+        <Route path="/add/article" element={<AddArticle />} />
       </Routes>
     </div>
   );

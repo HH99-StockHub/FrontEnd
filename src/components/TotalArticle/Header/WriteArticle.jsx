@@ -1,15 +1,18 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 //이미지
 import { ReactComponent as ArticleSvg } from "../../../image/Article.svg";
 
 const WriteArticle = () => {
   return (
-    <Category>
-      <ArticleSvg fill="black" />
-      <div>글쓰기</div>
-    </Category>
+    <Link to="/add/article">
+      <Category>
+        <ArticleSvg fill="black" />
+        <div>글쓰기</div>
+      </Category>
+    </Link>
   );
 };
 
