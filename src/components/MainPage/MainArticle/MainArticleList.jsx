@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 const MainArticleList = () => {
   // 데이터 받기 전 예시 arr
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   // 데이터 가져오기 query
   // const { data = [], isLoading, isError, error } = useGetMainArticles();
 
