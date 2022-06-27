@@ -8,13 +8,13 @@ import FramRichArticle from "./FramRichArticle";
 
 const FameArticle = () => {
   return (
-    <>
+    <div>
       <ArticleFameHeader title="명예의 전당" />
       <WrapContent>
         <FramPopularArticle />
         <FramRichArticle />
       </WrapContent>
-    </>
+    </div>
   );
 };
 

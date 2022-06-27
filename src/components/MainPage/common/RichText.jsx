@@ -1,17 +1,24 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 import styled from "styled-components";
+// 커스텀 훅
 import usePriceYield from "../../../custom/priceYield";
 import useSliceNum from "../../../custom/sliceNum";
-
+//이미지
+import { ReactComponent as UpStockSvg } from "../../../image/UpStock.svg";
 const RichText = ({ lastStock, nowStock }) => {
   return (
-    <WrapText>{useSliceNum(usePriceYield(lastStock, nowStock))} %</WrapText>
+    <WrapText>
+      <UpStockSvg />
+      <p>{useSliceNum(usePriceYield(lastStock, nowStock))} %</p>
+    </WrapText>
   );
 };
 
 export default RichText;
+
 const WrapText = styled.div`
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 3px;
 `;

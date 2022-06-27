@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 //컴포넌트
-import FramPopularCard from "./FramPopularCard";
+import FramRichCard from "./FramRichCard";
 
 const FramRichArticle = () => {
   //테스트 arr
@@ -12,7 +12,7 @@ const FramRichArticle = () => {
       <Title>수익률 TOP</Title>
       <WrapCard>
         {data.map((v) => {
-          return <FramPopularCard />;
+          return <FramRichCard />;
         })}
       </WrapCard>
     </div>
