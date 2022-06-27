@@ -18,5 +18,4 @@ export default MainArticle;
 const WrapBox = styled.div`
   width: 588px;
   height: 288px;
-  border: 1px solid #000;
 `;

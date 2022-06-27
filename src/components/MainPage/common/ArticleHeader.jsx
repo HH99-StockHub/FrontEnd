@@ -29,6 +29,7 @@ const WrapHead = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 12px;
   a {
     display: flex;
     gap: 5px;
