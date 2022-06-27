@@ -55,7 +55,6 @@ const AddArticleForm = () => {
         stockPoint[l]?.content === "" ||
         stockPoint[l]?.title === ""
       ) {
-        console.log("aaa");
         state = true;
       }
     });
@@ -72,8 +71,6 @@ const AddArticleForm = () => {
         data["point" + String(l + 1)] = v.title;
         data["content" + String(l + 1)] = v.content;
       });
-
-      console.log(data);
     }
   };
   // 투자 포인트 작성하기
