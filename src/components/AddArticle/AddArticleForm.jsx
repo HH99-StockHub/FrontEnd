@@ -60,14 +60,22 @@ const AddArticleForm = () => {
       alert("최소 하나의 투자 포인트가 있어야합니다.");
     }
   };
+
   // 검색어와 동일한 data만 색출하기
   useEffect(() => {
     const changeSotck = setTimeout(() => {
       const changeData = data.filter((v, l) => {
-        return v.slice(0, stockInput.length) === stockInput;
+        if (stockInput.length !== 0) {
+          return v.slice(0, stockInput.length) === stockInput;
+        } else {
+          return false;
+        }
       });
       setStockArr(changeData);
     }, 300);
+    if (stockInput === "") {
+      setStockArr([]);
+    }
     return () => {
       clearTimeout(changeSotck);
     };
@@ -95,9 +103,11 @@ const AddArticleForm = () => {
           return (
             <div key={v.key}>
               <input type="text" />
-              <span id={v.key} onClick={deleteTextarea}>
-                삭제
-              </span>
+              {l === 0 ? null : (
+                <span id={v.key} onClick={deleteTextarea}>
+                  삭제
+                </span>
+              )}
               <br></br>
               <TextareaText name={v.key} cols="30" rows="5"></TextareaText>
             </div>
@@ -121,14 +131,12 @@ export default AddArticleForm;
 const WrapForm = styled.div`
   border: 1px solid #000;
 `;
-
 const WrapSelect = styled.div`
   display: flex;
   span {
     border: 1px solid #000;
   }
 `;
-
 const TextareaText = styled.textarea`
   resize: none;
 `;
