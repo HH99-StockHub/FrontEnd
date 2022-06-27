@@ -10,7 +10,7 @@ const MainPage = () => {
     <div>
       <MainArticle />
       <PopularArticle />
-      <RichArticle />
+      {/* <RichArticle /> */}
     </div>
   );
 };

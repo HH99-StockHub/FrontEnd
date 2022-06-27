@@ -14,6 +14,6 @@ export default ArticleImgCard;
 
 const CompanyImg = styled.img`
   border: 1px solid #000;
-  width: 100px;
-  height: 100px;
+  width: 72px;
+  height: 72px;
 `;
