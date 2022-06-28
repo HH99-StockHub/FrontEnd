@@ -2,9 +2,10 @@
 import React from "react";
 //CSS
 import "../SlideStock.scss";
+import style from 'styled-components';
 const SlideStock = () => {
   return (
-    <div>
+    <SlideStock1>
       <div className="ticker-wrap">
         <div className="ticker">
           <div className="ticker__item">
@@ -17,8 +18,18 @@ const SlideStock = () => {
           </div>
         </div>
       </div>
-    </div>
+    </SlideStock1>
   );
 };
+
+const SlideStock1 = style.div`
+  position: absolute;
+  width: 1980px;
+  height: 40px;
+  left: 0px;
+  top:72px;
+
+  background: #999999
+`
 
 export default SlideStock;
