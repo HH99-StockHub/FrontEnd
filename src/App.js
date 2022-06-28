@@ -6,6 +6,7 @@ import MainPage from "./page/MainPage";
 import GlobalStyle from "./elem/GlobalStyle";
 import TotalArticle from "./page/TotalArticle";
 import AddArticle from "./page/AddArticle";
+import DetailArticle from "./components/DetailArticle/DetailArticle";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/total/:category/articles" element={<TotalArticle />} />
         <Route path="/add/article" element={<AddArticle />} />
+        <Route path="/detailarticle" element={<DetailArticle />} />
       </Routes>
     </div>
   );
