@@ -9,7 +9,7 @@ const FramRichArticle = () => {
   const data = [1, 2, 3];
   return (
     <div>
-      <Title>수익률 TOP</Title>
+      <Title>수익왕 베스트</Title>
       <WrapCard>
         {data.map((v) => {
           return <FramRichCard />;
@@ -22,8 +22,8 @@ const FramRichArticle = () => {
 export default FramRichArticle;
 
 const Title = styled.h3`
-  margin-bottom: 14px;
-  font-size: 14px;
+  margin-bottom: 9px;
+  font-size: 12px;
   font-weight: 700;
 `;
 

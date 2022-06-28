@@ -9,7 +9,7 @@ const FramPopularArticle = () => {
   const data = [1, 2, 3];
   return (
     <div>
-      <Title>인기 게시물</Title>
+      <Title>인기 베스트</Title>
       <WrapCard>
         {data.map((v) => {
           return <FramPopularCard />;
@@ -22,8 +22,8 @@ const FramPopularArticle = () => {
 export default FramPopularArticle;
 
 const Title = styled.h3`
-  margin-bottom: 14px;
-  font-size: 14px;
+  margin-bottom: 9px;
+  font-size: 12px;
   font-weight: 700;
 `;
 

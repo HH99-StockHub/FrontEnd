@@ -10,7 +10,7 @@ const RichText = ({ lastStock, nowStock }) => {
   return (
     <WrapText>
       <UpStockSvg />
-      <p>{useSliceNum(usePriceYield(lastStock, nowStock))} %</p>
+      <p>{useSliceNum(usePriceYield(lastStock, nowStock))}%</p>
     </WrapText>
   );
 };
@@ -19,6 +19,10 @@ export default RichText;
 
 const WrapText = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  gap: 5px;
+  align-items: center;
+  p {
+    font-size: 9px;
+    font-weight: 700;
+  }
 `;

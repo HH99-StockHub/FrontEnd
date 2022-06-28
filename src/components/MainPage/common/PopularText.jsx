@@ -7,7 +7,7 @@ import { ReactComponent as UpSvg } from "../../../image/Up.svg";
 const PopularText = React.memo(({ upCount }) => {
   return (
     <WrapText>
-      <UpSvg />
+      <UpSvg width="11" height="10" />
       <p>{upCount}</p>
     </WrapText>
   );
@@ -17,6 +17,10 @@ export default PopularText;
 
 const WrapText = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  gap: 5px;
+  align-items: center;
+  p {
+    font-size: 9px;
+    font-weight: 700;
+  }
 `;

@@ -37,4 +37,5 @@ const WrapText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 12px 0;
 `;

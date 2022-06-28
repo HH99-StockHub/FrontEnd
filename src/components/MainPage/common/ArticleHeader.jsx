@@ -18,10 +18,12 @@ const ArticleHeader = React.memo(({ title, subTitle, link }) => {
       </WrapTitle>
       <div>
         <SubTitle>{subTitle}</SubTitle>
-        <Link to={link}>
-          <PlusSvg />
-          <button>더보기</button>
-        </Link>
+        {link && (
+          <Link to={link}>
+            <PlusSvg />
+            <button>더보기</button>
+          </Link>
+        )}
       </div>
     </WrapHead>
   );

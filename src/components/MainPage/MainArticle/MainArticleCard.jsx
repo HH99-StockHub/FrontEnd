@@ -12,11 +12,11 @@ const MainArticleCard = ({ date, title, user, watch, up, down }) => {
       <td>{user}</td>
       <td>{watch}</td>
       <UpDownTd>
-        <UpSvg />
+        <UpSvg width="12" height="11" />
         <span>{up}</span>
       </UpDownTd>
       <UpDownTd>
-        <DownSvg />
+        <DownSvg width="12" height="11" />
         <span>{down}</span>
       </UpDownTd>
     </WrapCard>
