@@ -18,7 +18,10 @@ function App() {
       <SlideStock />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/total/:category/articles" element={<TotalArticle />} />
+        <Route
+          path="/total/:category/articles/:page"
+          element={<TotalArticle />}
+        />
         <Route path="/add/article" element={<AddArticle />} />
         <Route path="/detailarticle" element={<DetailArticle />} />
       </Routes>

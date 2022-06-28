@@ -3,12 +3,14 @@ import React from "react";
 // 컴포넌트
 import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
 import TotalArticleContent from "../components/TotalArticle/TotalArticleContent";
+import TotalPagenation from "../components/TotalArticle/TotalPagenation";
 
 const TotalArticle = () => {
   return (
     <div>
       <TotalArticleHeader />
       <TotalArticleContent />
+      <TotalPagenation />
     </div>
   );
 };

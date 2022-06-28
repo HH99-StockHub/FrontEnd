@@ -11,7 +11,7 @@ const RichArticle = () => {
       <ArticleHeader
         subTitle="수익왕 달성을 축하드립니다!"
         title="수익왕 게시글"
-        link="/total/rich/articles"
+        link="/total/rich/articles/1"
       />
       <RichArticleList />
     </WrapBox>

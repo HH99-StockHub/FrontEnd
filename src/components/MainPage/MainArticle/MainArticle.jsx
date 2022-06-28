@@ -11,7 +11,7 @@ const MainArticle = () => {
       <ArticleHeader
         subTitle="전체 게시판"
         title="전체 게시글"
-        link="/total/all/articles"
+        link="/total/all/articles/1"
       />
       <MainArticleList />
     </WrapBox>

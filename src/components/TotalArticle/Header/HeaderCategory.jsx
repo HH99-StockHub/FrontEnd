@@ -20,14 +20,14 @@ const HeaderCategory = () => {
     <WrapCategory>
       {arr.map((v, l) => {
         return category === v.category ? (
-          <Link to={`/total/${v.category}/articles`}>
+          <Link to={`/total/${v.category}/articles/1`}>
             <CurrentCategory>
               <ArticleSvg fill="white" />
               <div>{v.name}</div>
             </CurrentCategory>
           </Link>
         ) : (
-          <Link to={`/total/${v.category}/articles`}>
+          <Link to={`/total/${v.category}/articles/1`}>
             <Category>
               <ArticleSvg fill="black" />
               <div>{v.name}</div>
