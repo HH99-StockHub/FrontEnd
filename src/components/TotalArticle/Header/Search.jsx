@@ -3,9 +3,9 @@ import React from "react";
 
 const Search = () => {
   return (
-    <div>
+    <form>
       <input type="text" placeholder="관심있는 내용을 검색하세요" />
-    </div>
+    </form>
   );
 };
 

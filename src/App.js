@@ -2,17 +2,19 @@
 import { Route, Routes } from "react-router-dom";
 //컴포넌트
 import MainPage from "./page/MainPage";
-//CSS
-import GlobalStyle from "./elem/GlobalStyle";
+import Header from "./repeat/Header";
 import TotalArticle from "./page/TotalArticle";
 import AddArticle from "./page/AddArticle";
 import DetailArticle from "./components/DetailArticle/DetailArticle";
 import SlideStock from "./repeat/SlideStock";
+//CSS
+import GlobalStyle from "./elem/GlobalStyle";
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
+      <Header />
       <SlideStock />
       <Routes>
         <Route path="/" element={<MainPage />} />
