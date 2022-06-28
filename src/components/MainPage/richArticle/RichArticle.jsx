@@ -8,7 +8,11 @@ import RichArticleList from "./RichArticleList";
 const RichArticle = () => {
   return (
     <WrapBox>
-      <ArticleHeader title="수익왕 게시글" link="/total/rich/articles" />
+      <ArticleHeader
+        subTitle="수익왕 달성을 축하드립니다!"
+        title="수익왕 게시글"
+        link="/total/rich/articles"
+      />
       <RichArticleList />
     </WrapBox>
   );
@@ -16,8 +20,4 @@ const RichArticle = () => {
 
 export default RichArticle;
 
-const WrapBox = styled.div`
-  width: 588px;
-  height: 288px;
-  border: 1px solid #000;
-`;
+const WrapBox = styled.div``;

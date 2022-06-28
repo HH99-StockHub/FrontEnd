@@ -2,10 +2,8 @@
 import React from "react";
 import styled from "styled-components";
 //컴포넌트
-import ArticleImgCard from "../FameArticle/ArticleImgCard";
-import RichText from "../FameArticle/RichText";
-import ArticleTextCard from "../FameArticle/ArticleTextCard";
-
+import CardImg from "../common/CardImg";
+import CardTextRich from "../common/CardTextRich";
 const RichArticleList = () => {
   // 데이터 받기 전 예시 arr
   const data = [1, 2, 3, 4, 5, 6];
@@ -15,11 +13,17 @@ const RichArticleList = () => {
         {data.map((v) => {
           return (
             <WrapCard>
+              <WrapImgText>
+                <CardImg
+                  imgUrl={
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAAAyCAMAAABRcrRnAAAAY1BMVEX////90QD9zwD90AD9zgD+777+7bn+67T9zAD91jf91kL///3+44z+4YP90iT/+ej//PL+67D+8cj+89L/9+H+6KH92VX91kj90Rb+6an+5ZX92l3+9dj+78L92E/+33n+3Wy9XCD4AAADP0lEQVRYhe2X2babMAxFsawmTGEKhAA3If//lZVsY2xD2ty1+tB2oZcwHNi2JR2TKDriiP8vsrL++lzcfkP8y3gAxuePxRLjH3+Ge0YBp4/FIODgHtyD+3dys75Z75T1/Ez7W359x02uW3HoZtdxej6nvInC8LgzYJ7pEZxTBKkCn9Uu9wU4muHWq/hmxRRNYq5jES6Ty6VjEesR17EUUgKAFELC8i6XW7O4VYeDK76v4BH5YUS+jvNbbksyNF6dAcRpXj/OMz87bblK/FjFfX5+1C9XrLDY19fr6cZHl3fcQgqwN7tBL3hUAj3ThtzsLgTkllAbceuIvxhW6+OGj70kr9wXCPmMtnEiWBdyJ7kv5tcZ8VPaQ3oJCpnscgca0t0tChto185yOxZnO9qKxqMzyYko1hu9FOgW+8JV+drf0xMhe5+rlrDdFaeLeABnupozbrmcryUZYdykTD1uxeI3ZtNLs54vf4JlkEXDneiNQaVzZBRb7uQWYCC23ILG5qQto/P7hkv52pRJc3kmBQeN1ONSf8jbO7FY6od6tnArIKE7zrniZjF1hf+V1RQolRcAtYbHrVjs28/j7oo1l468Ak6o4pz56/kOYaGwGyFMF4q8CObbheLBF3+DS84s3MslG8/S51OYXxY7XcStAIvY5veTdabfVNpZUczSmdGmrgIxV265nLh1Bb+tK7pO44PXclW4lbPlViy25V84nvzdPjLGsXQ2Vaw13x2uNg7jCjSI1alXLvuGYxT1vm9EykIFGtcn7tqgO1y1ZRqjr8AdpOWWvk+mb3ySIuf60Fl189eF/avFvPOorFLmFh/VYlPGk7sOVPKrKOCy0mwNnBzlmlmTotjj0ioIqQuWHtOumT3StX+9xKlOcz6LfG5GO7Ae1ZV1t3F8kSFA2L+LWJhKaVzxfd3vGAZFXp/HxK2dLVft8frf4YVnKekDBbD7wj2uSqD+d6i+SUCJBxJbuxhQmhtCBlj6kALnf2gTL98uHSC5HuKliqoYzatqhHjdhx7x8gnRsZYeyJV4rab2RjfYQbH3FpmiatvWae/BGkDWdN2g1STZFXeueNTizIr1opzyeb6cy+iII4444p+Lnw9/K/gAI8FxAAAAAElFTkSuQmCC"
+                  }
+                />
+                <CardTextRich company={"카카오"} stock={"12"} />
+              </WrapImgText>
               <WrapText>
-                <ArticleTextCard title="쿠팡" userId="btae" />
-                <RichText upCount="10" downCount="1" />
+                글 제목이 있으면 유저들이 미리 내용을 파악할 수 있어요
               </WrapText>
-              <ArticleImgCard imgUrl="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAABBCAMAAADcxMsIAAAAflBMVEX39/f///wAAJkAHp77+/kOJZ8ADZsAG50AAJYAFpx5gL9rc7oAE5wSJ6BvdLqvstXg4u0uO6Zja7cFIZ4YLKLNz+Pq6/Hy8vWMkMXCxd6IjMReZ7Wbn81nbbZbYLKhpdCnq9I9RahQVq2Sl8lGTaslM6QyQanX2ei3utmEhcCySkFsAAADGElEQVRYhe2V25aqOhBFqaJys4OgkQBeABWE/v8f3BW0e1/6AR/PGSPrAUOyzExSRSpJoqKioqKioqKioqL+h4LE+wooNAmCluZX648eqio2P8do8X75kq83fg0megNLx521h61nLxXtfr9vy4CrT0sLzqdXD92vqdp9Vjx2b9uG/O104XYYPxGV7enOYMiHTO0uxToYWulU6swYpp5RPRSewwStUSN2AIMdFeaUwEmnqXJ2gAQ+LOZQaDWybyNThSU0aC88ckaHmCrp18BUYKa8Pzg98dxHZe423S5cZ7ZyA8lotqnMiQopDr5wTvsEQg8UKHaBq8TD3qGR6QckJISc/eBkt8otMUsBtsMjcFuHkxTjk4u9vkFhVWdszweJ3A+X4VHQP1xTy+HFrbTIAO5ab2CN65l7KzhRQlDTDKud0KF5c1jiLilxyK3tgLz89v3DlY1AX7642YGo4jxdj2+nhcONDwv0mvcU9kwL12fW57iZpT0voQu+KpzF31ycWsynby6UTdNMbyTWfLCZUQ1Hp0HX8kSW04gGp6sbTkfsnlz2ZexLyx/7xanT++I3t9W4fs4JEdAdhUCO29moDXRWffIarkInG5xPWM7S8CfCHyjVwfcjr3RZ6Ky039xmm4YZVrBFn/dQHATvCT5SjmQj3Y0xD4FJj/dReubWQMW562E6ZJzbP7iwk136HV/I5RvcRlvNKWjC3FcnGwgJXSU0Cl2VeEsVzFIdgX1SAHwq24f1/Z1XUMs2W7h8IAC9fYM7YSab8Mnl4F0mC6pkxmdOB05tnob3PoflB5+aJz6FhuNh3W3aKE6GF7eUYuHCzpnPeRTholkDt1JovmJMRZM2yJerNboh4mcFxuARco2cJnBZriK74xh4rRTalG0ca9QzJUZK3IfM1EaiwmGNGsD1VZmR72cqj3XNgK4+Mreuj1VolqE7LB+62zhe6+UvfnN9XC9lqAdNnnNG8jNvgqk4tu2lX83moGedoeSPCvOsQ78Lz6tCJRU9Z6TF8SxhFG4cev68Kto75SgqKioqKioqKioq6j+nX9XvOB9derqcAAAAAElFTkSuQmCC" />
             </WrapCard>
           );
         })}
@@ -32,25 +36,35 @@ export default RichArticleList;
 
 const ArticleBox = styled.div`
   display: flex;
+  justify-content: space-between;
+  gap: 14px 0;
   flex-wrap: wrap;
-  gap: 60px 20px;
   width: 588px;
-  border: 1px solid #000;
 `;
-
 const WrapCard = styled.div`
   display: flex;
-  gap: 10px;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 166px;
-  height: 92px;
-  padding: 10px 12px;
+  flex-direction: column;
+  gap: 5px;
+  width: 179px;
+  height: 112px;
+  padding: 18px 14px;
   border: 1px solid #000;
 `;
-
-const WrapText = styled.div`
+const WrapImgText = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  gap: 9px;
+`;
+
+const WrapText = styled.p`
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+  display: -webkit-box;
+  width: 100%;
+  height: 32px;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

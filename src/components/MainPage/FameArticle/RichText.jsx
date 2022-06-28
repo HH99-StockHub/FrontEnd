@@ -9,7 +9,7 @@ import { ReactComponent as UpStockSvg } from "../../../image/UpStock.svg";
 const RichText = ({ lastStock, nowStock }) => {
   return (
     <WrapText>
-      <UpStockSvg />
+      <UpStockSvg width="9.79" height="5.8" />
       <p>{useSliceNum(usePriceYield(lastStock, nowStock))}%</p>
     </WrapText>
   );
