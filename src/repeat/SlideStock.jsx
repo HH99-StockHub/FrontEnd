@@ -2,7 +2,11 @@
 import React from "react";
 //CSS
 import "../SlideStock.scss";
+//이미지
+import { ReactComponent as UpArrowSvg } from "../image/UpArrow.svg";
 const SlideStock = () => {
+  // 예시 잉여 arr
+  const data = [1, 2, 3, 4, 6, 6, 77, 6];
   return (
     <div>
       <div className="ticker-wrap">
@@ -10,11 +14,23 @@ const SlideStock = () => {
           <div className="ticker__item">
             <span>22-06-27</span>
           </div>
-          <div className="ticker__item">
-            <span className="flex">삼성전자</span>
-            <span className="flex">58,000</span>
-            <span className="flex">-0.5%</span>
-          </div>
+          {data.map((v) => {
+            return (
+              <>
+                <div className="ticker__item">
+                  <p>
+                    S&P 500 <span>4,530.41</span>
+                  </p>
+                </div>
+                <div className="ticker__item">
+                  <div className="tickerPoint">
+                    <span>-1.56</span>
+                    <UpArrowSvg />
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
     </div>

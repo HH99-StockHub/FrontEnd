@@ -29,15 +29,17 @@ $duration: 30s;
 .ticker-wrap {
   width: 100%;
   overflow: hidden;
-  height: 2rem;
+  height: 40px;
   background-color: rgba(#000, 0.9); 
   padding-left: 100%;
   box-sizing: content-box;
 
   .ticker {
 
-    display: inline-block;
-    height: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 40px;
     white-space: nowrap;
     padding-right: 100%;
     box-sizing: content-box;
@@ -53,11 +55,10 @@ $duration: 30s;
 
     &__item {
 
-      display: inline-block;
-
-      padding: 0 2rem;
+      display: flex;
       font-size: 1rem;
       color: white;   
+      font-size: 16px;
 
     }
 
@@ -65,6 +66,8 @@ $duration: 30s;
 
 }
 
-.flex{
-  margin-right: 10px;
+.tickerPoint{
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
