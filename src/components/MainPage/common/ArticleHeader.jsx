@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { ReactComponent as ArticleSvg } from "../../../image/Article.svg";
 import { ReactComponent as PlusSvg } from "../../../image/Plus.svg";
 
-const ArticleHeader = React.memo(({ title, link }) => {
+const ArticleHeader = React.memo(({ title, subTitle, link }) => {
   return (
     <WrapHead>
       <WrapTitle>
@@ -16,10 +16,13 @@ const ArticleHeader = React.memo(({ title, link }) => {
         </span>
         <p>{title}</p>
       </WrapTitle>
-      <Link to={link}>
-        <PlusSvg />
-        <button>더보기</button>
-      </Link>
+      <div>
+        <SubTitle>{"subTitle"}</SubTitle>
+        <Link to={link}>
+          <PlusSvg />
+          <button>더보기</button>
+        </Link>
+      </div>
     </WrapHead>
   );
 });
@@ -27,9 +30,14 @@ export default ArticleHeader;
 
 const WrapHead = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+  div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+  }
   a {
     display: flex;
     gap: 5px;
@@ -41,7 +49,7 @@ const WrapHead = styled.div`
   }
 `;
 
-const WrapTitle = styled.div`
+const WrapTitle = styled.h3`
   display: flex;
   align-items: center;
   gap: 10px;
@@ -50,3 +58,5 @@ const WrapTitle = styled.div`
     font-weight: 700;
   }
 `;
+
+const SubTitle = styled.div``;

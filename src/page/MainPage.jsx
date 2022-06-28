@@ -6,10 +6,12 @@ import MainArticle from "../components/MainPage/MainArticle/MainArticle";
 import PopularArticle from "../components/MainPage/popularArticle/PopularArticle";
 import RichArticle from "../components/MainPage/richArticle/RichArticle";
 import FameArticle from "../components/MainPage/FameArticle/FameArticle";
+import ArticleSubHeader from "../components/MainPage/common/ArticleSubHeader";
 
 const MainPage = () => {
   return (
     <WrapMainContent>
+      <ArticleSubHeader />
       <MainArticle />
       <FameArticle />
       <PopularArticle />
