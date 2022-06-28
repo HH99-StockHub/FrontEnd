@@ -10,13 +10,15 @@ import ArticleSubHeader from "../components/MainPage/common/ArticleSubHeader";
 
 const MainPage = () => {
   return (
-    <WrapMainContent>
+    <>
       <ArticleSubHeader />
-      <MainArticle />
-      <FameArticle />
-      <PopularArticle />
-      <RichArticle />
-    </WrapMainContent>
+      <WrapMainContent>
+        <MainArticle />
+        <FameArticle />
+        <PopularArticle />
+        <RichArticle />
+      </WrapMainContent>
+    </>
   );
 };
 
@@ -25,5 +27,6 @@ export default MainPage;
 const WrapMainContent = styled.div`
   display: flex;
   justify-content: center;
+  gap: 67px 24px;
   flex-wrap: wrap;
 `;
