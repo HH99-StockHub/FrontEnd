@@ -23,4 +23,5 @@ const WrapHeader = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
+  margin-top: 16px;
 `;
