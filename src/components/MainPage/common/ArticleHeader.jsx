@@ -17,7 +17,7 @@ const ArticleHeader = React.memo(({ title, subTitle, link }) => {
         <p>{title}</p>
       </WrapTitle>
       <div>
-        <SubTitle>{"subTitle"}</SubTitle>
+        <SubTitle>{subTitle}</SubTitle>
         <Link to={link}>
           <PlusSvg />
           <button>더보기</button>
@@ -59,4 +59,6 @@ const WrapTitle = styled.h3`
   }
 `;
 
-const SubTitle = styled.div``;
+const SubTitle = styled.div`
+  font-size: 14px;
+`;

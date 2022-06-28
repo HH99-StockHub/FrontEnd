@@ -17,8 +17,8 @@ const MainArticleList = () => {
       <THead>
         <tr>
           <th style={{ width: "64px" }}>날짜</th>
-          <th style={{ width: "260px" }}>제목</th>
-          <th style={{ width: "60px" }}>닉네임</th>
+          <th style={{ width: "226px" }}>제목</th>
+          <th style={{ width: "94px" }}>닉네임</th>
           <th style={{ width: "60px" }}>조회수</th>
           <th style={{ width: "72px" }}>추천</th>
           <th style={{ width: "72px" }}>비추천</th>
