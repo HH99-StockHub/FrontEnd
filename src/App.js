@@ -7,11 +7,13 @@ import GlobalStyle from "./elem/GlobalStyle";
 import TotalArticle from "./page/TotalArticle";
 import AddArticle from "./page/AddArticle";
 import DetailArticle from "./components/DetailArticle/DetailArticle";
+import SlideStock from "./repeat/SlideStock";
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
+      <SlideStock />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/total/:category/articles" element={<TotalArticle />} />
