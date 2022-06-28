@@ -2,9 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 //컴포넌트
-import ArticleImgCard from "../common/ArticleImgCard";
-import RichText from "../common/RichText";
-import ArticleTextCard from "../common/ArticleTextCard";
+import ArticleImgCard from "../FameArticle/ArticleImgCard";
+import RichText from "../FameArticle/RichText";
+import ArticleTextCard from "../FameArticle/ArticleTextCard";
 
 const RichArticleList = () => {
   // 데이터 받기 전 예시 arr

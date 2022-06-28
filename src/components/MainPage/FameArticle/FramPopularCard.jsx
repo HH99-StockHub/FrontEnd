@@ -2,9 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 //컴포넌트
-import ArticleImgCard from "../common/ArticleImgCard";
-import PopularText from "../common/PopularText";
-import ArticleTextCard from "../common/ArticleTextCard";
+import ArticleImgCard from "./ArticleImgCard";
+import PopularText from "./PopularText";
+import ArticleTextCard from "./ArticleTextCard";
 
 const FramPopularCard = () => {
   return (

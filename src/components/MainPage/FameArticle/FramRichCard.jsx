@@ -2,9 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 //컴포넌트
-import ArticleImgCard from "../common/ArticleImgCard";
-import RichText from "../common/RichText";
-import ArticleTextCard from "../common/ArticleTextCard";
+import ArticleImgCard from "./ArticleImgCard";
+import RichText from "./RichText";
+import ArticleTextCard from "./ArticleTextCard";
 
 const FramRichCard = () => {
   return (

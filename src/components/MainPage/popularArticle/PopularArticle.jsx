@@ -7,17 +7,22 @@ import PopularArticleList from "./PopularArticleList";
 
 const PopularArticle = () => {
   return (
-    <WrapBox>
-      <ArticleHeader title="인기 게시글" link="/total/popular/articles" />
-      <PopularArticleList />
-    </WrapBox>
+    <div>
+      <ArticleHeader
+        subTitle="인기 달성을 축하드립니다"
+        title="인기글"
+        link="/total/popular/articles"
+      />
+      <WrapCard>
+        <PopularArticleList />
+      </WrapCard>
+    </div>
   );
 };
 
 export default PopularArticle;
 
-const WrapBox = styled.div`
+const WrapCard = styled.div`
   width: 588px;
   height: 288px;
-  border: 1px solid #000;
 `;
