@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 const Profile = () => {
   const [user_id, setUserId] = useState();
@@ -9,17 +9,14 @@ const Profile = () => {
     try {
       // Kakao SDK API를 이용해 사용자 정보 획득
       let data = await window.Kakao.API.request({
-        url: "/v2/user/me",
+        url: '/v2/user/me',
       });
 
       // 사용자 정보 변수에 저장
-      console.log(data);
       setUserId(data.id);
       setNickName(data.properties.nickname);
       setProfileImage(data.properties.profile_image);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
