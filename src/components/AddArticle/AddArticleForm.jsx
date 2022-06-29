@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 //hook
 import { api } from "../../shared/api";
-
+//이미지
+import { ReactComponent as XBtnSbg } from "../../image/XBtn.svg";
 const AddArticleForm = () => {
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
@@ -159,66 +160,101 @@ const AddArticleForm = () => {
     };
   }, [stockInput]);
   return (
-    <WrapForm>
-      <form onSubmit={writeArticle}>
-        <div>
-          <h3>종목 선택</h3>
-          <WrapSelect>
-            <input type="text" value={stockInput} onChange={selectStockList} />
-            {selectStockState &&
-              stockArr.map((v) => {
-                return <p onClick={selectStockOne}>{v}</p>;
-              })}
-            <span>얼마 상승 등 주가</span>
-          </WrapSelect>
-        </div>
-        <div>
-          <h3>제목</h3>
-          <input type="text" ref={articleTitle} />
-        </div>
-        <h3>투자 포인트</h3>
-        {countArr.map((v, l) => {
-          return (
-            <div key={v.key}>
-              <input id={l} type="text" onChange={addStockPoint} />
-              {l === 0 ? null : (
-                <span
-                  id={v.key}
-                  onClick={(e) => {
-                    deleteTextarea(e, l);
-                  }}
-                >
-                  삭제
-                </span>
-              )}
-              <br></br>
-              <TextareaText
-                name={l}
-                cols="30"
-                rows="5"
-                onChange={addStockPoint}
-              ></TextareaText>
-            </div>
-          );
-        })}
+    <WrapToggle>
+      <WrapForm>
+        <Header>
+          <XBtnSbg width={"13.18"} height="13.18" />
+          <p>게시글작성</p>
+          <button type="button">등록하기</button>
+        </Header>
+        <form onSubmit={writeArticle}>
+          <div>
+            <h3>종목 선택</h3>
+            <WrapSelect>
+              <input
+                type="text"
+                value={stockInput}
+                onChange={selectStockList}
+              />
+              {selectStockState &&
+                stockArr.map((v) => {
+                  return <p onClick={selectStockOne}>{v}</p>;
+                })}
+              <span>얼마 상승 등 주가</span>
+            </WrapSelect>
+          </div>
+          <div>
+            <h3>제목</h3>
+            <input type="text" ref={articleTitle} />
+          </div>
+          <h3>투자 포인트</h3>
+          {countArr.map((v, l) => {
+            return (
+              <div key={v.key}>
+                <input id={l} type="text" onChange={addStockPoint} />
+                {l === 0 ? null : (
+                  <span
+                    id={v.key}
+                    onClick={(e) => {
+                      deleteTextarea(e, l);
+                    }}
+                  >
+                    삭제
+                  </span>
+                )}
+                <br></br>
+                <TextareaText
+                  name={l}
+                  cols="30"
+                  rows="5"
+                  onChange={addStockPoint}
+                ></TextareaText>
+              </div>
+            );
+          })}
 
-        <button type="button" onClick={addTextarea}>
-          +
-        </button>
-        <div>
-          <button type="submit">등록하기</button>
-          <button type="button">취소</button>
-        </div>
-      </form>
-    </WrapForm>
+          <button type="button" onClick={addTextarea}>
+            +
+          </button>
+          <div>
+            <button type="submit">등록하기</button>
+            <button type="button">취소</button>
+          </div>
+        </form>
+      </WrapForm>
+    </WrapToggle>
   );
 };
 
 export default AddArticleForm;
 
-const WrapForm = styled.div`
-  border: 1px solid #000;
+const WrapToggle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+  background-color: #ddd;
 `;
+const WrapForm = styled.div`
+  width: 720px;
+  padding: 21px;
+  border: 1px solid #000;
+  background-color: #fff;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 36px;
+  border-bottom: 1px solid #ccc;
+  > p {
+    font-size: 16px;
+    font-weight: 700;
+  }
+`;
+
 const WrapSelect = styled.div`
   display: flex;
   span {
