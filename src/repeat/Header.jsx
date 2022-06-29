@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 
 const Header = () => {
   //   return (
@@ -33,7 +34,7 @@ const Header = () => {
           <Post>내 게시물</Post>
           <Writing>글작성</Writing>
         </>
-        {/* <Login>카카오로그인</Login> */}
+        <KakaoLogin>카카오로그인</KakaoLogin>
       </Header2>
     </Header1>
   );
