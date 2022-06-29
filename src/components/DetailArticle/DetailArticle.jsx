@@ -1,6 +1,7 @@
 import React from "react";
 import { api } from "../../shared/api";
 import Vote from "./Vote";
+import WriteComment from "./WriteComment";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import styled  from "styled-components";
 
@@ -24,6 +25,8 @@ const DetailArticle = () => {
 }
 
   return <div>
+    <WriteComment />
+    <Vote />
     <button onClick={()=>{
       const data = {} //게시글에 대한 데이터 넣기
       mutate(data)
