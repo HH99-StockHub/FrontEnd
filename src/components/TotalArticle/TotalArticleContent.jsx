@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TotalArticleList from "./TotalArticleList";
 
-const TotalArticleContent = () => {
+const TotalArticleContent = ({ data }) => {
   return (
     <div>
       <Table>
@@ -15,7 +15,7 @@ const TotalArticleContent = () => {
           <div style={{ width: "92px" }}>비추천</div>
           <div style={{ width: "92px" }}>수익률</div>
         </WrapTh>
-        <TotalArticleList />
+        <TotalArticleList data={data} />
       </Table>
     </div>
   );

@@ -11,7 +11,23 @@ export const useGetMainArticles = () => {
     return data;
   };
 
-  return useQuery("mainArticles", fetcher);
+  return useQuery(["allArticle", "mainArticles"], fetcher);
+};
+
+// 메인 명예의 전당 게시글 가져오기 인기 / 수익
+export const useGetFamePopularArticle = () => {
+  const fetcher = async () => {
+    const { data } = await api.get("/main/fame/popular/articles");
+    return data;
+  };
+  return useQuery("popularFameArticles", fetcher);
+};
+export const useGetFameRichArticle = () => {
+  const fetcher = async () => {
+    const { data } = await api.get("/main/fame/rich/articles");
+    return data;
+  };
+  return useQuery("richFameArticles", fetcher);
 };
 
 // 메인 페이지 인기 게시글 가져오기
@@ -32,33 +48,33 @@ export const useGetRichArticles = () => {
   return useQuery("richArticles", fetcher);
 };
 
-// ALL 전체 게시글 가져오기
-export const useGetAllMainArticles = () => {
+// ALL 카테고리 별로 게시글 가져오기
+export const useGetAllArticles = (category, page) => {
   const fetcher = async () => {
-    const { data } = await api.get("/all/articles");
+    const { data } = await api.get(`/${category}/articles`);
     return data;
   };
 
-  return useQuery(["allArticle", "allMainArticles"], fetcher);
+  return useQuery(["allArticle", category, page], fetcher);
 };
 
 // ALL 인기 게시글 가져오기
-export const useGetAllPopularArticles = () => {
-  const fetcher = async () => {
-    const { data } = await api.get("/popular/articles");
-    return data;
-  };
-  return useQuery(["allArticle", "allPopularArticles"], fetcher);
-};
+// export const useGetAllArticles = () => {
+//   const fetcher = async () => {
+//     const { data } = await api.get("/popular/articles");
+//     return data;
+//   };
+//   return useQuery(["allArticle", "allPopularArticles"], fetcher);
+// };
 
-// ALL 수익왕 게시글 가져오기
-export const useGetAllRichArticles = () => {
-  const fetcher = async () => {
-    const { data } = await api.get("/rich/articles");
-    return data;
-  };
-  return useQuery(["allArticle", "allRichArticles"], fetcher);
-};
+// // ALL 수익왕 게시글 가져오기
+// export const useGetAllArticles = () => {
+//   const fetcher = async () => {
+//     const { data } = await api.get("/rich/articles");
+//     return data;
+//   };
+//   return useQuery(["allArticle", "allRichArticles"], fetcher);
+// };
 
 // ALL 내 게시글 가져오기
 

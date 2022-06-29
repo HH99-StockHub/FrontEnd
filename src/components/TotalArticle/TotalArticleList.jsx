@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import {
+  useGetAllArticles,
+  useGetAllMainArticles,
+} from "../../custom/reactQuery/useQuery";
 
-const TotalArticleList = () => {
-  // 임시 배열
-  const data = [1, 2, 3, 4];
+const TotalArticleList = ({ data }) => {
   return (
     <>
       {data.map((v) => {

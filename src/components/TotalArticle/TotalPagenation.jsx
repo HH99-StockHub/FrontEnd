@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const TotalPagenation = () => {
-  const param = useParams();
+const TotalPagenation = ({ category, nowPage }) => {
   const navigate = useNavigate();
   // 페이지 기준
   const [page, setPage] = useState(1);
@@ -14,16 +13,16 @@ const TotalPagenation = () => {
 
   // 현재 버튼에 CSS 주기위한 값
   const nowCssBtn = () => {
-    if (Number(param.page) % 10 === 0) {
+    if (Number(nowPage) % 10 === 0) {
       return 10;
     } else {
-      return Number(param.page) % 10;
+      return Number(nowPage) % 10;
     }
   };
 
   // 페이지 클릭 시 페이지 이동하기
   const navigatePage = (page) => {
-    navigate(`/total/${param.category}/articles/${page}`);
+    navigate(`/total/${category}/articles/${page}`);
   };
 
   // 이전 페이지 넘기기
@@ -32,7 +31,7 @@ const TotalPagenation = () => {
       // 첫 페이지 일 경우
       alert("이전 페이지가 존재하지 않습니다");
     } else {
-      navigate(`/total/${param.category}/articles/${page - 10}`);
+      navigate(`/total/${category}/articles/${page - 10}`);
       setPage(page - 10);
     }
   };
@@ -42,7 +41,7 @@ const TotalPagenation = () => {
     if (page + 10 > lastpage) {
       alert(`${lastpage} 페이지가 마지막입니다`);
     } else {
-      navigate(`/total/${param.category}/articles/${page + 10}`);
+      navigate(`/total/${category}/articles/${page + 10}`);
       setPage(page + 10);
     }
   };
@@ -50,26 +49,25 @@ const TotalPagenation = () => {
   // 주소에 따라 page 설정하기
   useEffect(() => {
     // 페이지가 있을 경우, 없으면 페이지 1번으로
-    if (Number(param.page) <= lastpage && Number(param.page) >= 1) {
+    if (Number(nowPage) <= lastpage && Number(nowPage) >= 1) {
       // 페이지가 한 자릿수 이거나 10일 경우
-      if (param.page.length === 1 || Number(param.page) === 10) {
+      if (nowPage.length === 1 || Number(nowPage) === 10) {
         setPage(1);
         // 페이지가 10의 배수일 경우
-      } else if (Number(param.page) % 10 === 0) {
+      } else if (Number(nowPage) % 10 === 0) {
         const startPage =
-          String(param.page.slice(0, 1) - 1) +
-          "0".repeat(Number(param.page.length) - 1);
+          String(nowPage.slice(0, 1) - 1) +
+          "0".repeat(Number(nowPage.length) - 1);
         setPage(Number(startPage) + 1);
         // 그 외
       } else {
         const startPage =
-          String(param.page.slice(0, 1)) +
-          "0".repeat(Number(param.page.length) - 1);
+          String(nowPage.slice(0, 1)) + "0".repeat(Number(nowPage.length) - 1);
         setPage(Number(startPage) + 1);
       }
     } else {
       alert("잘못된 접근입니다.");
-      navigate(`/total/${param.category}/articles/1`);
+      navigate(`/total/${category}/articles/1`);
     }
   }, []);
 

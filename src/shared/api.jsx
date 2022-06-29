@@ -2,7 +2,7 @@ import axios from "axios";
 
 // axios 기본 주소 & header 타입 세팅
 export const api = axios.create({
-  // baseURL: "http://13.209.88.160:8080",
+  baseURL: "http://13.209.88.160:8080",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
