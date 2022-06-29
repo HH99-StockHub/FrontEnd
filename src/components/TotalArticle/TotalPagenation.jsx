@@ -115,6 +115,11 @@ const WrapAllBtn = styled.div`
   gap: 10px;
 `;
 const WrapPageBtn = styled.div`
+  display: flex;
+  gap: 10px;
+  button {
+    padding: 10px;
+  }
   > button:nth-child(${({ num }) => Number(num)}) {
     border: 1px solid #000;
   }

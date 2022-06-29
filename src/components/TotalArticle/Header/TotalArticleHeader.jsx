@@ -23,5 +23,6 @@ const WrapHeader = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
-  margin-top: 16px;
+  padding: 16px 0 19px;
+  border-bottom: 1px solid #ccc;
 `;
