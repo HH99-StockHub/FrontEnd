@@ -1,15 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useQueryClient, useMutation } from 'react-query';
-import styled from 'styled-components';
-
+//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
+import React, { useEffect, useRef, useState } from "react";
+import { useQueryClient, useMutation } from "react-query";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
 //hook
-import { api } from '../../shared/api';
+import { api } from "../../shared/api";
+// 모듈
+import { togleState } from "../../redux/modules/addArticle";
 //이미지
-import { ReactComponent as XBtnSvg } from '../../image/XBtn.svg';
-import { ReactComponent as SearchSvg } from '../../image/Search.svg';
-import { ReactComponent as PlusSvg } from '../../image/Plus.svg';
+import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
+import { ReactComponent as SearchSvg } from "../../image/Search.svg";
+import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
 
-const AddArticleForm = ({ toggleState }) => {
+const AddArticleForm = () => {
+  const dispatch = useDispatch();
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
   // key state
@@ -20,44 +24,44 @@ const AddArticleForm = ({ toggleState }) => {
   const [stockArr, setStockArr] = useState([]);
   const [selectStockState, setSelectStockState] = useState(null);
   // 주식 선택하기 input 변경 값
-  const [stockInput, setStockInput] = useState('');
+  const [stockInput, setStockInput] = useState("");
   // 투자 포인트 데이터
   const [stockPoint, setStockPoint] = useState([{}]);
   // title가져오기
-  const articleTitle = useRef('');
+  const articleTitle = useRef("");
 
   //예시 arr
   const data = [
-    '삼기자9',
-    '삼성기자8',
-    '삼성호자7',
-    '삼성바자6',
-    '삼성전자5',
-    '삼성전자4',
-    '삼성전자3',
-    '삼성전자2',
-    '삼성전자1',
+    "삼기자9",
+    "삼성기자8",
+    "삼성호자7",
+    "삼성바자6",
+    "삼성전자5",
+    "삼성전자4",
+    "삼성전자3",
+    "삼성전자2",
+    "삼성전자1",
   ];
 
   // useMutation 사용
   const queryClient = useQueryClient();
   const fetcher = async (article) => {
-    await api.post('/article', article);
+    await api.post("/article", article);
   };
 
   const { mutate } = useMutation(fetcher, {
     onSuccess: () => {
-      queryClient.invalidateQueries('allArticle');
-      alert('작성 완료');
+      queryClient.invalidateQueries("allArticle");
+      alert("작성 완료");
     },
     onError: () => {
-      alert('에러가 발생했습니다.');
+      alert("에러가 발생했습니다.");
     },
   });
 
   // 주식 종목 선택하기 list
   const selectStockList = (e) => {
-    if (e.target.value === '') {
+    if (e.target.value === "") {
       setSelectStockState(null);
     } else {
       setSelectStockState(true);
@@ -78,24 +82,24 @@ const AddArticleForm = ({ toggleState }) => {
       if (
         stockPoint[l]?.content === undefined ||
         stockPoint[l]?.title === undefined ||
-        stockPoint[l]?.content === '' ||
-        stockPoint[l]?.title === ''
+        stockPoint[l]?.content === "" ||
+        stockPoint[l]?.title === ""
       ) {
         state = true;
       }
     });
     if (selectStockState === null || selectStockState) {
-      alert('종목을 선택해주세요');
-    } else if (articleTitle.current.value === '' || state) {
-      alert('공백 없이 작성해주세요');
+      alert("종목을 선택해주세요");
+    } else if (articleTitle.current.value === "" || state) {
+      alert("공백 없이 작성해주세요");
     } else {
       const data = {
         articleTitle: articleTitle.current.value,
-        stockName: '삼성전자',
+        stockName: "삼성전자",
       };
       stockPoint.forEach((v, l) => {
-        data['point' + String(l + 1)] = v.title;
-        data['content' + String(l + 1)] = v.content;
+        data["point" + String(l + 1)] = v.title;
+        data["content" + String(l + 1)] = v.content;
       });
       mutate(data);
     }
@@ -105,7 +109,7 @@ const AddArticleForm = ({ toggleState }) => {
     const element = e.target;
     const newStockPoint = [...stockPoint];
     //input일 때
-    if (element.id !== '') {
+    if (element.id !== "") {
       newStockPoint[element.id] = {
         ...newStockPoint[element.id],
         title: element.value,
@@ -127,7 +131,7 @@ const AddArticleForm = ({ toggleState }) => {
       setKey(key + 1);
       if (countArr.length === 2) setPointBtnState(false);
     } else {
-      alert('최대 3개까지 등록 가능합니다');
+      alert("최대 3개까지 등록 가능합니다");
     }
   };
   // 투자 포인트 삭제하기
@@ -143,7 +147,7 @@ const AddArticleForm = ({ toggleState }) => {
       setStockPoint(newStockPoint);
       setPointBtnState(true);
     } else {
-      alert('최소 하나의 투자 포인트가 있어야합니다.');
+      alert("최소 하나의 투자 포인트가 있어야합니다.");
     }
   };
 
@@ -159,7 +163,7 @@ const AddArticleForm = ({ toggleState }) => {
       });
       setStockArr(changeData);
     }, 300);
-    if (stockInput === '') {
+    if (stockInput === "") {
       setStockArr([]);
     }
     return () => {
@@ -174,10 +178,10 @@ const AddArticleForm = ({ toggleState }) => {
             <button
               type="button"
               onClick={() => {
-                toggleState(false);
+                dispatch(togleState(false));
               }}
             >
-              <XBtnSvg width={'13.18'} height="13.18" />
+              <XBtnSvg width={"13.18"} height="13.18" />
             </button>
             <p>게시글작성</p>
             <button type="submit">등록하기</button>
@@ -204,7 +208,11 @@ const AddArticleForm = ({ toggleState }) => {
             </WrapSearch>
             <WrapTitle>
               <h3>제목</h3>
-              <input type="text" placeholder="제목을 입력해주세요" ref={articleTitle} />
+              <input
+                type="text"
+                placeholder="제목을 입력해주세요"
+                ref={articleTitle}
+              />
             </WrapTitle>
             <WrapPoint>
               {countArr.map((v, l) => {

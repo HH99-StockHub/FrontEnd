@@ -10,11 +10,15 @@ import SlideStock from "./repeat/SlideStock";
 import OAuth from "./components/KakaoLogin/OAuth";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
+import { useSelector } from "react-redux";
 
 function App() {
+  // 게시글 작성 토글 관리
+  const toggleState = useSelector((state) => state.toggle.toggleState);
   return (
     <div className="App">
       <GlobalStyle />
+      {toggleState && <AddArticle />}
       <Header />
       <SlideStock />
       <Routes>
