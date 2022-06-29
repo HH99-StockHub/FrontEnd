@@ -25,9 +25,9 @@ const Vote = () => {
     },
   });
 
-  const InFavor = ({articleId}) => {
-    VoteInFavor.mutate({articleId})
-  }
+  const InFavor = ({ articleId }) => {
+    VoteInFavor.mutate({ articleId });
+  };
   //반대투표
   const NegativeVote = useMutation(useNegativeVote, {
     onSuccess: () => {
@@ -35,14 +35,14 @@ const Vote = () => {
     },
   });
 
-  const Negative = ({articleId}) => {
-    NegativeVote.mutate({articleId})
-  }
+  const Negative = ({ articleId }) => {
+    NegativeVote.mutate({ articleId });
+  };
 
-  if(Vote.isLoading){
+  if (Vote.isLoading) {
     return null;
   }
-  
+
   return (
     <div>
       <button onClick={InFavor}> 좋아요 </button>
@@ -50,6 +50,5 @@ const Vote = () => {
     </div>
   );
 };
-
 
 export default Vote;

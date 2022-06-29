@@ -128,7 +128,7 @@ const AddArticleForm = () => {
   const deleteTextarea = (e, index) => {
     if (countArr.length !== 1) {
       const newArr = countArr.filter(
-        (v) => String(v.key) !== String(e.target.id)
+        (v) => String(v.key) !== String(e.target.id),
       );
       setCountArr(newArr);
       const newStockPoint = stockPoint.filter((v, l) => {

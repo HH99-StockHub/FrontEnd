@@ -3,7 +3,7 @@ import { api } from "../../shared/api";
 import Vote from "./Vote";
 import WriteComment from "./WriteComment";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import styled  from "styled-components";
+import styled from "styled-components";
 
 //게시글삭제
 const useDeletePost = ({ commentId }) => {
@@ -14,24 +14,28 @@ const DetailArticle = () => {
   const queryClient = useQueryClient();
 
   //게시글삭제
- const {mutate} = useMutation(useDeletePost,{
-  onSuccess: () => {
-    queryClient.invalidateQueries();
+  const { mutate } = useMutation(useDeletePost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+
+  if (DetailArticle.isLoading) {
+    return null;
   }
- })
 
- if(DetailArticle.isLoading){
-  return null;
-}
-
-  return <div>
-    <WriteComment />
-    <Vote />
-    <button onClick={()=>{
-      const data = {} //게시글에 대한 데이터 넣기
-      mutate(data)
-    }}>삭제하기</button>
-  </div>;
+  return (
+    <div>
+      <button
+        onClick={() => {
+          const data = {}; //게시글에 대한 데이터 넣기
+          mutate(data);
+        }}
+      >
+        삭제하기
+      </button>
+    </div>
+  );
 };
 
 export default DetailArticle;

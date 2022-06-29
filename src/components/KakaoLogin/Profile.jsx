@@ -13,7 +13,7 @@ const Profile = () => {
       });
 
       // 사용자 정보 변수에 저장
-      console.log(data)
+      console.log(data);
       setUserId(data.id);
       setNickName(data.properties.nickname);
       setProfileImage(data.properties.profile_image);

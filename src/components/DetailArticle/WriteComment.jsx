@@ -1,7 +1,6 @@
 import React from "react";
 import { api } from "../../shared/api";
 import { useMutation, useQueryClient } from "react-query";
-import { styled } from "styled-components";
 
 //댓글작성
 const useWriteComment = ({ articleId }, payload) => {
