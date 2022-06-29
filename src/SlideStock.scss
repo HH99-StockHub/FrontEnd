@@ -30,11 +30,10 @@ $duration: 10s;
   width: 100%;
   overflow: hidden;
   height: 40px;
-  background-color: rgba(#000, 0.9); 
+  background-color: rgba(#000, 0.9);
   box-sizing: content-box;
 
   .ticker {
-
     display: flex;
     align-items: center;
     gap: 16px;
@@ -43,29 +42,25 @@ $duration: 10s;
     padding: 0 100%;
     box-sizing: content-box;
 
-    -webkit-animation-iteration-count: infinite; 
-            animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
-   -webkit-animation-name: ticker;
-           animation-name: ticker;
+    animation-timing-function: linear;
+    -webkit-animation-name: ticker;
+    animation-name: ticker;
     -webkit-animation-duration: $duration;
-            animation-duration: $duration;
+    animation-duration: $duration;
 
     &__item {
-
       display: flex;
       font-size: 1rem;
-      color: white;   
+      color: white;
       font-size: 16px;
-
     }
-
   }
-
 }
 
-.tickerPoint{
+.tickerPoint {
   display: flex;
   align-items: center;
   gap: 8px;
