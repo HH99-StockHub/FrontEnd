@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useQueryClient, useMutation } from "react-query";
 import styled from "styled-components";
+
+//hook
+import { api } from "../../shared/api";
 
 const AddArticleForm = () => {
   // 투자 포인트 map용 잉여 배열
@@ -28,6 +32,22 @@ const AddArticleForm = () => {
     "삼성전자2",
     "삼성전자1",
   ];
+
+  // useMutation 사용
+  const queryClient = useQueryClient();
+  const fetcher = async (article) => {
+    await api.post("/article", article);
+  };
+
+  const { mutate } = useMutation(fetcher, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("allArticle");
+      alert("작성 완료");
+    },
+    onError: () => {
+      alert("에러가 발생했습니다.");
+    },
+  });
 
   // 주식 종목 선택하기 list
   const selectStockList = (e) => {
@@ -71,6 +91,7 @@ const AddArticleForm = () => {
         data["point" + String(l + 1)] = v.title;
         data["content" + String(l + 1)] = v.content;
       });
+      mutate(data);
     }
   };
   // 투자 포인트 작성하기

@@ -4,7 +4,6 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 // // Queries
 // const query = useQuery("todos", getTodos);
 
-
 // 메인 페이지 전체 게시글 가져오기
 export const useGetMainArticles = () => {
   const fetcher = async () => {
@@ -40,7 +39,7 @@ export const useGetAllMainArticles = () => {
     return data;
   };
 
-  return useQuery("allMainArticles", fetcher);
+  return useQuery(["allArticle", "allMainArticles"], fetcher);
 };
 
 // ALL 인기 게시글 가져오기
@@ -49,7 +48,7 @@ export const useGetAllPopularArticles = () => {
     const { data } = await api.get("/popular/articles");
     return data;
   };
-  return useQuery("allPopularArticles", fetcher);
+  return useQuery(["allArticle", "allPopularArticles"], fetcher);
 };
 
 // ALL 수익왕 게시글 가져오기
@@ -58,7 +57,7 @@ export const useGetAllRichArticles = () => {
     const { data } = await api.get("/rich/articles");
     return data;
   };
-  return useQuery("allRichArticles", fetcher);
+  return useQuery(["allArticle", "allRichArticles"], fetcher);
 };
 
 // ALL 내 게시글 가져오기
@@ -68,11 +67,11 @@ export const useGetAllUserArticles = ({ userId }) => {
     const { data } = await api.get(`/user/${userId}/articles`);
     return data;
   };
-  return useQuery("allUserArticles", fetcher);
+  return useQuery(["allArticle", "allUserArticles"], fetcher);
 };
 
 //게시글 내용조회
-export const useContentInquiry = ({articleId}) => {
+export const useContentInquiry = ({ articleId }) => {
   const fetcher = async () => {
     const { data } = await api.get(`/articles/${articleId}`);
     return data;
@@ -81,7 +80,7 @@ export const useContentInquiry = ({articleId}) => {
 };
 
 //게시글 주식종목 조회
-export const useStocksInquiry = ({articleId}) => {
+export const useStocksInquiry = ({ articleId }) => {
   const fetcher = async () => {
     const { data } = await api.get(`/articles/${articleId}/stock`);
     return data;
@@ -90,14 +89,13 @@ export const useStocksInquiry = ({articleId}) => {
 };
 
 //게시글 댓글 목록 조회
-export const useCommentInquiry = ({articleId}) => {
+export const useCommentInquiry = ({ articleId }) => {
   const fetcher = async () => {
     const { data } = await api.get(`/articles/${articleId}/comments`);
     return data;
   };
   return useQuery("CommentInquiry", fetcher);
 };
-
 
 // // Mutations
 // const queryClient = useQueryClient();
