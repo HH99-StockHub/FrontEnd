@@ -5,12 +5,17 @@ import styled from "styled-components";
 //hook
 import { api } from "../../shared/api";
 //이미지
-import { ReactComponent as XBtnSbg } from "../../image/XBtn.svg";
+import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
+import { ReactComponent as SearchSvg } from "../../image/Search.svg";
+import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
+
 const AddArticleForm = () => {
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
   // key state
   const [key, setKey] = useState(1);
+  // 포인트 추가하기 버튼 상태
+  const [pointBtnState, setPointBtnState] = useState(true);
   // 주식 선택하기 일치 항목
   const [stockArr, setStockArr] = useState([]);
   const [selectStockState, setSelectStockState] = useState(null);
@@ -92,6 +97,7 @@ const AddArticleForm = () => {
         data["point" + String(l + 1)] = v.title;
         data["content" + String(l + 1)] = v.content;
       });
+      console.log(data);
       mutate(data);
     }
   };
@@ -120,21 +126,26 @@ const AddArticleForm = () => {
     if (countArr.length < 3) {
       setCountArr([...countArr, { key: key }]);
       setKey(key + 1);
+      if (countArr.length === 2) setPointBtnState(false);
     } else {
       alert("최대 3개까지 등록 가능합니다");
     }
   };
   // 투자 포인트 삭제하기
   const deleteTextarea = (e, index) => {
+    console.log(index);
     if (countArr.length !== 1) {
-      const newArr = countArr.filter(
-        (v) => String(v.key) !== String(e.target.id),
-      );
+      const newArr = countArr.filter((v, l) => {
+        console.log(String(v.key));
+        console.log(String(e.target.id));
+        return String(l) !== String(index);
+      });
       setCountArr(newArr);
       const newStockPoint = stockPoint.filter((v, l) => {
         return Number(l) !== Number(index);
       });
       setStockPoint(newStockPoint);
+      setPointBtnState(true);
     } else {
       alert("최소 하나의 투자 포인트가 있어야합니다.");
     }
@@ -162,64 +173,84 @@ const AddArticleForm = () => {
   return (
     <WrapToggle>
       <WrapForm>
-        <Header>
-          <XBtnSbg width={"13.18"} height="13.18" />
-          <p>게시글작성</p>
-          <button type="button">등록하기</button>
-        </Header>
         <form onSubmit={writeArticle}>
-          <div>
-            <h3>종목 선택</h3>
-            <WrapSelect>
+          <Header>
+            <button type="button">
+              <XBtnSvg width={"13.18"} height="13.18" />
+            </button>
+            <p>게시글작성</p>
+            <button type="submit">등록하기</button>
+          </Header>
+          <WrapText>
+            <WrapSearch>
+              <WrapSelect>
+                <input
+                  type="text"
+                  value={stockInput}
+                  placeholder="종목검색"
+                  onChange={selectStockList}
+                />
+                <SearchSvg width="17.49" height="17.49" />
+                {selectStockState && (
+                  <StockList>
+                    {stockArr.map((v) => {
+                      return <div onClick={selectStockOne}>{v}</div>;
+                    })}
+                  </StockList>
+                )}
+              </WrapSelect>
+              <span>현재 주가</span>
+            </WrapSearch>
+            <WrapTitle>
+              <h3>제목</h3>
               <input
                 type="text"
-                value={stockInput}
-                onChange={selectStockList}
+                placeholder="제목을 입력해주세요"
+                ref={articleTitle}
               />
-              {selectStockState &&
-                stockArr.map((v) => {
-                  return <p onClick={selectStockOne}>{v}</p>;
-                })}
-              <span>얼마 상승 등 주가</span>
-            </WrapSelect>
-          </div>
-          <div>
-            <h3>제목</h3>
-            <input type="text" ref={articleTitle} />
-          </div>
-          <h3>투자 포인트</h3>
-          {countArr.map((v, l) => {
-            return (
-              <div key={v.key}>
-                <input id={l} type="text" onChange={addStockPoint} />
-                {l === 0 ? null : (
-                  <span
-                    id={v.key}
-                    onClick={(e) => {
-                      deleteTextarea(e, l);
-                    }}
-                  >
-                    삭제
-                  </span>
-                )}
-                <br></br>
-                <TextareaText
-                  name={l}
-                  cols="30"
-                  rows="5"
-                  onChange={addStockPoint}
-                ></TextareaText>
-              </div>
-            );
-          })}
+            </WrapTitle>
+            <WrapPoint>
+              {countArr.map((v, l) => {
+                return (
+                  <WrapTextarea key={v.key}>
+                    <WrapPointHeader>
+                      <h3>투자 포인트 {l + 1} (최대 3개 작성 가능)</h3>
+                      {l === 0 ? null : (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            deleteTextarea(e, l);
+                          }}
+                        >
+                          <XBtnSvg width="6.59" height="6.59" />
+                        </button>
+                      )}
+                    </WrapPointHeader>
+                    <input
+                      id={l}
+                      type="text"
+                      placeholder="투자포인트 요약"
+                      onChange={addStockPoint}
+                    />
 
-          <button type="button" onClick={addTextarea}>
-            +
-          </button>
-          <div>
-            <button type="submit">등록하기</button>
-            <button type="button">취소</button>
-          </div>
+                    <br></br>
+                    <TextareaText
+                      name={l}
+                      cols="30"
+                      rows="5"
+                      placeholder="상세내용 작성"
+                      onChange={addStockPoint}
+                    ></TextareaText>
+                  </WrapTextarea>
+                );
+              })}
+            </WrapPoint>
+            {pointBtnState && (
+              <button type="button" onClick={addTextarea}>
+                투자포인트 추가 <PlusSvg />
+              </button>
+            )}
+          </WrapText>
         </form>
       </WrapForm>
     </WrapToggle>
@@ -229,25 +260,30 @@ const AddArticleForm = () => {
 export default AddArticleForm;
 
 const WrapToggle = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 90vh;
-  background-color: #ddd;
+  height: 100vh;
+  background-color: rgba(34, 34, 34, 0.5);
 `;
 const WrapForm = styled.div`
   width: 720px;
-  padding: 21px;
   border: 1px solid #000;
   background-color: #fff;
 `;
-
+const WrapText = styled.div`
+  padding: 30px 73px;
+`;
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  height: 36px;
+  align-items: center;
+  padding: 0 21px;
+  height: 57px;
   border-bottom: 1px solid #ccc;
   > p {
     font-size: 16px;
@@ -255,12 +291,92 @@ const Header = styled.div`
   }
 `;
 
-const WrapSelect = styled.div`
+const WrapSearch = styled.div`
+  position: relative;
   display: flex;
-  span {
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 19px;
+  > span {
+    width: 170px;
+    height: 44px;
+    padding: 10px;
     border: 1px solid #000;
   }
 `;
+const WrapSelect = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  width: 385px;
+  height: 44px;
+  border: 1px solid #000;
+  input {
+    width: 332px;
+  }
+`;
+const WrapTitle = styled.div`
+  > h3 {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  > input {
+    width: 100%;
+    height: 44px;
+    padding: 14.5px 10px;
+    margin-bottom: 30px;
+  }
+`;
+const WrapPoint = styled.div`
+  h3 {
+    font-size: 12px;
+  }
+`;
+const WrapPointHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  > button {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+`;
+
+const WrapTextarea = styled.div`
+  input {
+    width: 100%;
+    height: 44px;
+    padding: 14.5px 10px;
+    margin-bottom: 8px;
+  }
+`;
 const TextareaText = styled.textarea`
+  width: 100%;
+  height: 137px;
+  padding: 10px;
+  margin-bottom: 20px;
   resize: none;
+`;
+
+const StockList = styled.div`
+  position: absolute;
+  border: 1px solid #bbb;
+  top: 42px;
+  left: 0;
+  width: 385px;
+  height: 264px;
+  overflow-y: auto;
+  background-color: #fff;
+  div {
+    height: 44px;
+    :hover {
+      background-color: #bbb;
+    }
+  }
 `;
