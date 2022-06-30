@@ -1,50 +1,42 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+// 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
 import { setCookie } from "../shared/Cookie";
+import { loginState } from "../redux/modules/login";
 
 const Header = () => {
-  //   return (
-  //     <Header1>
-  //       <Logo>S.H.LOGO</Logo>
-  //       <Header2>
-  //         { "" ? (
-  //         <>
-  //         <Profile>프로필</Profile>
-  //         <Notice>알림</Notice>
-  //         <LogOut>로그아웃</LogOut>
-  //         <Post>내 게시물</Post>
-  //         <Writing>글작성</Writing>
-  //         </>
-  //         ) : (
-  //             <Login>카카오로그인</Login>
-  //         )}
-  //       </Header2>
-  //     </Header1>
-  //   );
-  // };
-  const cookie = getCookie("authorization");
-  const [is_cookie, setCookie] = React.useState(false);
+  const dispatch = useDispatch();
+  // 로그인 상태관리
+  const login = useSelector((state) => state.user.loginState);
 
-  React.useEffect(() => {
-    if (cookie !== undefined) {
-      return setCookie(true);
-    }
-  }, []);
-
+  // 로그아웃
   const onLogout = (e) => {
-    deleteCookie("authorization");
-    deleteCookie("username");
-    setCookie(false);
+    deleteCookie("token");
+    localStorage.removeItem("id");
+    dispatch(loginState(false));
+    alert("정상 로그아웃");
   };
 
+  // 토큰, id 유무 체크
+  React.useEffect(() => {
+    const cookie = getCookie("token");
+    const userId = localStorage.getItem("id");
+    if (cookie !== undefined && userId !== undefined) {
+      dispatch(loginState(true));
+    } else {
+      deleteCookie("token");
+      localStorage.removeItem("id");
+    }
+  }, []);
   return (
     <Header1>
       <Logo>S.H.LOGO</Logo>
       <Header2>
-        {is_cookie ? (
+        {login ? (
           <>
             <Profile>프로필</Profile>
             <Notice>알림</Notice>
