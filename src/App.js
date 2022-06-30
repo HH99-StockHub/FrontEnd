@@ -27,7 +27,6 @@ function App() {
           path="/total/:category/articles/:page"
           element={<TotalArticle />}
         />
-        <Route path="/add/article" element={<AddArticle />} />
         <Route path="/detailarticle" element={<DetailArticle />} />
         <Route path="/user/kakao/callback" element={<OAuth />} />
       </Routes>

@@ -11,7 +11,7 @@ const initialState = {
 const toggleReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_STATE:
-      return { ...state, toggleState: false };
+      return { ...state, toggleState: action.payload };
     default:
       return state;
   }

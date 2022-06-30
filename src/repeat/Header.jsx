@@ -7,6 +7,7 @@ import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
 import { setCookie } from "../shared/Cookie";
 import { loginState } from "../redux/modules/login";
+import { togleState } from "../redux/modules/addArticle";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,10 @@ const Header = () => {
     localStorage.removeItem("id");
     dispatch(loginState(false));
     alert("정상 로그아웃");
+  };
+
+  const openAddArticle = () => {
+    dispatch(togleState(true));
   };
 
   // 토큰, id 유무 체크
@@ -42,7 +47,7 @@ const Header = () => {
             <Notice>알림</Notice>
             <LogOut onClick={onLogout}>로그아웃</LogOut>
             <Post>내 게시물</Post>
-            <Writing>글작성</Writing>
+            <Writing onClick={openAddArticle}>글작성</Writing>
           </>
         ) : (
           <KakaoLogin>카카오로그인</KakaoLogin>
