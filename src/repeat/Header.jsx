@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
+import { getCookie } from "../shared/Cookie";
+import { deleteCookie } from "../shared/Cookie";
+import { setCookie } from "../shared/Cookie";
 
 const Header = () => {
   //   return (
@@ -22,19 +25,36 @@ const Header = () => {
   //     </Header1>
   //   );
   // };
+  const cookie = getCookie("authorization");
+  const [is_cookie, setCookie] = React.useState(false);
+
+  React.useEffect(() => {
+    if (cookie !== undefined) {
+      return setCookie(true);
+    }
+  }, []);
+
+  const onLogout = (e) => {
+    deleteCookie("authorization");
+    deleteCookie("username");
+    setCookie(false);
+  };
 
   return (
     <Header1>
       <Logo>S.H.LOGO</Logo>
       <Header2>
-        <>
-          <Profile>프로필</Profile>
-          <Notice>알림</Notice>
-          <LogOut>로그아웃</LogOut>
-          <Post>내 게시물</Post>
-          <Writing>글작성</Writing>
-        </>
-        <KakaoLogin>카카오로그인</KakaoLogin>
+        {is_cookie ? (
+          <>
+            <Profile>프로필</Profile>
+            <Notice>알림</Notice>
+            <LogOut onClick={onLogout}>로그아웃</LogOut>
+            <Post>내 게시물</Post>
+            <Writing>글작성</Writing>
+          </>
+        ) : (
+          <KakaoLogin>카카오로그인</KakaoLogin>
+        )}
       </Header2>
     </Header1>
   );

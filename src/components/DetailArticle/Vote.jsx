@@ -44,11 +44,22 @@ const Vote = () => {
   }
 
   return (
-    <div>
-      <button onClick={InFavor}> 좋아요 </button>
-      <button onClick={Negative}> 싫어요 </button>
-    </div>
+    <BtnBox>
+      <Btn onClick={InFavor}>  추천 </Btn>
+      <Btn onClick={Negative}> 반대 </Btn>
+    </BtnBox>
   );
 };
 
+const BtnBox = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+`;
+
+const Btn = styled.button`
+  padding: 10px 40px;
+  background: #D9D9D9;
+`
 export default Vote;
