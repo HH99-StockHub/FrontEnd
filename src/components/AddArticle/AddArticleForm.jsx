@@ -11,9 +11,11 @@ import { togleState } from "../../redux/modules/addArticle";
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
+import { useNavigate } from "react-router-dom";
 
 const AddArticleForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
   // key state
@@ -53,8 +55,9 @@ const AddArticleForm = () => {
     onSuccess: () => {
       queryClient.invalidateQueries("allArticle");
       alert("작성 완료");
+      navigate("/");
     },
-    onError: () => {
+    onError: (err) => {
       alert("에러가 발생했습니다.");
     },
   });
