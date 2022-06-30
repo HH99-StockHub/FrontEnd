@@ -39,16 +39,22 @@ const Header = () => {
   }, []);
   return (
     <Header1>
-      <Logo>S.H.LOGO</Logo>
       <Header2>
+        <Logo
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CvI_Ck9anQpBAd_DJrVAgLb55GeoSItofg&usqp=CAU"
+          alt="로고"
+        />
         {login ? (
-          <>
-            <Profile>프로필</Profile>
+          <WrapMenu>
+            <Profile
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWExS1AoV6x8lezZ77vBE2UjroomZ032soUw&usqp=CAU"
+              alt="프로필"
+            />
             <Notice>알림</Notice>
-            <LogOut onClick={onLogout}>로그아웃</LogOut>
-            <Post>내 게시물</Post>
+            <button onClick={onLogout}>로그아웃</button>
+            <button>내 게시물</button>
             <Writing onClick={openAddArticle}>글작성</Writing>
-          </>
+          </WrapMenu>
         ) : (
           <KakaoLogin>카카오로그인</KakaoLogin>
         )}
@@ -69,132 +75,44 @@ const Header1 = styled.div`
 
 const Header2 = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: row;
   height: 72px;
-  width: 1980px;
+  width: 1200px;
+  margin: 0 auto;
 `;
 
-const Logo = styled.div`
+const Logo = styled.img`
   width: 89px;
   height: 33px;
   left: 390px;
   top: 19px;
-
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 33px;
-  font-family: "Karma";
-  font-style: normal;
-
-  color: #000000;
+`;
+const WrapMenu = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 35px;
+  button {
+    height: 100%;
+    font-size: 12px;
+    font-weight: 400px;
+  }
 `;
 
-const Profile = styled.div`
+const Profile = styled.img`
   width: 24px;
   height: 24px;
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  border-radius: 50%;
 `;
 
 const Notice = styled.button`
-  background-color: transparent;
-  border: 0;
-  /* 알림 */
-  width: 23px;
-  height: 15px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 12px;
-  line-height: 15px;
-  /* identical to box height */
-  display: flex;
-  align-items: center;
-  color: #000000;
-  /* Inside auto layout */
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-`;
-
-const LogOut = styled.button`
-  background-color: transparent;
-  border: 0;
-  /* 로그아웃 */
-  width: 45px;
-  height: 15px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  /* identical to box height */
-  display: flex;
-  align-items: center;
-  color: #000000;
-  /* Inside auto layout */
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-`;
-
-const Post = styled.button`
-  background-color: transparent;
-  border: 0;
-  /* 내 게시물 */
-  width: 48px;
-  height: 15px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  /* identical to box height */
-  display: flex;
-  align-items: center;
-  color: #000000;
-  /* Inside auto layout */
-  flex: none;
-  order: 3;
-  flex-grow: 0;
 `;
 
 const Writing = styled.button`
-  background-color: transparent;
-  border: 0;
-  //글작성
-  /* Auto layout */
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 10px;
-  gap: 10px;
   width: 54px;
-  height: 35px;
-  background: #272727;
-  /* Inside auto layout */
-  flex: none;
-  order: 4;
-  flex-grow: 0;
-`;
-
-const Login = styled.button`
-  /* 카카오 로그인 */
-  position: absolute;
-  width: 73px;
-  height: 15px;
-  right: 390px;
-  top: 28px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  /* identical to box height */
-  display: flex;
-  align-items: center;
-  color: #000000;
+  background-color: #000;
+  color: #fff;
 `;
