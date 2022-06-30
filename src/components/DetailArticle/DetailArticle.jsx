@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Title from "./collection/Title";
 import Writing from "./collection/Writing";
 import Stocks from "./collection/Stocks";
-import View from './collection/View';
+import View from "./collection/View";
 import Comment from "./collection/Comment";
 
 //게시글삭제
@@ -45,7 +45,7 @@ const DetailArticle = () => {
         <Btn>수정</Btn>
       </BtnBox>
       <Writing />
-      <hr/>
+      <hr />
       <Stocks />
       <View />
       <Vote />
@@ -67,6 +67,7 @@ const BtnBox = styled.div`
 `;
 
 const Btn = styled.button`
- padding: 20px;
+  padding: 10px;
+  background: #eaeaea;
 `;
 export default DetailArticle;
