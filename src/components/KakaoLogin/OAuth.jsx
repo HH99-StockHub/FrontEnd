@@ -15,7 +15,6 @@ const OAuth = () => {
 
   // calllback으로 받은 인가코드
   const code = new URL(window.location.href).searchParams.get("code");
-  console.log(code);
 
   const navigate = useNavigate();
 
@@ -36,7 +35,6 @@ const OAuth = () => {
 
   useEffect(() => {
     if (!data) {
-      console.log(data);
       // const accessToken = data.headers.authorization;
       // setCookie("token", accessToken);
       // localStorage.setItem("id", data.userId);
@@ -67,7 +65,6 @@ const OAuth = () => {
   //     window.Kakao.Auth.setAccessToken(res.data.access_token);
   //     navigate("/profile");
   //   } catch (err) {
-  //     console.log(err);
   //   }
   // };
 
