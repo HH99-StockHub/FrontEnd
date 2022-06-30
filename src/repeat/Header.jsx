@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
-import { setCookie } from "../shared/Cookie";
 import { loginState } from "../redux/modules/login";
 import { togleState } from "../redux/modules/addArticle";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // 로그인 상태관리
   const login = useSelector((state) => state.user.loginState);
 
@@ -43,6 +44,9 @@ const Header = () => {
         <Logo
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CvI_Ck9anQpBAd_DJrVAgLb55GeoSItofg&usqp=CAU"
           alt="로고"
+          onClick={() => {
+            navigate("/");
+          }}
         />
         {login ? (
           <WrapMenu>
@@ -87,6 +91,7 @@ const Logo = styled.img`
   height: 33px;
   left: 390px;
   top: 19px;
+  cursor: pointer;
 `;
 const WrapMenu = styled.div`
   display: flex;

@@ -173,6 +173,12 @@ const AddArticleForm = () => {
       clearTimeout(changeSotck);
     };
   }, [stockInput]);
+
+  // 토글 창 오픈시 스크롤 막기 , 닫기 클릭 시 해제
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {};
+  }, []);
   return (
     <WrapToggle>
       <WrapForm>
@@ -181,6 +187,7 @@ const AddArticleForm = () => {
             <button
               type="button"
               onClick={() => {
+                document.body.style.overflow = "unset";
                 dispatch(togleState(false));
               }}
             >
