@@ -110,7 +110,7 @@ export const useCommentInquiry = ({ articleId }) => {
     const { data } = await api.get(`/articles/${articleId}/comments`);
     return data;
   };
-  return useQuery("CommentInquiry", fetcher);
+  return useQuery(["CommentInquiry", articleId], fetcher);
 };
 
 // // Mutations

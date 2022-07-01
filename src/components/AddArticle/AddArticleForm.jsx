@@ -182,7 +182,7 @@ const AddArticleForm = () => {
   return (
     <WrapToggle>
       <WrapForm>
-        <form onSubmit={writeArticle}>
+        <form onSubmit={writeArticle} autocomplete="off">
           <Header>
             <button
               type="button"
