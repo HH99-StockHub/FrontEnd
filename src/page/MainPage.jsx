@@ -29,4 +29,6 @@ const WrapMainContent = styled.div`
   justify-content: center;
   gap: 67px 24px;
   flex-wrap: wrap;
+  width: 1230px;
+  margin: 0 auto;
 `;

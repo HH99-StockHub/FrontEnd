@@ -17,7 +17,7 @@ root.render(
       </BrowserRouter>
     </Provider>
     <ReactQueryDevtools initialIsOpen={true} />
-  </QueryClientProvider>
+  </QueryClientProvider>,
 );
 
 reportWebVitals();

@@ -1,12 +1,15 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 import styled from "styled-components";
+import { useGetRichArticles } from "../../../custom/reactQuery/useQuery";
 //컴포넌트
 import CardImg from "../common/CardImg";
 import CardTextRich from "../common/CardTextRich";
 const RichArticleList = () => {
   // 데이터 받기 전 예시 arr
   const data = [1, 2, 3, 4, 5, 6];
+  // useQuery
+  // const {data=[]} = useGetRichArticles()
   return (
     <div>
       <ArticleBox>

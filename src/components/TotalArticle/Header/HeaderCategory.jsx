@@ -7,62 +7,34 @@ import styled from "styled-components";
 import { ReactComponent as ArticleSvg } from "../../../image/Article.svg";
 
 const HeaderCategory = () => {
+  // 주소 받아오기
   const { category } = useParams();
-  const [categoryName, setCategoryName] = useState("");
-  useEffect(() => {
-    switch (category) {
-      case "all":
-        setCategoryName("전체 게시판");
-        break;
-      case "popular":
-        setCategoryName("인기 게시판");
-        break;
-      case "rich":
-        setCategoryName("수익왕 게시판");
-        break;
-      case "user":
-        setCategoryName("내 게시글");
-        break;
-      default:
-        break;
-    }
-    return () => {
-      setCategoryName("");
-    };
-  }, [category]);
-
+  // 카테고리 관련 하드코딩 배열
+  const arr = [
+    { category: "all", name: "전체 게시판" },
+    { category: "popular", name: "인기 게시판" },
+    { category: "rich", name: "수익왕 게시판" },
+    { category: "user", name: "내 게시판" },
+  ];
   return (
     <WrapCategory>
-      <Link to="/">
-        <CurrentCategory>
-          <ArticleSvg fill="white" />
-          <div>{categoryName}</div>
-        </CurrentCategory>
-      </Link>
-      <Link to="/total/all/articles">
-        <Category>
-          <ArticleSvg fill="black" />
-          <div>전체 게시판</div>
-        </Category>
-      </Link>
-      <Link to="/total/popular/articles">
-        <Category>
-          <ArticleSvg fill="black" />
-          <div>인기 게시판</div>
-        </Category>
-      </Link>
-      <Link to="/total/rich/articles">
-        <Category>
-          <ArticleSvg fill="black" />
-          <div>수익왕 게시판</div>
-        </Category>
-      </Link>
-      <Link to="/total/user/articles">
-        <Category>
-          <ArticleSvg fill="black" />
-          <div>내 게시글</div>
-        </Category>
-      </Link>
+      {arr.map((v, l) => {
+        return category === v.category ? (
+          <Link to={`/total/${v.category}/articles/1`}>
+            <CurrentCategory>
+              <ArticleSvg fill="white" />
+              <div>{v.name}</div>
+            </CurrentCategory>
+          </Link>
+        ) : (
+          <Link to={`/total/${v.category}/articles/1`}>
+            <Category>
+              <ArticleSvg fill="black" />
+              <div>{v.name}</div>
+            </Category>
+          </Link>
+        );
+      })}
     </WrapCategory>
   );
 };
@@ -76,19 +48,15 @@ const CurrentCategory = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  /* padding: 8px 12px; */
-  width: 120px;
+  gap: 6px;
+  padding: 8px 12px;
   height: 40px;
   background-color: black;
   color: white;
   font-weight: 700;
   border: 1px solid #000;
-  border-radius: 20px;
-
-  div {
-    font-size: 14px;
-  }
+  border-radius: 25px;
+  font-size: 14px;
 `;
 
 const Category = styled.div`
@@ -96,12 +64,8 @@ const Category = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  /* padding: 8px 12px; */
-  width: 120px;
+  padding: 8px 12px;
   height: 40px;
   font-weight: 700;
-
-  div {
-    font-size: 14px;
-  }
+  font-size: 14px;
 `;

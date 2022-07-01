@@ -1,21 +1,9 @@
-import React from 'react'
-import { api } from "../../shared/api";
-import { useQuery , useMutation, useQueryClient } from "react-query";
-
+import React from "react";
+import { KAKAO_AUTH_URL } from "../../Auth/kakao";
 //카카오 로그인
-export const useKakaoLogin = () => {
-    const fetcher = async () => {
-      const { data } = await api.get(`/user/kakao/callback`);
-      return data;
-    };
-    return useQuery("KakaoLogin", fetcher);
-  };
 
 const KakaoLogin = () => {
+  return <a href={KAKAO_AUTH_URL}>카카오로그인</a>;
+};
 
-  return (
-    <div>KakaoLogin</div>
-  )
-}
-
-export default KakaoLogin
+export default KakaoLogin;

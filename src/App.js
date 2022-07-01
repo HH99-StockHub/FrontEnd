@@ -7,20 +7,28 @@ import TotalArticle from "./page/TotalArticle";
 import AddArticle from "./page/AddArticle";
 import DetailArticle from "./components/DetailArticle/DetailArticle";
 import SlideStock from "./repeat/SlideStock";
+import OAuth from "./components/KakaoLogin/OAuth";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
+import { useSelector } from "react-redux";
 
 function App() {
+  // 게시글 작성 토글 관리
+  const toggleState = useSelector((state) => state.toggle.toggleState);
   return (
     <div className="App">
       <GlobalStyle />
+      {toggleState && <AddArticle />}
       <Header />
       <SlideStock />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/total/:category/articles" element={<TotalArticle />} />
-        <Route path="/add/article" element={<AddArticle />} />
+        <Route
+          path="/total/:category/articles/:page"
+          element={<TotalArticle />}
+        />
         <Route path="/detailarticle" element={<DetailArticle />} />
+        <Route path="/user/kakao/callback" element={<OAuth />} />
       </Routes>
     </div>
   );

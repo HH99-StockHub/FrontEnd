@@ -4,7 +4,6 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 // // Queries
 // const query = useQuery("todos", getTodos);
 
-
 // 메인 페이지 전체 게시글 가져오기
 export const useGetMainArticles = () => {
   const fetcher = async () => {
@@ -12,7 +11,23 @@ export const useGetMainArticles = () => {
     return data;
   };
 
-  return useQuery("mainArticles", fetcher);
+  return useQuery(["allArticle", "mainArticles"], fetcher);
+};
+
+// 메인 명예의 전당 게시글 가져오기 인기 / 수익
+export const useGetFamePopularArticle = () => {
+  const fetcher = async () => {
+    const { data } = await api.get("/main/fame/popular/articles");
+    return data;
+  };
+  return useQuery("popularFameArticles", fetcher);
+};
+export const useGetFameRichArticle = () => {
+  const fetcher = async () => {
+    const { data } = await api.get("/main/fame/rich/articles");
+    return data;
+  };
+  return useQuery("richFameArticles", fetcher);
 };
 
 // 메인 페이지 인기 게시글 가져오기
@@ -33,33 +48,33 @@ export const useGetRichArticles = () => {
   return useQuery("richArticles", fetcher);
 };
 
-// ALL 전체 게시글 가져오기
-export const useGetAllMainArticles = () => {
+// ALL 카테고리 별로 게시글 가져오기
+export const useGetAllArticles = (category, page) => {
   const fetcher = async () => {
-    const { data } = await api.get("/all/articles");
+    const { data } = await api.get(`/${category}/articles`);
     return data;
   };
 
-  return useQuery("allMainArticles", fetcher);
+  return useQuery(["allArticle", category, page], fetcher);
 };
 
 // ALL 인기 게시글 가져오기
-export const useGetAllPopularArticles = () => {
-  const fetcher = async () => {
-    const { data } = await api.get("/popular/articles");
-    return data;
-  };
-  return useQuery("allPopularArticles", fetcher);
-};
+// export const useGetAllArticles = () => {
+//   const fetcher = async () => {
+//     const { data } = await api.get("/popular/articles");
+//     return data;
+//   };
+//   return useQuery(["allArticle", "allPopularArticles"], fetcher);
+// };
 
-// ALL 수익왕 게시글 가져오기
-export const useGetAllRichArticles = () => {
-  const fetcher = async () => {
-    const { data } = await api.get("/rich/articles");
-    return data;
-  };
-  return useQuery("allRichArticles", fetcher);
-};
+// // ALL 수익왕 게시글 가져오기
+// export const useGetAllArticles = () => {
+//   const fetcher = async () => {
+//     const { data } = await api.get("/rich/articles");
+//     return data;
+//   };
+//   return useQuery(["allArticle", "allRichArticles"], fetcher);
+// };
 
 // ALL 내 게시글 가져오기
 
@@ -68,11 +83,11 @@ export const useGetAllUserArticles = ({ userId }) => {
     const { data } = await api.get(`/user/${userId}/articles`);
     return data;
   };
-  return useQuery("allUserArticles", fetcher);
+  return useQuery(["allArticle", "allUserArticles"], fetcher);
 };
 
 //게시글 내용조회
-export const useContentInquiry = ({articleId}) => {
+export const useContentInquiry = ({ articleId }) => {
   const fetcher = async () => {
     const { data } = await api.get(`/articles/${articleId}`);
     return data;
@@ -81,7 +96,7 @@ export const useContentInquiry = ({articleId}) => {
 };
 
 //게시글 주식종목 조회
-export const useStocksInquiry = ({articleId}) => {
+export const useStocksInquiry = ({ articleId }) => {
   const fetcher = async () => {
     const { data } = await api.get(`/articles/${articleId}/stock`);
     return data;
@@ -90,14 +105,13 @@ export const useStocksInquiry = ({articleId}) => {
 };
 
 //게시글 댓글 목록 조회
-export const useCommentInquiry = ({articleId}) => {
+export const useCommentInquiry = ({ articleId }) => {
   const fetcher = async () => {
     const { data } = await api.get(`/articles/${articleId}/comments`);
     return data;
   };
-  return useQuery("CommentInquiry", fetcher);
+  return useQuery(["CommentInquiry", articleId], fetcher);
 };
-
 
 // // Mutations
 // const queryClient = useQueryClient();

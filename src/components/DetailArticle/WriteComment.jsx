@@ -1,25 +1,28 @@
 import React from "react";
 import { api } from "../../shared/api";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 //댓글작성
-const useWriteComment = ({ articleId } , payload) => {
-  return api.post(`/articles/${articleId}/comment`,{
-    comment : payload.comment
+const useWriteComment = ({ articleId }, payload) => {
+  return api.post(`/articles/${articleId}/comment`, {
+    comment: payload.comment,
   });
 };
 
 //댓글삭제
-const useDeleteComment = ({ articleId }) => {
-  return api.delete(`/comments/${articleId}`);
+const useDeleteComment = ({ commentId }) => {
+  return api.delete(`/comments/${commentId}`);
 };
 
 const WriteComment = () => {
+  const Write_input = React.useRef("");
+
   const queryClient = useQueryClient();
   //댓글작성
-  const WriteComment = useMutation(useWriteComment, {
+  const { mutate } = useMutation(useWriteComment, {
     onSuccess: () => {
       queryClient.invalidateQueries();
+      Write_input.current.value = "";
     },
   });
   //댓글삭제
@@ -28,7 +31,32 @@ const WriteComment = () => {
       queryClient.invalidateQueries();
     },
   });
-  return <div>WriteComment</div>;
+
+  const Delete = ({ commentID }) => {
+    DeleteComment.mutate({ commentID });
+  };
+
+  if (WriteComment.isLoading) {
+    return null;
+  }
+
+  return (
+    <div>
+      <input ref={Write_input} />
+      <button
+        onClick={() => {
+          const data = { Write: Write_input.current.value };
+          mutate(data);
+        }}
+      >
+        추가해보자
+      </button>
+      <div>
+        <button onClick={Delete}>삭제하기</button>
+      </div>
+    </div>
+  );
 };
+
 
 export default WriteComment;
