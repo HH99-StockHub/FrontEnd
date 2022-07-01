@@ -106,8 +106,6 @@ const AddArticleForm = () => {
       selectStockState &&
       !e.nativeEvent.isComposing
     ) {
-      console.log(wrapTagStockList);
-
       if (e.code === "ArrowDown" && Number(stockIndex) !== stockArr.length) {
         setStockIndex(stockIndex + 1);
         // 자동 스크롤 내리기
