@@ -6,15 +6,15 @@ const View = () => {
     <Box>
         <div>
       <Views>앞으로의 반도체 전망</Views>
-      <Contents placeholder="내용 작성"></Contents>
+      <Contents>{"내용"}</Contents>
       </div>
       <div>
       <Views>앞으로의 반도체 전망</Views>
-      <Contents placeholder="내용 작성"></Contents>
+      <Contents>{"내용"}</Contents>
       </div>
       <div>
       <Views>앞으로의 반도체 전망</Views>
-      <Contents placeholder="내용 작성"></Contents>
+      <Contents>{"내용"}</Contents>
       </div>
     </Box>
   );
@@ -35,7 +35,7 @@ const Views = styled.div`
   font-weight: 700;
   border: 1px solid #dbdbdb;
 `;
-const Contents = styled.textarea`
+const Contents = styled.pre`
   border: 1px solid #dbdbdb;
   height: 150px;
   width: 100%;
