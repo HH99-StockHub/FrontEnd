@@ -10,7 +10,9 @@ const Comment = () => {
       <Btn>보내기</Btn>
       </Label>
     </Box>
+    
   )
+
 }
 
 const Box = styled.div`
