@@ -9,11 +9,6 @@ const useWriteComment = ({ articleId }, payload) => {
   });
 };
 
-//댓글삭제
-const useDeleteComment = ({ commentId }) => {
-  return api.delete(`/comments/${commentId}`);
-};
-
 const WriteComment = () => {
   const Write_input = React.useRef("");
 
@@ -25,15 +20,9 @@ const WriteComment = () => {
       Write_input.current.value = "";
     },
   });
-  //댓글삭제
-  const DeleteComment = useMutation(useDeleteComment, {
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
 
   const Delete = ({ commentID }) => {
-    DeleteComment.mutate({ commentID });
+    mutate({ commentID });
   };
 
   if (WriteComment.isLoading) {
@@ -57,6 +46,5 @@ const WriteComment = () => {
     </div>
   );
 };
-
 
 export default WriteComment;
