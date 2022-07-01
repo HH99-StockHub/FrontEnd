@@ -25,15 +25,36 @@ const AddArticleForm = () => {
   // 주식 선택하기 일치 항목
   const [stockArr, setStockArr] = useState([]);
   const [selectStockState, setSelectStockState] = useState(null);
+  // 주식 선택하기 일치 항목 인덱스 값
+  const [stockIndex, setStockIndex] = useState(0);
   // 주식 선택하기 input 변경 값
   const [stockInput, setStockInput] = useState("");
   // 투자 포인트 데이터
   const [stockPoint, setStockPoint] = useState([{}]);
   // title가져오기
   const articleTitle = useRef("");
+  const wrapTagStockList = useRef();
 
   //예시 arr
   const data = [
+    "삼기자9",
+    "삼성기자8",
+    "삼성호자7",
+    "삼성바자6",
+    "삼성전자5",
+    "삼성전자4",
+    "삼성전자3",
+    "삼성전자2",
+    "삼성전자1",
+    "삼기자9",
+    "삼성기자8",
+    "삼성호자7",
+    "삼성바자6",
+    "삼성전자5",
+    "삼성전자4",
+    "삼성전자3",
+    "삼성전자2",
+    "삼성전자1",
     "삼기자9",
     "삼성기자8",
     "삼성호자7",
@@ -70,6 +91,52 @@ const AddArticleForm = () => {
       setSelectStockState(true);
     }
     setStockInput(e.target.value);
+    // setStockIndex(0);
+  };
+
+  // 주식 종목 keydownHander
+  const keyDownHandler = (e) => {
+    // 폼 엔터키 눌렀을 때 submit 막기
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+    // 방향키 핸들링
+    if (
+      stockArr.length !== 0 &&
+      selectStockState &&
+      !e.nativeEvent.isComposing
+    ) {
+      console.log(wrapTagStockList);
+
+      if (e.code === "ArrowDown" && Number(stockIndex) !== stockArr.length) {
+        setStockIndex(stockIndex + 1);
+        // 자동 스크롤 내리기
+        // 4번째마다 스크롤
+        if (stockIndex % 4 === 0 && stockIndex !== 0) {
+          const scrollPoint =
+            wrapTagStockList?.current?.children[stockIndex - 1];
+          scrollPoint.scrollIntoView({ behavior: "smooth" });
+        }
+      } else if (e.code === "ArrowUp" && Number(stockIndex) !== 1) {
+        setStockIndex(stockIndex - 1);
+        // 자동 스크롤 올리기
+        // 4번째마다 스크롤
+        if (stockIndex % 4 === 0 && stockIndex !== 0) {
+          if (stockIndex === 4) {
+            const scrollPoint = wrapTagStockList?.current?.children[0];
+            scrollPoint.scrollIntoView();
+          } else {
+            const scrollPoint =
+              wrapTagStockList?.current?.children[stockIndex - 6];
+            scrollPoint.scrollIntoView();
+          }
+        }
+      } else if (e.code === "Enter") {
+        setStockInput(stockArr[stockIndex - 1]);
+        setStockIndex(0);
+        setSelectStockState(false);
+      }
+    }
   };
   // 주식 종목 하나 선택하기
   const selectStockOne = (e) => {
@@ -156,6 +223,7 @@ const AddArticleForm = () => {
 
   // 검색어와 동일한 data만 색출하기
   useEffect(() => {
+    setStockIndex(0);
     const changeSotck = setTimeout(() => {
       const changeData = data.filter((v, l) => {
         if (stockInput.length !== 0) {
@@ -177,17 +245,18 @@ const AddArticleForm = () => {
   // 토글 창 오픈시 스크롤 막기 , 닫기 클릭 시 해제
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    return () => {};
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, []);
   return (
     <WrapToggle>
       <WrapForm>
-        <form onSubmit={writeArticle} autocomplete="off">
+        <form onSubmit={writeArticle} autoComplete="off">
           <Header>
             <button
               type="button"
               onClick={() => {
-                document.body.style.overflow = "unset";
                 dispatch(togleState(false));
               }}
             >
@@ -199,15 +268,17 @@ const AddArticleForm = () => {
           <WrapText>
             <WrapSearch>
               <WrapSelect>
+                <input hidden="hidden" />
                 <input
                   type="text"
                   value={stockInput}
                   placeholder="종목검색"
                   onChange={selectStockList}
+                  onKeyDown={keyDownHandler}
                 />
                 <SearchSvg width="17.49" height="17.49" />
                 {selectStockState && (
-                  <StockList>
+                  <StockList index={stockIndex} ref={wrapTagStockList}>
                     {stockArr.map((v) => {
                       return <div onClick={selectStockOne}>{v}</div>;
                     })}
@@ -388,10 +459,31 @@ const StockList = styled.div`
   height: 264px;
   overflow-y: auto;
   background-color: #fff;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
   div {
+    display: flex;
+    align-items: center;
     height: 44px;
     :hover {
       background-color: #bbb;
     }
+  }
+  div:nth-child(${({ index }) => {
+        return Number(index);
+      }}) {
+    border: 1px solid #000;
   }
 `;
