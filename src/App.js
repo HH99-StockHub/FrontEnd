@@ -11,13 +11,15 @@ import OAuth from "./components/KakaoLogin/OAuth";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import { useSelector } from "react-redux";
+import Test from "./Test";
 
 function App() {
   // 게시글 작성 토글 관리
   const toggleState = useSelector((state) => state.toggle.toggleState);
   return (
     <div className="App">
-      <GlobalStyle />
+      <Test />
+      {/* <GlobalStyle />
       {toggleState && <AddArticle />}
       <Header />
       <SlideStock />
@@ -29,7 +31,7 @@ function App() {
         />
         <Route path="/detailarticle" element={<DetailArticle />} />
         <Route path="/user/kakao/callback" element={<OAuth />} />
-      </Routes>
+      </Routes> */}
     </div>
   );
 }
