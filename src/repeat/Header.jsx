@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
+// 훅
 import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
+// 모듈
 import { loginState } from "../redux/modules/login";
 import { togleState } from "../redux/modules/addArticle";
 
