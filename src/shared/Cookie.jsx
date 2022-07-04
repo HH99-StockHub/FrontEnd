@@ -1,21 +1,20 @@
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 const getCookie = (name) => {
-  let value = "; " + document.cookie;
-
-  let parts = value.split(`; ${name}=`);
-
-  if (parts.length === 2) {
-    return parts.pop().split(";").shift();
-  }
+  return cookies.get(name);
 };
-const setCookie = (name, value, exp = 5) => {
-  let date = new Date();
-  date.setTime(date.getTime() + exp * 120 * 60 * 60 * 1000);
-  document.cookie = `${name}=${value};  path=/; expires=${date.toUTCString()}`;
+const setCookie = (name, value, exp = 24) => {
+  cookies.set(name, value, {
+    path: "/",
+    expires: new Date(Date.now() + exp * 60 * 60 * 1000),
+  });
 };
 
 const deleteCookie = (name) => {
-  let date = new Date("2020-01-01").toUTCString();
-  document.cookie = name + "=; expires=" + date;
+  cookies.remove(name, {
+    path: "/",
+  });
 };
 
 export { getCookie, setCookie, deleteCookie };

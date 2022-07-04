@@ -31,7 +31,7 @@ const Header = () => {
   React.useEffect(() => {
     const cookie = getCookie("token");
     const userId = localStorage.getItem("id");
-    if (cookie !== undefined && userId !== undefined) {
+    if (cookie !== undefined && userId !== null) {
       dispatch(loginState(true));
     } else {
       deleteCookie("token");
