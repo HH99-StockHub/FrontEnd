@@ -1,14 +1,14 @@
 import React from "react";
-import { api } from "../../shared/api";
-import Vote from "./Vote";
-import WriteComment from "./WriteComment";
+import { api } from "../shared/api";
+import Vote from "../components/DetailArticle/Vote";
+import WriteComment from "../components/DetailArticle/WriteComment";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
-import Title from "./collection/Title";
-import Writing from "./collection/Writing";
-import Stocks from "./collection/Stocks";
-import View from "./collection/View";
-import Comment from "./collection/Comment";
+import Title from "../components/DetailArticle/collection/Title";
+import Writing from "../components/DetailArticle/collection/Writing";
+import Stocks from "../components/DetailArticle/collection/Stocks";
+import View from "../components/DetailArticle/collection/View";
+import Comment from "../components/DetailArticle/collection/Comment";
 
 //게시글삭제
 const useDeletePost = ({ commentId }) => {
