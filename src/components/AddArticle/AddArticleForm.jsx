@@ -1,10 +1,9 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React, { useEffect, useRef, useState } from "react";
-import { useQueryClient, useMutation } from "react-query";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 //hook
-import { api } from "../../shared/api";
+import { useAddArticleFormMutate } from "./useAddArticleFormQuery";
 // 모듈
 import { togleState } from "../../redux/modules/addArticle";
 //이미지
@@ -67,21 +66,7 @@ const AddArticleForm = () => {
   ];
 
   // useMutation 사용
-  const queryClient = useQueryClient();
-  const fetcher = async (article) => {
-    await api.post("/article", article);
-  };
-
-  const { mutate } = useMutation(fetcher, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("allArticle");
-      alert("작성 완료");
-      navigate("/");
-    },
-    onError: (err) => {
-      alert("에러가 발생했습니다.");
-    },
-  });
+  const { mutate } = useAddArticleFormMutate.useAddArticleMutation();
 
   // 주식 종목 선택하기 list
   const selectStockList = (e) => {
