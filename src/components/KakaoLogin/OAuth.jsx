@@ -13,7 +13,7 @@ const OAuth = () => {
   const [check, setCheck] = useState(false);
   // calllback으로 받은 인가코드
   const code = new URL(window.location.href).searchParams.get("code");
-
+  const beforeUrl = sessionStorage.getItem("url");
   const {
     data = false,
     isLoading,
@@ -33,7 +33,7 @@ const OAuth = () => {
   useEffect(() => {
     if (isError) {
       alert("예상치 못한 오류가 발생했습니다. 다시 시도해주세요 ");
-      navigate("/");
+      navigate(beforeUrl);
     }
     if (data) {
       const accessToken = data.headers.authorization;
@@ -42,7 +42,7 @@ const OAuth = () => {
       dispatch(loginState(true));
       setCheck(true);
       alert("로그인 완료");
-      navigate(-1);
+      navigate(beforeUrl);
     }
   }, [data]);
   return (
