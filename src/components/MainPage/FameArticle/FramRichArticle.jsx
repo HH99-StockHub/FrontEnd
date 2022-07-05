@@ -1,9 +1,11 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useGetFameRichArticle } from "../../../custom/reactQuery/useQuery";
 //컴포넌트
 import FramRichCard from "./FramRichCard";
+// 쿼리 훅
+import { useGetFameRichArticle } from "../../../custom/reactQuery/useQuery";
 
 const FramRichArticle = () => {
   //테스트 arr
@@ -15,7 +17,11 @@ const FramRichArticle = () => {
       <Title>수익왕 베스트</Title>
       <WrapCard>
         {data.map((v) => {
-          return <FramRichCard />;
+          return (
+            <Link to={`/detail/article/${data.id}`}>
+              <FramRichCard />
+            </Link>
+          );
         })}
       </WrapCard>
     </div>

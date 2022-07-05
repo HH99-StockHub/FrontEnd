@@ -3,16 +3,17 @@ import { api } from "../../shared/api";
 import { useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
 
+const currentUserId = localStorage.getItem("id");
 //찬성투표
-const useVoteInFavor = ({ articleId }, payload) => {
-  return api.post(`/articles/${articleId}/up`, {
-    articleId: payload.articleId,
+const useVoteInFavor = (payload) => {
+  return api.post(`/articles/${payload.articleId}/up`, {
+    voteUpId: payload.voteUpId,
   });
 };
 //반대투표
-const useNegativeVote = ({ articleId }, payload) => {
-  return api.post(`/articles/${articleId}/down`, {
-    articleId: payload.articleId,
+const useNegativeVote = (payload) => {
+  return api.post(`/articles/${payload.articleId}/down`, {
+    voteDownId: payload.voteDownId,
   });
 };
 
@@ -26,7 +27,7 @@ const Vote = () => {
   });
 
   const InFavor = ({ articleId }) => {
-    VoteInFavor.mutate({ articleId });
+    VoteInFavor.mutate({ articleId , voteUpId:currentUserId });
   };
   //반대투표
   const NegativeVote = useMutation(useNegativeVote, {
@@ -36,7 +37,7 @@ const Vote = () => {
   });
 
   const Negative = ({ articleId }) => {
-    NegativeVote.mutate({ articleId });
+    NegativeVote.mutate({ articleId , voteDownId:currentUserId } );
   };
 
   if (Vote.isLoading) {

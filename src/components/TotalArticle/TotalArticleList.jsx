@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+// 쿼리 훅
 import {
   useGetAllArticles,
   useGetAllMainArticles,
@@ -20,7 +22,9 @@ const TotalArticleList = ({ data }) => {
                 alt="회사 로고"
               />
             </div>
-            <div style={{ width: "660px" }}>삼전 물리신 분들 모이세요</div>
+            <Link to={`/detail/article/${data.id}`}>
+              <div style={{ width: "660px" }}>삼전 물리신 분들 모이세요</div>
+            </Link>
             <div style={{ width: "72px" }}>22.07.25</div>
             <div style={{ width: "72px" }}>1000</div>
             <div style={{ width: "92px" }}>2000</div>
@@ -42,7 +46,7 @@ const WrapTd = styled.div`
   padding: 8px 0 8px 8px;
   font-size: 12px;
   text-align: center;
-  div:nth-child(2) {
+  a > div {
     text-align: left;
   }
   > div > img {

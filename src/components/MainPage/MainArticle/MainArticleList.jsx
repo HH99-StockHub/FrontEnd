@@ -24,18 +24,20 @@ const MainArticleList = () => {
           <th style={{ width: "72px" }}>비추천</th>
         </tr>
       </THead>
-      {data.map((v) => {
-        return (
-          <MainArticleCard
-            date={"22-08-07"}
-            title={"섬성전자 주식 3개월 전망 분석"}
-            user={"btae"}
-            watch={"1k"}
-            up={22}
-            down={0}
-          />
-        );
-      })}
+      <tbody>
+        {data.map((v) => {
+          return (
+            <MainArticleCard
+              date={"22-08-07"}
+              title={"섬성전자 주식 3개월 전망 분석"}
+              user={"btae"}
+              watch={"1k"}
+              up={22}
+              down={0}
+            />
+          );
+        })}
+      </tbody>
     </Table>
   );
 };

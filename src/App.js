@@ -5,7 +5,7 @@ import MainPage from "./page/MainPage";
 import Header from "./repeat/Header";
 import TotalArticle from "./page/TotalArticle";
 import AddArticle from "./page/AddArticle";
-import DetailArticle from "./components/DetailArticle/DetailArticle";
+import DetailArticle from "./page/DetailArticle";
 import SlideStock from "./repeat/SlideStock";
 import OAuth from "./components/KakaoLogin/OAuth";
 //CSS
@@ -27,7 +27,7 @@ function App() {
           path="/total/:category/articles/:page"
           element={<TotalArticle />}
         />
-        <Route path="/detailarticle" element={<DetailArticle />} />
+        <Route path="/detail/article/:id" element={<DetailArticle />} />
         <Route path="/user/kakao/callback" element={<OAuth />} />
       </Routes>
     </div>

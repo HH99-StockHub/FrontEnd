@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
+// 훅
 import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
+// 모듈
 import { loginState } from "../redux/modules/login";
 import { togleState } from "../redux/modules/addArticle";
 
@@ -31,7 +33,7 @@ const Header = () => {
   React.useEffect(() => {
     const cookie = getCookie("token");
     const userId = localStorage.getItem("id");
-    if (cookie !== undefined && userId !== undefined) {
+    if (cookie !== undefined && userId !== null) {
       dispatch(loginState(true));
     } else {
       deleteCookie("token");

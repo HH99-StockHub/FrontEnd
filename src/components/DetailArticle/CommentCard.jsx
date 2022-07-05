@@ -27,7 +27,6 @@ const CommentCard = ({ data }) => {
 
   useEffect(() => {
     const currentUserId = localStorage.getItem("id");
-    console.log(currentUserId);
     if (currentUserId !== null && currentUserId == data.userId) {
       setDeleteBtn(true);
     }
