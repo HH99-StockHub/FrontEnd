@@ -1,5 +1,5 @@
 import { api } from "../../shared/api";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 export const useAddArticleFormMutate = {
   useAddArticleMutation: () => {
@@ -25,13 +25,3 @@ export const useAddArticleFormMutate = {
     return useMutation(fetcher, option);
   },
 };
-
-// export const useAddArticleFormQuery = {
-//   useGetArticleStock: (article) => {
-//     const fetcher = async () => {
-//       const response = await api.get(`/articles/${article}/stock`);
-//       return response;
-//     };
-//     return useQuery(["stock", article], fetcher);
-//   },
-// };
