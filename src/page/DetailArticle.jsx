@@ -1,7 +1,8 @@
 import React from "react";
+import { api } from "../shared/api";
 import Vote from "../components/DetailArticle/Vote";
-import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
-import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
+import WriteComment from "../components/DetailArticle/WriteComment";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
 import Title from "../components/DetailArticle/collection/Title";
 import Writing from "../components/DetailArticle/collection/Writing";
@@ -9,16 +10,26 @@ import Stocks from "../components/DetailArticle/collection/Stocks";
 import View from "../components/DetailArticle/collection/View";
 import Comment from "../components/DetailArticle/collection/Comment";
 
-
+//게시글삭제
+const useDeletePost = ({ commentId }) => {
+  return api.delete(`/articles/${commentId}`);
+};
 
 const DetailArticle = () => {
+  const queryClient = useQueryClient();
 
   //게시글삭제
-  const { mutate } = useDetailArticleMutate.useDeletePost()
+  const { mutate } = useMutation(useDeletePost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+
+  if (DetailArticle.isLoading) {
+    return null;
+  }
 
   return (
-    <>
-    <TotalArticleHeader />
     <Container>
       <Title />
       <BtnBox>
@@ -40,7 +51,6 @@ const DetailArticle = () => {
       <Vote />
       <Comment />
     </Container>
-    </>
   );
 };
 

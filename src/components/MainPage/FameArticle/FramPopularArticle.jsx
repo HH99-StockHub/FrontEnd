@@ -5,19 +5,21 @@ import styled from "styled-components";
 //컴포넌트
 import FramPopularCard from "./FramPopularCard";
 // 쿼리 훅
-import { useMainPageQuery } from "../useMainPageQuery";
+import { useGetFamePopularArticle } from "../../../custom/reactQuery/useQuery";
 
 const FramPopularArticle = () => {
+  //테스트 arr
+  const data = [1, 2, 3];
   // useQuery
-  const { data = [] } = useMainPageQuery.useGetFamePopularArticle();
+  // const {data = []} = useGetFamePopularArticle()
   return (
     <div>
       <Title>인기 베스트</Title>
       <WrapCard>
         {data.map((v) => {
           return (
-            <Link to={`/detail/article/${v.id}`} key={v.id}>
-              <FramPopularCard data={v} />
+            <Link to={`/detail/article/${data.id}`}>
+              <FramPopularCard />
             </Link>
           );
         })}
