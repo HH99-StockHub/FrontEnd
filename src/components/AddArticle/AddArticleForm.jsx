@@ -2,15 +2,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 //hook
 import { useAddArticleFormMutate } from "./useAddArticleFormQuery";
 // 모듈
+import { stockData } from "../../Data/stockData";
 import { togleState } from "../../redux/modules/addArticle";
 //이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
-import { useNavigate } from "react-router-dom";
 
 const AddArticleForm = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,8 @@ const AddArticleForm = () => {
   const [stockIndex, setStockIndex] = useState(0);
   // 주식 선택하기 input 변경 값
   const [stockInput, setStockInput] = useState("");
+  //선택 주식 주가
+  const [currentStock, setCurrentStock] = useState("종목을 선택해주세요");
   // 투자 포인트 데이터
   const [stockPoint, setStockPoint] = useState([{}]);
   // title가져오기
@@ -35,39 +38,19 @@ const AddArticleForm = () => {
   const wrapTagStockList = useRef();
 
   //예시 arr
-  const data = [
-    "삼기자9",
-    "삼성기자8",
-    "삼성호자7",
-    "삼성바자6",
-    "삼성전자5",
-    "삼성전자4",
-    "삼성전자3",
-    "삼성전자2",
-    "삼성전자1",
-    "삼기자9",
-    "삼성기자8",
-    "삼성호자7",
-    "삼성바자6",
-    "삼성전자5",
-    "삼성전자4",
-    "삼성전자3",
-    "삼성전자2",
-    "삼성전자1",
-    "삼기자9",
-    "삼성기자8",
-    "삼성호자7",
-    "삼성바자6",
-    "삼성전자5",
-    "삼성전자4",
-    "삼성전자3",
-    "삼성전자2",
-    "삼성전자1",
-  ];
+  const data = stockData;
 
   // useMutation 사용
-  const { mutate } = useAddArticleFormMutate.useAddArticleMutation();
-
+  const { mutate: addArticle } =
+    useAddArticleFormMutate.useAddArticleMutation();
+  const { mutate: getStock } = useAddArticleFormMutate.useGetArticleStock({
+    onSuccess: (data, variables, context) => {
+      setCurrentStock(data.data);
+    },
+    onError: (err) => {
+      alert("에러가 발생했습니다.");
+    },
+  });
   // 주식 종목 선택하기 list
   const selectStockList = (e) => {
     if (e.target.value === "") {
@@ -76,7 +59,6 @@ const AddArticleForm = () => {
       setSelectStockState(true);
     }
     setStockInput(e.target.value);
-    // setStockIndex(0);
   };
 
   // 주식 종목 keydownHander
@@ -115,16 +97,19 @@ const AddArticleForm = () => {
           }
         }
       } else if (e.code === "Enter") {
-        setStockInput(stockArr[stockIndex - 1]);
+        setStockInput(stockArr[stockIndex - 1].stockName);
         setStockIndex(0);
         setSelectStockState(false);
+        console.log(stockArr[stockIndex - 1].stockName);
+        getStock(stockArr[stockIndex - 1].stockName);
       }
     }
   };
   // 주식 종목 하나 선택하기
   const selectStockOne = (e) => {
-    setStockInput(e.target.innerText);
+    setStockInput(e.currentTarget.innerText.split("\n")[1]);
     setSelectStockState(false);
+    getStock(e.currentTarget.innerText.split("\n")[1]);
   };
 
   // 게시글 작성하기
@@ -148,13 +133,14 @@ const AddArticleForm = () => {
     } else {
       const data = {
         articleTitle: articleTitle.current.value,
-        stockName: "삼성전자",
+        stockName: stockInput,
       };
       stockPoint.forEach((v, l) => {
         data["point" + String(l + 1)] = v.title;
         data["content" + String(l + 1)] = v.content;
       });
-      mutate(data);
+      addArticle(data);
+      dispatch(togleState(false));
     }
   };
   // 투자 포인트 작성하기
@@ -209,8 +195,11 @@ const AddArticleForm = () => {
     setStockIndex(0);
     const changeSotck = setTimeout(() => {
       const changeData = data.filter((v, l) => {
-        if (stockInput.length !== 0) {
-          return v.slice(0, stockInput.length) === stockInput;
+        if (String(stockInput).length !== 0) {
+          return (
+            v.stockName.slice(0, String(stockInput).length) === stockInput ||
+            v.stockCode.slice(0, String(stockInput).length) === stockInput
+          );
         } else {
           return false;
         }
@@ -263,12 +252,17 @@ const AddArticleForm = () => {
                 {selectStockState && (
                   <StockList index={stockIndex} ref={wrapTagStockList}>
                     {stockArr.map((v) => {
-                      return <div onClick={selectStockOne}>{v}</div>;
+                      return (
+                        <div key={v.id} onClick={selectStockOne}>
+                          <span>{v.stockCode}</span>
+                          <div>{v.stockName}</div>
+                        </div>
+                      );
                     })}
                   </StockList>
                 )}
               </WrapSelect>
-              <span>현재 주가</span>
+              <span>{currentStock}</span>
             </WrapSearch>
             <WrapTitle>
               <h3>제목</h3>
@@ -464,7 +458,7 @@ const StockList = styled.div`
       background-color: #bbb;
     }
   }
-  div:nth-child(${({ index }) => {
+  > div:nth-child(${({ index }) => {
         return Number(index);
       }}) {
     border: 1px solid #000;

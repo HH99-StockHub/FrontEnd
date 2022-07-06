@@ -1,5 +1,5 @@
 import { api } from "../../shared/api";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 export const useAddArticleFormMutate = {
   useAddArticleMutation: () => {
@@ -16,5 +16,12 @@ export const useAddArticleFormMutate = {
         alert("에러가 발생했습니다.");
       },
     });
+  },
+  useGetArticleStock: (option) => {
+    const fetcher = async (article) => {
+      const response = await api.get(`/stock/get/${article}`);
+      return response;
+    };
+    return useMutation(fetcher, option);
   },
 };

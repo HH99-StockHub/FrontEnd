@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useCommentInquiry } from "../../../custom/reactQuery/useQuery";
+import { useDetailArticleMutate } from "../useDetailArticle";
+
 // 컴포넌트
 import CommentCard from "../CommentCard";
 
 const Comment = () => {
+  const WriteInput = React.useRef("");
+  const { mutate } = useDetailArticleMutate.useWriteComment();
   // 잉여 arr
   const data = [1, 23, 2, 4, 5];
 
@@ -16,8 +20,11 @@ const Comment = () => {
     <Box>
       <h3>댓글달기</h3>
       <Label>
-        <Views placeholder="상세내용 작성"></Views>
-        <Btn>보내기</Btn>
+        <Views ref={WriteInput} placeholder="상세내용 작성"></Views>
+        <Btn onClick={()=>{
+          const data = { Write: WriteInput.current.value };
+          mutate(data)
+        }}>보내기</Btn>
       </Label>
       {data.map((v) => {
         return <CommentCard data={v} />;

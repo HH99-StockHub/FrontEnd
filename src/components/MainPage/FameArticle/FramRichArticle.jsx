@@ -5,21 +5,19 @@ import styled from "styled-components";
 //컴포넌트
 import FramRichCard from "./FramRichCard";
 // 쿼리 훅
-import { useGetFameRichArticle } from "../../../custom/reactQuery/useQuery";
+import { useMainPageQuery } from "../useMainPageQuery";
 
 const FramRichArticle = () => {
-  //테스트 arr
-  const data = [1, 2, 3];
   // useQuery
-  // const {data=[]} = useGetFameRichArticle();
+  const { data = [] } = useMainPageQuery.useGetFameRichArticle();
   return (
     <div>
       <Title>수익왕 베스트</Title>
       <WrapCard>
         {data.map((v) => {
           return (
-            <Link to={`/detail/article/${data.id}`}>
-              <FramRichCard />
+            <Link to={`/detail/article/${v.articleId}`}>
+              <FramRichCard data={v} />
             </Link>
           );
         })}
