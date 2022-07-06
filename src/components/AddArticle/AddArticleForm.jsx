@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 //hook
 import { useAddArticleFormMutate } from "./useAddArticleFormQuery";
 // 모듈
+import { stockData } from "../../Data/stockData";
 import { togleState } from "../../redux/modules/addArticle";
 //이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
-import { stockData } from "../../Data/stockData";
 
 const AddArticleForm = () => {
   const dispatch = useDispatch();
@@ -29,6 +29,8 @@ const AddArticleForm = () => {
   const [stockIndex, setStockIndex] = useState(0);
   // 주식 선택하기 input 변경 값
   const [stockInput, setStockInput] = useState("");
+  //선택 주식 주가
+  const [currentStock, setCurrentStock] = useState("종목을 선택해주세요");
   // 투자 포인트 데이터
   const [stockPoint, setStockPoint] = useState([{}]);
   // title가져오기
@@ -42,7 +44,9 @@ const AddArticleForm = () => {
   const { mutate: addArticle } =
     useAddArticleFormMutate.useAddArticleMutation();
   const { mutate: getStock } = useAddArticleFormMutate.useGetArticleStock({
-    onSuccess: (data, variables, context) => {},
+    onSuccess: (data, variables, context) => {
+      setCurrentStock(data.data);
+    },
     onError: (err) => {
       alert("에러가 발생했습니다.");
     },
@@ -55,7 +59,6 @@ const AddArticleForm = () => {
       setSelectStockState(true);
     }
     setStockInput(e.target.value);
-    // setStockIndex(0);
   };
 
   // 주식 종목 keydownHander
@@ -97,6 +100,7 @@ const AddArticleForm = () => {
         setStockInput(stockArr[stockIndex - 1].stockName);
         setStockIndex(0);
         setSelectStockState(false);
+        console.log(stockArr[stockIndex - 1].stockName);
         getStock(stockArr[stockIndex - 1].stockName);
       }
     }
@@ -136,6 +140,7 @@ const AddArticleForm = () => {
         data["content" + String(l + 1)] = v.content;
       });
       addArticle(data);
+      dispatch(togleState(false));
     }
   };
   // 투자 포인트 작성하기
@@ -257,7 +262,7 @@ const AddArticleForm = () => {
                   </StockList>
                 )}
               </WrapSelect>
-              <span>현재 주가</span>
+              <span>{currentStock}</span>
             </WrapSearch>
             <WrapTitle>
               <h3>제목</h3>
