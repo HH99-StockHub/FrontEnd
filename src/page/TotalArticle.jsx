@@ -8,17 +8,16 @@ import TotalArticleContent from "../components/TotalArticle/TotalArticleContent"
 import TotalPagenation from "../components/TotalArticle/TotalPagenation";
 import HelmetComponents from "../repeat/HelmetComponents";
 // query 훅
-import { useGetAllArticles } from "../custom/reactQuery/useQuery";
+import { useTotalPageQuery } from "../components/TotalArticle/useTotalPageQuery";
 
 const TotalArticle = () => {
   // 카테고리별 meta title 변경
   const [titleCategory, setTitleCategory] = useState("");
   // URL 정보가져오기
   const { category, page } = useParams();
-  // 임시 배열
-  const data = [1, 2, 3, 4];
   // useQuery
-  // const { data = [] } = useGetAllArticles(category, page);
+  const { data = [] } = useTotalPageQuery.useGetAllArticles(category, "page");
+  console.log(data, category);
 
   useEffect(() => {
     switch (category) {
