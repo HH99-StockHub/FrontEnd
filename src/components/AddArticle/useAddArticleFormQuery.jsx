@@ -17,4 +17,22 @@ export const useAddArticleFormMutate = {
       },
     });
   },
+  useGetArticleStock: (option) => {
+    const queryClient = useQueryClient();
+    const fetcher = async (article) => {
+      const response = await api.get(`/articles/${article}/stock`);
+      return response;
+    };
+    return useMutation(fetcher, option);
+  },
 };
+
+// export const useAddArticleFormQuery = {
+//   useGetArticleStock: (article) => {
+//     const fetcher = async () => {
+//       const response = await api.get(`/articles/${article}/stock`);
+//       return response;
+//     };
+//     return useQuery(["stock", article], fetcher);
+//   },
+// };

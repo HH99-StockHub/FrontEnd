@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 //hook
 import { useAddArticleFormMutate } from "./useAddArticleFormQuery";
 // 모듈
@@ -10,7 +11,6 @@ import { togleState } from "../../redux/modules/addArticle";
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
-import { useNavigate } from "react-router-dom";
 
 const AddArticleForm = () => {
   const dispatch = useDispatch();
@@ -66,8 +66,16 @@ const AddArticleForm = () => {
   ];
 
   // useMutation 사용
-  const { mutate } = useAddArticleFormMutate.useAddArticleMutation();
-
+  const { mutate: addArticle } =
+    useAddArticleFormMutate.useAddArticleMutation();
+  const { mutate: getStock } = useAddArticleFormMutate.useGetArticleStock({
+    onSuccess: (data, variables, context) => {
+      console.log("success", data, variables, context);
+    },
+    onError: (err) => {
+      alert("에러가 발생했습니다.");
+    },
+  });
   // 주식 종목 선택하기 list
   const selectStockList = (e) => {
     if (e.target.value === "") {
@@ -118,6 +126,7 @@ const AddArticleForm = () => {
         setStockInput(stockArr[stockIndex - 1]);
         setStockIndex(0);
         setSelectStockState(false);
+        getStock(stockArr[stockIndex - 1]);
       }
     }
   };
@@ -125,6 +134,7 @@ const AddArticleForm = () => {
   const selectStockOne = (e) => {
     setStockInput(e.target.innerText);
     setSelectStockState(false);
+    getStock(e.target.innerText);
   };
 
   // 게시글 작성하기
@@ -154,7 +164,7 @@ const AddArticleForm = () => {
         data["point" + String(l + 1)] = v.title;
         data["content" + String(l + 1)] = v.content;
       });
-      mutate(data);
+      addArticle(data);
     }
   };
   // 투자 포인트 작성하기
