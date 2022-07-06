@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useMutation, queryClient } from "react-query";
-// 컴포넌트
-import { api } from "../../shared/api";
+import { useDetailArticleMutate } from "./useDetailArticle";
 //이미지
 import { ReactComponent as XbtnSvg } from "../../image/XBtn.svg";
 const CommentCard = ({ data }) => {
   const [deleteBtn, setDeleteBtn] = useState(true);
 
-  //댓글삭제
-  const useDeleteComment = ({ commentId }) => {
-    return api.delete(`/comments/${commentId}`);
-  };
-  const { mutate } = useMutation(useDeleteComment, {
-    onSuccess: () => {
-      alert("댓글 작성 완료 ");
-      queryClient.invalidateQueries(["CommentInquiry", data.articleId]);
-    },
-    onError: () => {
-      alert("댓글 작성 실패!");
-    },
-  });
+  const { mutate } = useDetailArticleMutate.useDeleteComment();
+  //게시글 삭제
   const deleteComment = (commentId) => {
     mutate(commentId);
   };
