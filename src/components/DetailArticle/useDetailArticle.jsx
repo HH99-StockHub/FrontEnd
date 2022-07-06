@@ -1,6 +1,6 @@
 import React from "react";
 import { api } from "../../shared/api";
-import { useMutation, useQueryClient , useQuery} from "react-query";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 
 export const useDetailArticleMutate = {
   //찬성투표
@@ -76,39 +76,38 @@ export const useDetailArticleMutate = {
     });
   },
   //게시글 삭제
-  useDeletePost : () => {
+  useDeletePost: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      console.log(payload)
       await api.delete(`/articles/${payload.postId}`);
     };
-    return useMutation(fetcher,{
+    return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries()
-        alert("게시글 삭제 완료")
+        queryClient.invalidateQueries();
+        alert("게시글 삭제 완료");
       },
       onError: (err) => {
-        alert("삭제 권한이 없습니다.")
-      }
-    })
-  }
+        alert("삭제 권한이 없습니다.");
+      },
+    });
+  },
 };
 
 export const useDetailArticleGet = {
   //게시글 내용조회
-    useContentInquiry: ({ articleId }) => {
-      const fetcher = async () => {
-        const { data } = await api.get(`/articles/${articleId}`);
-        return data;
-      };
-      return useQuery("ContentInquiry", fetcher);
-    },
+  useContentInquiry: ({ articleId }) => {
+    const fetcher = async () => {
+      const { data } = await api.get(`/articles/${articleId}`);
+      return data;
+    };
+    return useQuery("ContentInquiry", fetcher);
+  },
   //게시글 댓글 목록 조회
-   useCommentInquiry : ({ articleId }) => {
-      const fetcher = async () => {
-        const { data } = await api.get(`/articles/${articleId}/comments`);
-        return data;
-      };
-      return useQuery(["CommentInquiry", articleId], fetcher);
-    },
-  }
+  useCommentInquiry: ({ articleId }) => {
+    const fetcher = async () => {
+      const { data } = await api.get(`/articles/${articleId}/comments`);
+      return data;
+    };
+    return useQuery(["CommentInquiry", articleId], fetcher);
+  },
+};

@@ -100,7 +100,6 @@ const AddArticleForm = () => {
         setStockInput(stockArr[stockIndex - 1].stockName);
         setStockIndex(0);
         setSelectStockState(false);
-        console.log(stockArr[stockIndex - 1].stockName);
         getStock(stockArr[stockIndex - 1].stockName);
       }
     }
