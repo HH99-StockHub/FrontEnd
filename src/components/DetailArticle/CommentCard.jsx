@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+// query 훅
 import { useDetailArticleMutate } from "./useDetailArticle";
 //이미지
 import { ReactComponent as XbtnSvg } from "../../image/XBtn.svg";
@@ -7,23 +8,23 @@ const CommentCard = ({ data }) => {
   const [deleteBtn, setDeleteBtn] = useState(true);
 
   const { mutate } = useDetailArticleMutate.useDeleteComment();
-  //게시글 삭제
+  //댓글 삭제
   const deleteComment = (commentId) => {
     mutate(commentId);
   };
 
   useEffect(() => {
     const currentUserId = localStorage.getItem("id");
-    if (currentUserId !== null && currentUserId == data.userId) {
+    if (currentUserId !== null && currentUserId === data.userId) {
       setDeleteBtn(true);
     }
   }, []);
   return (
     <WrapCard>
       <WrapContent>
-        <p>{"data.userid"}</p>
-        <pre>{"data.content"}</pre>
-        <span>{"data.date"}</span>
+        <p>{data.nickname}</p>
+        <pre>{data.comment}</pre>
+        <span>{data.createdAt}</span>
       </WrapContent>
       <BoxNo>
         {deleteBtn && (

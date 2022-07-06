@@ -8,38 +8,37 @@ import Writing from "../components/DetailArticle/collection/Writing";
 import Stocks from "../components/DetailArticle/collection/Stocks";
 import View from "../components/DetailArticle/collection/View";
 import Comment from "../components/DetailArticle/collection/Comment";
-
-
+import { useParams } from "react-router-dom";
 
 const DetailArticle = () => {
-
+  const { id } = useParams();
   //게시글삭제
-  const { mutate } = useDetailArticleMutate.useDeletePost()
+  const { mutate } = useDetailArticleMutate.useDeletePost();
 
   return (
     <>
-    <TotalArticleHeader />
-    <Container>
-      <Title />
-      <BtnBox>
-        <Btn>목록</Btn>
-        <Btn
-          onClick={() => {
-            const data = {}; //게시글에 대한 데이터 넣기
-            mutate(data);
-          }}
-        >
-          게시글 삭제
-        </Btn>
-        <Btn>수정</Btn>
-      </BtnBox>
-      <Writing />
-      <hr />
-      <Stocks />
-      <View />
-      <Vote />
-      <Comment />
-    </Container>
+      <TotalArticleHeader />
+      <Container>
+        <Title />
+        <BtnBox>
+          <Btn>목록</Btn>
+          <Btn
+            onClick={() => {
+              const data = { postId: id }; //게시글에 대한 데이터 넣기
+              mutate(data);
+            }}
+          >
+            게시글 삭제
+          </Btn>
+          <Btn>수정</Btn>
+        </BtnBox>
+        <Writing />
+        <hr />
+        <Stocks />
+        <View />
+        <Vote id={id} />
+        <Comment id={id} />
+      </Container>
     </>
   );
 };

@@ -17,7 +17,6 @@ const TotalArticle = () => {
   const { category, page } = useParams();
   // useQuery
   const { data = [] } = useTotalPageQuery.useGetAllArticles(category, "page");
-  console.log(data, category);
 
   useEffect(() => {
     switch (category) {

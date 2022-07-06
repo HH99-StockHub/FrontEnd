@@ -4,26 +4,36 @@ import { useDetailArticleMutate } from "./useDetailArticle";
 import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
 
-const Vote = () => {
+const Vote = (props) => {
+  const { id } = props;
   const currentUserId = localStorage.getItem("id");
   //찬성투표
-  const VoteInFavor = useDetailArticleMutate.useVoteUpMutation();
-
-  const InFavor = ({ articleId }) => {
-    VoteInFavor.mutate({ articleId, voteUpId: currentUserId });
-  };
+  const { mutate: InFavor } = useDetailArticleMutate.useVoteUpMutation();
 
   //반대투표
-  const NegativeVote = useDetailArticleMutate.useVoteDownMutation();
-
-  const Negative = ({ articleId }) => {
-    NegativeVote.mutate({ articleId, voteDownId: currentUserId });
-  };
+  const { mutate: Negative } = useDetailArticleMutate.useVoteDownMutation();
 
   return (
     <BtnBox>
-      <Btn onClick={InFavor}> <UpSvg width="11" height="10" /> 추천 10 </Btn>
-      <Btn onClick={Negative}> <DownSvg width="11" height="10"/>반대 10</Btn>
+      <Btn
+        onClick={() => {
+          const data = { postId: id };
+          InFavor(data);
+        }}
+      >
+        {" "}
+        <UpSvg width="11" height="10" /> 추천 10{" "}
+      </Btn>
+      <Btn
+        onClick={() => {
+          const data = { postId: id };
+          Negative(data);
+        }}
+      >
+        {" "}
+        <DownSvg width="11" height="10" />
+        반대 10
+      </Btn>
     </BtnBox>
   );
 };

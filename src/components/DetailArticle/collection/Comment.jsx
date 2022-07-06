@@ -1,33 +1,57 @@
 import React from "react";
 import styled from "styled-components";
-import { useCommentInquiry } from "../../../custom/reactQuery/useQuery";
-import { useDetailArticleMutate } from "../useDetailArticle";
+import { useQueryClient } from "react-query";
+// 컴포넌트
+import {
+  useDetailArticleGet,
+  useDetailArticleMutate,
+} from "../useDetailArticle";
 
 // 컴포넌트
 import CommentCard from "../CommentCard";
 
-const Comment = () => {
-  const WriteInput = React.useRef("");
-  const { mutate } = useDetailArticleMutate.useWriteComment();
-  // 잉여 arr
-  const data = [1, 23, 2, 4, 5];
+const Comment = ({ id }) => {
+  const queryClient = useQueryClient();
+  const writeInput = React.useRef("");
+  const { mutate, isSuccess } = useDetailArticleMutate.useWriteComment({
+    onSuccess: () => {
+      writeInput.current.value = "";
+      queryClient.invalidateQueries();
+      alert("댓글 작성 완료");
+    },
+    onError: (data, error, variables, context) => {
+      if (data.response.state === 400) {
+        alert("댓글 내용은 300자 이내로 작성해 주세요.");
+      }
+    },
+  });
 
   // 댓글 가져오기
-  // const { data, isLoading, isError, error } = useCommentInquiry("id");
-  // if (isLoading) return <div>불러오는 중입니다.</div>;
-  // if (isError) alert("댓글 불러오기를 실패했습니다.");
+  const {
+    data = [],
+    isLoading,
+    isError,
+    error,
+  } = useDetailArticleGet.useCommentInquiry(id);
+  if (isLoading) return <div>불러오는 중입니다.</div>;
+  if (isError) alert("댓글 불러오기를 실패했습니다.");
+
   return (
     <Box>
       <h3>댓글달기</h3>
       <Label>
-        <Views ref={WriteInput} placeholder="상세내용 작성"></Views>
-        <Btn onClick={()=>{
-          const data = { Write: WriteInput.current.value };
-          mutate(data)
-        }}>보내기</Btn>
+        <Views ref={writeInput} placeholder="상세내용 작성"></Views>
+        <Btn
+          onClick={() => {
+            const data = { write: writeInput.current.value, id: id };
+            mutate(data);
+          }}
+        >
+          보내기
+        </Btn>
       </Label>
       {data.map((v) => {
-        return <CommentCard data={v} />;
+        return <CommentCard data={v} key={v.commentId} />;
       })}
     </Box>
   );

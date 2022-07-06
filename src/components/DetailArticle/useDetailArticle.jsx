@@ -1,13 +1,12 @@
-import React from "react";
 import { api } from "../../shared/api";
-import { useMutation, useQueryClient , useQuery} from "react-query";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 
 export const useDetailArticleMutate = {
   //찬성투표
   useVoteUpMutation: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.articleId}/up`, {
+      await api.post(`/articles/${payload.postId}/up`, {
         voteUpId: payload.voteUpId,
       });
     };
@@ -25,7 +24,7 @@ export const useDetailArticleMutate = {
   useVoteDownMutation: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.articleId}/down`, {
+      await api.post(`/articles/${payload.postId}/down`, {
         voteDownId: payload.voteDownId,
       });
     };
@@ -40,74 +39,64 @@ export const useDetailArticleMutate = {
     });
   },
   //댓글 작성
-  useWriteComment: () => {
-    const Write_input = React.useRef("");
+  useWriteComment: (option) => {
     const queryClient = useQueryClient();
-    const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.articleId}/comment`, {
-        comment: payload.comment,
+    const fetcher = async ({ write, id }) => {
+      await api.post(`/articles/${id}/comment`, {
+        comment: write,
       });
     };
-    return useMutation(fetcher, {
-      onSuccess: () => {
-        queryClient.invalidateQueries();
-        Write_input.current.value = "";
-        alert("댓글 작성 완료");
-      },
-      onError: (err) => {
-        alert("댓글 내용은 300자 이내로 작성해 주세요.");
-      },
-    });
+    return useMutation(fetcher, option);
   },
   //댓글 삭제
   useDeleteComment: () => {
     const queryClient = useQueryClient();
-    const fetcher = async (payload) => {
-      await api.post(`/comments/${payload.commentId}`);
+    const fetcher = async (commentId) => {
+      await api.delete(`/comments/${commentId}`);
     };
     return useMutation(fetcher, {
       onSuccess: () => {
         queryClient.invalidateQueries();
         alert("댓글 삭제 완료");
       },
-      onError: (err) => {
+      onError: (data, error, variables, context) => {
         alert("삭제 권한이 없습니다.");
       },
     });
   },
   //게시글 삭제
-  useDeletePost : () => {
+  useDeletePost: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.commentId}`);
+      await api.delete(`/articles/${payload.postId}`);
     };
-    return useMutation(fetcher,{
+    return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries()
-        alert("게시글 삭제 완료")
+        queryClient.invalidateQueries();
+        alert("게시글 삭제 완료");
       },
       onError: (err) => {
-        alert("삭제 권한이 없습니다.")
-      }
-    })
-  }
+        alert("삭제 권한이 없습니다.");
+      },
+    });
+  },
 };
 
 export const useDetailArticleGet = {
   //게시글 내용조회
-    useContentInquiry: ({ articleId }) => {
-      const fetcher = async () => {
-        const { data } = await api.get(`/articles/${articleId}`);
-        return data;
-      };
-      return useQuery("ContentInquiry", fetcher);
-    },
+  useContentInquiry: ({ articleId }) => {
+    const fetcher = async () => {
+      const { data } = await api.get(`/articles/${articleId}`);
+      return data;
+    };
+    return useQuery("ContentInquiry", fetcher);
+  },
   //게시글 댓글 목록 조회
-   useCommentInquiry : ({ articleId }) => {
-      const fetcher = async () => {
-        const { data } = await api.get(`/articles/${articleId}/comments`);
-        return data;
-      };
-      return useQuery(["CommentInquiry", articleId], fetcher);
-    },
-  }
+  useCommentInquiry: (articleId) => {
+    const fetcher = async () => {
+      const { data } = await api.get(`/articles/${articleId}/comments`);
+      return data;
+    };
+    return useQuery(["CommentInquiry", articleId], fetcher);
+  },
+};
