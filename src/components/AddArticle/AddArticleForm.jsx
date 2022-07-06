@@ -11,6 +11,7 @@ import { togleState } from "../../redux/modules/addArticle";
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
+import { stockData } from "../../Data/stockData";
 
 const AddArticleForm = () => {
   const dispatch = useDispatch();
@@ -35,43 +36,13 @@ const AddArticleForm = () => {
   const wrapTagStockList = useRef();
 
   //예시 arr
-  const data = [
-    "삼기자9",
-    "삼성기자8",
-    "삼성호자7",
-    "삼성바자6",
-    "삼성전자5",
-    "삼성전자4",
-    "삼성전자3",
-    "삼성전자2",
-    "삼성전자1",
-    "삼기자9",
-    "삼성기자8",
-    "삼성호자7",
-    "삼성바자6",
-    "삼성전자5",
-    "삼성전자4",
-    "삼성전자3",
-    "삼성전자2",
-    "삼성전자1",
-    "삼기자9",
-    "삼성기자8",
-    "삼성호자7",
-    "삼성바자6",
-    "삼성전자5",
-    "삼성전자4",
-    "삼성전자3",
-    "삼성전자2",
-    "삼성전자1",
-  ];
+  const data = stockData;
 
   // useMutation 사용
   const { mutate: addArticle } =
     useAddArticleFormMutate.useAddArticleMutation();
   const { mutate: getStock } = useAddArticleFormMutate.useGetArticleStock({
-    onSuccess: (data, variables, context) => {
-      console.log("success", data, variables, context);
-    },
+    onSuccess: (data, variables, context) => {},
     onError: (err) => {
       alert("에러가 발생했습니다.");
     },
@@ -123,18 +94,18 @@ const AddArticleForm = () => {
           }
         }
       } else if (e.code === "Enter") {
-        setStockInput(stockArr[stockIndex - 1]);
+        setStockInput(stockArr[stockIndex - 1].stockName);
         setStockIndex(0);
         setSelectStockState(false);
-        getStock(stockArr[stockIndex - 1]);
+        getStock(stockArr[stockIndex - 1].stockName);
       }
     }
   };
   // 주식 종목 하나 선택하기
   const selectStockOne = (e) => {
-    setStockInput(e.target.innerText);
+    setStockInput(e.currentTarget.innerText.split("\n")[1]);
     setSelectStockState(false);
-    getStock(e.target.innerText);
+    getStock(e.currentTarget.innerText.split("\n")[1]);
   };
 
   // 게시글 작성하기
@@ -158,7 +129,7 @@ const AddArticleForm = () => {
     } else {
       const data = {
         articleTitle: articleTitle.current.value,
-        stockName: "삼성전자",
+        stockName: stockInput,
       };
       stockPoint.forEach((v, l) => {
         data["point" + String(l + 1)] = v.title;
@@ -219,8 +190,11 @@ const AddArticleForm = () => {
     setStockIndex(0);
     const changeSotck = setTimeout(() => {
       const changeData = data.filter((v, l) => {
-        if (stockInput.length !== 0) {
-          return v.slice(0, stockInput.length) === stockInput;
+        if (String(stockInput).length !== 0) {
+          return (
+            v.stockName.slice(0, String(stockInput).length) === stockInput ||
+            v.stockCode.slice(0, String(stockInput).length) === stockInput
+          );
         } else {
           return false;
         }
@@ -273,7 +247,12 @@ const AddArticleForm = () => {
                 {selectStockState && (
                   <StockList index={stockIndex} ref={wrapTagStockList}>
                     {stockArr.map((v) => {
-                      return <div onClick={selectStockOne}>{v}</div>;
+                      return (
+                        <div key={v.id} onClick={selectStockOne}>
+                          <span>{v.stockCode}</span>
+                          <div>{v.stockName}</div>
+                        </div>
+                      );
                     })}
                   </StockList>
                 )}
@@ -474,7 +453,7 @@ const StockList = styled.div`
       background-color: #bbb;
     }
   }
-  div:nth-child(${({ index }) => {
+  > div:nth-child(${({ index }) => {
         return Number(index);
       }}) {
     border: 1px solid #000;
