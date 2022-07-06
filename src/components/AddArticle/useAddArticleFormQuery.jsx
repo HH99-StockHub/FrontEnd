@@ -18,9 +18,8 @@ export const useAddArticleFormMutate = {
     });
   },
   useGetArticleStock: (option) => {
-    const queryClient = useQueryClient();
     const fetcher = async (article) => {
-      const response = await api.get(`/articles/${article}/stock`);
+      const response = await api.get(`/stock/get/${article}`);
       return response;
     };
     return useMutation(fetcher, option);
