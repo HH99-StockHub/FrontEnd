@@ -1,4 +1,3 @@
-import React from "react";
 import { api } from "../../shared/api";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 
@@ -40,37 +39,27 @@ export const useDetailArticleMutate = {
     });
   },
   //댓글 작성
-  useWriteComment: () => {
-    const Write_input = React.useRef("");
+  useWriteComment: (option) => {
     const queryClient = useQueryClient();
-    const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.articleId}/comment`, {
-        comment: payload.comment,
+    const fetcher = async ({ write, id }) => {
+      await api.post(`/articles/${id}/comment`, {
+        comment: write,
       });
     };
-    return useMutation(fetcher, {
-      onSuccess: () => {
-        queryClient.invalidateQueries();
-        Write_input.current.value = "";
-        alert("댓글 작성 완료");
-      },
-      onError: (err) => {
-        alert("댓글 내용은 300자 이내로 작성해 주세요.");
-      },
-    });
+    return useMutation(fetcher, option);
   },
   //댓글 삭제
   useDeleteComment: () => {
     const queryClient = useQueryClient();
-    const fetcher = async (payload) => {
-      await api.post(`/comments/${payload.commentId}`);
+    const fetcher = async (commentId) => {
+      await api.delete(`/comments/${commentId}`);
     };
     return useMutation(fetcher, {
       onSuccess: () => {
         queryClient.invalidateQueries();
         alert("댓글 삭제 완료");
       },
-      onError: (err) => {
+      onError: (data, error, variables, context) => {
         alert("삭제 권한이 없습니다.");
       },
     });
@@ -103,7 +92,7 @@ export const useDetailArticleGet = {
     return useQuery("ContentInquiry", fetcher);
   },
   //게시글 댓글 목록 조회
-  useCommentInquiry: ({ articleId }) => {
+  useCommentInquiry: (articleId) => {
     const fetcher = async () => {
       const { data } = await api.get(`/articles/${articleId}/comments`);
       return data;
