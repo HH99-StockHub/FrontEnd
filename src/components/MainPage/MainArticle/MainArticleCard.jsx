@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import { ReactComponent as UpSvg } from "../../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../../image/Down.svg";
 
-const MainArticleCard = ({ date, title, user, watch, up, down, articleId }) => {
+const MainArticleCard = ({ date, title, user, watch, up, down }) => {
   return (
     <WrapCard>
       <td>{date}</td>
       <td>
-        <Link to={`/detail/article/${articleId}`}>{title}</Link>
+        <Link to={`/detail/article/${date.id}`}>{title}</Link>
       </td>
       <td>{user}</td>
       <td>{watch}</td>
