@@ -7,14 +7,14 @@ const CommentCard = ({ data }) => {
   const [deleteBtn, setDeleteBtn] = useState(true);
 
   const { mutate } = useDetailArticleMutate.useDeleteComment();
-  //게시글 삭제
+  //댓글 삭제
   const deleteComment = (commentId) => {
     mutate(commentId);
   };
 
   useEffect(() => {
     const currentUserId = localStorage.getItem("id");
-    if (currentUserId !== null && currentUserId == data.userId) {
+    if (currentUserId !== null && currentUserId === data.userId) {
       setDeleteBtn(true);
     }
   }, []);

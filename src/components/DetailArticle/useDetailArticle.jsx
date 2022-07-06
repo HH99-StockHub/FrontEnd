@@ -7,7 +7,7 @@ export const useDetailArticleMutate = {
   useVoteUpMutation: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.articleId}/up`, {
+      await api.post(`/articles/${payload.postId}/up`, {
         voteUpId: payload.voteUpId,
       });
     };
@@ -25,7 +25,7 @@ export const useDetailArticleMutate = {
   useVoteDownMutation: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.articleId}/down`, {
+      await api.post(`/articles/${payload.postId}/down`, {
         voteDownId: payload.voteDownId,
       });
     };
@@ -79,7 +79,8 @@ export const useDetailArticleMutate = {
   useDeletePost : () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.commentId}`);
+      console.log(payload)
+      await api.delete(`/articles/${payload.postId}`);
     };
     return useMutation(fetcher,{
       onSuccess: () => {
