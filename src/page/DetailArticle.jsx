@@ -1,7 +1,8 @@
 import React from "react";
+import { api } from "../shared/api";
 import Vote from "../components/DetailArticle/Vote";
-import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
-import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
+import WriteComment from "../components/DetailArticle/WriteComment";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
 import Title from "../components/DetailArticle/collection/Title";
 import Writing from "../components/DetailArticle/collection/Writing";

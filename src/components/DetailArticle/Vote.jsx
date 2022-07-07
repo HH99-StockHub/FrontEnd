@@ -1,16 +1,33 @@
 import React from "react";
+import { api } from "../../shared/api";
+import { useMutation, useQueryClient } from "react-query";
 import styled from "styled-components";
-import { useDetailArticleMutate } from "./useDetailArticle";
-import { ReactComponent as UpSvg } from "../../image/Up.svg";
-import { ReactComponent as DownSvg } from "../../image/Down.svg";
+
+const currentUserId = localStorage.getItem("id");
+//찬성투표
+const useVoteInFavor = (payload) => {
+  return api.post(`/articles/${payload.articleId}/up`, {
+    voteUpId: payload.voteUpId,
+  });
+};
+//반대투표
+const useNegativeVote = (payload) => {
+  return api.post(`/articles/${payload.articleId}/down`, {
+    voteDownId: payload.voteDownId,
+  });
+};
 
 const Vote = (props) => {
-  const { id,voteUp,voteDown } = props;
+  const { id, voteUp, voteDown } = props;
   //찬성투표
   const { mutate: InFavor } = useDetailArticleMutate.useVoteUpMutation();
 
   //반대투표
   const { mutate: Negative } = useDetailArticleMutate.useVoteDownMutation();
+
+  if (Vote.isLoading) {
+    return null;
+  }
 
   return (
     <BtnBox>
