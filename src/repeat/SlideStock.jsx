@@ -14,9 +14,9 @@ const SlideStock = () => {
         <div className="ticker__item">
           <span>22-06-27</span>
         </div>
-        {data.map((v, l) => {
+        {data.map((v) => {
           return (
-            <div key={l}>
+            <>
               <div className="ticker__item">
                 <p>
                   S&P 500 <span>4,530.41</span>
@@ -28,7 +28,7 @@ const SlideStock = () => {
                   <UpArrowSvg />
                 </div>
               </div>
-            </div>
+            </>
           );
         })}
       </div>

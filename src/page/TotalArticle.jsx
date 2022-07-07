@@ -8,7 +8,7 @@ import TotalArticleContent from "../components/TotalArticle/TotalArticleContent"
 import TotalPagenation from "../components/TotalArticle/TotalPagenation";
 import HelmetComponents from "../repeat/HelmetComponents";
 // query 훅
-import { useTotalPageQuery } from "../components/TotalArticle/useTotalPageQuery";
+import { useGetAllArticles } from "../custom/reactQuery/useQuery";
 
 const TotalArticle = () => {
   // 카테고리별 meta title 변경
