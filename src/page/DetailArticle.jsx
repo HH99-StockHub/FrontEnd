@@ -9,9 +9,18 @@ import Stocks from "../components/DetailArticle/collection/Stocks";
 import View from "../components/DetailArticle/collection/View";
 import Comment from "../components/DetailArticle/collection/Comment";
 import { useParams } from "react-router-dom";
+import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
 
 const DetailArticle = () => {
   const { id } = useParams();
+      //게시글 가져오기
+      const {
+        data = [],
+        isLoading,
+        isError,
+        error,
+      } = useDetailArticleGet.useContentInquiry(id);
+      console.log(data)
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
 
@@ -19,7 +28,7 @@ const DetailArticle = () => {
     <>
       <TotalArticleHeader />
       <Container>
-        <Title />
+        <Title stockName={data.stockName} />
         <BtnBox>
           <Btn>목록</Btn>
           <Btn
@@ -32,11 +41,11 @@ const DetailArticle = () => {
           </Btn>
           <Btn>수정</Btn>
         </BtnBox>
-        <Writing />
+        <Writing date={data.createdAt} view={data.viewCount} stockName={data.stockName} articleTitle={data.articleTitle}/>
         <hr />
-        <Stocks />
-        <View />
-        <Vote id={id} />
+        <Stocks date={data.createdAt}/>
+        <View content1={data.content1} content2={data.content2} content3={data.content3} point1={data.point1} point2={data.point2}  point3={data.point3} />
+        <Vote id={id} voteUp={data.voteUpCount} voteDown={data.voteDownCount} />
         <Comment id={id} />
       </Container>
     </>

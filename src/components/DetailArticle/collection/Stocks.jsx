@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from "styled-components";
 
-const Stocks = () => {
+const Stocks = (props) => {
+  const {date} = props
   return (
     <Box>
         <Stock1>
-          2022.06.30 작성 시점 주가
+          {date} 작성 시점 주가
           <P>84,000</P>
           </Stock1>
         <Stock2>

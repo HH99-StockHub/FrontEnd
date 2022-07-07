@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const Title = () => {
+
+const Title = (props) => {
+  const {stockName} = props
   return (
     <>
       <Box>
         <Name>
-          <p>삼성전자</p>
+          <P>{stockName}</P>
           <p>8,400</p>
         </Name>
         <Market>
@@ -25,6 +27,11 @@ const Title = () => {
     </>
   );
 };
+
+const P = styled.p`
+font-weight: 700;
+font-size: 16px;
+line-height: 19px;`
 
 const Box = styled.div`
   display: flex;

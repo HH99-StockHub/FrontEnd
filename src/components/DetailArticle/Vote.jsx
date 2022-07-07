@@ -5,8 +5,7 @@ import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
 
 const Vote = (props) => {
-  const { id } = props;
-  const currentUserId = localStorage.getItem("id");
+  const { id,voteUp,voteDown } = props;
   //찬성투표
   const { mutate: InFavor } = useDetailArticleMutate.useVoteUpMutation();
 
@@ -22,7 +21,7 @@ const Vote = (props) => {
         }}
       >
         {" "}
-        <UpSvg width="11" height="10" /> 추천 10{" "}
+        <UpSvg width="11" height="10" /> 추천 {voteUp}{" "}
       </Btn>
       <Btn
         onClick={() => {
@@ -32,7 +31,7 @@ const Vote = (props) => {
       >
         {" "}
         <DownSvg width="11" height="10" />
-        반대 10
+        반대 {voteDown}
       </Btn>
     </BtnBox>
   );
