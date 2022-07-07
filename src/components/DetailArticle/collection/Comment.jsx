@@ -36,19 +36,22 @@ const Comment = ({ id }) => {
   if (isLoading) return <div>불러오는 중입니다.</div>;
   if (isError) alert("댓글 불러오기를 실패했습니다.");
 
+  const addComment = (e) => {
+    e.preventDefault();
+    if (writeInput.current.value !== "") {
+      const data = { write: writeInput.current.value, id: id };
+      mutate(data);
+    } else {
+      alert("공백없이 작성해주세요");
+    }
+  };
+
   return (
     <Box>
       <h3>댓글달기</h3>
-      <Label>
+      <Label onSubmit={addComment}>
         <Views ref={writeInput} placeholder="상세내용 작성"></Views>
-        <Btn
-          onClick={() => {
-            const data = { write: writeInput.current.value, id: id };
-            mutate(data);
-          }}
-        >
-          보내기
-        </Btn>
+        <Btn type="sumbit">보내기</Btn>
       </Label>
       {data.map((v) => {
         return <CommentCard data={v} key={v.commentId} />;
@@ -62,7 +65,7 @@ const Box = styled.div`
   padding: 20px 0px;
 `;
 
-const Label = styled.label`
+const Label = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;

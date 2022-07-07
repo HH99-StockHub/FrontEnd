@@ -5,17 +5,17 @@ import { useDetailArticleMutate } from "./useDetailArticle";
 //이미지
 import { ReactComponent as XbtnSvg } from "../../image/XBtn.svg";
 const CommentCard = ({ data }) => {
-  const [deleteBtn, setDeleteBtn] = useState(true);
+  const [deleteBtn, setDeleteBtn] = useState(false);
 
   const { mutate } = useDetailArticleMutate.useDeleteComment();
   //댓글 삭제
   const deleteComment = (commentId) => {
     mutate(commentId);
   };
-
+  console.log(data);
   useEffect(() => {
-    const currentUserId = localStorage.getItem("id");
-    if (currentUserId !== null && currentUserId === data.userId) {
+    const currentUserId = localStorage.getItem("profileImg");
+    if (currentUserId === data.profileImage) {
       setDeleteBtn(true);
     }
   }, []);
