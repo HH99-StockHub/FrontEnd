@@ -6,7 +6,6 @@ export const useDetailArticleMutate = {
   useVoteUpMutation: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      console.log(payload)
       await api.post(`/articles/${payload.postId}/up`, {
         voteUpId: payload.voteUpId,
       });

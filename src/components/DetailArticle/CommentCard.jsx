@@ -12,7 +12,6 @@ const CommentCard = ({ data }) => {
   const deleteComment = (commentId) => {
     mutate(commentId);
   };
-  console.log(data);
   useEffect(() => {
     const currentUserId = localStorage.getItem("profileImg");
     if (currentUserId === data.profileImage) {
