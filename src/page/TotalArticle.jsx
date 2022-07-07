@@ -15,8 +15,14 @@ const TotalArticle = () => {
   const [titleCategory, setTitleCategory] = useState("");
   // URL 정보가져오기
   const { category, page } = useParams();
+  // 임시 배열
+  const data = [1, 2, 3, 4];
   // useQuery
+<<<<<<< HEAD
   const { data = [] } = useTotalPageQuery.useGetAllArticles(category, "page");
+=======
+  // const { data = [] } = useGetAllArticles(category, page);
+>>>>>>> main
 
   useEffect(() => {
     switch (category) {

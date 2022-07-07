@@ -9,6 +9,7 @@ import Writing from "../components/DetailArticle/collection/Writing";
 import Stocks from "../components/DetailArticle/collection/Stocks";
 import View from "../components/DetailArticle/collection/View";
 import Comment from "../components/DetailArticle/collection/Comment";
+<<<<<<< HEAD
 import { useParams } from "react-router-dom";
 import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
 
@@ -61,6 +62,50 @@ const DetailArticle = () => {
         <Comment id={id} />
       </Container>
     </>
+=======
+
+//게시글삭제
+const useDeletePost = ({ commentId }) => {
+  return api.delete(`/articles/${commentId}`);
+};
+
+const DetailArticle = () => {
+  const queryClient = useQueryClient();
+
+  //게시글삭제
+  const { mutate } = useMutation(useDeletePost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+
+  if (DetailArticle.isLoading) {
+    return null;
+  }
+
+  return (
+    <Container>
+      <Title />
+      <BtnBox>
+        <Btn>목록</Btn>
+        <Btn
+          onClick={() => {
+            const data = {}; //게시글에 대한 데이터 넣기
+            mutate(data);
+          }}
+        >
+          게시글 삭제
+        </Btn>
+        <Btn>수정</Btn>
+      </BtnBox>
+      <Writing />
+      <hr />
+      <Stocks />
+      <View />
+      <Vote />
+      <Comment />
+    </Container>
+>>>>>>> main
   );
 };
 

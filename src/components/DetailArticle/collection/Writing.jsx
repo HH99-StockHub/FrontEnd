@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import View from "./View";
 
+<<<<<<< HEAD
 const Writing = (props) => {
   const { date, view, stockName, articleTitle } = props;
   return (
@@ -18,6 +19,14 @@ const Writing = (props) => {
       </Box>
     </>
   );
+=======
+const Writing = () => {
+    return (
+  <Box>
+    <h3>삼성전자</h3>
+  </Box>
+  )
+>>>>>>> main
 };
 
 const Box = styled.div`

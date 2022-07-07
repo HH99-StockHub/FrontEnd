@@ -118,7 +118,10 @@ const AddArticleForm = () => {
         setStockInput(stockArr[stockIndex - 1]);
         setStockIndex(0);
         setSelectStockState(false);
+<<<<<<< HEAD
         getStock(stockArr[stockIndex - 1].stockName);
+=======
+>>>>>>> main
       }
     }
   };

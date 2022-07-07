@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+<<<<<<< HEAD
 // query 훅
 import { useDetailArticleMutate } from "./useDetailArticle";
+=======
+>>>>>>> main
 import { useMutation, queryClient } from "react-query";
 // 컴포넌트
 import { api } from "../../shared/api";

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+<<<<<<< HEAD
 import { useQueryClient } from "react-query";
 // 컴포넌트
 import {
@@ -25,6 +26,15 @@ const Comment = ({ id }) => {
       }
     },
   });
+=======
+import { useCommentInquiry } from "../../../custom/reactQuery/useQuery";
+// 컴포넌트
+import CommentCard from "../CommentCard";
+
+const Comment = () => {
+  // 잉여 arr
+  const data = [1, 23, 2, 4, 5];
+>>>>>>> main
 
   // 댓글 가져오기
   const {
@@ -49,9 +59,15 @@ const Comment = ({ id }) => {
   return (
     <Box>
       <h3>댓글달기</h3>
+<<<<<<< HEAD
       <Label onSubmit={addComment}>
         <Views ref={writeInput} placeholder="상세내용 작성"></Views>
         <Btn type="sumbit">보내기</Btn>
+=======
+      <Label>
+        <Views placeholder="상세내용 작성"></Views>
+        <Btn>보내기</Btn>
+>>>>>>> main
       </Label>
       {data.map((v) => {
         return <CommentCard data={v} key={v.commentId} />;
