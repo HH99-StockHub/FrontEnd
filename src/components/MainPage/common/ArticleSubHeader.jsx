@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 // 모듈
+import { getCookie } from "../../../shared/Cookie";
 import { togleState } from "../../../redux/modules/addArticle";
 // 이미지
 import { ReactComponent as MainBannerSvg } from "../../../image/MainPageBanner.svg";
@@ -9,6 +10,14 @@ import { ReactComponent as MainBannerSvg } from "../../../image/MainPageBanner.s
 const ArticleSubHeader = () => {
   // 게시글 작성 토글 상태관리
   const dispatch = useDispatch();
+  const openTogle = () => {
+    const token = getCookie("token");
+    if (token !== undefined) {
+      dispatch(togleState(true));
+    } else {
+      alert("작성 전 로그인이 필요합니다");
+    }
+  };
   return (
     <SubHeader>
       <WrapSvg>
@@ -24,13 +33,7 @@ const ArticleSubHeader = () => {
           주식 전망글을 작성하고 <br />
           수익왕이 되는 그 날을 응원합니다!
         </SubText>
-        <WriteBtn
-          onClick={() => {
-            dispatch(togleState(true));
-          }}
-        >
-          글쓰러가기
-        </WriteBtn>
+        <WriteBtn onClick={openTogle}>글쓰러가기</WriteBtn>
       </WrapText>
     </SubHeader>
   );
