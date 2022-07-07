@@ -19,7 +19,6 @@ const OAuth = () => {
     isLoading,
     isError,
   } = useLoginQuery.useKaKaoLogin(code);
-
   // 로그인 했으면 돌려보내기
   useEffect(() => {
     const cookie = getCookie("token");
@@ -39,6 +38,7 @@ const OAuth = () => {
       const accessToken = data.headers.authorization;
       setCookie("token", accessToken);
       localStorage.setItem("id", data.headers.userid);
+      localStorage.setItem("profileImg", data.headers.profileimage);
       dispatch(loginState(true));
       setCheck(true);
       alert("로그인 완료");
