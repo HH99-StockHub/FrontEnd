@@ -16,11 +16,11 @@ const Header = () => {
   const navigate = useNavigate();
   // 로그인 상태관리
   const login = useSelector((state) => state.user.loginState);
-
   // 로그아웃
   const onLogout = (e) => {
     deleteCookie("token");
     localStorage.removeItem("id");
+    localStorage.removeItem("profileImg");
     dispatch(loginState(false));
     alert("정상 로그아웃");
   };
@@ -33,7 +33,8 @@ const Header = () => {
   React.useEffect(() => {
     const cookie = getCookie("token");
     const userId = localStorage.getItem("id");
-    if (cookie !== undefined && userId !== null) {
+    const profileImg = localStorage.getItem("profileImg");
+    if (cookie !== undefined && userId !== null && profileImg !== null) {
       dispatch(loginState(true));
     } else {
       deleteCookie("token");
@@ -52,10 +53,7 @@ const Header = () => {
         />
         {login ? (
           <WrapMenu>
-            <Profile
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWExS1AoV6x8lezZ77vBE2UjroomZ032soUw&usqp=CAU"
-              alt="프로필"
-            />
+            <Profile src={localStorage.getItem("profileImg")} alt="프로필" />
             <Notice>알림</Notice>
             <button onClick={onLogout}>로그아웃</button>
             <button>내 게시물</button>
