@@ -1,17 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import View from './View';
 
-const Writing = () => {
+const Writing = (props) => {
+  const {date,view,stockName , articleTitle} = props
   return (
     <>
       <Box>
         <Sam>
-          <h3>삼성전자</h3>
-          <p>삼성전자 매수한 사람 모두 모여보세요</p>
+          <h3>{stockName}</h3>
+          <p>{articleTitle}</p>
         </Sam>
         <Div>
-        <P>날짜 22.06.30</P>
-        <P>조회 300,000</P>
+        <P>날짜 {date}</P>
+        <P>조회 {view}</P>
         </Div>
       </Box>
     </>

@@ -1,21 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 
-const View = () => {
+const View = (props) => {
+  const {content1,content2,content3,point1,point2,point3} = props
   return (
     <Box>
+      {content1 ?
         <div>
-      <Views>앞으로의 반도체 전망</Views>
-      <Contents>{"내용"}</Contents>
+      <Views>{content1}</Views>
+      <Contents>{point1}</Contents>
       </div>
+: ""}
+{content2 ?
       <div>
-      <Views>앞으로의 반도체 전망</Views>
-      <Contents>{"내용"}</Contents>
+      <Views>{content2}</Views>
+      <Contents>{point2}</Contents>
       </div>
+: ""}
+{content3 ?
       <div>
-      <Views>앞으로의 반도체 전망</Views>
-      <Contents>{"내용"}</Contents>
+      <Views>{content3}</Views>
+      <Contents>{point3}</Contents>
       </div>
+:""}
     </Box>
   );
 };

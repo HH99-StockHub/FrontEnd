@@ -6,6 +6,7 @@ export const useDetailArticleMutate = {
   useVoteUpMutation: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
+      console.log(payload)
       await api.post(`/articles/${payload.postId}/up`, {
         voteUpId: payload.voteUpId,
       });
@@ -84,7 +85,7 @@ export const useDetailArticleMutate = {
 
 export const useDetailArticleGet = {
   //게시글 내용조회
-  useContentInquiry: ({ articleId }) => {
+  useContentInquiry: (articleId) => {
     const fetcher = async () => {
       const { data } = await api.get(`/articles/${articleId}`);
       return data;
