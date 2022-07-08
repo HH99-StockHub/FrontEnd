@@ -18,21 +18,19 @@ const MainArticleList = () => {
   return (
     <Table>
       <THead>
-        <tr>
-          <th style={{ width: "64px" }}>날짜</th>
-          <th style={{ width: "226px" }}>제목</th>
-          <th style={{ width: "94px" }}>닉네임</th>
-          <th style={{ width: "60px" }}>조회수</th>
-          <th style={{ width: "72px" }}>추천</th>
-          <th style={{ width: "72px" }}>비추천</th>
-        </tr>
+        <p style={{ width: "244px" }}>제목</p>
+        <p style={{ width: "56px" }}>추천</p>
+        <p style={{ width: "56px" }}>비추천</p>
+        <p style={{ width: "64px" }}>조회수</p>
+        <p style={{ width: "64px" }}>날짜</p>
+        <p style={{ width: "64px" }}>닉네임</p>
       </THead>
       <tbody>
         {data.map((v) => {
           return (
             <MainArticleCard
               key={v.articleId}
-              date={v.createdAt}
+              date={"v.createdAt"}
               title={v.articleTitle}
               user={v.nickname}
               watch={v.viewCount}
@@ -49,17 +47,12 @@ const MainArticleList = () => {
 
 export default MainArticleList;
 
-const Table = styled.table`
-  border-collapse: collapse;
-  height: 320px;
-`;
+const Table = styled.div``;
 const THead = styled.thead`
+  display: flex;
+  padding: 12px 20px;
+  border-radius: 6px 6px 0 0;
   text-align: left;
-  background-color: var(--grey);
+  background-color: #5aa9c2;
   font-size: 12px;
-  tr {
-    th {
-      padding: 8px 0 8px 8px;
-    }
-  }
 `;

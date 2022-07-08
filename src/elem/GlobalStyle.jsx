@@ -22,9 +22,9 @@ const GlobalStyle = createGlobalStyle`
   :root {
    --black : #000 ;
    --white : #fff ;
-   --green1 : #54BA7D ;
-   --green2 : #30a860 ;
-   --green3 : #008B2F;
+   --green1 : #54BA7D;
+   --green2 : #008B2F;
+   --green3 : #086326;
    --gray1 : #F6F6F6 ;
    --gray2 : #E0E0E0 ;
    --gray3 : #B1B1B1;
