@@ -21,7 +21,7 @@ const Vote = (props) => {
         }}
       >
         {" "}
-        <UpSvg width="11" height="10" /> 추천 {voteUp}{" "}
+        <UpSvg width="11" height="10"  fill="black"/> 추천 {voteUp}{" "}
       </Btn>
       <Btn
         onClick={() => {
@@ -30,7 +30,7 @@ const Vote = (props) => {
         }}
       >
         {" "}
-        <DownSvg width="11" height="10" />
+        <DownSvg width="11" height="10" fill="black" />
         반대 {voteDown}
       </Btn>
     </BtnBox>

@@ -247,7 +247,7 @@ const AddArticleForm = () => {
                   onChange={selectStockList}
                   onKeyDown={keyDownHandler}
                 />
-                <SearchSvg width="17.49" height="17.49" />
+                <SearchSvg width="17.49" height="17.49" fill="black" />
                 {selectStockState && (
                   <StockList index={stockIndex} ref={wrapTagStockList}>
                     {stockArr.map((v) => {
