@@ -7,7 +7,7 @@ const Search = () => {
   return (
     <FormStyle>
       <input type="text" placeholder="관심있는 내용을 검색하세요" />
-      <SearchSvg width="17.49" height="17.49" />
+      <SearchSvg width="17.49" height="17.49" fill="#008B2F" />
     </FormStyle>
   );
 };
@@ -23,8 +23,11 @@ const FormStyle = styled.form`
   width: 333px;
   height: 40px;
   border-radius: 25px;
-  border: 1px solid #000;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
   input {
     width: 100%;
-  }
+    border: none;
+    outline: none;
+}
 `;

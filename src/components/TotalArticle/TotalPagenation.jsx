@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+//이미지
+import { ReactComponent as Left } from "../../image/Left.svg";
+import { ReactComponent as Right } from "../../image/Right.svg";
 
 const TotalPagenation = ({ category, nowPage }) => {
   const navigate = useNavigate();
@@ -85,7 +88,7 @@ const TotalPagenation = ({ category, nowPage }) => {
   }, [page]);
   return (
     <WrapAllBtn>
-      <button onClick={navigatePrevious}>~</button>
+      <button onClick={navigatePrevious}><Left/></button>
       <WrapPageBtn num={nowCssBtn()}>
         {btnCount.map((v, l) => {
           return (
@@ -100,7 +103,7 @@ const TotalPagenation = ({ category, nowPage }) => {
           );
         })}
       </WrapPageBtn>
-      <button onClick={navigateNext}>~</button>
+      <button onClick={navigateNext}><Right/></button>
     </WrapAllBtn>
   );
 };
@@ -108,6 +111,7 @@ const TotalPagenation = ({ category, nowPage }) => {
 export default TotalPagenation;
 
 const WrapAllBtn = styled.div`
+width: 100%;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -120,5 +124,6 @@ const WrapPageBtn = styled.div`
   }
   > button:nth-child(${({ num }) => Number(num)}) {
     border: 1px solid #000;
+    background: #54BA7D;
   }
 `;

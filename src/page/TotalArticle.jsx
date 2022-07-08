@@ -7,6 +7,7 @@ import TotalArticleBanner from "../components/TotalArticle/TotalArticleBanner";
 import TotalArticleContent from "../components/TotalArticle/TotalArticleContent";
 import TotalPagenation from "../components/TotalArticle/TotalPagenation";
 import HelmetComponents from "../repeat/HelmetComponents";
+import styled from "styled-components";
 // query 훅
 import { useTotalPageQuery } from "../components/TotalArticle/useTotalPageQuery";
 
@@ -40,11 +41,19 @@ const TotalArticle = () => {
     <div>
       <HelmetComponents title={`${titleCategory}`} />
       <TotalArticleHeader />
+      <Div>
       <TotalArticleBanner />
       <TotalArticleContent data={data} />
       <TotalPagenation category={category} nowPage={page} />
+      </Div>
     </div>
   );
 };
+
+const Div = styled.div`
+  background: #F5F5F5;
+  width: 100%;
+  height: 100vh;
+`
 
 export default TotalArticle;
