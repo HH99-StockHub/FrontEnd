@@ -25,22 +25,20 @@ const MainArticleList = () => {
         <p style={{ width: "64px" }}>날짜</p>
         <p style={{ width: "64px" }}>닉네임</p>
       </THead>
-      <tbody>
-        {data.map((v) => {
-          return (
-            <MainArticleCard
-              key={v.articleId}
-              date={"v.createdAt"}
-              title={v.articleTitle}
-              user={v.nickname}
-              watch={v.viewCount}
-              up={v.voteUpCount}
-              down={v.voteDownCount}
-              articleId={v.articleId}
-            />
-          );
-        })}
-      </tbody>
+      {data.map((v) => {
+        return (
+          <MainArticleCard
+            key={v.articleId}
+            date={"v.createdAt"}
+            title={v.articleTitle}
+            user={v.nickname}
+            watch={v.viewCount}
+            up={v.voteUpCount}
+            down={v.voteDownCount}
+            articleId={v.articleId}
+          />
+        );
+      })}
     </Table>
   );
 };
@@ -48,7 +46,7 @@ const MainArticleList = () => {
 export default MainArticleList;
 
 const Table = styled.div``;
-const THead = styled.thead`
+const THead = styled.div`
   display: flex;
   padding: 12px 20px;
   border-radius: 6px 6px 0 0;

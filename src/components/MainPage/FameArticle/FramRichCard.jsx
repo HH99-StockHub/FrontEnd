@@ -2,19 +2,15 @@
 import React from "react";
 import styled from "styled-components";
 //컴포넌트
-import ArticleImgCard from "./ArticleImgCard";
 import RichText from "./RichText";
-import ArticleTextCard from "./ArticleTextCard";
 
 const FramRichCard = ({ data }) => {
   return (
     <div>
       <WrapCard>
         <WrapText>
-          <ArticleTextCard title={data.articleTitle} userId={data.nickname} />
           <RichText />
         </WrapText>
-        <ArticleImgCard imgUrl={data.profileImage} />
       </WrapCard>
     </div>
   );
