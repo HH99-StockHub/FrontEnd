@@ -27,8 +27,7 @@ export default MainPage;
 const WrapMainContent = styled.div`
   display: flex;
   justify-content: center;
-  gap: 67px 24px;
+  gap: 64px;
   flex-wrap: wrap;
-  width: 1230px;
   margin: 0 auto;
 `;

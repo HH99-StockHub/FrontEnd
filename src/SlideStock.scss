@@ -26,6 +26,11 @@ $duration: 10s;
   }
 }
 
+.stockBox{
+  display: flex;
+  gap: 4px;
+}
+
 .ticker-wrap {
   width: 100%;
   overflow: hidden;
@@ -54,7 +59,7 @@ $duration: 10s;
     &__item {
       display: flex;
       font-size: 1rem;
-      color: white;
+      color: #3cc572;
       font-size: 16px;
     }
   }

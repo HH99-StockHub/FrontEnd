@@ -2,24 +2,16 @@
 import React from "react";
 import styled from "styled-components";
 //컴포넌트
-import ArticleImgCard from "./ArticleImgCard";
 import PopularText from "./PopularText";
-import ArticleTextCard from "./ArticleTextCard";
 
-const FramPopularCard = ({ data }) => {
+const FramPopularCard = ({ data, index }) => {
   return (
-    <div>
-      <WrapCard>
-        <WrapText>
-          <ArticleTextCard title={data.articleTitle} userId={data.nickname} />
-          <PopularText
-            upCount={data.voteUpCount}
-            downCount={data.voteDownCount}
-          />
-        </WrapText>
-        <ArticleImgCard imgUrl={data.profileImage} />
-      </WrapCard>
-    </div>
+    <WrapCard>
+      <WrapText>
+        <p>{data.articleTitle}</p>
+        <PopularText upCount={data.voteUpCount} index={index} />
+      </WrapText>
+    </WrapCard>
   );
 };
 
@@ -30,14 +22,21 @@ const WrapCard = styled.div`
   gap: 10px;
   flex-direction: row;
   justify-content: space-between;
-  width: 166px;
+  width: 100%;
   height: 92px;
-  padding: 10px 12px;
-  border: 1px solid #000;
+  padding: 12px 14px 16px 16px;
+  border: 1px solid var(--gray2);
+  border-radius: 0 0 6px 6px;
 `;
 
 const WrapText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  > p {
+    width: 100%;
+    font-size: 14px;
+    line-height: 19px;
+  }
 `;
