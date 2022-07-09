@@ -19,7 +19,7 @@ const FramRichArticle = () => {
       userId: "Long",
       nickname: "박태형",
       profileImage: "String",
-      articleTitle: "삼성전자 앞으로 1년만 보면",
+      articleTitle: "삼성전자 앞으로앞으로앞으로앞으로 앞으로 1년만 보면",
       stockName: "삼성전자",
       stockReturn: "double",
       voteUpCount: "int",

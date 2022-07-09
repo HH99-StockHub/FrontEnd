@@ -32,6 +32,12 @@ const WrapCard = styled.div`
   }
   p:nth-child(1) {
     font-size: 14px;
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   p:nth-child(2) {
     color: var(--green1);

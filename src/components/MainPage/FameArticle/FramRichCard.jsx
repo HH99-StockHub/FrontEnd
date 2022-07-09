@@ -40,5 +40,11 @@ const WrapText = styled.div`
     width: 100%;
     font-size: 14px;
     line-height: 19px;
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
