@@ -16,7 +16,7 @@ const MainPage = () => {
         <MainArticle />
         <FameArticle />
         <PopularArticle />
-        {/* <RichArticle /> */}
+        <RichArticle />
       </WrapMainContent>
     </>
   );
