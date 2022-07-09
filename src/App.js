@@ -20,7 +20,6 @@ function App() {
       <GlobalStyle />
       {toggleState && <AddArticle />}
       <Header />
-      <SlideStock />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route

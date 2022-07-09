@@ -10,6 +10,7 @@ import HelmetComponents from "../repeat/HelmetComponents";
 import styled from "styled-components";
 // query 훅
 import { useTotalPageQuery } from "../components/TotalArticle/useTotalPageQuery";
+import SlideStock from "../repeat/SlideStock";
 
 const TotalArticle = () => {
   // 카테고리별 meta title 변경
@@ -38,15 +39,18 @@ const TotalArticle = () => {
     }
   }, [category]);
   return (
-    <Box>
-      <HelmetComponents title={`${titleCategory}`} />
-      <TotalArticleHeader />
-      <Div>
-        <TotalArticleBanner />
-        <TotalArticleContent data={data} />
-        <TotalPagenation category={category} nowPage={page} />
-      </Div>
-    </Box>
+    <>
+      <SlideStock />
+      <Box>
+        <HelmetComponents title={`${titleCategory}`} />
+        <TotalArticleHeader />
+        <Div>
+          <TotalArticleBanner />
+          <TotalArticleContent data={data} />
+          <TotalPagenation category={category} nowPage={page} />
+        </Div>
+      </Box>
+    </>
   );
 };
 
