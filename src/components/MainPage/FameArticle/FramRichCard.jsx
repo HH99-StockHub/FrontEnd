@@ -2,19 +2,16 @@
 import React from "react";
 import styled from "styled-components";
 //컴포넌트
-import ArticleImgCard from "./ArticleImgCard";
 import RichText from "./RichText";
-import ArticleTextCard from "./ArticleTextCard";
 
-const FramRichCard = ({ data }) => {
+const FramRichCard = ({ data, index }) => {
   return (
     <div>
       <WrapCard>
         <WrapText>
-          <ArticleTextCard title={data.articleTitle} userId={data.nickname} />
-          <RichText />
+          <p>{data.articleTitle}</p>
+          <RichText stockReturn={data.stockReturn} index={index} />
         </WrapText>
-        <ArticleImgCard imgUrl={data.profileImage} />
       </WrapCard>
     </div>
   );
@@ -27,15 +24,27 @@ const WrapCard = styled.div`
   gap: 10px;
   flex-direction: row;
   justify-content: space-between;
-  width: 166px;
+  width: 100%;
   height: 92px;
-  padding: 10px 12px;
-  border: 1px solid #000;
+  padding: 12px 14px 16px 16px;
+  border: 1px solid var(--gray2);
+  border-radius: 0 0 6px 6px;
 `;
 
 const WrapText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 12px 0;
+  width: 100%;
+  > p {
+    width: 100%;
+    font-size: 14px;
+    line-height: 19px;
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;

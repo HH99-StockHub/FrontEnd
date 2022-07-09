@@ -8,16 +8,16 @@ import FramRichArticle from "./FramRichArticle";
 
 const FameArticle = () => {
   return (
-    <div>
-      <ArticleHeader
-        title="명예의 전당"
-        subTitle="방구석 애널리스트들에게 인정받은 베스트 게시물"
-      />
-      <WrapContent>
+    <WrapContent>
+      <div>
+        <ArticleHeader title="BEST 인기글" />
         <FramPopularArticle />
+      </div>
+      <div>
+        <ArticleHeader title="BEST 수익왕" />
         <FramRichArticle />
-      </WrapContent>
-    </div>
+      </div>
+    </WrapContent>
   );
 };
 
@@ -26,8 +26,5 @@ export default FameArticle;
 const WrapContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  padding: 24px;
-  width: 588px;
-  border: 1px solid #000;
+  gap: 58px;
 `;

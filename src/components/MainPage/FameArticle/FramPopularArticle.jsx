@@ -6,35 +6,80 @@ import styled from "styled-components";
 import FramPopularCard from "./FramPopularCard";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
+import CardHeader from "./CardHeader";
 
 const FramPopularArticle = () => {
   // useQuery
-  const { data = [] } = useMainPageQuery.useGetFamePopularArticle();
+  // 임시 arr
+  const data = [
+    {
+      articleId: "Long",
+      createdAt: "LocalDateTime",
+      userId: "Long",
+      nickname: "박태형",
+      profileImage: "String",
+      articleTitle: "삼성전자 앞으로 1년만 보면",
+      stockName: "삼성전자",
+      stockReturn: "double",
+      voteUpCount: "int",
+      voteDownCount: "int",
+      commentCount: "int",
+      viewCount: "int",
+    },
+    {
+      articleId: "Long",
+      createdAt: "LocalDateTime",
+      userId: "Long",
+      nickname: "박태형",
+      profileImage: "String",
+      articleTitle: "삼성전자 앞으로 1년만 보면",
+      stockName: "삼성전자",
+      stockReturn: "double",
+      voteUpCount: "int",
+      voteDownCount: "int",
+      commentCount: "int",
+      viewCount: "int",
+    },
+    {
+      articleId: "Long",
+      createdAt: "LocalDateTime",
+      userId: "Long",
+      nickname: "박태형",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "삼성전자",
+      stockReturn: "double",
+      voteUpCount: "int",
+      voteDownCount: "int",
+      commentCount: "int",
+      viewCount: "int",
+    },
+  ];
+  // const { data = [] } = useMainPageQuery.useGetFamePopularArticle();
   return (
-    <div>
-      <Title>인기 베스트</Title>
-      <WrapCard>
-        {data.map((v) => {
-          return (
+    <WrapPopular>
+      {data.map((v, l) => {
+        return (
+          <WrapCard key={l}>
+            <CardHeader nickname={v.nickname} title={v.stockName} />
             <Link to={`/detail/article/${v.id}`} key={v.id}>
-              <FramPopularCard data={v} />
+              <FramPopularCard data={v} index={l} />
             </Link>
-          );
-        })}
-      </WrapCard>
-    </div>
+          </WrapCard>
+        );
+      })}
+    </WrapPopular>
   );
 };
 
 export default FramPopularArticle;
-
-const Title = styled.h3`
-  margin-bottom: 9px;
-  font-size: 12px;
-  font-weight: 700;
+const WrapPopular = styled.div`
+  display: flex;
+  gap: 12px;
 `;
 
 const WrapCard = styled.div`
+  width: 188px;
   display: flex;
-  gap: 21px;
+  flex-direction: column;
 `;
