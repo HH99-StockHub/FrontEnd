@@ -40,7 +40,7 @@ const WrapText = styled.div`
   justify-content: space-between;
   > div {
     display: flex;
-    gap: 5px;
+    gap: 6px;
     align-items: center;
     > p {
       color: var(--green1);

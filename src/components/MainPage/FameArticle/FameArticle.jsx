@@ -8,13 +8,16 @@ import FramRichArticle from "./FramRichArticle";
 
 const FameArticle = () => {
   return (
-    <>
+    <WrapContent>
       <div>
         <ArticleHeader title="BEST 인기글" />
         <FramPopularArticle />
-        {/* <FramRichArticle /> */}
       </div>
-    </>
+      <div>
+        <ArticleHeader title="BEST 수익왕" />
+        <FramRichArticle />
+      </div>
+    </WrapContent>
   );
 };
 
@@ -23,8 +26,5 @@ export default FameArticle;
 const WrapContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  padding: 24px;
-  width: 588px;
-  border: 1px solid #000;
+  gap: 58px;
 `;
