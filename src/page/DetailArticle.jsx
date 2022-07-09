@@ -10,8 +10,10 @@ import View from "../components/DetailArticle/collection/View";
 import Comment from "../components/DetailArticle/collection/Comment";
 import { useParams } from "react-router-dom";
 import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
+import { useNavigate } from "react-router-dom";
 
 const DetailArticle = () => {
+  const navigate = useNavigate()
   const { id } = useParams();
   //게시글 가져오기
   const {
@@ -34,6 +36,7 @@ const DetailArticle = () => {
             onClick={() => {
               const data = { postId: id }; //게시글에 대한 데이터 넣기
               mutate(data);
+              navigate(-1)
             }}
           >
             게시글 삭제

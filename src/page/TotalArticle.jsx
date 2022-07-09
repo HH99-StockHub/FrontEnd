@@ -38,22 +38,24 @@ const TotalArticle = () => {
     }
   }, [category]);
   return (
-    <div>
+    <Box>
       <HelmetComponents title={`${titleCategory}`} />
       <TotalArticleHeader />
       <Div>
-      <TotalArticleBanner />
-      <TotalArticleContent data={data} />
-      <TotalPagenation category={category} nowPage={page} />
+        <TotalArticleBanner />
+        <TotalArticleContent data={data} />
+        <TotalPagenation category={category} nowPage={page} />
       </Div>
-    </div>
+    </Box>
   );
 };
 
 const Div = styled.div`
-  background: #F5F5F5;
-  width: 100%;
-  height: 100vh;
-`
-
+  max-width: 1240px;
+  width: 80%;
+  margin: 0 auto;
+`;
+const Box = styled.div`
+  background: #f5f5f5;
+`;
 export default TotalArticle;

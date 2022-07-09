@@ -37,6 +37,7 @@ const HeaderCategory = () => {
 export default HeaderCategory;
 const WrapCategory = styled.div`
   display: flex;
+  /* border-bottom: 1px solid #B1B1B1; */
 `;
 
 const CurrentCategory = styled.div`

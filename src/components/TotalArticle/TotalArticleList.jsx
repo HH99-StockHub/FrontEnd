@@ -12,7 +12,6 @@ const TotalArticleList = ({ data }) => {
   
   return (
     <>
-      <WrapTd>
         <Content>
           {data.map((data) => {
             return (
@@ -52,40 +51,28 @@ const TotalArticleList = ({ data }) => {
             );
           })}
         </Content>
-      </WrapTd>
     </>
   );
 };
 
 export default TotalArticleList;
 
-const WrapTd = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 0 8px 8px;
-  font-size: 12px;
-`;
-
 const Box = styled.div`
-padding: 32px 26px;
+  padding: 32px 26px;
   width: 404px;
-  height: 171px;
   background: #ffffff;
   border: 1px solid #ededed;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  margin-right: 6px;
+  flex-grow: 0;
 `;
 
 const Content = styled.div`
   flex-wrap: wrap;
   display: flex;
-  gap: 20px 0;
-  margin: 20px auto;
-  width: 1240px;
-  
+  margin-top:20px;
+  gap:14px
 `;
 
 const P = styled.p`
@@ -101,7 +88,13 @@ const P1 = styled.p`
   line-height: 24px;
   color: #000000;
   margin-bottom: 14px;
-  margin-top: 3px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 342px;
+  margin-top: 6px;
+  margin-bottom: 14px;
 `;
 
 const P2 = styled.p`
@@ -109,9 +102,6 @@ const P2 = styled.p`
   font-size: 14px;
   line-height: 17px;
   color: #929292;
-  margin-left:5px;
-  margin-right: 5px;
-  margin-top: -3px;
   `;
 
 const P3 = styled.p`
@@ -133,7 +123,10 @@ const P4 = styled.p`
 `;
 const Random = styled.div`
   display: flex;
+  align-items: center;
+  gap:5.58px;
 `;
+
 
 const Just = styled.div`
   justify-content: space-between;
