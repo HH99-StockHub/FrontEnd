@@ -78,7 +78,7 @@ const TotalPagenation = ({ category, nowPage }) => {
   useEffect(() => {
     // 마지막 페이지에서 역순 할 경우
     if (Number(page + 9) < Number(lastpage) && btnCount.length !== 10) {
-      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const arr = [1, 2, 3, 4, 5,6,7,8,9,10];
       setBtnCount(arr);
       // 마지막 페이지 리스트일 경우
     } else if (Number(page + 9) > Number(lastpage)) {
@@ -88,7 +88,9 @@ const TotalPagenation = ({ category, nowPage }) => {
   }, [page]);
   return (
     <WrapAllBtn>
-      <button onClick={navigatePrevious}><Left/></button>
+      <button onClick={navigatePrevious}>
+        <Left />
+      </button>
       <WrapPageBtn num={nowCssBtn()}>
         {btnCount.map((v, l) => {
           return (
@@ -103,7 +105,9 @@ const TotalPagenation = ({ category, nowPage }) => {
           );
         })}
       </WrapPageBtn>
-      <button onClick={navigateNext}><Right/></button>
+      <button onClick={navigateNext}>
+        <Right />
+      </button>
     </WrapAllBtn>
   );
 };
@@ -111,10 +115,11 @@ const TotalPagenation = ({ category, nowPage }) => {
 export default TotalPagenation;
 
 const WrapAllBtn = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: 40px;
 `;
 const WrapPageBtn = styled.div`
   display: flex;
@@ -123,7 +128,7 @@ const WrapPageBtn = styled.div`
     padding: 10px;
   }
   > button:nth-child(${({ num }) => Number(num)}) {
-    border: 1px solid #000;
-    background: #54BA7D;
+    background: #54ba7d;
+    color: white
   }
 `;

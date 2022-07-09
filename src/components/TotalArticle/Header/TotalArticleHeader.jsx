@@ -7,10 +7,12 @@ import Search from "./Search";
 
 const TotalArticleHeader = () => {
   return (
+    <Wrap>
     <WrapHeader>
       <HeaderCategory />
       <Search />
     </WrapHeader>
+    </Wrap>
   );
 };
 
@@ -18,9 +20,15 @@ export default TotalArticleHeader;
 
 const WrapHeader = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 384px;
+  width: 1240px;
   padding: 16px 0 19px;
-  border-bottom: 1px solid #ccc;
+  margin: 0 auto;
 `;
+
+const Wrap = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #B1B1B1;
+  margin-bottom: 38px;
+`
