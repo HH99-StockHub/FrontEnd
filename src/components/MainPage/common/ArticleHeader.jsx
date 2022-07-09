@@ -38,4 +38,5 @@ const WrapHead = styled.div`
 const WrapTitle = styled.h3`
   font-size: 20px;
   font-weight: 700;
+  line-height: 1;
 `;

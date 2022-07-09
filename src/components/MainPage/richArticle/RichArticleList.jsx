@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 //컴포넌트
-import CardImg from "../common/CardImg";
 import CardTextRich from "../common/CardTextRich";
 // query 훅
 import { useMainPageQuery } from "../useMainPageQuery";
@@ -18,7 +17,6 @@ const RichArticleList = () => {
             <Link to={`/detail/article/${v.id}`}>
               <WrapCard>
                 <WrapImgText>
-                  <CardImg imgUrl={v.profileImage} />
                   <CardTextRich company={v.stockName} stock={v.voteUpCount} />
                 </WrapImgText>
                 <WrapText>
