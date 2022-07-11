@@ -5,7 +5,7 @@ export const useGetSearchArticle = {
     const fetcher = async () => {
       switch (category) {
         case "keyword":
-          const { user: search } = await api.get(`/articles/${keyword}/search`);
+          const { data: search } = await api.get(`/articles/${keyword}/search`);
           return search;
         case "user":
           const { data: user } = await api.get(`/user/${keyword}/articles`);
