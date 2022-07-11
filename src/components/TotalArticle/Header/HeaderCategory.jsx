@@ -11,19 +11,18 @@ const HeaderCategory = () => {
     { category: "all", name: "전체 게시판" },
     { category: "popular", name: "인기 게시판" },
     { category: "rich", name: "수익왕 게시판" },
-    { category: "user", name: "내 게시글" },
   ];
   return (
     <WrapCategory>
       {arr.map((v, l) => {
         return category === v.category ? (
-          <Link to={`/total/${v.category}/articles/1`}>
+          <Link to={`/total/${v.category}/articles/1`} key={v.category}>
             <CurrentCategory>
               <div>{v.name}</div>
             </CurrentCategory>
           </Link>
         ) : (
-          <Link to={`/total/${v.category}/articles/1`}>
+          <Link to={`/total/${v.category}/articles/1`} key={v.category}>
             <Category>
               <div>{v.name}</div>
             </Category>

@@ -28,9 +28,10 @@ const GlobalStyle = createGlobalStyle`
    --gray1 : #F6F6F6 ;
    --gray2 : #E0E0E0 ;
    --gray3 : #B1B1B1;
-   --blue1 : #78c0d6;
-   --blue2 : #5AA9C2 ;
-   --blue3 : #2b839e ;
+   --blue1 : #5AA9C2;
+   --blue2 : #3246FF ;
+   --pink1 : #FF607C
+   --pink2 : #FF3232
   }
 `;
 export default GlobalStyle;

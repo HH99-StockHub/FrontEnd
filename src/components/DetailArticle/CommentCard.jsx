@@ -18,7 +18,6 @@ const CommentCard = ({ data }) => {
       setDeleteBtn(true);
     }
   }, []);
-  console.log(data);
   return (
     <WrapCard>
       <WrapContent>
