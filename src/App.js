@@ -11,6 +11,7 @@ import OAuth from "./components/KakaoLogin/OAuth";
 import GlobalStyle from "./elem/GlobalStyle";
 import { useSelector } from "react-redux";
 import AddArticleFixBtn from "./components/AddArticle/AddArticleFixBtn";
+import SearchArticle from "./page/SearchArticle";
 
 function App() {
   // 게시글 작성 토글 관리
@@ -29,6 +30,10 @@ function App() {
         />
         <Route path="/detail/article/:id" element={<DetailArticle />} />
         <Route path="/user/kakao/callback" element={<OAuth />} />
+        <Route
+          path="/search/article/:category/:keyword"
+          element={<SearchArticle />}
+        />
       </Routes>
     </div>
   );
