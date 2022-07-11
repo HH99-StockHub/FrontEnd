@@ -8,10 +8,10 @@ import Search from "./Search";
 const TotalArticleHeader = () => {
   return (
     <Wrap>
-    <WrapHeader>
-      <HeaderCategory />
-      <Search />
-    </WrapHeader>
+      <WrapHeader>
+        <HeaderCategory />
+        <Search />
+      </WrapHeader>
     </Wrap>
   );
 };
@@ -29,6 +29,6 @@ const WrapHeader = styled.div`
 
 const Wrap = styled.div`
   width: 100%;
-  border-bottom: 1px solid #B1B1B1;
-  margin-bottom: 38px;
-`
+  border-bottom: 1px solid #b1b1b1;
+  margin-bottom: 36px;
+`;
