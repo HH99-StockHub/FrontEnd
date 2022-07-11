@@ -139,7 +139,6 @@ const AddArticleForm = () => {
         data["content" + String(l + 1)] = v.content;
       });
       addArticle(data);
-      dispatch(togleState(false));
     }
   };
   // 투자 포인트 작성하기
