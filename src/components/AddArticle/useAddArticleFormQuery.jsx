@@ -1,16 +1,26 @@
 import { api } from "../../shared/api";
 import { useMutation, useQueryClient } from "react-query";
+import { useDispatch } from "react-redux";
+// 모듈
+import { togleState } from "../../redux/modules/addArticle";
 
 export const useAddArticleFormMutate = {
   useAddArticleMutation: () => {
+    const dispatch = useDispatch();
     const queryClient = useQueryClient();
     const fetcher = async (article) => {
-      await api.post("/article", article);
+      const { data } = await api.post("/article", article);
+      return data;
     };
     return useMutation(fetcher, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("allArticle");
-        alert("작성 완료");
+      onSuccess: (data) => {
+        if (data) {
+          queryClient.invalidateQueries("allArticle");
+          alert("작성 완료");
+          dispatch(togleState(false));
+        } else {
+          alert("비속어 금지");
+        }
       },
       onError: (err) => {
         alert("에러가 발생했습니다.");

@@ -42,9 +42,10 @@ export const useDetailArticleMutate = {
   useWriteComment: (option) => {
     const queryClient = useQueryClient();
     const fetcher = async ({ write, id }) => {
-      await api.post(`/articles/${id}/comment`, {
+      const { data } = await api.post(`/articles/${id}/comment`, {
         comments: write,
       });
+      return data;
     };
     return useMutation(fetcher, option);
   },
