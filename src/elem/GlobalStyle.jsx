@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
     background-color: transparent;
     border: 0;
   }
+  input, textarea {
+    outline: none;
+    border: 1px solid var(--gray2);
+  }
   body{
   }
   :root {
@@ -30,8 +34,8 @@ const GlobalStyle = createGlobalStyle`
    --gray3 : #B1B1B1;
    --blue1 : #5AA9C2;
    --blue2 : #3246FF ;
-   --pink1 : #FF607C
-   --pink2 : #FF3232
+   --pink1 : #FF607C;
+   --pink2 : #FF3232;
   }
 `;
 export default GlobalStyle;
