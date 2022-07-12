@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 //컴포넌트
 import CardTextPopular from "../common/CardTextPopular";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import Porfile from "../common/Porfile";
 // 훅
 import { useMainPageQuery } from "../useMainPageQuery";
@@ -19,6 +20,7 @@ const PopularArticleList = () => {
 
   return (
     <ArticleBox>
+      {isLoading && <LoadingSpinner />}
       {data.map((v) => {
         return (
           <div>
@@ -43,11 +45,13 @@ const PopularArticleList = () => {
 export default PopularArticleList;
 
 const ArticleBox = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   gap: 24px 15px;
   flex-wrap: wrap;
   width: 588px;
+  min-height: 300px;
 `;
 
 const WrapCard = styled.div`

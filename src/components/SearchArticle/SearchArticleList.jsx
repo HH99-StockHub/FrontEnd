@@ -10,7 +10,7 @@ const SearchArticleList = () => {
   // url을 통한 현재 페이지 정보 가져오기
   const { category, keyword } = useParams();
 
-  const { data = [] } = useGetSearchArticle.useGetSearchKeyword(
+  const { data = [], isLoading } = useGetSearchArticle.useGetSearchKeyword(
     category,
     keyword,
   );
@@ -29,7 +29,7 @@ const SearchArticleList = () => {
   return (
     <WrapList>
       <p>{topic()}</p>
-      <TotalArticleList data={data} />
+      <TotalArticleList data={data} isLoading={isLoading} />
     </WrapList>
   );
 };

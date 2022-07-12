@@ -7,13 +7,15 @@ import FramPopularCard from "./FramPopularCard";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 import CardHeader from "./CardHeader";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 
 const FramPopularArticle = () => {
   // useQuery
 
-  const { data = [] } = useMainPageQuery.useGetFamePopularArticle();
+  const { data = [], isLoading } = useMainPageQuery.useGetFamePopularArticle();
   return (
     <WrapPopular>
+      {isLoading && <LoadingSpinner />}
       {data.map((v, l) => {
         return (
           <WrapCard key={l}>
@@ -30,8 +32,10 @@ const FramPopularArticle = () => {
 
 export default FramPopularArticle;
 const WrapPopular = styled.div`
+  position: relative;
   display: flex;
   gap: 12px;
+  min-height: 168px;
 `;
 
 const WrapCard = styled.div`

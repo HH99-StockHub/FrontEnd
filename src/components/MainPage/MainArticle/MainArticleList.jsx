@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 // 컴포넌트
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import MainArticleCard from "./MainArticleCard";
 // 커스텀 훅
 import { useMainPageQuery } from "../useMainPageQuery";
@@ -25,6 +26,8 @@ const MainArticleList = () => {
         <p style={{ width: "64px" }}>날짜</p>
         <p style={{ width: "64px" }}>닉네임</p>
       </THead>
+      {isLoading && <LoadingSpinner />}
+
       {data.map((v) => {
         return (
           <MainArticleCard
@@ -45,7 +48,10 @@ const MainArticleList = () => {
 
 export default MainArticleList;
 
-const Table = styled.div``;
+const Table = styled.div`
+  position: relative;
+  min-height: 400px;
+`;
 const THead = styled.div`
   display: flex;
   padding: 12px 20px;

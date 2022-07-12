@@ -12,6 +12,7 @@ import { togleState } from "../../redux/modules/addArticle";
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
+import LoadingSpinner from "../../repeat/LoadingSpinner";
 
 const AddArticleForm = () => {
   const dispatch = useDispatch();
@@ -41,16 +42,17 @@ const AddArticleForm = () => {
   const data = stockData;
 
   // useMutation 사용
-  const { mutate: addArticle } =
+  const { mutate: addArticle, stockLoading: addLoading } =
     useAddArticleFormMutate.useAddArticleMutation();
-  const { mutate: getStock } = useAddArticleFormMutate.useGetArticleStock({
-    onSuccess: (data, variables, context) => {
-      setCurrentStock(data.data);
-    },
-    onError: (err) => {
-      alert("에러가 발생했습니다.");
-    },
-  });
+  const { mutate: getStock, isLoading: stockLoading } =
+    useAddArticleFormMutate.useGetArticleStock({
+      onSuccess: (data, variables, context) => {
+        setCurrentStock(data.data);
+      },
+      onError: (err) => {
+        alert("에러가 발생했습니다.");
+      },
+    });
   // 주식 종목 선택하기 list
   const selectStockList = (e) => {
     if (e.target.value === "") {
@@ -236,6 +238,7 @@ const AddArticleForm = () => {
             <button type="submit">등록하기</button>
           </Header>
           <WrapText>
+            {addLoading && <LoadingSpinner />}
             <WrapSearch>
               <WrapSelect>
                 <input hidden="hidden" />
@@ -260,7 +263,7 @@ const AddArticleForm = () => {
                   </StockList>
                 )}
               </WrapSelect>
-              <span>{currentStock}</span>
+              <span>{stockLoading ? <LoadingSpinner /> : currentStock}</span>
             </WrapSearch>
             <WrapTitle>
               <h3>제목</h3>
@@ -359,6 +362,7 @@ const WrapSearch = styled.div`
   gap: 8px;
   margin-bottom: 19px;
   > span {
+    position: relative;
     width: 170px;
     height: 44px;
     padding: 10px;

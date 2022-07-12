@@ -18,7 +18,10 @@ const TotalArticle = () => {
   // URL 정보가져오기
   const { category, page } = useParams();
   // useQuery
-  const { data = [] } = useTotalPageQuery.useGetAllArticles(category, "page");
+  const { data = [], isLoading } = useTotalPageQuery.useGetAllArticles(
+    category,
+    "page",
+  );
 
   useEffect(() => {
     switch (category) {
@@ -46,7 +49,7 @@ const TotalArticle = () => {
         <TotalArticleHeader />
         <Div>
           <TotalArticleBanner />
-          <TotalArticleContent data={data} />
+          <TotalArticleContent data={data} isLoading={isLoading} />
           <TotalPagenation category={category} nowPage={page} />
         </Div>
       </Box>
