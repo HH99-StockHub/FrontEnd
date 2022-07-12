@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 // 이미지
 import { ReactComponent as BtnSvg } from "../../image/AddArticle.svg";
 import { togleState } from "../../redux/modules/addArticle";
-const AddArticleFixBtn = () => {
+const AddArticleFixBtn = React.memo(() => {
   const dispatch = useDispatch();
   // 게시글 작성 토글 오픈
   const openTogle = () => {
@@ -17,7 +17,7 @@ const AddArticleFixBtn = () => {
       <BtnSvg width="18px" height="18px" fill="var(--white)" />
     </Btn>
   );
-};
+});
 
 export default AddArticleFixBtn;
 
