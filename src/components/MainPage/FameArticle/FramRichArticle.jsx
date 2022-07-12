@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 //컴포넌트
 import FramRichCard from "./FramRichCard";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import CardHeader from "./CardHeader";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 
 const FramRichArticle = () => {
   // useQuery
-  const { data = [] } = useMainPageQuery.useGetFameRichArticle();
+  const { data = [], isLoading } = useMainPageQuery.useGetFameRichArticle();
   return (
     <WrapRich>
+      {isLoading && <LoadingSpinner />}
       {data.map((v, l) => {
         return (
           <WrapCard>
@@ -29,7 +31,9 @@ const FramRichArticle = () => {
 
 export default FramRichArticle;
 const WrapRich = styled.div`
+  position: relative;
   display: flex;
+  min-height: 168px;
   gap: 12px;
 `;
 

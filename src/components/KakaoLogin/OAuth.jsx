@@ -6,6 +6,7 @@ import { setCookie, getCookie } from "../../shared/Cookie";
 import { useLoginQuery } from "./useLoginQuery";
 //모듈
 import { loginState } from "../../redux/modules/login";
+import LoadingSpinner from "../../repeat/LoadingSpinner";
 const OAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ const OAuth = () => {
   }, [data]);
   return (
     <>
+      {isLoading && <LoadingSpinner />}
       <div>카카오 로그인 중입니다. 잠시만 기달려주세요</div>
     </>
   );
