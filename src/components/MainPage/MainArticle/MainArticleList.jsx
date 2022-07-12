@@ -6,8 +6,10 @@ import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import MainArticleCard from "./MainArticleCard";
 // 커스텀 훅
 import { useMainPageQuery } from "../useMainPageQuery";
+import useChangeNum from "../../../custom/changeNum";
 
 const MainArticleList = () => {
+  const changeNum = useChangeNum;
   // 데이터 가져오기 query
   const {
     data = [],
@@ -32,12 +34,12 @@ const MainArticleList = () => {
         return (
           <MainArticleCard
             key={v.articleId}
-            date={"v.createdAt"}
+            date={v.createdAt}
             title={v.articleTitle}
             user={v.nickname}
-            watch={v.viewCount}
-            up={v.voteUpCount}
-            down={v.voteDownCount}
+            watch={changeNum(v.viewCount)}
+            up={changeNum(v.voteUpCount)}
+            down={changeNum(v.voteDownCount)}
             articleId={v.articleId}
           />
         );
