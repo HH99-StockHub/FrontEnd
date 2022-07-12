@@ -5,7 +5,7 @@ import "../SlideStock.scss";
 //이미지
 import { ReactComponent as UpArrowSvg } from "../image/UpArrow.svg";
 
-const SlideStock = () => {
+const SlideStock = React.memo(() => {
   // 예시 잉여 arr
   const data = [1, 2, 3, 4, 6, 6, 77, 6];
   return (
@@ -34,6 +34,6 @@ const SlideStock = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SlideStock;

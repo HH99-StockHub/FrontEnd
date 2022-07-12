@@ -78,7 +78,7 @@ const TotalPagenation = ({ category, nowPage }) => {
   useEffect(() => {
     // 마지막 페이지에서 역순 할 경우
     if (Number(page + 9) < Number(lastpage) && btnCount.length !== 10) {
-      const arr = [1, 2, 3, 4, 5,6,7,8,9,10];
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       setBtnCount(arr);
       // 마지막 페이지 리스트일 경우
     } else if (Number(page + 9) > Number(lastpage)) {
@@ -129,6 +129,6 @@ const WrapPageBtn = styled.div`
   }
   > button:nth-child(${({ num }) => Number(num)}) {
     background: #54ba7d;
-    color: white
+    color: white;
   }
 `;
