@@ -6,11 +6,12 @@ import Header from "./repeat/Header";
 import TotalArticle from "./page/TotalArticle";
 import AddArticle from "./page/AddArticle";
 import DetailArticle from "./page/DetailArticle";
-import SlideStock from "./repeat/SlideStock";
 import OAuth from "./components/KakaoLogin/OAuth";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import { useSelector } from "react-redux";
+import AddArticleFixBtn from "./components/AddArticle/AddArticleFixBtn";
+import SearchArticle from "./page/SearchArticle";
 
 function App() {
   // 게시글 작성 토글 관리
@@ -20,7 +21,7 @@ function App() {
       <GlobalStyle />
       {toggleState && <AddArticle />}
       <Header />
-      <SlideStock />
+      <AddArticleFixBtn />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route
@@ -29,6 +30,10 @@ function App() {
         />
         <Route path="/detail/article/:id" element={<DetailArticle />} />
         <Route path="/user/kakao/callback" element={<OAuth />} />
+        <Route
+          path="/search/article/:category/:keyword"
+          element={<SearchArticle />}
+        />
       </Routes>
     </div>
   );

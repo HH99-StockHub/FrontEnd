@@ -27,4 +27,5 @@ const WrapContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 58px;
+  width: 558px;
 `;

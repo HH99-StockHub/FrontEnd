@@ -7,57 +7,15 @@ import FramPopularCard from "./FramPopularCard";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 import CardHeader from "./CardHeader";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 
 const FramPopularArticle = () => {
   // useQuery
-  // 임시 arr
-  const data = [
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "삼성전자 앞으로 1년만 보면",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "삼성전자 앞으로 1년만 보면",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-  ];
-  // const { data = [] } = useMainPageQuery.useGetFamePopularArticle();
+
+  const { data = [], isLoading } = useMainPageQuery.useGetFamePopularArticle();
   return (
     <WrapPopular>
+      {isLoading && <LoadingSpinner />}
       {data.map((v, l) => {
         return (
           <WrapCard key={l}>
@@ -74,8 +32,10 @@ const FramPopularArticle = () => {
 
 export default FramPopularArticle;
 const WrapPopular = styled.div`
+  position: relative;
   display: flex;
   gap: 12px;
+  min-height: 168px;
 `;
 
 const WrapCard = styled.div`

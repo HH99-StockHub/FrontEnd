@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-const HelmetComponents = ({ title }) => {
+const HelmetComponents = React.memo(({ title }) => {
   return (
     <Helmet>
       <title>{title}</title>
@@ -22,6 +22,6 @@ const HelmetComponents = ({ title }) => {
       />
     </Helmet>
   );
-};
+});
 
 export default HelmetComponents;

@@ -4,60 +4,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 //컴포넌트
 import FramRichCard from "./FramRichCard";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import CardHeader from "./CardHeader";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 
 const FramRichArticle = () => {
   // useQuery
-  // const { data = [] } = useMainPageQuery.useGetFameRichArticle();
-  //임시 arr
-  const data = [
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "삼성전자 앞으로앞으로앞으로앞으로 앞으로 1년만 보면",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "삼성전자 앞으로 1년만 보면",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-  ];
+  const { data = [], isLoading } = useMainPageQuery.useGetFameRichArticle();
   return (
     <WrapRich>
+      {isLoading && <LoadingSpinner />}
       {data.map((v, l) => {
         return (
           <WrapCard>
@@ -74,7 +31,9 @@ const FramRichArticle = () => {
 
 export default FramRichArticle;
 const WrapRich = styled.div`
+  position: relative;
   display: flex;
+  min-height: 168px;
   gap: 12px;
 `;
 

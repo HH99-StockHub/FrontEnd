@@ -46,11 +46,12 @@ const Header = () => {
   return (
     <Header1>
       <Header2>
-        <Logo1>
-      <Logo  onClick={()=>{
-        navigate("/")
-      }}/>
-      </Logo1>
+        <Logo
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+
         {login ? (
           <WrapMenu>
             <Profile src={localStorage.getItem("profileImg")} alt="프로필" />
@@ -125,6 +126,6 @@ const Notice = styled.button`
 
 const Writing = styled.button`
   width: 54px;
-  background-color: #3CC472;
+  background-color: #3cc472;
   color: #fff;
 `;

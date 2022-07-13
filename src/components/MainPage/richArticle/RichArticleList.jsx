@@ -4,102 +4,18 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 //컴포넌트
 import CardTextRich from "../common/CardTextRich";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import Porfile from "../common/Porfile";
 // query 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 const RichArticleList = () => {
   // useQuery
-  // const { data = [] } = useMainPageQuery.useGetRichArticles();
-  // 임시 arr
-  const data = [
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "삼성전자 앞으로 1년만 보면",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "삼성전자 앞으로 1년만 보면12s359311",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "삼성전자 앞으로 1년만 보면",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "삼성전자 앞으로 1년만 보면12s359311",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-    {
-      articleId: "Long",
-      createdAt: "LocalDateTime",
-      userId: "Long",
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "삼성전자",
-      stockReturn: "double",
-      voteUpCount: "int",
-      voteDownCount: "int",
-      commentCount: "int",
-      viewCount: "int",
-    },
-  ];
+  const { data = [], isLoading } = useMainPageQuery.useGetRichArticles();
+
   return (
     <div>
       <ArticleBox>
+        {isLoading && <LoadingSpinner />}
         {data.map((v) => {
           return (
             <WrapCard>
@@ -119,11 +35,13 @@ const RichArticleList = () => {
 export default RichArticleList;
 
 const ArticleBox = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   gap: 24px 15px;
   flex-wrap: wrap;
   width: 588px;
+  min-height: 300px;
 `;
 const WrapCard = styled.div`
   display: flex;

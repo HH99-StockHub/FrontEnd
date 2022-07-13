@@ -7,16 +7,22 @@ import PopularArticle from "../components/MainPage/popularArticle/PopularArticle
 import RichArticle from "../components/MainPage/richArticle/RichArticle";
 import FameArticle from "../components/MainPage/FameArticle/FameArticle";
 import ArticleSubHeader from "../components/MainPage/common/ArticleSubHeader";
+import SlideStock from "../repeat/SlideStock";
 
 const MainPage = () => {
   return (
     <>
       <ArticleSubHeader />
+      <SlideStock />
       <WrapMainContent>
-        <MainArticle />
-        <FameArticle />
-        <PopularArticle />
-        <RichArticle />
+        <div>
+          <MainArticle />
+          <FameArticle />
+        </div>
+        <div>
+          <PopularArticle />
+          <RichArticle />
+        </div>
       </WrapMainContent>
     </>
   );
@@ -26,8 +32,14 @@ export default MainPage;
 
 const WrapMainContent = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 64px;
-  flex-wrap: wrap;
   margin: 0 auto;
+  margin-top: 64px;
+  > div {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+  }
 `;

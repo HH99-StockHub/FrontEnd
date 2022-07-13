@@ -14,10 +14,14 @@ const Comment = ({ id }) => {
   const queryClient = useQueryClient();
   const writeInput = React.useRef("");
   const { mutate, isSuccess } = useDetailArticleMutate.useWriteComment({
-    onSuccess: () => {
-      writeInput.current.value = "";
-      queryClient.invalidateQueries();
-      alert("댓글 작성 완료");
+    onSuccess: (data) => {
+      if (data) {
+        writeInput.current.value = "";
+        queryClient.invalidateQueries();
+        alert("댓글 작성 완료");
+      } else {
+        alert("비속어 금지");
+      }
     },
     onError: (data, error, variables, context) => {
       if (data.response.state === 400) {

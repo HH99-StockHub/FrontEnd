@@ -22,7 +22,7 @@ const CommentCard = ({ data }) => {
     <WrapCard>
       <WrapContent>
         <p>{data.nickname}</p>
-        <pre>{data.comment}</pre>
+        <pre>{data.comments}</pre>
         <span>{data.createdAt}</span>
       </WrapContent>
       <BoxNo>
