@@ -100,4 +100,12 @@ export const useDetailArticleGet = {
     };
     return useQuery(["CommentInquiry", articleId], fetcher);
   },
-};
+  //종목 뉴스 검색
+  useNewsSearch : (payload) => {
+    const fetcher = async () => {
+      const {data} = await api.get(`/article?query=${payload}`)
+      return data;
+    }
+    return useQuery("NewsSearch",fetcher)
+  },
+}

@@ -51,6 +51,7 @@ const Header = () => {
             navigate("/");
           }}
         />
+
         {login ? (
           <WrapMenu>
             <Profile src={localStorage.getItem("profileImg")} alt="프로필" />
@@ -85,6 +86,12 @@ const Header2 = styled.div`
   width: 1200px;
   margin: 0 auto;
 `;
+
+const Logo1 = styled.div`
+  &:hover{
+    cursor: pointer;
+  }
+`
 
 // const Logo = styled.img`
 //   width: 89px;

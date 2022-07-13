@@ -23,6 +23,8 @@ const DetailArticle = () => {
     isError,
     error,
   } = useDetailArticleGet.useContentInquiry(id);
+
+  console.log(data)
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
 
@@ -30,10 +32,9 @@ const DetailArticle = () => {
     <>
       <SlideStock />
       <TotalArticleHeader />
+      <Div>
       <Container>
-        <Title stockName={data.stockName} />
-        <BtnBox>
-          <Btn>목록</Btn>
+      <BtnBox>
           <Btn
             onClick={() => {
               const data = { postId: id }; //게시글에 대한 데이터 넣기
@@ -43,15 +44,17 @@ const DetailArticle = () => {
           >
             게시글 삭제
           </Btn>
-          <Btn>수정</Btn>
+          
         </BtnBox>
         <Writing
           date={data.createdAt}
           view={data.viewCount}
           stockName={data.stockName}
           articleTitle={data.articleTitle}
+          profileImage={data.profileImage}
+          nickName = {data.nickname}
         />
-        <hr />
+
         <Stocks date={data.createdAt} />
         <View
           content1={data.content1}
@@ -64,24 +67,35 @@ const DetailArticle = () => {
         <Vote id={id} voteUp={data.voteUpCount} voteDown={data.voteDownCount} />
         <Comment id={id} />
       </Container>
+      <Title stockName={data.stockName} />
+      </Div>
     </>
   );
 };
 
+
+
 const Container = styled.div`
-  width: 70%;
-  margin: 0 auto;
+  width: 821px;
 `;
+const Div = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  
+  width: 1240px;
+  margin: 0 auto;
+  position: relative;
+`
 
 const BtnBox = styled.div`
   display: flex;
-  justify-content: flex-end;
   gap: 5px;
-  margin-top: 20px;
+  margin-top: 26px;
 `;
 
 const Btn = styled.button`
   padding: 10px;
-  background: #eaeaea;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
 `;
 export default DetailArticle;

@@ -19,6 +19,7 @@ const Search = () => {
       alert("최소 한 글자라도 입력해야합니다");
     }
   };
+
   return (
     <FormStyle onSubmit={submit}>
       <input
