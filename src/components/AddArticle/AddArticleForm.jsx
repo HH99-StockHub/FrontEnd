@@ -12,6 +12,7 @@ import { togleState } from "../../redux/modules/addArticle";
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import LoadingSpinner from "../../repeat/LoadingSpinner";
+import CandleChart from "../Chart/CandleChart";
 
 const AddArticleForm = () => {
   const dispatch = useDispatch();
@@ -262,7 +263,9 @@ const AddArticleForm = () => {
               {selectStockState === false && (
                 <ChartBox>
                   <button type="button">그래프 보기</button>
-                  <div></div>
+                  <div>
+                    <CandleChart />
+                  </div>
                 </ChartBox>
               )}
 
@@ -479,7 +482,7 @@ const ChartBox = styled.div`
   > div {
     width: 100%;
     height: 200px;
-    border: 1px solid #000;
+    border: 1px solid var(--gray3);
   }
 `;
 

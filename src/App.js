@@ -1,5 +1,6 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 //컴포넌트
 import MainPage from "./page/MainPage";
 import Header from "./repeat/Header";
@@ -9,7 +10,6 @@ import DetailArticle from "./page/DetailArticle";
 import OAuth from "./components/KakaoLogin/OAuth";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
-import { useSelector } from "react-redux";
 import AddArticleFixBtn from "./components/AddArticle/AddArticleFixBtn";
 import SearchArticle from "./page/SearchArticle";
 
