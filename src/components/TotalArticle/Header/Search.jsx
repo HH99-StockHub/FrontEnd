@@ -2,8 +2,8 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as SearchSvg } from "../../../image/Search.svg";
-
-const Search = () => {
+import { useTotalPageQuery } from './../useTotalPageQuery';
+const Search = (keywords) => {
   return (
     <FormStyle>
       <input type="text" placeholder="관심있는 내용을 검색하세요" />

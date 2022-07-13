@@ -48,10 +48,10 @@ const Comment = ({ id }) => {
 
   return (
     <Box>
-      <h3>댓글달기</h3>
+      <H3>댓글달기</H3>
       <Label onSubmit={addComment}>
-        <Views ref={writeInput} placeholder="상세내용 작성"></Views>
-        <Btn type="sumbit">보내기</Btn>
+        <Views ref={writeInput} placeholder="댓글을 작성해주세요."></Views>
+        <Btn type="sumbit">등록하기</Btn>
       </Label>
       {data.map((v) => {
         return <CommentCard data={v} key={v.commentId} />;
@@ -62,30 +62,48 @@ const Comment = ({ id }) => {
 
 const Box = styled.div`
   margin-top: 20px;
-  padding: 20px 0px;
 `;
 
+const H3 = styled.h3`
+  font-weight: 700;
+font-size: 16px;
+line-height: 19px;
+color: #000000;
+`
+
 const Label = styled.form`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+display: flex;
+justify-content: space-between;
   border: 1px solid #dbdbdb;
   width: 100%;
   margin-top: 20px;
+  height: 89px;
+
 `;
 
 const Btn = styled.button`
-  background: #dedede;
-  padding: 10px;
+  background: #54BA7D;
   margin-right: 10px;
+  padding: 10px;
+  font-weight: 700;
+font-size: 12px;
+line-height: 14px;
+height: 34px;
+color: #FFFFFF;
+align-self: flex-end;
 `;
 
 const Views = styled.input`
-  flex: 8;
-  padding: 20px;
   color: #000000;
+  flex: 8;
   font-weight: 700;
   border: 0;
+  padding: 10px;
+
+  height: 100%;
   outline: none;
+  ::placeholder {
+    color: #B1B1B1;
+  }
 `;
 export default Comment;
