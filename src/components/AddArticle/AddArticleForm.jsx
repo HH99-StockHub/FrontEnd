@@ -258,7 +258,7 @@ const AddArticleForm = () => {
               </WrapSelect>
               <span>{stockLoading ? <LoadingSpinner /> : currentStock}</span>
             </WrapSearch>
-            <div>
+            <ScrollScope>
               {selectStockState === false && (
                 <ChartBox>
                   <button type="button">그래프 보기</button>
@@ -319,7 +319,7 @@ const AddArticleForm = () => {
                   투자포인트 추가
                 </PlusBtn>
               )}
-            </div>
+            </ScrollScope>
           </WrapText>
           <WrapBtn>
             <button type="submit">게시글 올리기</button>
@@ -420,6 +420,15 @@ const WrapTitle = styled.div`
     font-size: 12px;
   }
 `;
+
+const ScrollScope = styled.div`
+  max-height: 500px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+`;
+
 const WrapPointHeader = styled.div`
   display: flex;
   align-items: center;
