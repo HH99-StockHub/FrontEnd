@@ -11,7 +11,6 @@ import { togleState } from "../../redux/modules/addArticle";
 //이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
-import { ReactComponent as PlusSvg } from "../../image/Plus.svg";
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 
 const AddArticleForm = () => {
@@ -31,13 +30,16 @@ const AddArticleForm = () => {
   // 주식 선택하기 input 변경 값
   const [stockInput, setStockInput] = useState("");
   //선택 주식 주가
-  const [currentStock, setCurrentStock] = useState("종목을 선택해주세요");
+  const [currentStock, setCurrentStock] = useState("현재 주가");
   // 투자 포인트 데이터
   const [stockPoint, setStockPoint] = useState([{}]);
   // title가져오기
   const articleTitle = useRef("");
   const wrapTagStockList = useRef();
 
+  const a = window.outerHeight;
+  const b = window.innerHeight;
+  console.log(a, b);
   //예시 arr
   const data = stockData;
 
@@ -226,16 +228,7 @@ const AddArticleForm = () => {
       <WrapForm>
         <form onSubmit={writeArticle} autoComplete="off">
           <Header>
-            <button
-              type="button"
-              onClick={() => {
-                dispatch(togleState(false));
-              }}
-            >
-              <XBtnSvg width={"13.18"} height="13.18" />
-            </button>
             <p>게시글작성</p>
-            <button type="submit">등록하기</button>
           </Header>
           <WrapText>
             {addLoading && <LoadingSpinner />}
@@ -249,7 +242,7 @@ const AddArticleForm = () => {
                   onChange={selectStockList}
                   onKeyDown={keyDownHandler}
                 />
-                <SearchSvg width="17.49" height="17.49" fill="black" />
+                <SearchSvg width="17.49" height="17.49" fill="var(--green1)" />
                 {selectStockState && (
                   <StockList index={stockIndex} ref={wrapTagStockList}>
                     {stockArr.map((v) => {
@@ -265,56 +258,80 @@ const AddArticleForm = () => {
               </WrapSelect>
               <span>{stockLoading ? <LoadingSpinner /> : currentStock}</span>
             </WrapSearch>
-            <WrapTitle>
-              <h3>제목</h3>
-              <input
-                type="text"
-                placeholder="제목을 입력해주세요"
-                ref={articleTitle}
-              />
-            </WrapTitle>
-            <WrapPoint>
-              {countArr.map((v, l) => {
-                return (
-                  <WrapTextarea key={v.key}>
-                    <WrapPointHeader>
-                      <h3>투자 포인트 {l + 1} (최대 3개 작성 가능)</h3>
-                      {l === 0 ? null : (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            deleteTextarea(e, l);
-                          }}
-                        >
-                          <XBtnSvg width="6.59" height="6.59" />
-                        </button>
-                      )}
-                    </WrapPointHeader>
-                    <input
-                      id={l}
-                      type="text"
-                      placeholder="투자포인트 요약"
-                      onChange={addStockPoint}
-                    />
+            <ScrollScope>
+              {selectStockState === false && (
+                <ChartBox>
+                  <button type="button">그래프 보기</button>
+                  <div></div>
+                </ChartBox>
+              )}
 
-                    <br></br>
-                    <TextareaText
-                      name={l}
-                      cols="30"
-                      rows="5"
-                      placeholder="상세내용 작성"
-                      onChange={addStockPoint}
-                    ></TextareaText>
-                  </WrapTextarea>
-                );
-              })}
-            </WrapPoint>
-            {pointBtnState && (
-              <button type="button" onClick={addTextarea}>
-                투자포인트 추가 <PlusSvg />
-              </button>
-            )}
+              <WrapTitle>
+                <p>제목</p>
+                <input
+                  type="text"
+                  placeholder="제목을 입력해주세요"
+                  ref={articleTitle}
+                />
+              </WrapTitle>
+              <div>
+                {countArr.map((v, l) => {
+                  return (
+                    <WrapTextarea key={v.key}>
+                      <WrapPointHeader>
+                        <p>투자 포인트 {l + 1} (최대 3개 작성 가능)</p>
+                        {l === 0 ? null : (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              deleteTextarea(e, l);
+                            }}
+                          >
+                            <XBtnSvg
+                              width="6.59"
+                              height="6.59"
+                              fill="var(--pink1)"
+                            />
+                          </button>
+                        )}
+                      </WrapPointHeader>
+                      <input
+                        id={l}
+                        type="text"
+                        placeholder="투자포인트 요약"
+                        onChange={addStockPoint}
+                      />
+
+                      <br></br>
+                      <TextareaText
+                        name={l}
+                        cols="30"
+                        rows="5"
+                        placeholder="상세내용 작성"
+                        onChange={addStockPoint}
+                      ></TextareaText>
+                    </WrapTextarea>
+                  );
+                })}
+              </div>
+              {pointBtnState && (
+                <PlusBtn type="button" onClick={addTextarea}>
+                  투자포인트 추가
+                </PlusBtn>
+              )}
+            </ScrollScope>
           </WrapText>
+          <WrapBtn>
+            <button type="submit">게시글 올리기</button>
+            <button
+              type="button"
+              onClick={() => {
+                dispatch(togleState(false));
+              }}
+            >
+              취소하기
+            </button>
+          </WrapBtn>
         </form>
       </WrapForm>
     </WrapToggle>
@@ -335,20 +352,22 @@ const WrapToggle = styled.div`
   background-color: rgba(34, 34, 34, 0.5);
 `;
 const WrapForm = styled.div`
-  width: 720px;
-  border: 1px solid #000;
+  width: 100%;
+  max-width: 720px;
   background-color: #fff;
 `;
 const WrapText = styled.div`
-  padding: 30px 73px;
+  padding: 24px 79px 48px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--gray2);
 `;
 const Header = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0 21px;
-  height: 57px;
-  border-bottom: 1px solid #ccc;
+  height: 67px;
+  background-color: var(--green1);
+  color: var(--white);
   > p {
     font-size: 16px;
     font-weight: 700;
@@ -360,13 +379,17 @@ const WrapSearch = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 19px;
+  margin-bottom: 12px;
   > span {
     position: relative;
+    display: flex;
+    align-items: center;
     width: 170px;
     height: 44px;
     padding: 10px;
-    border: 1px solid #000;
+    border: 1px solid var(--gray2);
+    font-size: 12px;
+    color: var(--gray3);
   }
 `;
 const WrapSelect = styled.div`
@@ -375,13 +398,16 @@ const WrapSelect = styled.div`
   padding: 0 10px;
   width: 385px;
   height: 44px;
-  border: 1px solid #000;
+  border: 1px solid var(--gray2);
   input {
     width: 332px;
+    border: none;
+    outline: none;
   }
 `;
 const WrapTitle = styled.div`
-  > h3 {
+  margin-top: 25px;
+  > p {
     font-size: 12px;
     font-weight: 400;
     margin-bottom: 8px;
@@ -389,20 +415,28 @@ const WrapTitle = styled.div`
   > input {
     width: 100%;
     height: 44px;
-    padding: 14.5px 10px;
-    margin-bottom: 30px;
-  }
-`;
-const WrapPoint = styled.div`
-  h3 {
+    padding: 0 10px;
+    margin-bottom: 24px;
     font-size: 12px;
   }
 `;
+
+const ScrollScope = styled.div`
+  max-height: 500px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+`;
+
 const WrapPointHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
+  > p {
+    font-size: 12px;
+  }
   > button {
     width: 20px;
     height: 20px;
@@ -429,10 +463,30 @@ const TextareaText = styled.textarea`
   resize: none;
 `;
 
+const ChartBox = styled.div`
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  align-items: flex-end;
+  > button {
+    padding: 10px;
+    width: 85px;
+    background-color: var(--green1);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  > div {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #000;
+  }
+`;
+
 const StockList = styled.div`
   position: absolute;
-  border: 1px solid #bbb;
-  top: 42px;
+  border: 1px solid var(--gray2);
+  top: 44px;
   left: 0;
   width: 385px;
   height: 264px;
@@ -452,17 +506,50 @@ const StockList = styled.div`
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }
-  div {
+  > div {
     display: flex;
     align-items: center;
+    gap: 8px;
     height: 44px;
+    padding: 0 10px;
+    font-size: 12px;
+    span {
+      font-weight: 700;
+    }
     :hover {
-      background-color: #bbb;
+      background-color: #f6f6f6;
     }
   }
   > div:nth-child(${({ index }) => {
         return Number(index);
       }}) {
-    border: 1px solid #000;
+    background-color: #f6f6f6;
+  }
+`;
+
+const PlusBtn = styled.button`
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--white);
+  background-color: var(--green2);
+`;
+
+const WrapBtn = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  button {
+    width: 100%;
+    height: 40px;
+    max-width: 562px;
+    color: var(--white);
+    &:first-child {
+      background-color: var(--blue1);
+    }
+    &:nth-child(2) {
+      background-color: var(--gray3);
+    }
   }
 `;
