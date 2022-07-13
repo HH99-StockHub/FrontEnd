@@ -6,12 +6,7 @@ import { useDetailArticleGet } from "../useDetailArticle";
 const Title = (props) => {
   const { stockName } = props;
 
-  const {
-    data = [],
-  } = useDetailArticleGet.useNewsSearch(stockName);
-  console.log(stockName)
-
-  console.log (data)
+  const { data = [] } = useDetailArticleGet.useNewsSearch(stockName);
 
   return (
     <>

@@ -52,8 +52,8 @@ const P = styled.p`
   line-height: 15px;
 `;
 
-const P1 = styled.p`
-width: 100%;
+const P1 = styled.div`
+  width: 100%;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
@@ -67,8 +67,8 @@ const P2 = styled.p`
   line-height: 26px;
 `;
 
-const P3 = styled.p`
-gap: 4px;
+const P3 = styled.div`
+  gap: 4px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
