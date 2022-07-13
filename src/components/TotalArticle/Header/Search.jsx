@@ -12,8 +12,12 @@ const Search = () => {
   // 검색하기
   const submit = (e) => {
     e.preventDefault();
-    navigate(`/search/article/keyword/${searchInput.current.value}`);
-    searchInput.current.value = "";
+    if (searchInput.current.value.trim() !== "") {
+      navigate(`/search/article/keyword/${searchInput.current.value}`);
+      searchInput.current.value = "";
+    } else {
+      alert("최소 한 글자라도 입력해야합니다");
+    }
   };
   return (
     <FormStyle onSubmit={submit}>
