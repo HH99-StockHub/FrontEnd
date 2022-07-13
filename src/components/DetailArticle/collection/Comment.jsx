@@ -95,17 +95,19 @@ line-height: 14px;
 height: 34px;
 color: #FFFFFF;
 align-self: flex-end;
+margin-bottom: 10px;
 `;
 
-const Views = styled.input`
+const Views = styled.textarea`
   color: #000000;
   flex: 8;
   font-weight: 700;
   border: 0;
   padding: 10px;
-
   height: 100%;
   outline: none;
+  resize: none;
+  ::-webkit-scrollbar { display: none; }
   ::placeholder {
     color: #B1B1B1;
   }
