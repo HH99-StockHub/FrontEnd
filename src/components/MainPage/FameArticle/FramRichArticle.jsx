@@ -18,7 +18,11 @@ const FramRichArticle = () => {
       {data.map((v, l) => {
         return (
           <WrapCard>
-            <CardHeader nickname={v.nickname} title={v.stockName} />
+            <CardHeader
+              nickname={v.nickname}
+              title={v.stockName}
+              userId={v.userId}
+            />
             <Link to={`/detail/article/${v.articleId}`}>
               <FramRichCard data={v} index={l} />
             </Link>

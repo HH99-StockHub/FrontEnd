@@ -19,7 +19,11 @@ const FramPopularArticle = () => {
       {data.map((v, l) => {
         return (
           <WrapCard key={l}>
-            <CardHeader nickname={v.nickname} title={v.stockName} />
+            <CardHeader
+              nickname={v.nickname}
+              title={v.stockName}
+              userId={v.userId}
+            />
             <Link to={`/detail/article/${v.id}`} key={v.id}>
               <FramPopularCard data={v} index={l} />
             </Link>

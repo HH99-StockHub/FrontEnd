@@ -7,11 +7,9 @@ export const useGetSearchArticle = {
         case "keyword":
           const { data: search } = await api.get(`/articles/${keyword}/search`);
           return search;
-        case "user":
+        default:
           const { data: user } = await api.get(`/user/${keyword}/articles`);
           return user;
-        default:
-          break;
       }
     };
     return useQuery(["searchArticle", category, keyword], fetcher);

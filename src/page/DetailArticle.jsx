@@ -63,6 +63,7 @@ const DetailArticle = () => {
             articleTitle={data.articleTitle}
             profileImage={data.profileImage}
             nickName={data.nickname}
+            userId={data.userId}
           />
 
           <Stocks date={data.createdAt} />
