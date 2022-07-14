@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 // 모듈
 import { getCookie } from "../../../shared/Cookie";
-import { togleState } from "../../../redux/modules/addArticle";
+import { togleState } from "../../../redux/modules/toggleState";
 // 이미지
 import { ReactComponent as MainBannerSvg } from "../../../image/MainPageBanner.svg";
 

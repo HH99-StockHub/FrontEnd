@@ -9,7 +9,7 @@ import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
 // 모듈
 import { loginState } from "../redux/modules/login";
-import { togleState } from "../redux/modules/addArticle";
+import { togleState } from "../redux/modules/toggleState";
 //이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 
@@ -88,10 +88,10 @@ const Header2 = styled.div`
 `;
 
 const Logo1 = styled.div`
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
-`
+`;
 
 // const Logo = styled.img`
 //   width: 89px;

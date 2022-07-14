@@ -64,7 +64,6 @@ const CandleChart = () => {
         rotate: 0,
         // y축 원하는데로 변경하기 , 찍어서 가독성을 높여보자
         formatter: (value) => {
-          console.log(value);
           return parseInt(value);
         },
       },
@@ -111,7 +110,6 @@ const CandleChart = () => {
         rotate: 0,
         formatter: function (val, l) {
           // x축 원하는데로 조작하기
-          console.log(val);
           return dayjs(val).format("MM DD");
         },
         style: {
