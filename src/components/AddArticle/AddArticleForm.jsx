@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAddArticleFormMutate } from "./useAddArticleFormQuery";
 // 모듈
 import { stockData } from "../../Data/stockData";
-import { togleState } from "../../redux/modules/addArticle";
+import { chartToggleState, togleState } from "../../redux/modules/toggleState";
 //이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
@@ -39,9 +39,6 @@ const AddArticleForm = () => {
   const articleTitle = useRef("");
   const wrapTagStockList = useRef();
 
-  const a = window.outerHeight;
-  const b = window.innerHeight;
-  console.log(a, b);
   //예시 arr
   const data = stockData;
 
@@ -226,135 +223,130 @@ const AddArticleForm = () => {
     };
   }, []);
   return (
-    <WrapToggle>
-      <WrapForm>
-        <form onSubmit={writeArticle} autoComplete="off">
-          <Header>
-            <p>게시글작성</p>
-          </Header>
-          <WrapText>
-            {addLoading && <LoadingSpinner />}
-            <WrapSearch>
-              <WrapSelect>
-                <input hidden="hidden" />
-                <input
-                  type="text"
-                  value={stockInput}
-                  placeholder="종목검색"
-                  onChange={selectStockList}
-                  onKeyDown={keyDownHandler}
-                />
-                <SearchSvg width="17.49" height="17.49" fill="var(--green1)" />
-                {selectStockState && (
-                  <StockList index={stockIndex} ref={wrapTagStockList}>
-                    {stockArr.map((v) => {
-                      return (
-                        <div key={v.id} onClick={selectStockOne}>
-                          <span>{v.stockCode}</span>
-                          <div>{v.stockName}</div>
-                        </div>
-                      );
-                    })}
-                  </StockList>
-                )}
-              </WrapSelect>
-              <span>{stockLoading ? <LoadingSpinner /> : currentStock}</span>
-            </WrapSearch>
-            <ScrollScope>
-              {selectStockState === false && (
-                <ChartBox>
-                  <button type="button">그래프 보기</button>
-                  <div>
-                    <LineChart />
-                  </div>
-                </ChartBox>
+    <WrapForm>
+      <form onSubmit={writeArticle} autoComplete="off">
+        <Header>
+          <p>게시글작성</p>
+        </Header>
+        <WrapText>
+          {addLoading && <LoadingSpinner />}
+          <WrapSearch>
+            <WrapSelect>
+              <input hidden="hidden" />
+              <input
+                type="text"
+                value={stockInput}
+                placeholder="종목검색"
+                onChange={selectStockList}
+                onKeyDown={keyDownHandler}
+              />
+              <SearchSvg width="17.49" height="17.49" fill="var(--green1)" />
+              {selectStockState && (
+                <StockList index={stockIndex} ref={wrapTagStockList}>
+                  {stockArr.map((v) => {
+                    return (
+                      <div key={v.id} onClick={selectStockOne}>
+                        <span>{v.stockCode}</span>
+                        <div>{v.stockName}</div>
+                      </div>
+                    );
+                  })}
+                </StockList>
               )}
+            </WrapSelect>
+            <span>{stockLoading ? <LoadingSpinner /> : currentStock}</span>
+          </WrapSearch>
+          <ScrollScope>
+            {selectStockState === false && (
+              <ChartBox>
+                {/* 모달창 오픈 */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(chartToggleState(true));
+                  }}
+                >
+                  그래프 보기
+                </button>
+                <div>
+                  <LineChart />
+                </div>
+              </ChartBox>
+            )}
 
-              <WrapTitle>
-                <p>제목</p>
-                <input
-                  type="text"
-                  placeholder="제목을 입력해주세요"
-                  ref={articleTitle}
-                />
-              </WrapTitle>
-              <div>
-                {countArr.map((v, l) => {
-                  return (
-                    <WrapTextarea key={v.key}>
-                      <WrapPointHeader>
-                        <p>투자 포인트 {l + 1} (최대 3개 작성 가능)</p>
-                        {l === 0 ? null : (
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              deleteTextarea(e, l);
-                            }}
-                          >
-                            <XBtnSvg
-                              width="6.59"
-                              height="6.59"
-                              fill="var(--pink1)"
-                            />
-                          </button>
-                        )}
-                      </WrapPointHeader>
-                      <input
-                        id={l}
-                        type="text"
-                        placeholder="투자포인트 요약"
-                        onChange={addStockPoint}
-                      />
+            <WrapTitle>
+              <p>제목</p>
+              <input
+                type="text"
+                placeholder="제목을 입력해주세요"
+                ref={articleTitle}
+              />
+            </WrapTitle>
+            <div>
+              {countArr.map((v, l) => {
+                return (
+                  <WrapTextarea key={v.key}>
+                    <WrapPointHeader>
+                      <p>투자 포인트 {l + 1} (최대 3개 작성 가능)</p>
+                      {l === 0 ? null : (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            deleteTextarea(e, l);
+                          }}
+                        >
+                          <XBtnSvg
+                            width="6.59"
+                            height="6.59"
+                            fill="var(--pink1)"
+                          />
+                        </button>
+                      )}
+                    </WrapPointHeader>
+                    <input
+                      id={l}
+                      type="text"
+                      placeholder="투자포인트 요약"
+                      onChange={addStockPoint}
+                    />
 
-                      <br></br>
-                      <TextareaText
-                        name={l}
-                        cols="30"
-                        rows="5"
-                        placeholder="상세내용 작성"
-                        onChange={addStockPoint}
-                      ></TextareaText>
-                    </WrapTextarea>
-                  );
-                })}
-              </div>
-              {pointBtnState && (
-                <PlusBtn type="button" onClick={addTextarea}>
-                  투자포인트 추가
-                </PlusBtn>
-              )}
-            </ScrollScope>
-          </WrapText>
-          <WrapBtn>
-            <button type="submit">게시글 올리기</button>
-            <button
-              type="button"
-              onClick={() => {
-                dispatch(togleState(false));
-              }}
-            >
-              취소하기
-            </button>
-          </WrapBtn>
-        </form>
-      </WrapForm>
-    </WrapToggle>
+                    <br></br>
+                    <TextareaText
+                      name={l}
+                      cols="30"
+                      rows="5"
+                      placeholder="상세내용 작성"
+                      onChange={addStockPoint}
+                    ></TextareaText>
+                  </WrapTextarea>
+                );
+              })}
+            </div>
+            {pointBtnState && (
+              <PlusBtn type="button" onClick={addTextarea}>
+                투자포인트 추가
+              </PlusBtn>
+            )}
+          </ScrollScope>
+        </WrapText>
+        <WrapBtn>
+          <button type="submit">게시글 올리기</button>
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(togleState(false));
+            }}
+          >
+            취소하기
+          </button>
+        </WrapBtn>
+      </form>
+    </WrapForm>
   );
 };
 
 export default AddArticleForm;
 
-const WrapToggle = styled.div`
-  position: fixed;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(34, 34, 34, 0.5);
-`;
 const WrapForm = styled.div`
   width: 100%;
   max-width: 720px;

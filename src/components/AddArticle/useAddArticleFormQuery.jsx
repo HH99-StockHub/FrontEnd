@@ -2,7 +2,7 @@ import { api } from "../../shared/api";
 import { useMutation, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 // 모듈
-import { togleState } from "../../redux/modules/addArticle";
+import { togleState } from "../../redux/modules/toggleState";
 
 export const useAddArticleFormMutate = {
   useAddArticleMutation: () => {

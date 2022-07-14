@@ -1,6 +1,6 @@
 //configStore.js
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import toggle from "./modules/addArticle";
+import toggle from "./modules/toggleState";
 import user from "./modules/login";
 //리듀서
 
