@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+// 훅
+import { toastify } from "../../../custom/toastify";
 // 모듈
 import { getCookie } from "../../../shared/Cookie";
 import { togleState } from "../../../redux/modules/toggleState";
@@ -15,7 +17,7 @@ const ArticleSubHeader = () => {
     if (token !== undefined) {
       dispatch(togleState(true));
     } else {
-      alert("작성 전 로그인이 필요합니다");
+      toastify.error("작성 전 로그인이 필요합니다");
     }
   };
   return (

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 // 훅
 import { getCookie } from "../shared/Cookie";
+import { toastify } from "../custom/toastify";
 import { deleteCookie } from "../shared/Cookie";
 // 모듈
 import { loginState } from "../redux/modules/login";
@@ -24,7 +25,7 @@ const Header = () => {
     localStorage.removeItem("id");
     localStorage.removeItem("profileImg");
     dispatch(loginState(false));
-    alert("정상 로그아웃");
+    toastify.success("정상 로그아웃");
   };
 
   const openAddArticle = () => {

@@ -3,6 +3,8 @@ import { useMutation, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 // 모듈
 import { togleState } from "../../redux/modules/toggleState";
+// 훅
+import { toastify } from "../../custom/toastify";
 
 export const useAddArticleFormMutate = {
   useAddArticleMutation: () => {
@@ -16,14 +18,14 @@ export const useAddArticleFormMutate = {
       onSuccess: (data) => {
         if (data) {
           queryClient.invalidateQueries("allArticle");
-          alert("작성 완료");
+          toastify.success("작성 완료");
           dispatch(togleState(false));
         } else {
-          alert("비속어 금지");
+          toastify.error("비속어 금지");
         }
       },
       onError: (err) => {
-        alert("에러가 발생했습니다.");
+        toastify.error("에러가 발생했습니다.");
       },
     });
   },

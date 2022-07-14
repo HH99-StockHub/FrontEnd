@@ -21,7 +21,6 @@ const CommentCard = ({ data }) => {
       setCircle(false);
     }
   }, []);
-  console.log(data);
   return (
     <WrapCard
       onMouseOver={() => {

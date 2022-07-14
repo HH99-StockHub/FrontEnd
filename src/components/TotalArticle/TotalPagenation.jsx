@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+// 훅
+import { toastify } from "../../custom/toastify";
 //이미지
 import { ReactComponent as Left } from "../../image/Left.svg";
 import { ReactComponent as Right } from "../../image/Right.svg";
@@ -32,7 +34,7 @@ const TotalPagenation = ({ category, nowPage }) => {
   const navigatePrevious = () => {
     if (page === 1) {
       // 첫 페이지 일 경우
-      alert("이전 페이지가 존재하지 않습니다");
+      toastify.error("이전 페이지가 존재하지 않습니다");
     } else {
       navigate(`/total/${category}/articles/${page - 10}`);
       setPage(page - 10);
@@ -42,7 +44,7 @@ const TotalPagenation = ({ category, nowPage }) => {
   const navigateNext = () => {
     // 다음 페이지가 전체 페이지를 넘을 경우
     if (page + 10 > lastpage) {
-      alert(`${lastpage} 페이지가 마지막입니다`);
+      toastify.error(`${lastpage} 페이지가 마지막입니다`);
     } else {
       navigate(`/total/${category}/articles/${page + 10}`);
       setPage(page + 10);
@@ -69,7 +71,7 @@ const TotalPagenation = ({ category, nowPage }) => {
         setPage(Number(startPage) + 1);
       }
     } else {
-      alert("잘못된 접근입니다.");
+      toastify.error("잘못된 접근입니다.");
       navigate(`/total/${category}/articles/1`);
     }
   }, []);

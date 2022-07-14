@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 //hook
 import { useAddArticleFormMutate } from "./useAddArticleFormQuery";
+import { toastify } from "../../custom/toastify";
 // 모듈
 import { stockData } from "../../Data/stockData";
 import { chartToggleState, togleState } from "../../redux/modules/toggleState";
@@ -12,7 +13,6 @@ import { chartToggleState, togleState } from "../../redux/modules/toggleState";
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import LoadingSpinner from "../../repeat/LoadingSpinner";
-import CandleChart from "../Chart/CandleChart";
 import LineChart from "../Chart/LineChart";
 
 const AddArticleForm = () => {
@@ -51,7 +51,7 @@ const AddArticleForm = () => {
         setCurrentStock(data.data);
       },
       onError: (err) => {
-        alert("에러가 발생했습니다.");
+        toastify.error("에러가 발생했습니다");
       },
     });
   // 주식 종목 선택하기 list
@@ -129,9 +129,9 @@ const AddArticleForm = () => {
       }
     });
     if (selectStockState === null || selectStockState) {
-      alert("종목을 선택해주세요");
+      toastify.info("종목을 선택해주세요");
     } else if (articleTitle.current.value === "" || state) {
-      alert("공백 없이 작성해주세요");
+      toastify.info("공백 없이 작성해주세요");
     } else {
       const data = {
         articleTitle: articleTitle.current.value,
@@ -171,7 +171,7 @@ const AddArticleForm = () => {
       setKey(key + 1);
       if (countArr.length === 2) setPointBtnState(false);
     } else {
-      alert("최대 3개까지 등록 가능합니다");
+      toastify.info("최대 3개까지 등록 가능합니다");
     }
   };
   // 투자 포인트 삭제하기
@@ -187,7 +187,7 @@ const AddArticleForm = () => {
       setStockPoint(newStockPoint);
       setPointBtnState(true);
     } else {
-      alert("최소 하나의 투자 포인트가 있어야합니다.");
+      toastify.info("최소 하나의 투자 포인트가 있어야합니다.");
     }
   };
 

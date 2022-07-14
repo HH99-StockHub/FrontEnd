@@ -1,7 +1,7 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 //CSS
-import "../SlideStock.scss";
+import "../CSS/SlideStock.scss";
 //이미지
 import { ReactComponent as UpArrowSvg } from "../image/UpArrow.svg";
 
