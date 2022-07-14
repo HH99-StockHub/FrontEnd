@@ -2,6 +2,8 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+//훅
+import { toastify } from "../../../custom/toastify";
 // 이미지
 import { ReactComponent as SearchSvg } from "../../../image/Search.svg";
 
@@ -16,7 +18,8 @@ const Search = () => {
       navigate(`/search/article/keyword/${searchInput.current.value}`);
       searchInput.current.value = "";
     } else {
-      alert("최소 한 글자라도 입력해야합니다");
+      toastify.error("최소 한 글자라도 입력해야합니다");
+      searchInput.current.value = "";
     }
   };
 

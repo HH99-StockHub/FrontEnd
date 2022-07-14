@@ -2,6 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReactModal from "react-modal";
+import { ToastContainer } from "react-toastify";
 //컴포넌트
 import MainPage from "./page/MainPage";
 import Header from "./repeat/Header";
@@ -17,6 +18,7 @@ import AddArticleFixBtn from "./components/AddArticle/AddArticleFixBtn";
 import { chartToggleState } from "./redux/modules/toggleState";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
+import "./CSS/toastify.css";
 
 function App() {
   // 게시글 작성 토글 관리
@@ -92,6 +94,7 @@ function App() {
           element={<SearchArticle />}
         />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

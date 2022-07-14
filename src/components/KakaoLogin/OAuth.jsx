@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // 훅
 import { setCookie, getCookie } from "../../shared/Cookie";
 import { useLoginQuery } from "./useLoginQuery";
+import { toastify } from "../../custom/toastify";
 //모듈
 import { loginState } from "../../redux/modules/login";
 import LoadingSpinner from "../../repeat/LoadingSpinner";
@@ -25,14 +26,14 @@ const OAuth = () => {
     const cookie = getCookie("token");
     const userId = localStorage.getItem("id");
     if (cookie !== undefined && userId !== null) {
-      alert("이미 로그인 됐습니다.");
+      toastify.info("이미 로그인 됐습니다.");
       navigate(-1);
     }
   }, []);
 
   useEffect(() => {
     if (isError) {
-      alert("예상치 못한 오류가 발생했습니다. 다시 시도해주세요 ");
+      toastify.error("예상치 못한 오류가 발생했습니다. 다시 시도해주세요 ");
       navigate(beforeUrl);
     }
     if (data) {
@@ -42,7 +43,7 @@ const OAuth = () => {
       localStorage.setItem("profileImg", data.headers.profileimage);
       dispatch(loginState(true));
       setCheck(true);
-      alert("로그인 완료");
+      toastify.success("로그인 완료");
       navigate(beforeUrl);
     }
   }, [data]);

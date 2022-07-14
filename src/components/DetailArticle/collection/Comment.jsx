@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { useQueryClient } from "react-query";
 // 컴포넌트
+import CommentCard from "../CommentCard";
+// 훅
+import { toastify } from "../../../custom/toastify";
 import {
   useDetailArticleGet,
   useDetailArticleMutate,
 } from "../useDetailArticle";
-
-// 컴포넌트
-import CommentCard from "../CommentCard";
 
 const Comment = ({ id }) => {
   const queryClient = useQueryClient();
@@ -18,14 +18,14 @@ const Comment = ({ id }) => {
       if (data) {
         writeInput.current.value = "";
         queryClient.invalidateQueries();
-        alert("댓글 작성 완료");
+        toastify.success("댓글 작성 완료");
       } else {
-        alert("비속어 금지");
+        toastify.error("비속어 금지");
       }
     },
     onError: (data, error, variables, context) => {
       if (data.response.state === 400) {
-        alert("댓글 내용은 300자 이내로 작성해 주세요.");
+        toastify.error("댓글 내용은 300자 이내로 작성해 주세요.");
       }
     },
   });
@@ -38,7 +38,7 @@ const Comment = ({ id }) => {
     error,
   } = useDetailArticleGet.useCommentInquiry(id);
   if (isLoading) return <div>불러오는 중입니다.</div>;
-  if (isError) alert("댓글 불러오기를 실패했습니다.");
+  if (isError) toastify.error("댓글 불러오기를 실패했습니다.");
 
   const addComment = (e) => {
     e.preventDefault();
@@ -46,7 +46,7 @@ const Comment = ({ id }) => {
       const data = { write: writeInput.current.value, id: id };
       mutate(data);
     } else {
-      alert("공백없이 작성해주세요");
+      if (isError) toastify.error("공백없이 작성해주세요");
     }
   };
 
@@ -70,32 +70,31 @@ const Box = styled.div`
 
 const H3 = styled.h3`
   font-weight: 700;
-font-size: 16px;
-line-height: 19px;
-color: #000000;
-`
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+`;
 
 const Label = styled.form`
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
   border: 1px solid #dbdbdb;
   width: 100%;
   margin-top: 20px;
   height: 89px;
-
 `;
 
 const Btn = styled.button`
-  background: #54BA7D;
+  background: #54ba7d;
   margin-right: 10px;
   padding: 10px;
   font-weight: 700;
-font-size: 12px;
-line-height: 14px;
-height: 34px;
-color: #FFFFFF;
-align-self: flex-end;
-margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 14px;
+  height: 34px;
+  color: #ffffff;
+  align-self: flex-end;
+  margin-bottom: 10px;
 `;
 
 const Views = styled.textarea`
@@ -107,9 +106,11 @@ const Views = styled.textarea`
   height: 100%;
   outline: none;
   resize: none;
-  ::-webkit-scrollbar { display: none; }
+  ::-webkit-scrollbar {
+    display: none;
+  }
   ::placeholder {
-    color: #B1B1B1;
+    color: #b1b1b1;
   }
 `;
 export default Comment;
