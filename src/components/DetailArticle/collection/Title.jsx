@@ -9,9 +9,6 @@ const Title = (props) => {
   const {
     data = [],
   } = useDetailArticleGet.useNewsSearch(stockName);
-  console.log(stockName)
-
-  console.log (data)
 
   return (
     <>

@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
 import { useNavigate } from "react-router-dom";
 import SlideStock from "../repeat/SlideStock";
+import { useEffect,useState } from "react";
 
 const DetailArticle = () => {
   const navigate = useNavigate();
@@ -24,10 +25,20 @@ const DetailArticle = () => {
     error,
   } = useDetailArticleGet.useContentInquiry(id);
 
-  console.log(data)
+
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
-
+  const [deleteBtn, setDeleteBtn] = useState(false);
+  useEffect(() => {
+    const currentUserId = localStorage.getItem("id");
+    if (Number(currentUserId) === Number(data?.userId)) {
+      setDeleteBtn(true);
+    }else{
+      setDeleteBtn(false);
+    }
+    
+  }, [data?.userId]);
+  
   return (
     <>
       <SlideStock />
@@ -35,6 +46,7 @@ const DetailArticle = () => {
       <Div>
       <Container>
       <BtnBox>
+        {deleteBtn ? (
           <Btn
             onClick={() => {
               const data = { postId: id }; //게시글에 대한 데이터 넣기
@@ -44,7 +56,7 @@ const DetailArticle = () => {
           >
             게시글 삭제
           </Btn>
-          
+          ): null}
         </BtnBox>
         <Writing
           date={data.createdAt}
@@ -90,7 +102,6 @@ const Div = styled.div`
 const BtnBox = styled.div`
   display: flex;
   gap: 5px;
-  margin-top: 26px;
 `;
 
 const Btn = styled.button`
