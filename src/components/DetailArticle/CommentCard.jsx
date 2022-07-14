@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 // query 훅
 import { useDetailArticleMutate } from "./useDetailArticle";
-//이미지
-import { ReactComponent as XbtnSvg } from "../../image/XBtn.svg";
 const CommentCard = ({ data }) => {
   const [circle, setCircle] = useState(false);
   const [deleteBtn, setDeleteBtn] = useState(false);
@@ -22,6 +21,7 @@ const CommentCard = ({ data }) => {
       setCircle(false);
     }
   }, []);
+  console.log(data);
   return (
     <WrapCard
       onMouseOver={() => {
@@ -38,7 +38,9 @@ const CommentCard = ({ data }) => {
             <Img>
               <Img1 src={data.profileImage} />
             </Img>
-            <P3p>{data.nickname}</P3p>
+            <Link to={`/search/article/${data.nickname}/${data.userId}`}>
+              <P3p>{data.nickname}</P3p>
+            </Link>
           </P3div>
           <P3pre>{data.comments}</P3pre>
         </P3>

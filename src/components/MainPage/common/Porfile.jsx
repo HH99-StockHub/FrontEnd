@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Porfile = ({ img, nickname }) => {
+const Porfile = ({ img, nickname, userId }) => {
   return (
     <WrapProfile>
       <img
@@ -10,7 +11,11 @@ const Porfile = ({ img, nickname }) => {
         }
         alt="프로필"
       />
-      <p>by. {nickname} 님</p>
+      <p>
+        <Link to={`/search/article/${nickname}/${userId}`}>
+          by. {nickname} 님
+        </Link>
+      </p>
     </WrapProfile>
   );
 };

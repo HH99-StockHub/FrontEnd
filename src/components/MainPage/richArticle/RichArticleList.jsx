@@ -23,7 +23,11 @@ const RichArticleList = () => {
                 <CardTextRich stock={v.voteUpCount} />
                 <WrapText>{v.articleTitle}</WrapText>
               </Link>
-              <Porfile img={v.profileImage} nickname={v.nickname} />
+              <Porfile
+                img={v.profileImage}
+                nickname={v.nickname}
+                userId={v.userId}
+              />
             </WrapCard>
           );
         })}

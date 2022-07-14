@@ -2,11 +2,17 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// 이미지
-import { ReactComponent as UpSvg } from "../../../image/Up.svg";
-import { ReactComponent as DownSvg } from "../../../image/Down.svg";
 
-const MainArticleCard = ({ date, title, user, watch, up, down, articleId }) => {
+const MainArticleCard = ({
+  date,
+  title,
+  user,
+  watch,
+  up,
+  down,
+  articleId,
+  userId,
+}) => {
   return (
     <WrapCard>
       <p style={{ width: "244px" }}>
@@ -16,7 +22,9 @@ const MainArticleCard = ({ date, title, user, watch, up, down, articleId }) => {
       <p style={{ width: "56px" }}>{down}</p>
       <p style={{ width: "64px" }}>{watch}</p>
       <p style={{ width: "64px" }}>{date}</p>
-      <p style={{ width: "64px" }}>{user}</p>
+      <p style={{ width: "64px" }}>
+        <Link to={`/search/article/${user}/${userId}`}>{user}</Link>
+      </p>
     </WrapCard>
   );
 };

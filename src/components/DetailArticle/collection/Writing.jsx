@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import View from "./View";
 
 const Writing = (props) => {
-  const { view, stockName, articleTitle, profileImage, nickName } = props;
+  const { view, stockName, articleTitle, profileImage, nickName, userId } =
+    props;
   return (
     <>
       <Box>
@@ -14,7 +15,9 @@ const Writing = (props) => {
               <Img>
                 <Img1 src={profileImage} />
               </Img>
-              {nickName}
+              <Link to={`/search/article/${nickName}/${userId}`}>
+                {nickName}
+              </Link>
             </P3>
           </P1>
         </Sam>

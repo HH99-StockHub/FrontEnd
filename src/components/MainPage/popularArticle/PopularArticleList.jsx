@@ -32,7 +32,11 @@ const PopularArticleList = () => {
                 <WrapText>{v.articleTitle}</WrapText>
               </Link>
               <Link to="/">
-                <Porfile nickname={v.nickname} img={v.profileImage} />
+                <Porfile
+                  nickname={v.nickname}
+                  img={v.profileImage}
+                  userId={v.userId}
+                />
               </Link>
             </WrapCard>
           </div>

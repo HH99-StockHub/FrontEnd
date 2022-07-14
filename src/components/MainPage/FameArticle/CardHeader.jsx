@@ -1,11 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+// 이미지
 import Img from "../../../image/CardHeader.png";
-const CardHeader = ({ title, nickname }) => {
+const CardHeader = ({ title, nickname, userId }) => {
   return (
     <Header>
       <div>{title} 분석글</div>
-      <div>{nickname} 님</div>
+      <div>
+        <Link to={`/search/article/${nickname}/${userId}`}>{nickname} 님</Link>
+      </div>
     </Header>
   );
 };
