@@ -1,11 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-
+import { chartToggleState } from "../../../redux/modules/toggleState";
+//컴포넌트
+import LineChart from "../../Chart/LineChart";
 import { useDetailArticleGet } from "../useDetailArticle";
 
 const Title = (props) => {
   const { stockName } = props;
-
+  const dispatch = useDispatch();
   const { data = [] } = useDetailArticleGet.useNewsSearch(stockName);
 
   return (
@@ -47,9 +50,17 @@ const Title = (props) => {
           <MarketDiv>
             <MarketB>
               <MarkeTT>일일 그래프</MarkeTT>
-              <MarketGp>그래프 보기</MarketGp>
+              <MarketGp
+                onClick={() => {
+                  dispatch(chartToggleState(true));
+                }}
+              >
+                그래프 보기
+              </MarketGp>
             </MarketB>
-            <Market>ddddddddddddddddd</Market>
+            <Market>
+              <LineChart />
+            </Market>
           </MarketDiv>
         </NameDiv>
         <NewsBox>
