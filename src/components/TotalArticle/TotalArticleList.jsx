@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 // 이미지
@@ -9,75 +9,86 @@ import { ReactComponent as DownSvg } from "../../image/Down.svg";
 import { ReactComponent as Vector } from "../../image/Vector.svg";
 import { ReactComponent as Stock } from "../../image/UpStock.svg";
 const TotalArticleList = ({ data, isLoading }) => {
+  // onclick navigate 이벤트 버블링이 있어 하위 요소에 옵션으로 막아둠
+  const navigate = useNavigate();
+
   return (
     <>
       <Content>
         {isLoading && <LoadingSpinner />}
         {data.map((data) => {
           return (
-            <Link to={`/detail/article/${data.articleId}`}>
-              <Box key={data.articleId}>
-                <P>{data.stockName}</P>
-                <P1>{data.articleTitle}</P1>
+            <Box
+              key={data.articleId}
+              onClick={(e) => {
+                navigate(`/detail/article/${data.articleId}`);
+              }}
+            >
+              <P>{data.stockName}</P>
+              <P1>{data.articleTitle}</P1>
+              <Random>
                 <Random>
-                  <Random>
-                    <UpSvg
-                      width="12.83"
-                      height="11.67"
-                      top="0.58"
-                      left="0.58"
-                      fill="#B1B1B1"
-                    />
-                    <P2>{data.voteUpCount}</P2>
-                  </Random>
-                  <Random>
-                    <DownSvg
-                      width="12.83"
-                      height="11.67"
-                      top="0.58"
-                      left="0.58"
-                      fill="#B1B1B1"
-                    />
-                    <P2>{data.voteDownCount}</P2>
-                  </Random>
-                  <Random>
-                    <Stock
-                      width="12.83"
-                      height="11.67"
-                      top="0.58"
-                      left="0.58"
-                      fill="#B1B1B1"
-                    />
-                    <P2>{data.stockReturn}%</P2>
-                  </Random>
-                  <Random>
-                    <Vector
-                      width="12.83"
-                      height="11.67"
-                      top="0.58"
-                      left="0.58"
-                      fill="#B1B1B1"
-                    />
-                    <P2>{data.viewCount}</P2>
-                  </Random>
+                  <UpSvg
+                    width="12.83"
+                    height="11.67"
+                    top="0.58"
+                    left="0.58"
+                    fill="#B1B1B1"
+                  />
+                  <P2>{data.voteUpCount}</P2>
                 </Random>
-                <Just>
-                  <Random>
-                    <Img>
-                      <Img1 src={data.profileImage} alt="프로필" />
-                    </Img>
-                    <P3>
-                      <Link
-                        to={`/search/article/${data.nickname}/${data.userId}`}
-                      >
-                        {data.nickname}
-                      </Link>
-                    </P3>
-                  </Random>
-                  <P4>{data.createdAt}</P4>
-                </Just>
-              </Box>
-            </Link>
+                <Random>
+                  <DownSvg
+                    width="12.83"
+                    height="11.67"
+                    top="0.58"
+                    left="0.58"
+                    fill="#B1B1B1"
+                  />
+                  <P2>{data.voteDownCount}</P2>
+                </Random>
+                <Random>
+                  <Stock
+                    width="12.83"
+                    height="11.67"
+                    top="0.58"
+                    left="0.58"
+                    fill="#B1B1B1"
+                  />
+                  <P2>{data.stockReturn}%</P2>
+                </Random>
+                <Random>
+                  <Vector
+                    width="12.83"
+                    height="11.67"
+                    top="0.58"
+                    left="0.58"
+                    fill="#B1B1B1"
+                  />
+                  <P2>{data.viewCount}</P2>
+                </Random>
+              </Random>
+              <Just>
+                <Random>
+                  <Img>
+                    <Img1 src={data.profileImage} alt="프로필" />
+                  </Img>
+                  <P3
+                    id="userNickname"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(
+                        `/search/article/${data.nickname}/${data.userId}`,
+                      );
+                    }}
+                  >
+                    {data.nickname}
+                  </P3>
+                </Random>
+                <P4>{data.createdAt}</P4>
+              </Just>
+              {/* </Link> */}
+            </Box>
           );
         })}
       </Content>
