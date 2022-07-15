@@ -11,7 +11,6 @@ import { useMainPageQuery } from "../useMainPageQuery";
 const RichArticleList = () => {
   // useQuery
   const { data = [], isLoading } = useMainPageQuery.useGetRichArticles();
-
   return (
     <div>
       <ArticleBox>
@@ -20,7 +19,7 @@ const RichArticleList = () => {
           return (
             <WrapCard key={v.articleId}>
               <Link to={`/detail/article/${v.articleId}`}>
-                <CardTextRich stock={v.voteUpCount} />
+                <CardTextRich stock={v.stockReturn} />
                 <WrapText>{v.articleTitle}</WrapText>
               </Link>
               <Porfile
