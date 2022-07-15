@@ -41,6 +41,7 @@ const MainArticleList = () => {
             up={changeNum(v.voteUpCount)}
             down={changeNum(v.voteDownCount)}
             articleId={v.articleId}
+            userId={v.userId}
           />
         );
       })}

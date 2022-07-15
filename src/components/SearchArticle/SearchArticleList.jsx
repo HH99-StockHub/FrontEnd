@@ -19,10 +19,8 @@ const SearchArticleList = () => {
     switch (category) {
       case "keyword":
         return `'${keyword}' 검색 결과`;
-      case "user":
-        return `${keyword} 님의 게시물`;
       default:
-        break;
+        return `${category} 님의 게시물`;
     }
   };
 

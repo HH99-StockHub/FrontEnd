@@ -9,6 +9,7 @@ import { ReactComponent as DownSvg } from "../../image/Down.svg";
 import { ReactComponent as Vector } from "../../image/Vector.svg";
 import { ReactComponent as Stock } from "../../image/UpStock.svg";
 const TotalArticleList = ({ data, isLoading }) => {
+  // onclick navigate 이벤트 버블링이 있어 하위 요소에 옵션으로 막아둠
   const navigate = useNavigate();
 
   return (
@@ -19,7 +20,7 @@ const TotalArticleList = ({ data, isLoading }) => {
           return (
             <Box
               key={data.articleId}
-              onClick={() => {
+              onClick={(e) => {
                 navigate(`/detail/article/${data.articleId}`);
               }}
             >
@@ -72,10 +73,21 @@ const TotalArticleList = ({ data, isLoading }) => {
                   <Img>
                     <Img1 src={data.profileImage} alt="프로필" />
                   </Img>
-                  <P3>{data.nickname}</P3>
+                  <P3
+                    id="userNickname"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(
+                        `/search/article/${data.nickname}/${data.userId}`,
+                      );
+                    }}
+                  >
+                    {data.nickname}
+                  </P3>
                 </Random>
                 <P4>{data.createdAt}</P4>
               </Just>
+              {/* </Link> */}
             </Box>
           );
         })}

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 // 이미지
 import { ReactComponent as BtnSvg } from "../../image/AddArticle.svg";
-import { togleState } from "../../redux/modules/addArticle";
+import { togleState } from "../../redux/modules/toggleState";
 const AddArticleFixBtn = React.memo(() => {
   const dispatch = useDispatch();
   // 게시글 작성 토글 오픈
