@@ -1,5 +1,5 @@
 :root {
-   --toastify-color-success: var(--pink1);
+   --toastify-color-success: var(--green1);
    --toastify-icon-color-success: var(--toastify-color-success);
 
    --toastify-toast-width: 400px;

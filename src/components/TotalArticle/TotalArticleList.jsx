@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 //컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 // 이미지
@@ -85,9 +86,8 @@ const TotalArticleList = ({ data, isLoading }) => {
                     {data.nickname}
                   </P3>
                 </Random>
-                <P4>{data.createdAt}</P4>
+                <P4>{dayjs(data.createdAt).format("YY.MM.DD")}</P4>
               </Just>
-              {/* </Link> */}
             </Box>
           );
         })}
@@ -107,6 +107,7 @@ const Box = styled.div`
   justify-content: space-between;
   flex-direction: column;
   flex-grow: 0;
+  cursor: pointer;
 `;
 
 const Content = styled.div`
