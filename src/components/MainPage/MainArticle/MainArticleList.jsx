@@ -60,6 +60,6 @@ const THead = styled.div`
   padding: 12px 20px;
   border-radius: 6px 6px 0 0;
   text-align: left;
-  background-color: #5aa9c2;
+  background-color: var(--blue1);
   font-size: 12px;
 `;

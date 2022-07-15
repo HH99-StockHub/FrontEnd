@@ -48,8 +48,8 @@ const FormStyle = styled.form`
   width: 333px;
   height: 40px;
   border-radius: 25px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
+  background: var(--white);
+  border: 1px solid var(--gray2);
   input {
     width: 100%;
     border: none;

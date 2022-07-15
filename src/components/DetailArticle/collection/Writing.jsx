@@ -33,7 +33,7 @@ const Writing = (props) => {
 const Box = styled.div`
   align-items: center;
   padding: 20px 0px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--gray2);
 `;
 
 const Sam = styled.div`
@@ -77,7 +77,7 @@ const P3 = styled.div`
   line-height: 17px;
   display: flex;
   align-items: center;
-  color: #000000;
+  color: var(--black);
 `;
 
 const Img1 = styled.img`

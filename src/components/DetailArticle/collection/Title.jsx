@@ -109,14 +109,14 @@ const TitleP = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: #ff3232;
+  color: var(--pink2);
 `;
 
 const NameP = styled.p`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  color: #ff3232;
+  color: var(--pink2);
 `;
 
 const Box1P = styled.p`
@@ -151,10 +151,10 @@ const MarketB = styled.div`
 `;
 
 const MarketGp = styled.button`
-  background: #54ba7d;
+  background: var(--green1);
   padding: 10px;
   gap: 10px;
-  color: #ffffff;
+  color: var(--white);
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
@@ -164,12 +164,12 @@ const MarkeTT = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
-  color: #000000;
+  color: var(--black);
 `;
 
 const Newsb = styled.div`
   padding: 12px 0px;
-  border-bottom: 1px solid #e0e0e0; ;
+  border-bottom: 1px solid var(--gray2);
 `;
 
 const MarketDiv = styled.div`
@@ -178,13 +178,13 @@ const MarketDiv = styled.div`
 
 const NameDiv = styled.div`
   /* height: 448px; */
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray2);
   padding: 0px 24px;
 `;
 
 const NewsBox = styled.div`
   height: 463px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray2);
   margin-top: 24px;
   padding: 24px 24px;
 `;
@@ -193,11 +193,11 @@ const NewsTitle = styled.p`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  color: #000000;
+  color: var(--black);
 `;
 
 const News = styled.p`
-  color: #000000;
+  color: var(--black);
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -215,7 +215,7 @@ const NewsP1 = styled.p`
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  color: #b1b1b1;
+  color: var(--gray3);
 `;
 
 const P = styled.p`
@@ -235,11 +235,11 @@ const Box1 = styled.div`
 `;
 
 const Name = styled.div`
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--gray2);
   padding: 24px 0;
 `;
 const Market = styled.div`
-  border: 1px solid #b1b1b1;
+  border: 1px solid var(--gray3);
   height: 200px;
   margin-top: 12px;
 `;

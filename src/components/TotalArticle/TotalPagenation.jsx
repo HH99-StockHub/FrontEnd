@@ -130,7 +130,7 @@ const WrapPageBtn = styled.div`
     padding: 10px;
   }
   > button:nth-child(${({ num }) => Number(num)}) {
-    background: #54ba7d;
+    background: var(--green1);
     color: white;
   }
 `;
