@@ -13,7 +13,7 @@ const ArticleHeader = React.memo(({ title, link }) => {
       <WrapTitle>{title}</WrapTitle>
       {link && (
         <Link to={link}>
-          <PlusSvg width={"10px"} height="10px" fill="#54ba7d" />
+          <PlusSvg width={"10px"} height="10px" fill="#54BA7D" />
         </Link>
       )}
     </WrapHead>

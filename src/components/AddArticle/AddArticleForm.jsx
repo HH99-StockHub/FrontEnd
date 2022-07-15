@@ -357,7 +357,7 @@ export default AddArticleForm;
 const WrapForm = styled.div`
   width: 100%;
   max-width: 720px;
-  background-color: #fff;
+  background-color: var(--white);
 `;
 const WrapText = styled.div`
   padding: 24px 79px 48px;
@@ -425,7 +425,7 @@ const WrapTitle = styled.div`
 `;
 
 const ScrollScope = styled.div`
-  max-height: 500px;
+  max-height: 400px;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -495,7 +495,7 @@ const StockList = styled.div`
   width: 385px;
   height: 264px;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: var(--white);
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -521,13 +521,13 @@ const StockList = styled.div`
       font-weight: 700;
     }
     :hover {
-      background-color: #f6f6f6;
+      background-color: var(--gray1);
     }
   }
   > div:nth-child(${({ index }) => {
         return Number(index);
       }}) {
-    background-color: #f6f6f6;
+    background-color: var(--gray1);
   }
 `;
 

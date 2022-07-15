@@ -19,6 +19,7 @@ import { chartToggleState } from "./redux/modules/toggleState";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import "./CSS/toastify.css";
+import Footer from "./repeat/Footer";
 
 function App() {
   // 게시글 작성 토글 관리
@@ -44,7 +45,7 @@ function App() {
             background: "#fff",
             overflow: "hidden",
             width: "720px",
-            height: "900px",
+            height: "800px",
             margin: "auto",
           },
         }}
@@ -94,9 +95,10 @@ function App() {
           element={<SearchArticle />}
         />
       </Routes>
+      <Footer />
       <ToastContainer />
     </div>
   );
 }
-
+ReactModal.setAppElement("#root");
 export default App;

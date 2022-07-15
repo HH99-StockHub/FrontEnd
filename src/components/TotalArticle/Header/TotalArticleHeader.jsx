@@ -29,6 +29,6 @@ const WrapHeader = styled.div`
 
 const Wrap = styled.div`
   width: 100%;
-  border-bottom: 1px solid #b1b1b1;
+  border-bottom: 1px solid var(--gray3);
   margin-bottom: 36px;
 `;

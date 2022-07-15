@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 //컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
+
+import useSliceNum from "../../custom/sliceNum";
 // 이미지
 import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
@@ -12,7 +14,7 @@ import { ReactComponent as Stock } from "../../image/UpStock.svg";
 const TotalArticleList = ({ data, isLoading }) => {
   // onclick navigate 이벤트 버블링이 있어 하위 요소에 옵션으로 막아둠
   const navigate = useNavigate();
-
+  const sliceNum = useSliceNum;
   return (
     <>
       <Content>
@@ -56,7 +58,7 @@ const TotalArticleList = ({ data, isLoading }) => {
                     left="0.58"
                     fill="#B1B1B1"
                   />
-                  <P2>{data.stockReturn}%</P2>
+                  <P2>{sliceNum(data.stockReturn)}%</P2>
                 </Random>
                 <Random>
                   <Vector
@@ -101,7 +103,7 @@ export default TotalArticleList;
 const Box = styled.div`
   padding: 32px 26px;
   width: 404px;
-  background: #ffffff;
+  background: var(--white);
   border: 1px solid #ededed;
   display: flex;
   justify-content: space-between;
@@ -121,14 +123,14 @@ const P = styled.p`
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: #b1b1b1;
+  color: var(--gray3);
 `;
 
 const P1 = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: #000000;
+  color: var(--black);
   margin-bottom: 14px;
   display: block;
   white-space: nowrap;
@@ -152,7 +154,7 @@ const P3 = styled.p`
   line-height: 17px;
   display: flex;
   align-items: center;
-  color: #000000;
+  color: var(--black);
 `;
 
 const P4 = styled.p`
@@ -161,7 +163,7 @@ const P4 = styled.p`
   line-height: 17px;
   display: flex;
   align-items: center;
-  color: #e0e0e0;
+  color: var(--gray2);
 `;
 const Random = styled.div`
   display: flex;

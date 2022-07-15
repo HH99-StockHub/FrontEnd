@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+// 훅
+import useSliceNum from "../../../custom/sliceNum";
 // 이미지
 import { ReactComponent as UpStockSvg } from "../../../image/UpStock.svg";
 const CardTextRich = ({ stock }) => {
+  const sliceNum = useSliceNum;
   return (
     <Wrap>
       <UpStockSvg width="11.42" height="6.76" fill="var(--green1)" />
-      <p>{stock} %</p>
+      <p>{sliceNum(stock)} %</p>
     </Wrap>
   );
 };

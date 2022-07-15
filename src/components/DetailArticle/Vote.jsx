@@ -5,7 +5,7 @@ import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
 
 const Vote = (props) => {
-  const { id,voteUp,voteDown } = props;
+  const { id, voteUp, voteDown } = props;
   //찬성투표
   const { mutate: InFavor } = useDetailArticleMutate.useVoteUpMutation();
 
@@ -21,7 +21,7 @@ const Vote = (props) => {
         }}
       >
         {" "}
- 추천 {voteUp}{" "}
+        추천 {voteUp}{" "}
       </Btn>
       <Btn1
         onClick={() => {
@@ -43,15 +43,15 @@ const BtnBox = styled.div`
 `;
 
 const Btn = styled.button`
-padding: 10px;
-  background: #54BA7D;
-  color: #FFFFFF;
+  padding: 10px;
+  background: var(--green1);
+  color: var(--white);
 `;
 
 const Btn1 = styled.button`
-padding: 10px;
-  background: #FFFFFF;
-  border: 1px solid #E0E0E0;
-  color: #B1B1B1;
+  padding: 10px;
+  background: var(--white);
+  border: 1px solid var(--gray2);
+  color: var(--gray3);
 `;
 export default Vote;

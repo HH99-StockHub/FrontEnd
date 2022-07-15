@@ -108,9 +108,11 @@ export const useDetailArticleGet = {
   //종목 뉴스 검색
   useNewsSearch: (payload) => {
     const fetcher = async () => {
-      const { data } = await api.get(`/article/news?stockName=${payload}`);
-      return data;
+      if (payload !== undefined) {
+        const { data } = await api.get(`/article/news?stockName=${payload}`);
+        return data;
+      }
     };
-    return useQuery("NewsSearch", fetcher);
+    return useQuery(["NewsSearch", payload], fetcher);
   },
 };

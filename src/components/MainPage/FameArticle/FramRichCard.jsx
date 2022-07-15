@@ -3,14 +3,16 @@ import React from "react";
 import styled from "styled-components";
 //컴포넌트
 import RichText from "./RichText";
-
+//훅
+import useSliceNum from "../../../custom/sliceNum";
 const FramRichCard = ({ data, index }) => {
+  const sliceNum = useSliceNum;
   return (
     <div>
       <WrapCard>
         <WrapText>
           <p>{data.articleTitle}</p>
-          <RichText stockReturn={data.stockReturn} index={index} />
+          <RichText stockReturn={sliceNum(data.stockReturn)} index={index} />
         </WrapText>
       </WrapCard>
     </div>

@@ -11,16 +11,15 @@ import { useMainPageQuery } from "../useMainPageQuery";
 const RichArticleList = () => {
   // useQuery
   const { data = [], isLoading } = useMainPageQuery.useGetRichArticles();
-
   return (
     <div>
       <ArticleBox>
         {isLoading && <LoadingSpinner />}
         {data.map((v) => {
           return (
-            <WrapCard>
-              <Link to={`/detail/article/${v.id}`}>
-                <CardTextRich stock={v.voteUpCount} />
+            <WrapCard key={v.articleId}>
+              <Link to={`/detail/article/${v.articleId}`}>
+                <CardTextRich stock={v.stockReturn} />
                 <WrapText>{v.articleTitle}</WrapText>
               </Link>
               <Porfile
@@ -41,7 +40,6 @@ export default RichArticleList;
 const ArticleBox = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
   gap: 24px 15px;
   flex-wrap: wrap;
   width: 588px;
@@ -55,6 +53,7 @@ const WrapCard = styled.div`
   height: 157px;
   padding: 16px;
   border: 1px solid var(--gray2);
+  border-radius: 6px;
 `;
 
 const WrapText = styled.p`

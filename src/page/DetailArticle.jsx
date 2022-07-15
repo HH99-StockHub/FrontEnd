@@ -24,7 +24,6 @@ const DetailArticle = () => {
     isError,
     error,
   } = useDetailArticleGet.useContentInquiry(id);
-
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
   const [deleteBtn, setDeleteBtn] = useState(false);
@@ -66,7 +65,12 @@ const DetailArticle = () => {
             userId={data.userId}
           />
 
-          <Stocks date={data.createdAt} />
+          <Stocks
+            date={data.createdAt}
+            stockReturn={data.stockReturn}
+            stockPriceFirst={data.stockPriceFirst}
+            stockPriceLast={data.stockPriceLast}
+          />
           <View
             content1={data.content1}
             content2={data.content2}
@@ -107,7 +111,7 @@ const BtnBox = styled.div`
 
 const Btn = styled.button`
   padding: 10px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
+  background: var(--white);
+  border: 1px solid var(--gray2);
 `;
 export default DetailArticle;
