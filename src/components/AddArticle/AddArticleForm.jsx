@@ -425,7 +425,7 @@ const WrapTitle = styled.div`
 `;
 
 const ScrollScope = styled.div`
-  max-height: 500px;
+  max-height: 400px;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 0;

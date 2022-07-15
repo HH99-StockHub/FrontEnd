@@ -24,7 +24,7 @@ const DetailArticle = () => {
     isError,
     error,
   } = useDetailArticleGet.useContentInquiry(id);
-
+  console.log(id, "페이지");
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
   const [deleteBtn, setDeleteBtn] = useState(false);
@@ -66,7 +66,12 @@ const DetailArticle = () => {
             userId={data.userId}
           />
 
-          <Stocks date={data.createdAt} />
+          <Stocks
+            date={data.createdAt}
+            stockReturn={data.stockReturn}
+            stockPriceFirst={data.stockPriceFirst}
+            stockPriceLast={data.stockPriceLast}
+          />
           <View
             content1={data.content1}
             content2={data.content2}

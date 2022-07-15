@@ -29,7 +29,7 @@ const Comment = ({ id }) => {
       }
     },
   });
-
+  console.log(id, "댓글 카드");
   // 댓글 가져오기
   const {
     data = [],
@@ -39,6 +39,7 @@ const Comment = ({ id }) => {
   } = useDetailArticleGet.useCommentInquiry(id);
   if (isLoading) return <div>불러오는 중입니다.</div>;
   if (isError) toastify.error("댓글 불러오기를 실패했습니다.");
+  console.log(data);
 
   const addComment = (e) => {
     e.preventDefault();

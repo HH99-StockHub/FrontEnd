@@ -18,8 +18,8 @@ const RichArticleList = () => {
         {isLoading && <LoadingSpinner />}
         {data.map((v) => {
           return (
-            <WrapCard>
-              <Link to={`/detail/article/${v.id}`}>
+            <WrapCard key={v.articleId}>
+              <Link to={`/detail/article/${v.articleId}`}>
                 <CardTextRich stock={v.voteUpCount} />
                 <WrapText>{v.articleTitle}</WrapText>
               </Link>

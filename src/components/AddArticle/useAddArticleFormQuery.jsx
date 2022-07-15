@@ -31,7 +31,7 @@ export const useAddArticleFormMutate = {
   },
   useGetArticleStock: (option) => {
     const fetcher = async (article) => {
-      const response = await api.get(`/stock/get/${article}`);
+      const response = await api.get(`/stock/price/${article}`);
       return response;
     };
     return useMutation(fetcher, option);

@@ -1,10 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { chartToggleState } from "../../../redux/modules/toggleState";
+import dayjs from "dayjs";
 //컴포넌트
 import LineChart from "../../Chart/LineChart";
 import { useDetailArticleGet } from "../useDetailArticle";
+
+//모듈
+import { chartToggleState } from "../../../redux/modules/toggleState";
 
 //이미지
 import { ReactComponent as Poly } from "../../../image/Poly.svg.svg";
@@ -13,7 +16,7 @@ import { ReactComponent as Plus } from "../../../image/Plus.svg";
 const Title = (props) => {
   const { stockName } = props;
   const dispatch = useDispatch();
-  const { data = [] } = useDetailArticleGet.useNewsSearch(stockName);
+  const { data = [], refetch } = useDetailArticleGet.useNewsSearch(stockName);
 
   return (
     <>
@@ -78,12 +81,23 @@ const Title = (props) => {
           </MarketDiv>
         </NameDiv>
         <NewsBox>
-          <NewsTitle>삼성전자 관련기사</NewsTitle>
-          <Newsb>
-            <News> 아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</News>
-            <NewsP>내용</NewsP>
-            <NewsP1>날짜</NewsP1>
-          </Newsb>
+          <NewsTitle>{stockName} 관련기사</NewsTitle>
+          {data.map((v, l) => {
+            return (
+              <Newsb
+                onClick={() => {
+                  window.open(v.link, "_blank");
+                }}
+                key={l}
+              >
+                <News dangerouslySetInnerHTML={{ __html: v.title }}></News>
+                <NewsP
+                  dangerouslySetInnerHTML={{ __html: v.description }}
+                ></NewsP>
+                <NewsP1>{dayjs(v.pubDate).format("YY-MM-DD")}</NewsP1>
+              </Newsb>
+            );
+          })}
         </NewsBox>
       </Box>
     </>
@@ -167,9 +181,10 @@ const MarkeTT = styled.div`
   color: #000000;
 `;
 
-const Newsb = styled.div`
+const Newsb = styled.pre`
   padding: 12px 0px;
-  border-bottom: 1px solid #e0e0e0; ;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
 `;
 
 const MarketDiv = styled.div`
@@ -183,34 +198,49 @@ const NameDiv = styled.div`
 `;
 
 const NewsBox = styled.div`
-  height: 463px;
+  width: 100%;
   border: 1px solid #e0e0e0;
   margin-top: 24px;
   padding: 24px 24px;
 `;
 
-const NewsTitle = styled.p`
+const NewsTitle = styled.div`
+  width: 100%;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
   color: #000000;
 `;
 
-const News = styled.p`
+const News = styled.div`
+  width: 100%;
   color: #000000;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
-const NewsP = styled.p`
+const NewsP = styled.div`
+  width: 100%;
   margin-top: 8px;
   font-weight: 300;
   font-size: 12px;
+  height: 42px;
   line-height: 14px;
+  white-space: normal;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 `;
 
-const NewsP1 = styled.p`
+const NewsP1 = styled.pre`
+  width: 100%;
   margin-top: 8px;
   font-weight: 400;
   font-size: 12px;

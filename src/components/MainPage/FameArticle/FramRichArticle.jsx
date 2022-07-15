@@ -17,7 +17,7 @@ const FramRichArticle = () => {
       {isLoading && <LoadingSpinner />}
       {data.map((v, l) => {
         return (
-          <WrapCard>
+          <WrapCard key={v.articleId}>
             <CardHeader
               nickname={v.nickname}
               title={v.stockName}

@@ -44,7 +44,7 @@ function App() {
             background: "#fff",
             overflow: "hidden",
             width: "720px",
-            height: "900px",
+            height: "800px",
             margin: "auto",
           },
         }}
@@ -98,5 +98,5 @@ function App() {
     </div>
   );
 }
-
+ReactModal.setAppElement("#root");
 export default App;

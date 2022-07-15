@@ -25,7 +25,7 @@ const PopularArticleList = () => {
         return (
           <div>
             <WrapCard>
-              <Link to={`/detail/article/${v.id}`} key={v.articleId}>
+              <Link to={`/detail/article/${v.articleId}`} key={v.articleId}>
                 <WrapImgText>
                   <CardTextPopular up={v.voteUpCount} />
                 </WrapImgText>

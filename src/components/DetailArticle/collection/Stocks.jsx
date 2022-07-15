@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
+// 훅
+import useSliceNum from "../../../custom/sliceNum";
 
 const Stocks = (props) => {
-  const { date } = props;
+  const { date, stockReturn, stockPriceFirst, stockPriceLast } = props;
+  const sliceNum = useSliceNum;
+
   return (
     <Box>
       <Stock1>
@@ -13,16 +17,16 @@ const Stocks = (props) => {
         </Stock1div>
         <Stock1div2>
           작성날짜 : {dayjs(date).format("YYYY.MM.YY")}
-          <P>84,000</P>
+          <P>{sliceNum(stockPriceFirst)} 원</P>
         </Stock1div2>
       </Stock1>
       <Stock2>
         <Stock2div>현재 주가</Stock2div>
-        <P1>96,000</P1>
+        <P1>{sliceNum(stockPriceLast)} 원</P1>
       </Stock2>
       <Stock3>
         대비 수익률
-        <P2>15%</P2>
+        <P2>{sliceNum(stockReturn)} %</P2>
       </Stock3>
     </Box>
   );
