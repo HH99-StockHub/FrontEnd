@@ -89,7 +89,7 @@ const DeleteBt = styled.button`
   top: 0;
   left: 20px;
   width: 100px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray2);
   font-weight: 500;
   font-size: 12px;
   padding: 10px;
@@ -109,7 +109,7 @@ const WrapCard = styled.div`
   justify-content: space-between;
   gap: 18px;
   margin-top: 24px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--gray2);
   &:hover {
     background: #f7f7f7;
   }
@@ -151,7 +151,7 @@ const P3 = styled.div`
   font-size: 14px;
   line-height: 17px;
   align-items: center;
-  color: #000000;
+  color: var(--black);
 `;
 
 const Img1 = styled.img`

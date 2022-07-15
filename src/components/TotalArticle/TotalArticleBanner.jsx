@@ -4,19 +4,22 @@ import styled from "styled-components";
 import { ReactComponent as BannerImg } from "../../image/BannerImg.svg";
 
 const TotalArticleBanner = () => {
-  return <WrapBanner>
-    <BannerText>
-    내 주식의 매매 포인트 3가지를 작성하여 수익왕에 도전하세요.<br/>
-    얼마나 수익률이 올랐는지 비교할 수 있어요.
-    </BannerText>
-    <BannerImg/>
-  </WrapBanner>;
+  return (
+    <WrapBanner>
+      <BannerText>
+        내 주식의 매매 포인트 3가지를 작성하여 수익왕에 도전하세요.
+        <br />
+        얼마나 수익률이 올랐는지 비교할 수 있어요.
+      </BannerText>
+      <BannerImg />
+    </WrapBanner>
+  );
 };
 
 export default TotalArticleBanner;
 
 const WrapBanner = styled.div`
-padding: 32px;
+  padding: 32px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -29,7 +32,7 @@ padding: 32px;
 
 const BannerText = styled.div`
   font-weight: 400;
-font-size: 22px;
-line-height: 28px;
-color: #FFFFFF;
-`
+  font-size: 22px;
+  line-height: 28px;
+  color: var(--white);
+`;

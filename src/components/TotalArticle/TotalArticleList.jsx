@@ -101,7 +101,7 @@ export default TotalArticleList;
 const Box = styled.div`
   padding: 32px 26px;
   width: 404px;
-  background: #ffffff;
+  background: var(--white);
   border: 1px solid #ededed;
   display: flex;
   justify-content: space-between;
@@ -121,14 +121,14 @@ const P = styled.p`
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: #b1b1b1;
+  color: var(--gray3);
 `;
 
 const P1 = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: #000000;
+  color: var(--black);
   margin-bottom: 14px;
   display: block;
   white-space: nowrap;
@@ -152,7 +152,7 @@ const P3 = styled.p`
   line-height: 17px;
   display: flex;
   align-items: center;
-  color: #000000;
+  color: var(--black);
 `;
 
 const P4 = styled.p`
@@ -161,7 +161,7 @@ const P4 = styled.p`
   line-height: 17px;
   display: flex;
   align-items: center;
-  color: #e0e0e0;
+  color: var(--gray2);
 `;
 const Random = styled.div`
   display: flex;

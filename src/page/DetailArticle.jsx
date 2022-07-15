@@ -107,7 +107,7 @@ const BtnBox = styled.div`
 
 const Btn = styled.button`
   padding: 10px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
+  background: var(--white);
+  border: 1px solid var(--gray2);
 `;
 export default DetailArticle;

@@ -16,8 +16,10 @@ export const useDetailArticleMutate = {
         queryClient.invalidateQueries();
         toastify.success("투표 완료");
       },
-      onError: (err) => {
-        toastify.error("이미 찬성 투표를 하였습니다.");
+      onError: (data) => {
+        if (data.response.data.error === "403") {
+          toastify.error(data.response.data.message);
+        }
       },
     });
   },
@@ -34,8 +36,10 @@ export const useDetailArticleMutate = {
         queryClient.invalidateQueries();
         toastify.success("투표 완료");
       },
-      onError: (err) => {
-        toastify.error("이미 반대 투표를 하였습니다.");
+      onError: (data) => {
+        if (data.response.data.error === "403") {
+          toastify.error(data.response.data.message);
+        }
       },
     });
   },

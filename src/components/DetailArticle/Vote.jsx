@@ -44,14 +44,14 @@ const BtnBox = styled.div`
 
 const Btn = styled.button`
   padding: 10px;
-  background: #54ba7d;
-  color: #ffffff;
+  background: var(--green1);
+  color: var(--white);
 `;
 
 const Btn1 = styled.button`
   padding: 10px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  color: #b1b1b1;
+  background: var(--white);
+  border: 1px solid var(--gray2);
+  color: var(--gray3);
 `;
 export default Vote;
