@@ -42,12 +42,12 @@ const Box = styled.div`
 `;
 
 const BoxDiv = styled.div`
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray2);
   padding: 20px;
 `;
 
 const Views = styled.div`
-  color: #000000;
+  color: var(--black);
   font-weight: 700;
   padding: 3px 0;
 `;

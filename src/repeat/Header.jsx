@@ -77,7 +77,7 @@ const Header1 = styled.div`
   display: flex;
   height: 72px;
   width: 100%;
-  background: #ffffff;
+  background: var(--white);
 `;
 
 const Header2 = styled.div`
@@ -129,5 +129,5 @@ const Notice = styled.button`
 const Writing = styled.button`
   width: 54px;
   background-color: #3cc472;
-  color: #fff;
+  color: var(--white);
 `;

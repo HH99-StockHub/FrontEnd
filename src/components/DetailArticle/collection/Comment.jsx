@@ -71,7 +71,7 @@ const H3 = styled.h3`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  color: #000000;
+  color: var(--black);
 `;
 
 const Label = styled.form`
@@ -84,20 +84,20 @@ const Label = styled.form`
 `;
 
 const Btn = styled.button`
-  background: #54ba7d;
+  background: var(--green1);
   margin-right: 10px;
   padding: 10px;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
   height: 34px;
-  color: #ffffff;
+  color: var(--white);
   align-self: flex-end;
   margin-bottom: 10px;
 `;
 
 const Views = styled.textarea`
-  color: #000000;
+  color: var(--black);
   flex: 8;
   font-weight: 700;
   border: 0;
@@ -109,7 +109,7 @@ const Views = styled.textarea`
     display: none;
   }
   ::placeholder {
-    color: #b1b1b1;
+    color: var(--gray3);
   }
 `;
 export default Comment;

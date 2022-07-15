@@ -47,7 +47,7 @@ const Stock1 = styled.div`
 `;
 
 const Stock1div = styled.div`
-  color: #000000;
+  color: var(--black);
   margin-bottom: 4px;
   font-weight: 400;
   font-size: 12px;
@@ -56,7 +56,7 @@ const Stock1div = styled.div`
 
 const Stock1div2 = styled.div`
   display: flex;
-  color: #b1b1b1;
+  color: var(--gray3);
   margin-bottom: 4px;
   justify-content: space-between;
   font-weight: 400;
@@ -74,7 +74,7 @@ const P1 = styled.p`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  color: #008b2f;
+  color: var(--green2);
   margin-top: 30px;
 `;
 
@@ -82,18 +82,18 @@ const P2 = styled.p`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  color: #ffffff;
+  color: var(--white);
   margin-top: 30px;
 `;
 
 const Stock2 = styled.div`
   flex: 3;
-  color: #ffffff;
+  color: var(--white);
   padding: 20px;
   justify-content: space-between;
   display: flex;
-  color: #000000;
-  border: 1px solid #54ba7d;
+  color: var(--black);
+  border: 1px solid var(--green1);
 `;
 
 const Stock2div = styled.div`
@@ -104,8 +104,8 @@ const Stock2div = styled.div`
 `;
 const Stock3 = styled.div`
   flex: 3;
-  background: #54ba7d;
-  color: #ffffff;
+  background: var(--green1);
+  color: var(--white);
   padding: 20px;
   justify-content: space-between;
   display: flex;

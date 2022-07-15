@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 // query 훅
 import { useDetailArticleMutate } from "./useDetailArticle";
+
 const CommentCard = ({ data }) => {
   const [circle, setCircle] = useState(false);
   const [deleteBtn, setDeleteBtn] = useState(false);
@@ -37,9 +37,7 @@ const CommentCard = ({ data }) => {
             <Img>
               <Img1 src={data.profileImage} />
             </Img>
-            <Link to={`/search/article/${data.nickname}/${data.userId}`}>
-              <P3p>{data.nickname}</P3p>
-            </Link>
+            <P3p>{data.nickname}</P3p>
           </P3div>
           <P3pre>{data.comments}</P3pre>
         </P3>
@@ -91,12 +89,10 @@ const DeleteBt = styled.button`
   top: 0;
   left: 20px;
   width: 100px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray2);
   font-weight: 500;
   font-size: 12px;
   padding: 10px;
-  background-color: var(--white);
-  z-index: 99;
 `;
 
 const Circle = styled.div`
@@ -113,7 +109,7 @@ const WrapCard = styled.div`
   justify-content: space-between;
   gap: 18px;
   margin-top: 24px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--gray2);
   &:hover {
     background: #f7f7f7;
   }
@@ -155,7 +151,7 @@ const P3 = styled.div`
   font-size: 14px;
   line-height: 17px;
   align-items: center;
-  color: #000000;
+  color: var(--black);
 `;
 
 const Img1 = styled.img`
