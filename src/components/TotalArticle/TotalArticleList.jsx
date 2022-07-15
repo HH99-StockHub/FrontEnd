@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 //컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
+
+import useSliceNum from "../../custom/sliceNum";
 // 이미지
 import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
@@ -12,7 +14,7 @@ import { ReactComponent as Stock } from "../../image/UpStock.svg";
 const TotalArticleList = ({ data, isLoading }) => {
   // onclick navigate 이벤트 버블링이 있어 하위 요소에 옵션으로 막아둠
   const navigate = useNavigate();
-
+  const sliceNum = useSliceNum;
   return (
     <>
       <Content>
@@ -56,7 +58,7 @@ const TotalArticleList = ({ data, isLoading }) => {
                     left="0.58"
                     fill="#B1B1B1"
                   />
-                  <P2>{data.stockReturn}%</P2>
+                  <P2>{sliceNum(data.stockReturn)}%</P2>
                 </Random>
                 <Random>
                   <Vector

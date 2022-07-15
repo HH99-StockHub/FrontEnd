@@ -40,7 +40,6 @@ export default RichArticleList;
 const ArticleBox = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
   gap: 24px 15px;
   flex-wrap: wrap;
   width: 588px;
@@ -54,6 +53,7 @@ const WrapCard = styled.div`
   height: 157px;
   padding: 16px;
   border: 1px solid var(--gray2);
+  border-radius: 6px;
 `;
 
 const WrapText = styled.p`

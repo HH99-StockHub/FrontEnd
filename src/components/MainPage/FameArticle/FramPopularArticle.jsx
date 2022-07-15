@@ -18,13 +18,13 @@ const FramPopularArticle = () => {
       {isLoading && <LoadingSpinner />}
       {data.map((v, l) => {
         return (
-          <WrapCard key={l}>
+          <WrapCard key={v.articleId}>
             <CardHeader
               nickname={v.nickname}
               title={v.stockName}
               userId={v.userId}
             />
-            <Link to={`/detail/article/${v.id}`} key={v.id}>
+            <Link to={`/detail/article/${v.articleId}`}>
               <FramPopularCard data={v} index={l} />
             </Link>
           </WrapCard>

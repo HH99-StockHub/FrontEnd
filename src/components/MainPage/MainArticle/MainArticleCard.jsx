@@ -28,8 +28,6 @@ const MainArticleCard = ({
       }
     }
   }, []);
-
-  dayjs(date).format("YY-MM-DD");
   return (
     <WrapCard>
       <p style={{ width: "244px" }}>

@@ -7,24 +7,24 @@ const View = (props) => {
     <Box>
       {content1 ? (
         <BoxDiv>
-          <Views>{content1}</Views>
-          <Contents>{point1}</Contents>
+          <Views>{point1}</Views>
+          <Contents>{content1}</Contents>
         </BoxDiv>
       ) : (
         ""
       )}
       {content2 ? (
         <BoxDiv>
-          <Views>{content2}</Views>
-          <Contents>{point2}</Contents>
+          <Views>{point2}</Views>
+          <Contents>{content2}</Contents>
         </BoxDiv>
       ) : (
         ""
       )}
       {content3 ? (
         <BoxDiv>
-          <Views>{content3}</Views>
-          <Contents>{point3}</Contents>
+          <Views>{point3}</Views>
+          <Contents>{content3}</Contents>
         </BoxDiv>
       ) : (
         ""
@@ -49,15 +49,19 @@ const BoxDiv = styled.div`
 const Views = styled.div`
   color: #000000;
   font-weight: 700;
+  padding: 3px 0;
 `;
 const Contents = styled.pre`
+  padding: 3px 0;
+  margin-top: 12px;
   height: 150px;
   width: 100%;
   resize: none;
-  margin-top: 12px;
+  line-height: 18px;
   font-size: 16px;
   font-weight: 400;
-  line-height: 15px;
+  overflow: auto;
+  white-space: pre-wrap;
 `;
 
 export default View;

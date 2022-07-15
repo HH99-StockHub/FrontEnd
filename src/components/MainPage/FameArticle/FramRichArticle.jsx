@@ -12,7 +12,6 @@ import { useMainPageQuery } from "../useMainPageQuery";
 const FramRichArticle = () => {
   // useQuery
   const { data = [], isLoading } = useMainPageQuery.useGetFameRichArticle();
-  console.log(data, " 수익왕");
   return (
     <WrapRich>
       {isLoading && <LoadingSpinner />}
