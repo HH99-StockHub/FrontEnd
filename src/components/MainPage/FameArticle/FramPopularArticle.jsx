@@ -6,35 +6,44 @@ import styled from "styled-components";
 import FramPopularCard from "./FramPopularCard";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
+import CardHeader from "./CardHeader";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 
 const FramPopularArticle = () => {
   // useQuery
-  const { data = [] } = useMainPageQuery.useGetFamePopularArticle();
+
+  const { data = [], isLoading } = useMainPageQuery.useGetFamePopularArticle();
   return (
-    <div>
-      <Title>인기 베스트</Title>
-      <WrapCard>
-        {data.map((v) => {
-          return (
+    <WrapPopular>
+      {isLoading && <LoadingSpinner />}
+      {data.map((v, l) => {
+        return (
+          <WrapCard key={l}>
+            <CardHeader
+              nickname={v.nickname}
+              title={v.stockName}
+              userId={v.userId}
+            />
             <Link to={`/detail/article/${v.id}`} key={v.id}>
-              <FramPopularCard data={v} />
+              <FramPopularCard data={v} index={l} />
             </Link>
-          );
-        })}
-      </WrapCard>
-    </div>
+          </WrapCard>
+        );
+      })}
+    </WrapPopular>
   );
 };
 
 export default FramPopularArticle;
-
-const Title = styled.h3`
-  margin-bottom: 9px;
-  font-size: 12px;
-  font-weight: 700;
+const WrapPopular = styled.div`
+  position: relative;
+  display: flex;
+  gap: 12px;
+  min-height: 168px;
 `;
 
 const WrapCard = styled.div`
+  width: 188px;
   display: flex;
-  gap: 21px;
+  flex-direction: column;
 `;

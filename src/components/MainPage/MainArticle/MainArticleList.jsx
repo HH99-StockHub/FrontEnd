@@ -2,11 +2,14 @@
 import React from "react";
 import styled from "styled-components";
 // 컴포넌트
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import MainArticleCard from "./MainArticleCard";
 // 커스텀 훅
 import { useMainPageQuery } from "../useMainPageQuery";
+import useChangeNum from "../../../custom/changeNum";
 
 const MainArticleList = () => {
+  const changeNum = useChangeNum;
   // 데이터 가져오기 query
   const {
     data = [],
@@ -18,48 +21,45 @@ const MainArticleList = () => {
   return (
     <Table>
       <THead>
-        <tr>
-          <th style={{ width: "64px" }}>날짜</th>
-          <th style={{ width: "226px" }}>제목</th>
-          <th style={{ width: "94px" }}>닉네임</th>
-          <th style={{ width: "60px" }}>조회수</th>
-          <th style={{ width: "72px" }}>추천</th>
-          <th style={{ width: "72px" }}>비추천</th>
-        </tr>
+        <p style={{ width: "244px" }}>제목</p>
+        <p style={{ width: "56px" }}>추천</p>
+        <p style={{ width: "56px" }}>비추천</p>
+        <p style={{ width: "64px" }}>조회수</p>
+        <p style={{ width: "64px" }}>날짜</p>
+        <p style={{ width: "64px" }}>닉네임</p>
       </THead>
-      <tbody>
-        {data.map((v) => {
-          return (
-            <MainArticleCard
-              key={v.articleId}
-              date={v.createdAt}
-              title={v.articleTitle}
-              user={v.nickname}
-              watch={v.viewCount}
-              up={v.voteUpCount}
-              down={v.voteDownCount}
-              articleId={v.articleId}
-            />
-          );
-        })}
-      </tbody>
+      {isLoading && <LoadingSpinner />}
+
+      {data.map((v) => {
+        return (
+          <MainArticleCard
+            key={v.articleId}
+            date={v.createdAt}
+            title={v.articleTitle}
+            user={v.nickname}
+            watch={changeNum(v.viewCount)}
+            up={changeNum(v.voteUpCount)}
+            down={changeNum(v.voteDownCount)}
+            articleId={v.articleId}
+            userId={v.userId}
+          />
+        );
+      })}
     </Table>
   );
 };
 
 export default MainArticleList;
 
-const Table = styled.table`
-  border-collapse: collapse;
-  height: 320px;
+const Table = styled.div`
+  position: relative;
+  min-height: 400px;
 `;
-const THead = styled.thead`
+const THead = styled.div`
+  display: flex;
+  padding: 12px 20px;
+  border-radius: 6px 6px 0 0;
   text-align: left;
-  background-color: var(--grey);
+  background-color: #5aa9c2;
   font-size: 12px;
-  tr {
-    th {
-      padding: 8px 0 8px 8px;
-    }
-  }
 `;

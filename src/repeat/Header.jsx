@@ -6,10 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 // 훅
 import { getCookie } from "../shared/Cookie";
+import { toastify } from "../custom/toastify";
 import { deleteCookie } from "../shared/Cookie";
 // 모듈
 import { loginState } from "../redux/modules/login";
-import { togleState } from "../redux/modules/addArticle";
+import { togleState } from "../redux/modules/toggleState";
+//이미지
+import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,7 +25,7 @@ const Header = () => {
     localStorage.removeItem("id");
     localStorage.removeItem("profileImg");
     dispatch(loginState(false));
-    alert("정상 로그아웃");
+    toastify.success("정상 로그아웃");
   };
 
   const openAddArticle = () => {
@@ -44,13 +47,13 @@ const Header = () => {
   return (
     <Header1>
       <Header2>
-        <Logo
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CvI_Ck9anQpBAd_DJrVAgLb55GeoSItofg&usqp=CAU"
-          alt="로고"
-          onClick={() => {
-            navigate("/");
-          }}
-        />
+        <Logo1>
+          <Logo
+            onClick={() => {
+              navigate("/");
+            }}
+          />
+        </Logo1>
         {login ? (
           <WrapMenu>
             <Profile src={localStorage.getItem("profileImg")} alt="프로필" />
@@ -74,7 +77,7 @@ const Header1 = styled.div`
   display: flex;
   height: 72px;
   width: 100%;
-  background: #d9d9d9;
+  background: #ffffff;
 `;
 
 const Header2 = styled.div`
@@ -86,13 +89,20 @@ const Header2 = styled.div`
   margin: 0 auto;
 `;
 
-const Logo = styled.img`
-  width: 89px;
-  height: 33px;
-  left: 390px;
-  top: 19px;
-  cursor: pointer;
+const Logo1 = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
 `;
+
+// const Logo = styled.img`
+//   width: 89px;
+//   height: 33px;
+//   left: 390px;
+//   top: 19px;
+//   cursor: pointer;
+// `;
+
 const WrapMenu = styled.div`
   display: flex;
   align-items: center;
@@ -118,6 +128,6 @@ const Notice = styled.button`
 
 const Writing = styled.button`
   width: 54px;
-  background-color: #000;
+  background-color: #3cc472;
   color: #fff;
 `;

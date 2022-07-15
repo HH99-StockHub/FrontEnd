@@ -21,31 +21,37 @@ const Vote = (props) => {
         }}
       >
         {" "}
-        <UpSvg width="11" height="10" /> 추천 {voteUp}{" "}
+ 추천 {voteUp}{" "}
       </Btn>
-      <Btn
+      <Btn1
         onClick={() => {
           const data = { postId: id };
           Negative(data);
         }}
       >
         {" "}
-        <DownSvg width="11" height="10" />
         반대 {voteDown}
-      </Btn>
+      </Btn1>
     </BtnBox>
   );
 };
 
 const BtnBox = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  gap: 4px;
   margin-top: 20px;
 `;
 
 const Btn = styled.button`
-  padding: 10px 40px;
-  background: #d9d9d9;
+padding: 10px;
+  background: #54BA7D;
+  color: #FFFFFF;
+`;
+
+const Btn1 = styled.button`
+padding: 10px;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  color: #B1B1B1;
 `;
 export default Vote;

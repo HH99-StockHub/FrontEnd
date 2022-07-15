@@ -19,4 +19,14 @@ export const useTotalPageQuery = {
     };
     return useQuery(["allArticle", "allUserArticles"], fetcher);
   },
+  //게시글 검색
+  useGetAllArticlesSearch: (payload) => {
+    const fetcher = async () => {
+      const { data } = await api.get(`articles/${payload.keywords}/search`);
+      return data;
+    };
+    return useQuery("keywords", fetcher);
+  },
+  // //종목 뉴스 검색
+  // useGetNewsSearch:
 };

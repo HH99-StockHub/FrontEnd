@@ -2,47 +2,78 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// 이미지
-import { ReactComponent as UpSvg } from "../../../image/Up.svg";
-import { ReactComponent as DownSvg } from "../../../image/Down.svg";
+import dayjs from "dayjs";
+import { useState } from "react";
+import { useEffect } from "react";
+const MainArticleCard = ({
+  date,
+  title,
+  user,
+  watch,
+  up,
+  down,
+  articleId,
+  userId,
+}) => {
+  const [today, setToday] = useState(dayjs(date).format("YY.MM.DD"));
+  useEffect(() => {
+    if (
+      dayjs(new Date()).format().slice(0, 7) ===
+      dayjs(date).format().slice(0, 7)
+    ) {
+      if (dayjs(new Date()).format("D") - dayjs(date).format("D") === 1) {
+        setToday("어제");
+      } else if (dayjs(new Date()).format("D") === dayjs(date).format("D")) {
+        setToday("오늘");
+      }
+    }
+  }, []);
 
-const MainArticleCard = ({ date, title, user, watch, up, down, articleId }) => {
+  dayjs(date).format("YY-MM-DD");
   return (
     <WrapCard>
-      <td>{date}</td>
-      <td>
+      <p style={{ width: "244px" }}>
         <Link to={`/detail/article/${articleId}`}>{title}</Link>
-      </td>
-      <td>{user}</td>
-      <td>{watch}</td>
-      <UpDownTd>
-        <UpSvg width="12" height="11" />
-        <span>{up}</span>
-      </UpDownTd>
-      <UpDownTd>
-        <DownSvg width="12" height="11" />
-        <span>{down}</span>
-      </UpDownTd>
+      </p>
+      <p style={{ width: "56px" }}>{up}</p>
+      <p style={{ width: "56px" }}>{down}</p>
+      <p style={{ width: "64px" }}>{watch}</p>
+      <p style={{ width: "64px" }}>{today}</p>
+      <p style={{ width: "64px" }}>
+        <Link to={`/search/article/${user}/${userId}`}>{user}</Link>
+      </p>
     </WrapCard>
   );
 };
 
 export default MainArticleCard;
 
-const WrapCard = styled.tr`
+const WrapCard = styled.div`
+  display: flex;
+  padding: 12px 20px;
   font-size: 12px;
-  td {
-    padding: 8px 0 8px 8px;
-    border: 1px solid #000;
+  p {
+    font-weight: 400;
   }
-`;
-
-const UpDownTd = styled.td`
-  position: relative;
-  padding: 0 0 0 8px;
-  span {
-    position: absolute;
-    top: 6px;
-    margin-left: 4px;
+  p:nth-child(1) {
+    font-size: 14px;
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  p:nth-child(2) {
+    color: var(--green1);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  p:nth-child(3) {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  p:nth-child(5) {
+    color: var(--gray3);
   }
 `;

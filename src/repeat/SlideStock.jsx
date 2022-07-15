@@ -1,11 +1,11 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 //CSS
-import "../SlideStock.scss";
+import "../CSS/SlideStock.scss";
 //이미지
 import { ReactComponent as UpArrowSvg } from "../image/UpArrow.svg";
 
-const SlideStock = () => {
+const SlideStock = React.memo(() => {
   // 예시 잉여 arr
   const data = [1, 2, 3, 4, 6, 6, 77, 6];
   return (
@@ -16,7 +16,7 @@ const SlideStock = () => {
         </div>
         {data.map((v, l) => {
           return (
-            <div key={l}>
+            <div className="stockBox" key={l}>
               <div className="ticker__item">
                 <p>
                   S&P 500 <span>4,530.41</span>
@@ -34,6 +34,6 @@ const SlideStock = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SlideStock;

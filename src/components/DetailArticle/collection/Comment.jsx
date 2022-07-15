@@ -2,26 +2,30 @@ import React from "react";
 import styled from "styled-components";
 import { useQueryClient } from "react-query";
 // 컴포넌트
+import CommentCard from "../CommentCard";
+// 훅
+import { toastify } from "../../../custom/toastify";
 import {
   useDetailArticleGet,
   useDetailArticleMutate,
 } from "../useDetailArticle";
 
-// 컴포넌트
-import CommentCard from "../CommentCard";
-
 const Comment = ({ id }) => {
   const queryClient = useQueryClient();
   const writeInput = React.useRef("");
   const { mutate, isSuccess } = useDetailArticleMutate.useWriteComment({
-    onSuccess: () => {
-      writeInput.current.value = "";
-      queryClient.invalidateQueries();
-      alert("댓글 작성 완료");
+    onSuccess: (data) => {
+      if (data) {
+        writeInput.current.value = "";
+        queryClient.invalidateQueries();
+        toastify.success("댓글 작성 완료");
+      } else {
+        toastify.error("비속어 금지");
+      }
     },
     onError: (data, error, variables, context) => {
       if (data.response.state === 400) {
-        alert("댓글 내용은 300자 이내로 작성해 주세요.");
+        toastify.error("댓글 내용은 300자 이내로 작성해 주세요.");
       }
     },
   });
@@ -34,7 +38,7 @@ const Comment = ({ id }) => {
     error,
   } = useDetailArticleGet.useCommentInquiry(id);
   if (isLoading) return <div>불러오는 중입니다.</div>;
-  if (isError) alert("댓글 불러오기를 실패했습니다.");
+  if (isError) toastify.error("댓글 불러오기를 실패했습니다.");
 
   const addComment = (e) => {
     e.preventDefault();
@@ -42,16 +46,16 @@ const Comment = ({ id }) => {
       const data = { write: writeInput.current.value, id: id };
       mutate(data);
     } else {
-      alert("공백없이 작성해주세요");
+      if (isError) toastify.error("공백없이 작성해주세요");
     }
   };
 
   return (
     <Box>
-      <h3>댓글달기</h3>
+      <H3>댓글달기</H3>
       <Label onSubmit={addComment}>
-        <Views ref={writeInput} placeholder="상세내용 작성"></Views>
-        <Btn type="sumbit">보내기</Btn>
+        <Views ref={writeInput} placeholder="댓글을 작성해주세요."></Views>
+        <Btn type="sumbit">등록하기</Btn>
       </Label>
       {data.map((v) => {
         return <CommentCard data={v} key={v.commentId} />;
@@ -62,30 +66,51 @@ const Comment = ({ id }) => {
 
 const Box = styled.div`
   margin-top: 20px;
-  padding: 20px 0px;
+`;
+
+const H3 = styled.h3`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
 `;
 
 const Label = styled.form`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   border: 1px solid #dbdbdb;
   width: 100%;
   margin-top: 20px;
+  height: 89px;
 `;
 
 const Btn = styled.button`
-  background: #dedede;
-  padding: 10px;
+  background: #54ba7d;
   margin-right: 10px;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  height: 34px;
+  color: #ffffff;
+  align-self: flex-end;
+  margin-bottom: 10px;
 `;
 
-const Views = styled.input`
-  flex: 8;
-  padding: 20px;
+const Views = styled.textarea`
   color: #000000;
+  flex: 8;
   font-weight: 700;
   border: 0;
+  padding: 10px;
+  height: 100%;
   outline: none;
+  resize: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  ::placeholder {
+    color: #b1b1b1;
+  }
 `;
 export default Comment;

@@ -17,20 +17,25 @@ const GlobalStyle = createGlobalStyle`
     background-color: transparent;
     border: 0;
   }
+  input, textarea {
+    outline: none;
+    border: 1px solid var(--gray2);
+  }
   body{
   }
   :root {
-    --aquaD : #00c2ca;
-    --aqua : #c0f8f5;
-    --black : #333333;
-    --white: #ffffff;
-    --grey : #dddddd;
-    --green : #00B98D;
-    --red :#F85151; 
-    --blue : #0085FF;
-    --dGrey : #aaa;
-    --gray:rgba(33,37,41,.86);
-
+   --black : #000 ;
+   --white : #fff ;
+   --green1 : #54BA7D;
+   --green2 : #008B2F;
+   --green3 : #086326;
+   --gray1 : #F6F6F6 ;
+   --gray2 : #E0E0E0 ;
+   --gray3 : #B1B1B1;
+   --blue1 : #5AA9C2;
+   --blue2 : #3246FF ;
+   --pink1 : #FF607C;
+   --pink2 : #FF3232;
   }
 `;
 export default GlobalStyle;

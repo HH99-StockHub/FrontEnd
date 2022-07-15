@@ -3,8 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 //컴포넌트
-import CardImg from "../common/CardImg";
 import CardTextPopular from "../common/CardTextPopular";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
+import Porfile from "../common/Porfile";
 // 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 
@@ -19,17 +20,26 @@ const PopularArticleList = () => {
 
   return (
     <ArticleBox>
+      {isLoading && <LoadingSpinner />}
       {data.map((v) => {
         return (
-          <Link to={`/detail/article/${v.id}`} key={v.articleId}>
+          <div>
             <WrapCard>
-              <WrapImgText>
-                <CardImg imgUrl={v.profileImage} />
-                <CardTextPopular company={v.stockName} up={v.voteUpCount} />
-              </WrapImgText>
-              <WrapText>{v.articleTitle}</WrapText>
+              <Link to={`/detail/article/${v.id}`} key={v.articleId}>
+                <WrapImgText>
+                  <CardTextPopular up={v.voteUpCount} />
+                </WrapImgText>
+                <WrapText>{v.articleTitle}</WrapText>
+              </Link>
+              <Link to="/">
+                <Porfile
+                  nickname={v.nickname}
+                  img={v.profileImage}
+                  userId={v.userId}
+                />
+              </Link>
             </WrapCard>
-          </Link>
+          </div>
         );
       })}
     </ArticleBox>
@@ -39,21 +49,24 @@ const PopularArticleList = () => {
 export default PopularArticleList;
 
 const ArticleBox = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
-  gap: 14px 0;
+  gap: 24px 15px;
   flex-wrap: wrap;
   width: 588px;
+  min-height: 300px;
 `;
 
 const WrapCard = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 5px;
-  width: 179px;
-  height: 112px;
-  padding: 18px 14px;
-  border: 1px solid #000;
+  width: 186px;
+  height: 157px;
+  padding: 16px;
+  border: 1px solid var(--gray2);
 `;
 const WrapImgText = styled.div`
   display: flex;
@@ -61,12 +74,13 @@ const WrapImgText = styled.div`
 `;
 
 const WrapText = styled.p`
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 16px;
   display: -webkit-box;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 26px;
+  font-weight: 700;
   width: 100%;
-  height: 32px;
   white-space: normal;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

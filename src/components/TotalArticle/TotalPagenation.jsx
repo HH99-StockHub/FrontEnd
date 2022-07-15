@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+// 훅
+import { toastify } from "../../custom/toastify";
+//이미지
+import { ReactComponent as Left } from "../../image/Left.svg";
+import { ReactComponent as Right } from "../../image/Right.svg";
 
 const TotalPagenation = ({ category, nowPage }) => {
   const navigate = useNavigate();
@@ -29,7 +34,7 @@ const TotalPagenation = ({ category, nowPage }) => {
   const navigatePrevious = () => {
     if (page === 1) {
       // 첫 페이지 일 경우
-      alert("이전 페이지가 존재하지 않습니다");
+      toastify.error("이전 페이지가 존재하지 않습니다");
     } else {
       navigate(`/total/${category}/articles/${page - 10}`);
       setPage(page - 10);
@@ -39,7 +44,7 @@ const TotalPagenation = ({ category, nowPage }) => {
   const navigateNext = () => {
     // 다음 페이지가 전체 페이지를 넘을 경우
     if (page + 10 > lastpage) {
-      alert(`${lastpage} 페이지가 마지막입니다`);
+      toastify.error(`${lastpage} 페이지가 마지막입니다`);
     } else {
       navigate(`/total/${category}/articles/${page + 10}`);
       setPage(page + 10);
@@ -66,7 +71,7 @@ const TotalPagenation = ({ category, nowPage }) => {
         setPage(Number(startPage) + 1);
       }
     } else {
-      alert("잘못된 접근입니다.");
+      toastify.error("잘못된 접근입니다.");
       navigate(`/total/${category}/articles/1`);
     }
   }, []);
@@ -85,7 +90,9 @@ const TotalPagenation = ({ category, nowPage }) => {
   }, [page]);
   return (
     <WrapAllBtn>
-      <button onClick={navigatePrevious}>~</button>
+      <button onClick={navigatePrevious}>
+        <Left />
+      </button>
       <WrapPageBtn num={nowCssBtn()}>
         {btnCount.map((v, l) => {
           return (
@@ -100,7 +107,9 @@ const TotalPagenation = ({ category, nowPage }) => {
           );
         })}
       </WrapPageBtn>
-      <button onClick={navigateNext}>~</button>
+      <button onClick={navigateNext}>
+        <Right />
+      </button>
     </WrapAllBtn>
   );
 };
@@ -108,9 +117,11 @@ const TotalPagenation = ({ category, nowPage }) => {
 export default TotalPagenation;
 
 const WrapAllBtn = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: 40px;
 `;
 const WrapPageBtn = styled.div`
   display: flex;
@@ -119,6 +130,7 @@ const WrapPageBtn = styled.div`
     padding: 10px;
   }
   > button:nth-child(${({ num }) => Number(num)}) {
-    border: 1px solid #000;
+    background: #54ba7d;
+    color: white;
   }
 `;

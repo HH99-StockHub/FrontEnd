@@ -2,14 +2,11 @@ import React from "react";
 import styled from "styled-components";
 // 이미지
 import { ReactComponent as UpStockSvg } from "../../../image/UpStock.svg";
-const CardTextRich = ({ company, stock }) => {
+const CardTextRich = ({ stock }) => {
   return (
     <Wrap>
-      <p>{company}</p>
-      <div>
-        <UpStockSvg width="9.79" height="5.8" />
-        <Text>{stock}</Text>
-      </div>
+      <UpStockSvg width="11.42" height="6.76" fill="var(--green1)" />
+      <p>{stock} %</p>
     </Wrap>
   );
 };
@@ -18,20 +15,11 @@ export default CardTextRich;
 
 const Wrap = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 4.5px;
-
+  gap: 6px;
+  align-items: center;
   > p {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
+    color: var(--green1);
   }
-  > div {
-    display: flex;
-    align-items: center;
-    gap: 2.5px;
-  }
-`;
-const Text = styled.span`
-  font-size: 9px;
-  font-weight: 700;
 `;

@@ -2,14 +2,11 @@ import React from "react";
 import styled from "styled-components";
 // 이미지
 import { ReactComponent as UpSvg } from "../../../image/Up.svg";
-const CardTextPopular = ({ company, up }) => {
+const CardTextPopular = ({ up }) => {
   return (
     <Wrap>
-      <p>{company}</p>
-      <div>
-        <UpSvg width="11" height="10" />
-        <Text>{up}</Text>
-      </div>
+      <UpSvg width="12.83" height="11.67" fill="var(--green1)" />
+      <Text>{up}</Text>
     </Wrap>
   );
 };
@@ -18,19 +15,13 @@ export default CardTextPopular;
 
 const Wrap = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 4.5px;
-
-  > p {
-    font-size: 12px;
-    font-weight: 700;
-  }
-  > div {
-    display: flex;
-    gap: 2.5px;
-  }
+  align-items: center;
+  gap: 6px;
+  height: 17px;
 `;
 const Text = styled.span`
-  font-size: 9px;
+  font-size: 14px;
+  line-height: 1;
   font-weight: 700;
+  color: var(--green1);
 `;
