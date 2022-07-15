@@ -2,7 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import dayjs from "dayjs";
+import { useState } from "react";
+import { useEffect } from "react";
 const MainArticleCard = ({
   date,
   title,
@@ -13,6 +15,21 @@ const MainArticleCard = ({
   articleId,
   userId,
 }) => {
+  const [today, setToday] = useState(dayjs(date).format("YY.MM.DD"));
+  useEffect(() => {
+    if (
+      dayjs(new Date()).format().slice(0, 7) ===
+      dayjs(date).format().slice(0, 7)
+    ) {
+      if (dayjs(new Date()).format("D") - dayjs(date).format("D") === 1) {
+        setToday("어제");
+      } else if (dayjs(new Date()).format("D") === dayjs(date).format("D")) {
+        setToday("오늘");
+      }
+    }
+  }, []);
+
+  dayjs(date).format("YY-MM-DD");
   return (
     <WrapCard>
       <p style={{ width: "244px" }}>
@@ -21,7 +38,7 @@ const MainArticleCard = ({
       <p style={{ width: "56px" }}>{up}</p>
       <p style={{ width: "56px" }}>{down}</p>
       <p style={{ width: "64px" }}>{watch}</p>
-      <p style={{ width: "64px" }}>{date}</p>
+      <p style={{ width: "64px" }}>{today}</p>
       <p style={{ width: "64px" }}>
         <Link to={`/search/article/${user}/${userId}`}>{user}</Link>
       </p>

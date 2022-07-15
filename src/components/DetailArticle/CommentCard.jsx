@@ -95,6 +95,8 @@ const DeleteBt = styled.button`
   font-weight: 500;
   font-size: 12px;
   padding: 10px;
+  background-color: var(--white);
+  z-index: 99;
 `;
 
 const Circle = styled.div`
