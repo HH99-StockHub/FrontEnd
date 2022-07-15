@@ -34,7 +34,14 @@ const AddArticleForm = () => {
   //선택 주식 주가
   const [currentStock, setCurrentStock] = useState("현재 주가");
   // 투자 포인트 데이터
-  const [stockPoint, setStockPoint] = useState([{}]);
+  const [stockPoint, setStockPoint] = useState([
+    {
+      title: "",
+      content: "",
+    },
+    { title: "", content: "" },
+    { title: "", content: "" },
+  ]);
   // title가져오기
   const articleTitle = useRef("");
   const wrapTagStockList = useRef();
