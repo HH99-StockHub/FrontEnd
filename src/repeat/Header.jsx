@@ -46,12 +46,13 @@ const Header = () => {
   return (
     <Header1>
       <Header2>
-        <Logo
-          onClick={() => {
-            navigate("/");
-          }}
-        />
-
+        <Logo1>
+          <Logo
+            onClick={() => {
+              navigate("/");
+            }}
+          />
+        </Logo1>
         {login ? (
           <WrapMenu>
             <Profile src={localStorage.getItem("profileImg")} alt="프로필" />
@@ -75,7 +76,7 @@ const Header1 = styled.div`
   display: flex;
   height: 72px;
   width: 100%;
-  background: #d9d9d9;
+  background: #ffffff;
 `;
 
 const Header2 = styled.div`
@@ -88,10 +89,10 @@ const Header2 = styled.div`
 `;
 
 const Logo1 = styled.div`
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
-`
+`;
 
 // const Logo = styled.img`
 //   width: 89px;
