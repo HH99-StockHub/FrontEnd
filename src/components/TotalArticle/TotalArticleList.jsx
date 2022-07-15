@@ -87,7 +87,6 @@ const TotalArticleList = ({ data, isLoading }) => {
                 </Random>
                 <P4>{data.createdAt}</P4>
               </Just>
-              {/* </Link> */}
             </Box>
           );
         })}
@@ -107,6 +106,7 @@ const Box = styled.div`
   justify-content: space-between;
   flex-direction: column;
   flex-grow: 0;
+  cursor: pointer;
 `;
 
 const Content = styled.div`

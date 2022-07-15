@@ -63,6 +63,7 @@ const Div = styled.div`
   margin: 0 auto;
 `;
 const Box = styled.div`
+  height: 90vh;
   background: #f5f5f5;
 `;
 export default TotalArticle;
