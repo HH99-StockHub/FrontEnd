@@ -6,6 +6,10 @@ import { chartToggleState } from "../../../redux/modules/toggleState";
 import LineChart from "../../Chart/LineChart";
 import { useDetailArticleGet } from "../useDetailArticle";
 
+//이미지
+import { ReactComponent as Poly } from "../../../image/Poly.svg.svg";
+import { ReactComponent as Plus } from "../../../image/Plus.svg";
+
 const Title = (props) => {
   const { stockName } = props;
   const dispatch = useDispatch();
@@ -17,7 +21,17 @@ const Title = (props) => {
         <NameDiv>
           <Name>
             <P>{stockName}</P>
-            <NameP>8,400</NameP>
+            <TitleBox>
+              <NameP>8,400</NameP>
+              <TitleDiv>
+                <Poly />
+                <TitleP>7,000</TitleP>
+              </TitleDiv>
+              <TitleDiv>
+                <Plus width="9" height="9" fill="#FF3232" />
+                <TitleP>10%</TitleP>
+              </TitleDiv>
+            </TitleBox>
             <Box1>
               <Box1Div>
                 전일
@@ -76,12 +90,33 @@ const Title = (props) => {
   );
 };
 
+const TitleBox = styled.div`
+  display: flex;
+  margin-top: 12px;
+`;
+
+const TitleDiv = styled.div`
+  gap: 4px;
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  align-items: center;
+  margin: 0 8px;
+`;
+
+const TitleP = styled.div`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ff3232;
+`;
+
 const NameP = styled.p`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
   color: #ff3232;
-  margin-top: 12px;
 `;
 
 const Box1P = styled.p`
