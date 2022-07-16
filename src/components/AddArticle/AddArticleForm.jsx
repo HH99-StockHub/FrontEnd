@@ -2,9 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
 //hook
-import { useAddArticleFormMutate } from "./useAddArticleFormQuery";
+import {
+  useAddArticleFormMutate,
+  useAddArticleFormQuery,
+} from "./useAddArticleFormQuery";
 import { toastify } from "../../custom/toastify";
 // 모듈
 import { stockData } from "../../Data/stockData";
@@ -17,7 +20,6 @@ import LineChart from "../Chart/LineChart";
 
 const AddArticleForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
   // key state
@@ -47,8 +49,9 @@ const AddArticleForm = () => {
   const wrapTagStockList = useRef();
 
   //예시 arr
-  const data = stockData;
 
+  // stockName 전체 부르기
+  const { data = stockData } = useAddArticleFormQuery.useGetStockName();
   // useMutation 사용
   const { mutate: addArticle, stockLoading: addLoading } =
     useAddArticleFormMutate.useAddArticleMutation();
@@ -202,11 +205,13 @@ const AddArticleForm = () => {
   useEffect(() => {
     setStockIndex(0);
     const changeSotck = setTimeout(() => {
-      const changeData = data.filter((v, l) => {
+      const changeData = data.filter((v) => {
         if (String(stockInput).length !== 0) {
           return (
-            v.stockName.slice(0, String(stockInput).length) === stockInput ||
-            v.stockCode.slice(0, String(stockInput).length) === stockInput
+            v.stockName.slice(0, String(stockInput).length).toLowerCase() ===
+              stockInput.toLowerCase() ||
+            v.stockCode.slice(0, String(stockInput).length).toLowerCase() ===
+              stockInput.toLowerCase()
           );
         } else {
           return false;
@@ -220,7 +225,7 @@ const AddArticleForm = () => {
     return () => {
       clearTimeout(changeSotck);
     };
-  }, [stockInput]);
+  }, [stockInput, data]);
 
   // 토글 창 오픈시 스크롤 막기 , 닫기 클릭 시 해제
   useEffect(() => {
@@ -359,11 +364,13 @@ const WrapForm = styled.div`
   max-width: 720px;
   background-color: var(--white);
 `;
+
 const WrapText = styled.div`
   padding: 24px 79px 48px;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--gray2);
 `;
+
 const Header = styled.div`
   display: flex;
   justify-content: center;
@@ -395,7 +402,9 @@ const WrapSearch = styled.div`
     color: var(--gray3);
   }
 `;
+
 const WrapSelect = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -408,6 +417,7 @@ const WrapSelect = styled.div`
     outline: none;
   }
 `;
+
 const WrapTitle = styled.div`
   margin-top: 25px;
   > p {
@@ -458,6 +468,7 @@ const WrapTextarea = styled.div`
     margin-bottom: 8px;
   }
 `;
+
 const TextareaText = styled.textarea`
   width: 100%;
   height: 137px;
@@ -490,9 +501,9 @@ const ChartBox = styled.div`
 const StockList = styled.div`
   position: absolute;
   border: 1px solid var(--gray2);
-  top: 44px;
+  top: 42px;
   left: 0;
-  width: 385px;
+  width: 100%;
   height: 264px;
   overflow-y: auto;
   background-color: var(--white);

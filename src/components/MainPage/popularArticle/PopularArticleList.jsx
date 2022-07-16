@@ -23,23 +23,19 @@ const PopularArticleList = () => {
       {isLoading && <LoadingSpinner />}
       {data.map((v) => {
         return (
-          <div>
-            <WrapCard>
-              <Link to={`/detail/article/${v.articleId}`} key={v.articleId}>
-                <WrapImgText>
-                  <CardTextPopular up={v.voteUpCount} />
-                </WrapImgText>
-                <WrapText>{v.articleTitle}</WrapText>
-              </Link>
-              <Link to="/">
-                <Porfile
-                  nickname={v.nickname}
-                  img={v.profileImage}
-                  userId={v.userId}
-                />
-              </Link>
-            </WrapCard>
-          </div>
+          <WrapCard key={v.articleId}>
+            <Link to={`/detail/article/${v.articleId}`}>
+              <WrapImgText>
+                <CardTextPopular up={v.voteUpCount} />
+              </WrapImgText>
+              <WrapText>{v.articleTitle}</WrapText>
+            </Link>
+            <Porfile
+              nickname={v.nickname}
+              img={v.profileImage}
+              userId={v.userId}
+            />
+          </WrapCard>
         );
       })}
     </ArticleBox>

@@ -1,5 +1,5 @@
 import { api } from "../../shared/api";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 // 모듈
 import { togleState } from "../../redux/modules/toggleState";
@@ -35,5 +35,18 @@ export const useAddArticleFormMutate = {
       return response;
     };
     return useMutation(fetcher, option);
+  },
+};
+
+export const useAddArticleFormQuery = {
+  useGetStockName: () => {
+    const fetcher = async () => {
+      const { data } = await api.get("/stocks");
+      return data;
+    };
+    return useQuery("stockName", fetcher, {
+      staleTime: 1000 * 60 * 30,
+      cacheTime: 1000 * 60 * 30,
+    });
   },
 };
