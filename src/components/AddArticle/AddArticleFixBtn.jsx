@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { toastify } from "../../custom/toastify";
 
+import { getCookie } from "../../shared/Cookie";
 // 이미지
 import { ReactComponent as BtnSvg } from "../../image/AddArticle.svg";
 import { togleState } from "../../redux/modules/toggleState";
@@ -9,7 +11,12 @@ const AddArticleFixBtn = React.memo(() => {
   const dispatch = useDispatch();
   // 게시글 작성 토글 오픈
   const openTogle = () => {
-    dispatch(togleState(true));
+    const token = getCookie("token");
+    if (token !== undefined) {
+      dispatch(togleState(true));
+    } else {
+      toastify.error("작성 전 로그인이 필요합니다");
+    }
   };
 
   return (

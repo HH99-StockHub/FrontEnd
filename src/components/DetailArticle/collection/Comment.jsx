@@ -4,6 +4,7 @@ import { useQueryClient } from "react-query";
 // 컴포넌트
 import CommentCard from "../CommentCard";
 // 훅
+import { getCookie } from "../../../shared/Cookie";
 import { toastify } from "../../../custom/toastify";
 import {
   useDetailArticleGet,
@@ -13,7 +14,7 @@ import {
 const Comment = ({ id }) => {
   const queryClient = useQueryClient();
   const writeInput = React.useRef("");
-  const { mutate, isSuccess } = useDetailArticleMutate.useWriteComment({
+  const { mutate } = useDetailArticleMutate.useWriteComment({
     onSuccess: (data) => {
       if (data) {
         writeInput.current.value = "";
@@ -26,6 +27,8 @@ const Comment = ({ id }) => {
     onError: (data, error, variables, context) => {
       if (data.response.state === 400) {
         toastify.error("댓글 내용은 300자 이내로 작성해 주세요.");
+      } else {
+        toastify.error("예상치 못한 에러가 발생했습니다.");
       }
     },
   });
@@ -48,12 +51,23 @@ const Comment = ({ id }) => {
       if (isError) toastify.error("공백없이 작성해주세요");
     }
   };
+  // 댓글 input 포커스 시 로그인 유무 체크
+  const commentFocus = (e) => {
+    if (getCookie("token") === undefined) {
+      toastify.error("로그인 후 이용해주세요");
+      e.target.blur();
+    }
+  };
 
   return (
     <Box>
       <H3>댓글달기</H3>
       <Label onSubmit={addComment}>
-        <Views ref={writeInput} placeholder="댓글을 작성해주세요."></Views>
+        <Views
+          ref={writeInput}
+          placeholder="댓글을 작성해주세요."
+          onFocus={commentFocus}
+        ></Views>
         <Btn type="sumbit">등록하기</Btn>
       </Label>
       {data.map((v) => {
