@@ -33,4 +33,5 @@ const Btn = styled.div`
   border-radius: 50%;
   background-color: var(--green1);
   cursor: pointer;
+  z-index: 99;
 `;

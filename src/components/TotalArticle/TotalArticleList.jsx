@@ -115,6 +115,7 @@ const Content = styled.div`
   display: flex;
   margin-top: 20px;
   gap: 14px;
+  min-height: 100px;
 `;
 
 const P = styled.p`

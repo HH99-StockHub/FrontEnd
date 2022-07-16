@@ -18,15 +18,15 @@ const SearchArticleList = () => {
   const topic = () => {
     switch (category) {
       case "keyword":
-        return `'${keyword}' 검색 결과`;
+        return `<b>'${keyword}'</b> 검색 결과`;
       default:
-        return `${category} 님의 게시물`;
+        return `<b>${category}</b> 님의 게시물`;
     }
   };
 
   return (
     <WrapList>
-      <p>{topic()}</p>
+      <p dangerouslySetInnerHTML={{ __html: topic() }}></p>
       <TotalArticleList data={data} isLoading={isLoading} />
     </WrapList>
   );

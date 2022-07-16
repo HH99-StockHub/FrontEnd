@@ -97,8 +97,7 @@ const Container = styled.div`
 `;
 const Div = styled.div`
   display: flex;
-  justify-content: flex-start;
-
+  gap: 16px;
   width: 1240px;
   margin: 0 auto;
   position: relative;
