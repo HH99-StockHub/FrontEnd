@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useRecoilState } from "recoil";
+
+// 컴포넌트
+import LoadingSpinner from "../../repeat/LoadingSpinner";
+
 // 훅
 import { setCookie, getCookie } from "../../shared/Cookie";
 import { useLoginQuery } from "./useLoginQuery";
 import { toastify } from "../../custom/toastify";
 //모듈
-import { loginState } from "../../redux/modules/login";
-import LoadingSpinner from "../../repeat/LoadingSpinner";
+import { loginState } from "../../state/client/login";
+
 const OAuth = () => {
-  const dispatch = useDispatch();
+  // recoil
+  const [, setLoginState] = useRecoilState(loginState);
   const navigate = useNavigate();
-  const login = useSelector((state) => state.user.loginState);
-  const [check, setCheck] = useState(false);
   // calllback으로 받은 인가코드
   const code = new URL(window.location.href).searchParams.get("code");
   const beforeUrl = sessionStorage.getItem("url");
@@ -41,8 +44,7 @@ const OAuth = () => {
       setCookie("token", accessToken);
       localStorage.setItem("id", data.headers.userid);
       localStorage.setItem("profileImg", data.headers.profileimage);
-      dispatch(loginState(true));
-      setCheck(true);
+      setLoginState(true);
       toastify.success("로그인 완료");
       navigate(beforeUrl);
     }

@@ -1,7 +1,7 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useRecoilState } from "recoil";
 
 //hook
 import {
@@ -9,9 +9,10 @@ import {
   useAddArticleFormQuery,
 } from "./useAddArticleFormQuery";
 import { toastify } from "../../custom/toastify";
-// 모듈
+
 import { stockData } from "../../Data/stockData";
-import { chartToggleState, togleState } from "../../redux/modules/toggleState";
+// 모듈
+import { addArticleState, showChart } from "../../state/client/modal";
 //이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
@@ -19,7 +20,9 @@ import LoadingSpinner from "../../repeat/LoadingSpinner";
 import LineChart from "../Chart/LineChart";
 
 const AddArticleForm = () => {
-  const dispatch = useDispatch();
+  // recoil
+  const [, setModalState] = useRecoilState(showChart);
+  const [, setFormState] = useRecoilState(addArticleState);
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
   // key state
@@ -275,7 +278,7 @@ const AddArticleForm = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    dispatch(chartToggleState(true));
+                    setModalState(true);
                   }}
                 >
                   그래프 보기
@@ -346,7 +349,7 @@ const AddArticleForm = () => {
           <button
             type="button"
             onClick={() => {
-              dispatch(togleState(false));
+              setFormState(false);
             }}
           >
             취소하기
