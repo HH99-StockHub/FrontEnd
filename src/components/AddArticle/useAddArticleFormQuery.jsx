@@ -1,14 +1,14 @@
 import { api } from "../../shared/api";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useDispatch } from "react-redux";
+import { useRecoilState } from "recoil";
 // 모듈
-import { togleState } from "../../redux/modules/toggleState";
+import { addArticleState } from "../../state/client/modal";
 // 훅
 import { toastify } from "../../custom/toastify";
 
 export const useAddArticleFormMutate = {
   useAddArticleMutation: () => {
-    const dispatch = useDispatch();
+    const [, setFormState] = useRecoilState(addArticleState);
     const queryClient = useQueryClient();
     const fetcher = async (article) => {
       const { data } = await api.post("/article", article);
@@ -19,7 +19,7 @@ export const useAddArticleFormMutate = {
         if (data) {
           queryClient.invalidateQueries("allArticle");
           toastify.success("작성 완료");
-          dispatch(togleState(false));
+          setFormState(false);
         } else {
           toastify.error("비속어 금지");
         }

@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useRecoilState } from "recoil";
 // 훅
 import { toastify } from "../../../custom/toastify";
 // 모듈
 import { getCookie } from "../../../shared/Cookie";
-import { togleState } from "../../../redux/modules/toggleState";
+import { addArticleState } from "../../../state/client/modal";
 // 이미지
 import { ReactComponent as MainBannerSvg } from "../../../image/MainPageBanner.svg";
 
 const ArticleSubHeader = () => {
-  // 게시글 작성 토글 상태관리
-  const dispatch = useDispatch();
+  // 게시글 작성 토글 상태관리 recoil
+  const [, setFormModal] = useRecoilState(addArticleState);
   const openTogle = () => {
     const token = getCookie("token");
     if (token !== undefined) {
-      dispatch(togleState(true));
+      setFormModal(true);
     } else {
       toastify.error("작성 전 로그인이 필요합니다");
     }

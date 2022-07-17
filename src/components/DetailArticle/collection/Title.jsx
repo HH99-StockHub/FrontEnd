@@ -1,13 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import dayjs from "dayjs";
+import { useRecoilState } from "recoil";
 //컴포넌트
 import LineChart from "../../Chart/LineChart";
 import { useDetailArticleGet } from "../useDetailArticle";
 
 //모듈
-import { chartToggleState } from "../../../redux/modules/toggleState";
+import { showChart } from "../../../state/client/modal";
 
 //이미지
 import { ReactComponent as Poly } from "../../../image/Poly.svg.svg";
@@ -15,7 +15,8 @@ import { ReactComponent as Plus } from "../../../image/Plus.svg";
 
 const Title = (props) => {
   const { stockName } = props;
-  const dispatch = useDispatch();
+  // recoil
+  const [, setChartModal] = useRecoilState(showChart);
   const { data = [], refetch } = useDetailArticleGet.useNewsSearch(stockName);
 
   return (
@@ -68,7 +69,7 @@ const Title = (props) => {
             <MarkeTT>일일 그래프</MarkeTT>
             <MarketGp
               onClick={() => {
-                dispatch(chartToggleState(true));
+                setChartModal(true);
               }}
             >
               그래프 보기

@@ -1,8 +1,8 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import { Route, Routes } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import ReactModal from "react-modal";
 import { ToastContainer } from "react-toastify";
+import { useRecoilState } from "recoil";
 //컴포넌트
 import MainPage from "./page/MainPage";
 import Header from "./repeat/Header";
@@ -15,22 +15,22 @@ import SearchArticle from "./page/SearchArticle";
 import AddArticleFixBtn from "./components/AddArticle/AddArticleFixBtn";
 
 // 모듈
-import { chartToggleState } from "./redux/modules/toggleState";
+import { addArticleState, showChart } from "./state/client/modal";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import "./CSS/toastify.css";
 import Footer from "./repeat/Footer";
 
 function App() {
-  // 게시글 작성 토글 관리
-  const toggleState = useSelector((state) => state.toggle.toggleState);
-  const chartToggle = useSelector((state) => state.toggle.chartToggle);
-  const dispatch = useDispatch();
+  // 게시글 작성 토글 관리 recoil
+  const [addModalState] = useRecoilState(addArticleState);
+  const [chartModalState, setChartModalState] = useRecoilState(showChart);
+
   return (
     <div className="App">
       <GlobalStyle />
       <ReactModal
-        isOpen={toggleState}
+        isOpen={addModalState}
         style={{
           overlay: {
             position: "fixed",
@@ -53,9 +53,9 @@ function App() {
         <AddArticle />
       </ReactModal>
       <ReactModal
-        isOpen={chartToggle}
+        isOpen={chartModalState}
         onRequestClose={() => {
-          dispatch(chartToggleState(false));
+          setChartModalState(false);
         }}
         style={{
           overlay: {
