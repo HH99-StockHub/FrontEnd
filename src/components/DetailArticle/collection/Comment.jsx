@@ -10,6 +10,7 @@ import {
   useDetailArticleGet,
   useDetailArticleMutate,
 } from "../useDetailArticle";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 
 const Comment = ({ id }) => {
   const queryClient = useQueryClient();
@@ -39,7 +40,6 @@ const Comment = ({ id }) => {
     isError,
     error,
   } = useDetailArticleGet.useCommentInquiry(id);
-  if (isLoading) return <div>불러오는 중입니다.</div>;
   if (isError) toastify.error("댓글 불러오기를 실패했습니다.");
 
   const addComment = (e) => {
@@ -70,9 +70,17 @@ const Comment = ({ id }) => {
         ></Views>
         <Btn type="sumbit">등록하기</Btn>
       </Label>
-      {data.map((v) => {
-        return <CommentCard data={v} key={v.commentId} />;
-      })}
+      <WrapComment>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            {data.map((v) => {
+              return <CommentCard data={v} key={v.commentId} />;
+            })}
+          </>
+        )}
+      </WrapComment>
     </Box>
   );
 };
@@ -125,5 +133,10 @@ const Views = styled.textarea`
   ::placeholder {
     color: var(--gray3);
   }
+`;
+
+const WrapComment = styled.div`
+  position: relative;
+  min-height: 100px;
 `;
 export default Comment;
