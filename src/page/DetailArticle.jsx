@@ -13,6 +13,7 @@ import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticl
 import { useNavigate } from "react-router-dom";
 import SlideStock from "../repeat/SlideStock";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../repeat/LoadingSpinner";
 
 const DetailArticle = () => {
   const navigate = useNavigate();
@@ -42,49 +43,55 @@ const DetailArticle = () => {
       <TotalArticleHeader />
       <Div>
         <Container>
-          <BtnBox>
-            {deleteBtn ? (
-              <Btn
-                onClick={() => {
-                  const data = { postId: id }; //게시글에 대한 데이터 넣기
-                  mutate(data);
-                  navigate(-1);
-                }}
-              >
-                게시글 삭제
-              </Btn>
-            ) : null}
-          </BtnBox>
-          <Writing
-            date={data.createdAt}
-            view={data.viewCount}
-            stockName={data.stockName}
-            articleTitle={data.articleTitle}
-            profileImage={data.profileImage}
-            nickName={data.nickname}
-            userId={data.userId}
-          />
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <BtnBox>
+                {deleteBtn ? (
+                  <Btn
+                    onClick={() => {
+                      const data = { postId: id }; //게시글에 대한 데이터 넣기
+                      mutate(data);
+                      navigate(-1);
+                    }}
+                  >
+                    게시글 삭제
+                  </Btn>
+                ) : null}
+              </BtnBox>
+              <Writing
+                date={data.createdAt}
+                view={data.viewCount}
+                stockName={data.stockName}
+                articleTitle={data.articleTitle}
+                profileImage={data.profileImage}
+                nickName={data.nickname}
+                userId={data.userId}
+              />
 
-          <Stocks
-            date={data.createdAt}
-            stockReturn={data.stockReturn}
-            stockPriceFirst={data.stockPriceFirst}
-            stockPriceLast={data.stockPriceLast}
-          />
-          <View
-            content1={data.content1}
-            content2={data.content2}
-            content3={data.content3}
-            point1={data.point1}
-            point2={data.point2}
-            point3={data.point3}
-          />
-          <Vote
-            id={id}
-            voteUp={data.voteUpCount}
-            voteDown={data.voteDownCount}
-          />
-          <Comment id={id} />
+              <Stocks
+                date={data.createdAt}
+                stockReturn={data.stockReturn}
+                stockPriceFirst={data.stockPriceFirst}
+                stockPriceLast={data.stockPriceLast}
+              />
+              <View
+                content1={data.content1}
+                content2={data.content2}
+                content3={data.content3}
+                point1={data.point1}
+                point2={data.point2}
+                point3={data.point3}
+              />
+              <Vote
+                id={id}
+                voteUp={data.voteUpCount}
+                voteDown={data.voteDownCount}
+              />
+              <Comment id={id} />
+            </>
+          )}
         </Container>
         <Title stockName={data.stockName} />
       </Div>
@@ -93,6 +100,7 @@ const DetailArticle = () => {
 };
 
 const Container = styled.div`
+  position: relative;
   width: 821px;
 `;
 const Div = styled.div`

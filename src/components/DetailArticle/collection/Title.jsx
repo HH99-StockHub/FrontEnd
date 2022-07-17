@@ -12,12 +12,13 @@ import { showChart } from "../../../state/client/modal";
 //이미지
 import { ReactComponent as Poly } from "../../../image/Poly.svg.svg";
 import { ReactComponent as Plus } from "../../../image/Plus.svg";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 
 const Title = (props) => {
   const { stockName } = props;
   // recoil
   const [, setChartModal] = useRecoilState(showChart);
-  const { data = [], refetch } = useDetailArticleGet.useNewsSearch(stockName);
+  const { data = [], isLoading } = useDetailArticleGet.useNewsSearch(stockName);
 
   return (
     <Box>
@@ -81,23 +82,29 @@ const Title = (props) => {
         </MarketDiv>
       </NameDiv>
       <NewsBox>
-        <NewsTitle>{stockName} 관련기사</NewsTitle>
-        {data.map((v, l) => {
-          return (
-            <Newsb
-              onClick={() => {
-                window.open(v.link, "_blank");
-              }}
-              key={l}
-            >
-              <News dangerouslySetInnerHTML={{ __html: v.title }}></News>
-              <NewsP
-                dangerouslySetInnerHTML={{ __html: v.description }}
-              ></NewsP>
-              <NewsP1>{dayjs(v.pubDate).format("YY-MM-DD")}</NewsP1>
-            </Newsb>
-          );
-        })}
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <NewsTitle>{stockName} 관련기사</NewsTitle>
+            {data.map((v, l) => {
+              return (
+                <Newsb
+                  onClick={() => {
+                    window.open(v.link, "_blank");
+                  }}
+                  key={l}
+                >
+                  <News dangerouslySetInnerHTML={{ __html: v.title }}></News>
+                  <NewsP
+                    dangerouslySetInnerHTML={{ __html: v.description }}
+                  ></NewsP>
+                  <NewsP1>{dayjs(v.pubDate).format("YY-MM-DD")}</NewsP1>
+                </Newsb>
+              );
+            })}
+          </>
+        )}
       </NewsBox>
     </Box>
   );
@@ -197,6 +204,7 @@ const NameDiv = styled.div`
 `;
 
 const NewsBox = styled.div`
+  position: relative;
   width: 100%;
   border: 1px solid var(--gray2);
   margin-top: 24px;
