@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 // 훅
@@ -14,9 +14,9 @@ import { loginState } from "../state/client/login";
 //이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 
-const Header = () => {
+const Header = React.memo(() => {
   //recoil
-  const [, setFormState] = useRecoilState(addArticleState);
+  const setFormState = useSetRecoilState(addArticleState);
   const [login, setLoginState] = useRecoilState(loginState);
   const navigate = useNavigate();
   // 로그아웃
@@ -68,7 +68,7 @@ const Header = () => {
       </Header2>
     </Header1>
   );
-};
+});
 
 export default Header;
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 // 훅
 import { toastify } from "../../../custom/toastify";
 // 모듈
@@ -11,7 +11,7 @@ import { ReactComponent as MainBannerSvg } from "../../../image/MainPageBanner.s
 
 const ArticleSubHeader = React.memo(() => {
   // 게시글 작성 토글 상태관리 recoil
-  const [, setFormModal] = useRecoilState(addArticleState);
+  const setFormModal = useSetRecoilState(addArticleState);
   const openTogle = () => {
     const token = getCookie("token");
     if (token !== undefined) {

@@ -1,6 +1,6 @@
 import { api } from "../../shared/api";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 // 모듈
 import { addArticleState } from "../../state/client/modal";
 // 훅
@@ -8,7 +8,7 @@ import { toastify } from "../../custom/toastify";
 
 export const useAddArticleFormMutate = {
   useAddArticleMutation: () => {
-    const [, setFormState] = useRecoilState(addArticleState);
+    const setFormState = useSetRecoilState(addArticleState);
     const queryClient = useQueryClient();
     const fetcher = async (article) => {
       const { data } = await api.post("/article", article);

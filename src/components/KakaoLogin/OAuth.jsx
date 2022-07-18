@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 // 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
@@ -14,7 +14,7 @@ import { loginState } from "../../state/client/login";
 
 const OAuth = () => {
   // recoil
-  const [, setLoginState] = useRecoilState(loginState);
+  const setLoginState = useSetRecoilState(loginState);
   const navigate = useNavigate();
   // calllback으로 받은 인가코드
   const code = new URL(window.location.href).searchParams.get("code");

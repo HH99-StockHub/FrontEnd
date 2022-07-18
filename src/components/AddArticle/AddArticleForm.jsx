@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 //hook
 import {
@@ -23,8 +23,8 @@ import { useCallback } from "react";
 
 const AddArticleForm = () => {
   // recoil
-  const [, setModalState] = useRecoilState(showChart);
-  const [, setFormState] = useRecoilState(addArticleState);
+  const setModalState = useSetRecoilState(showChart);
+  const setFormState = useSetRecoilState(addArticleState);
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
   // key state
