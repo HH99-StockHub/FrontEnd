@@ -9,7 +9,7 @@ import { addArticleState } from "../../../state/client/modal";
 // 이미지
 import { ReactComponent as MainBannerSvg } from "../../../image/MainPageBanner.svg";
 
-const ArticleSubHeader = () => {
+const ArticleSubHeader = React.memo(() => {
   // 게시글 작성 토글 상태관리 recoil
   const [, setFormModal] = useRecoilState(addArticleState);
   const openTogle = () => {
@@ -39,7 +39,7 @@ const ArticleSubHeader = () => {
       </WrapText>
     </SubHeader>
   );
-};
+});
 
 export default ArticleSubHeader;
 
