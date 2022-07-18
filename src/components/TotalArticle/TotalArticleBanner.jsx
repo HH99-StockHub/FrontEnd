@@ -3,7 +3,7 @@ import styled from "styled-components";
 //이미지
 import { ReactComponent as BannerImg } from "../../image/BannerImg.svg";
 
-const TotalArticleBanner = () => {
+const TotalArticleBanner = React.memo(() => {
   return (
     <WrapBanner>
       <BannerText>
@@ -14,7 +14,7 @@ const TotalArticleBanner = () => {
       <BannerImg />
     </WrapBanner>
   );
-};
+});
 
 export default TotalArticleBanner;
 

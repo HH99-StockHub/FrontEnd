@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CandleChart from "./CandleChart";
 import LineChart from "./LineChart";
 
-const ModalChart = () => {
+const DetailChart = () => {
   return (
     <WrapChart>
       {/* <LineChart /> */}
@@ -12,7 +12,7 @@ const ModalChart = () => {
   );
 };
 
-export default ModalChart;
+export default DetailChart;
 
 const WrapChart = styled.div`
   width: 100%;

@@ -95,7 +95,7 @@ export const useDetailArticleGet = {
       const { data } = await api.get(`/articles/${articleId}`);
       return data;
     };
-    return useQuery("ContentInquiry", fetcher);
+    return useQuery(["ContentInquiry", articleId], fetcher);
   },
   //게시글 댓글 목록 조회
   useCommentInquiry: (articleId) => {
