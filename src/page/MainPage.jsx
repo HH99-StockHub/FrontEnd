@@ -8,10 +8,12 @@ import RichArticle from "../components/MainPage/richArticle/RichArticle";
 import FameArticle from "../components/MainPage/FameArticle/FameArticle";
 import ArticleSubHeader from "../components/MainPage/common/ArticleSubHeader";
 import SlideStock from "../repeat/SlideStock";
+import HelmetComponents from "../repeat/HelmetComponents";
 
 const MainPage = () => {
   return (
     <>
+      <HelmetComponents title={"StockHub"} />
       <ArticleSubHeader />
       <SlideStock />
       <WrapMainContent>

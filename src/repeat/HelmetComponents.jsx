@@ -7,7 +7,7 @@ const HelmetComponents = React.memo(({ title }) => {
       <title>{title}</title>
       <meta
         property="og:title"
-        content={`Stock Hub ${title}`}
+        content={`StockHub ${title}`}
         data-react-helmet="true"
       />
       <meta

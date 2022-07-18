@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import SlideStock from "../repeat/SlideStock";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../repeat/LoadingSpinner";
+import HelmetComponents from "../repeat/HelmetComponents";
 
 const DetailArticle = () => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const DetailArticle = () => {
 
   return (
     <>
+      <HelmetComponents title={`${data.stockName} 게시글`} />
       <SlideStock />
       <TotalArticleHeader />
       <Div>
