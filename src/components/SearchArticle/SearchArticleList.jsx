@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import HelmetComponents from "../../repeat/HelmetComponents";
 // 컴포넌트
 import TotalArticleList from "../TotalArticle/TotalArticleList";
 //query 훅
@@ -18,14 +19,15 @@ const SearchArticleList = () => {
   const topic = () => {
     switch (category) {
       case "keyword":
-        return `<b>'${keyword}'</b> 검색 결과`;
+        return `'${keyword}' 검색 결과`;
       default:
-        return `<b>${category}</b> 님의 게시물`;
+        return `${category} 님의 게시물`;
     }
   };
 
   return (
     <WrapList>
+      <HelmetComponents title={topic()} />
       <p dangerouslySetInnerHTML={{ __html: topic() }}></p>
       <TotalArticleList data={data} isLoading={isLoading} />
     </WrapList>
