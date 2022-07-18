@@ -1,5 +1,6 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React, { useEffect, useRef, useState } from "react";
+import { debounce } from "lodash";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
@@ -18,6 +19,7 @@ import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 import LineChart from "../Chart/LineChart";
+import { useCallback } from "react";
 
 const AddArticleForm = () => {
   // recoil
@@ -71,11 +73,35 @@ const AddArticleForm = () => {
   const selectStockList = (e) => {
     if (e.target.value === "") {
       setSelectStockState(null);
+      setStockArr([]);
     } else {
-      setSelectStockState(true);
+      sameStock(e.target.value);
     }
+    //debounce로 함수 실행 늦추기
     setStockInput(e.target.value);
   };
+
+  // 검색어와 동일한 data만 색출하기
+  const sameStock = useCallback(
+    debounce((word) => {
+      setSelectStockState(true);
+      setStockIndex(0);
+      const changeData = data.filter((v) => {
+        if (String(word).length !== 0) {
+          return (
+            v.stockName.slice(0, String(word).length).toLowerCase() ===
+              word.toLowerCase() ||
+            v.stockCode.slice(0, String(word).length).toLowerCase() ===
+              word.toLowerCase()
+          );
+        } else {
+          return false;
+        }
+      });
+      setStockArr(changeData);
+    }, 300),
+    [data],
+  );
 
   // 주식 종목 keydownHander
   const keyDownHandler = (e) => {
@@ -158,7 +184,7 @@ const AddArticleForm = () => {
     }
   };
   // 투자 포인트 작성하기
-  const addStockPoint = (e) => {
+  const addStockPoint = debounce((e) => {
     const element = e.target;
     const newStockPoint = [...stockPoint];
     //input일 때
@@ -176,7 +202,9 @@ const AddArticleForm = () => {
       };
       setStockPoint(newStockPoint);
     }
-  };
+    console.log("실행");
+  }, 300);
+
   // 투자 포인트 input 추가하기
   const addTextarea = () => {
     if (countArr.length < 3) {
@@ -203,32 +231,6 @@ const AddArticleForm = () => {
       toastify.info("최소 하나의 투자 포인트가 있어야합니다.");
     }
   };
-
-  // 검색어와 동일한 data만 색출하기
-  useEffect(() => {
-    setStockIndex(0);
-    const changeSotck = setTimeout(() => {
-      const changeData = data.filter((v) => {
-        if (String(stockInput).length !== 0) {
-          return (
-            v.stockName.slice(0, String(stockInput).length).toLowerCase() ===
-              stockInput.toLowerCase() ||
-            v.stockCode.slice(0, String(stockInput).length).toLowerCase() ===
-              stockInput.toLowerCase()
-          );
-        } else {
-          return false;
-        }
-      });
-      setStockArr(changeData);
-    }, 300);
-    if (stockInput === "") {
-      setStockArr([]);
-    }
-    return () => {
-      clearTimeout(changeSotck);
-    };
-  }, [stockInput, data]);
 
   // 토글 창 오픈시 스크롤 막기 , 닫기 클릭 시 해제
   useEffect(() => {
