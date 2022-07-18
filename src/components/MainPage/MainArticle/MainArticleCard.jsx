@@ -38,7 +38,7 @@ const MainArticleCard = ({
       <p style={{ width: "64px" }}>{watch}</p>
       <p style={{ width: "64px" }}>{today}</p>
       <p style={{ width: "64px" }}>
-        <Link to={`/search/article/${user}/${userId}`}>{user}</Link>
+        <Link to={`/search/article/${user}/${userId}/1`}>{user}</Link>
       </p>
     </WrapCard>
   );

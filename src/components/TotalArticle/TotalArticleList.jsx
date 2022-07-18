@@ -79,7 +79,7 @@ const TotalArticleList = ({ data, isLoading }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate(
-                        `/search/article/${data.nickname}/${data.userId}`,
+                        `/search/article/${data.nickname}/${data.userId}/1`,
                       );
                     }}
                   >

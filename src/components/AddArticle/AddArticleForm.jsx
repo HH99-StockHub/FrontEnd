@@ -202,7 +202,6 @@ const AddArticleForm = () => {
       };
       setStockPoint(newStockPoint);
     }
-    console.log("실행");
   }, 300);
 
   // 투자 포인트 input 추가하기
