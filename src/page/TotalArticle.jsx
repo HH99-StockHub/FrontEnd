@@ -52,8 +52,8 @@ const TotalArticle = () => {
   return (
     <>
       <SlideStock />
+      <HelmetComponents title={`${titleCategory}`} />
       <Box>
-        <HelmetComponents title={`${titleCategory}`} />
         <TotalArticleHeader />
         {isLoading ? (
           <LoadingSpinner />
@@ -82,7 +82,7 @@ const Div = styled.div`
   margin: 0 auto;
 `;
 const Box = styled.div`
-  min-height: 120vh;
+  min-height: 90vh;
   background: #f5f5f5;
 `;
 export default TotalArticle;

@@ -8,6 +8,7 @@ import LoadingSpinner from "../../repeat/LoadingSpinner";
 // 컴포넌트
 import TotalArticleList from "../TotalArticle/TotalArticleList";
 import TotalPagenation from "../TotalArticle/TotalPagenation";
+import NotSearch from "./NotSearch";
 //query 훅
 import { useGetSearchArticle } from "./useSearchArticleQuery";
 
@@ -41,6 +42,8 @@ const SearchArticleList = () => {
       <p dangerouslySetInnerHTML={{ __html: topic() }}></p>
       {isLoading ? (
         <LoadingSpinner />
+      ) : data.totalPages === 0 ? (
+        <NotSearch keyword={keyword} />
       ) : (
         <>
           <TotalArticleList
