@@ -25,7 +25,7 @@ const AddFormModal = () => {
           background: "#fff",
           overflow: "hidden",
           width: "720px",
-          height: "800px",
+          height: "700px",
           margin: "auto",
         },
       }}

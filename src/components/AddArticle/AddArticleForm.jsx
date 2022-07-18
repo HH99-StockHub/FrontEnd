@@ -202,7 +202,6 @@ const AddArticleForm = () => {
       };
       setStockPoint(newStockPoint);
     }
-    console.log("실행");
   }, 300);
 
   // 투자 포인트 input 추가하기
@@ -556,14 +555,11 @@ const PlusBtn = styled.button`
 
 const WrapBtn = styled.div`
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 12px;
-  margin: 24px 0;
+  gap: 22px;
+  margin: 0 79px;
   button {
     width: 100%;
     height: 40px;
-    max-width: 562px;
     color: var(--white);
     &:first-child {
       background-color: var(--blue1);
