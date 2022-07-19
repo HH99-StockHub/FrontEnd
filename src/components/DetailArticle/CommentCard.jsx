@@ -15,8 +15,8 @@ const CommentCard = ({ data }) => {
     mutate(commentId);
   };
   useEffect(() => {
-    const currentUserId = localStorage.getItem("profileImg");
-    if (currentUserId === data.profileImage) {
+    const currentUserId = localStorage.getItem("id");
+    if (currentUserId === data.userId) {
       setDeleteBtn(true);
       setCircle(false);
     }

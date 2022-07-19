@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { toastify } from "../../custom/toastify";
+// 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 import TotalArticleList from "../TotalArticle/TotalArticleList";
 import TotalPagenation from "../TotalArticle/TotalPagenation";
 import NotSearch from "./NotSearch";
 import { useGetSearchArticle } from "./useSearchArticleQuery";
+// 훅
+import { toastify } from "../../custom/toastify";
 
 const SearchArticleContent = ({ category, keyword, page }) => {
   const { data, isLoading, isError } = useGetSearchArticle.useGetSearchKeyword(
