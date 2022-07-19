@@ -8,10 +8,16 @@ import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import CardHeader from "./CardHeader";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
+import { toastify } from "../../../custom/toastify";
 
 const FramRichArticle = () => {
   // useQuery
-  const { data = [], isLoading } = useMainPageQuery.useGetFameRichArticle();
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useMainPageQuery.useGetFameRichArticle();
+  if (isError) toastify.error("Best 수익왕 불러오기를 실패했습니다.");
   return (
     <WrapRich>
       {isLoading && <LoadingSpinner />}
