@@ -20,5 +20,6 @@ export default PopularArticle;
 
 const WrapCard = styled.div`
   width: 588px;
-  height: 288px;
+  min-height: 288px;
+  margin-bottom: 30px;
 `;

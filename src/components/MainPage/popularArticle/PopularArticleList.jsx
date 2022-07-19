@@ -23,23 +23,19 @@ const PopularArticleList = () => {
       {isLoading && <LoadingSpinner />}
       {data.map((v) => {
         return (
-          <div>
-            <WrapCard>
-              <Link to={`/detail/article/${v.id}`} key={v.articleId}>
-                <WrapImgText>
-                  <CardTextPopular up={v.voteUpCount} />
-                </WrapImgText>
-                <WrapText>{v.articleTitle}</WrapText>
-              </Link>
-              <Link to="/">
-                <Porfile
-                  nickname={v.nickname}
-                  img={v.profileImage}
-                  userId={v.userId}
-                />
-              </Link>
-            </WrapCard>
-          </div>
+          <WrapCard key={v.articleId}>
+            <Link to={`/detail/article/${v.articleId}`}>
+              <WrapImgText>
+                <CardTextPopular up={v.voteUpCount} />
+              </WrapImgText>
+              <WrapText>{v.articleTitle}</WrapText>
+            </Link>
+            <Porfile
+              nickname={v.nickname}
+              img={v.profileImage}
+              userId={v.userId}
+            />
+          </WrapCard>
         );
       })}
     </ArticleBox>
@@ -51,7 +47,7 @@ export default PopularArticleList;
 const ArticleBox = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24px 15px;
   flex-wrap: wrap;
   width: 588px;
@@ -67,6 +63,7 @@ const WrapCard = styled.div`
   height: 157px;
   padding: 16px;
   border: 1px solid var(--gray2);
+  border-radius: 6px;
 `;
 const WrapImgText = styled.div`
   display: flex;

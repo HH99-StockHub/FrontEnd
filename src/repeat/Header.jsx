@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useRecoilState, useSetRecoilState } from "recoil";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 // 훅
@@ -9,27 +9,27 @@ import { getCookie } from "../shared/Cookie";
 import { toastify } from "../custom/toastify";
 import { deleteCookie } from "../shared/Cookie";
 // 모듈
-import { loginState } from "../redux/modules/login";
-import { togleState } from "../redux/modules/toggleState";
+import { addArticleState } from "../state/client/modal";
+import { loginState } from "../state/client/login";
 //이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 
-const Header = () => {
-  const dispatch = useDispatch();
+const Header = React.memo(() => {
+  //recoil
+  const setFormState = useSetRecoilState(addArticleState);
+  const [login, setLoginState] = useRecoilState(loginState);
   const navigate = useNavigate();
-  // 로그인 상태관리
-  const login = useSelector((state) => state.user.loginState);
   // 로그아웃
   const onLogout = (e) => {
     deleteCookie("token");
     localStorage.removeItem("id");
     localStorage.removeItem("profileImg");
-    dispatch(loginState(false));
+    setLoginState(false);
     toastify.success("정상 로그아웃");
   };
 
   const openAddArticle = () => {
-    dispatch(togleState(true));
+    setFormState(true);
   };
 
   // 토큰, id 유무 체크
@@ -38,7 +38,7 @@ const Header = () => {
     const userId = localStorage.getItem("id");
     const profileImg = localStorage.getItem("profileImg");
     if (cookie !== undefined && userId !== null && profileImg !== null) {
-      dispatch(loginState(true));
+      setLoginState(true);
     } else {
       deleteCookie("token");
       localStorage.removeItem("id");
@@ -68,7 +68,7 @@ const Header = () => {
       </Header2>
     </Header1>
   );
-};
+});
 
 export default Header;
 

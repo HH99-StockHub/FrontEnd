@@ -13,6 +13,8 @@ import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticl
 import { useNavigate } from "react-router-dom";
 import SlideStock from "../repeat/SlideStock";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../repeat/LoadingSpinner";
+import HelmetComponents from "../repeat/HelmetComponents";
 
 const DetailArticle = () => {
   const navigate = useNavigate();
@@ -24,7 +26,6 @@ const DetailArticle = () => {
     isError,
     error,
   } = useDetailArticleGet.useContentInquiry(id);
-
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
   const [deleteBtn, setDeleteBtn] = useState(false);
@@ -39,48 +40,60 @@ const DetailArticle = () => {
 
   return (
     <>
+      <HelmetComponents title={`${data.stockName} 게시글`} />
       <SlideStock />
       <TotalArticleHeader />
       <Div>
         <Container>
-          <BtnBox>
-            {deleteBtn ? (
-              <Btn
-                onClick={() => {
-                  const data = { postId: id }; //게시글에 대한 데이터 넣기
-                  mutate(data);
-                  navigate(-1);
-                }}
-              >
-                게시글 삭제
-              </Btn>
-            ) : null}
-          </BtnBox>
-          <Writing
-            date={data.createdAt}
-            view={data.viewCount}
-            stockName={data.stockName}
-            articleTitle={data.articleTitle}
-            profileImage={data.profileImage}
-            nickName={data.nickname}
-            userId={data.userId}
-          />
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <BtnBox>
+                {deleteBtn ? (
+                  <Btn
+                    onClick={() => {
+                      const data = { postId: id }; //게시글에 대한 데이터 넣기
+                      mutate(data);
+                      navigate(-1);
+                    }}
+                  >
+                    게시글 삭제
+                  </Btn>
+                ) : null}
+              </BtnBox>
+              <Writing
+                date={data.createdAt}
+                view={data.viewCount}
+                stockName={data.stockName}
+                articleTitle={data.articleTitle}
+                profileImage={data.profileImage}
+                nickName={data.nickname}
+                userId={data.userId}
+              />
 
-          <Stocks date={data.createdAt} />
-          <View
-            content1={data.content1}
-            content2={data.content2}
-            content3={data.content3}
-            point1={data.point1}
-            point2={data.point2}
-            point3={data.point3}
-          />
-          <Vote
-            id={id}
-            voteUp={data.voteUpCount}
-            voteDown={data.voteDownCount}
-          />
-          <Comment id={id} />
+              <Stocks
+                date={data.createdAt}
+                stockReturn={data.stockReturn}
+                stockPriceFirst={data.stockPriceFirst}
+                stockPriceLast={data.stockPriceLast}
+              />
+              <View
+                content1={data.content1}
+                content2={data.content2}
+                content3={data.content3}
+                point1={data.point1}
+                point2={data.point2}
+                point3={data.point3}
+              />
+              <Vote
+                id={id}
+                voteUp={data.voteUpCount}
+                voteDown={data.voteDownCount}
+              />
+              <Comment id={id} />
+            </>
+          )}
         </Container>
         <Title stockName={data.stockName} />
       </Div>
@@ -89,12 +102,12 @@ const DetailArticle = () => {
 };
 
 const Container = styled.div`
+  position: relative;
   width: 821px;
 `;
 const Div = styled.div`
   display: flex;
-  justify-content: flex-start;
-
+  gap: 16px;
   width: 1240px;
   margin: 0 auto;
   position: relative;
