@@ -90,7 +90,7 @@ const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
         navigate(`/search/article/${category}/${keyword}/1`);
       }
     }
-  }, []);
+  }, [category, keyword, lastpage, navigate, nowPage, totalPages, type]);
 
   // 마지막 페이지 리스트일 경우 배열 갯수 조절하기
   useEffect(() => {
@@ -103,7 +103,7 @@ const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
       const count = String(lastpage).slice(-1);
       setBtnCount(btnCount.slice(0, Number(count)));
     }
-  }, [page]);
+  }, [page, btnCount, lastpage]);
   return (
     <WrapAllBtn>
       <button onClick={navigatePrevious}>

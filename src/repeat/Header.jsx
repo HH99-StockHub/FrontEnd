@@ -43,7 +43,7 @@ const Header = React.memo(() => {
       deleteCookie("token");
       localStorage.removeItem("id");
     }
-  }, []);
+  }, [setLoginState]);
   return (
     <Header1>
       <Header2>
@@ -56,7 +56,10 @@ const Header = React.memo(() => {
         </Logo1>
         {login ? (
           <WrapMenu>
-            <Profile src={localStorage.getItem("profileImg")} alt="프로필" />
+            <Profile
+              src={localStorage.getItem("profileImg")}
+              alt="프로필 이미지"
+            />
             <Notice>알림</Notice>
             <button onClick={onLogout}>로그아웃</button>
             <button>내 게시물</button>

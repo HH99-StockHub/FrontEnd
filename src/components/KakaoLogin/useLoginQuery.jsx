@@ -1,5 +1,5 @@
 import { api } from "../../shared/api";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 
 export const useLoginQuery = {
   //kakao login

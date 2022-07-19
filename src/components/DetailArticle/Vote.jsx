@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useDetailArticleMutate } from "./useDetailArticle";
-import { ReactComponent as UpSvg } from "../../image/Up.svg";
-import { ReactComponent as DownSvg } from "../../image/Down.svg";
 
 const Vote = (props) => {
   const { id, voteUp, voteDown } = props;

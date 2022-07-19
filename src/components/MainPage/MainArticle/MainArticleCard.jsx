@@ -1,10 +1,8 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import { useState } from "react";
-import { useEffect } from "react";
 const MainArticleCard = ({
   date,
   title,
@@ -27,7 +25,7 @@ const MainArticleCard = ({
         setToday("오늘");
       }
     }
-  }, []);
+  }, [date]);
   return (
     <WrapCard>
       <p style={{ width: "244px" }}>

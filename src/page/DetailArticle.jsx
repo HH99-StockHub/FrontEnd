@@ -1,20 +1,23 @@
-import React from "react";
-import Vote from "../components/DetailArticle/Vote";
-import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
-import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+// 컴포넌트
+import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
 import Title from "../components/DetailArticle/collection/Title";
 import Writing from "../components/DetailArticle/collection/Writing";
 import Stocks from "../components/DetailArticle/collection/Stocks";
 import View from "../components/DetailArticle/collection/View";
 import Comment from "../components/DetailArticle/collection/Comment";
-import { useParams } from "react-router-dom";
-import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
-import { useNavigate } from "react-router-dom";
+import Vote from "../components/DetailArticle/Vote";
 import SlideStock from "../repeat/SlideStock";
-import { useEffect, useState } from "react";
 import LoadingSpinner from "../repeat/LoadingSpinner";
 import HelmetComponents from "../repeat/HelmetComponents";
+// 훅
+import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
+import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
+import { toastify } from "../custom/toastify";
 
 const DetailArticle = () => {
   const navigate = useNavigate();
@@ -24,7 +27,6 @@ const DetailArticle = () => {
     data = [],
     isLoading,
     isError,
-    error,
   } = useDetailArticleGet.useContentInquiry(id);
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
@@ -38,6 +40,7 @@ const DetailArticle = () => {
     }
   }, [data?.userId]);
 
+  if (isError) toastify.error("정보 불러오기를 실패했습니다.");
   return (
     <>
       <HelmetComponents title={`${data.stockName} 게시글`} />

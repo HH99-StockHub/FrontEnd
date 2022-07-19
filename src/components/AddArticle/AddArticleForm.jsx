@@ -1,5 +1,5 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
@@ -66,26 +66,23 @@ const AddArticleForm = () => {
   };
 
   // 검색어와 동일한 data만 색출하기
-  const sameStock = useCallback(
-    debounce((word) => {
-      setSelectStockState(true);
-      setStockIndex(0);
-      const changeData = data.filter((v) => {
-        if (String(word).length !== 0) {
-          return (
-            v.stockName.slice(0, String(word).length).toLowerCase() ===
-              word.toLowerCase() ||
-            v.stockCode.slice(0, String(word).length).toLowerCase() ===
-              word.toLowerCase()
-          );
-        } else {
-          return false;
-        }
-      });
-      setStockArr(changeData);
-    }, 300),
-    [data],
-  );
+  const sameStock = debounce((word) => {
+    setSelectStockState(true);
+    setStockIndex(0);
+    const changeData = data.filter((v) => {
+      if (String(word).length !== 0) {
+        return (
+          v.stockName.slice(0, String(word).length).toLowerCase() ===
+            word.toLowerCase() ||
+          v.stockCode.slice(0, String(word).length).toLowerCase() ===
+            word.toLowerCase()
+        );
+      } else {
+        return false;
+      }
+    });
+    setStockArr(changeData);
+  }, 300);
 
   // 주식 종목 keydownHander
   const keyDownHandler = (e) => {

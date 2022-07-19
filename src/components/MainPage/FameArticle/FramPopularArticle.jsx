@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 //컴포넌트
 import FramPopularCard from "./FramPopularCard";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
+import CardHeader from "./CardHeader";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
-import CardHeader from "./CardHeader";
-import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import { toastify } from "../../../custom/toastify";
 
 const FramPopularArticle = () => {
