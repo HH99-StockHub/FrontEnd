@@ -34,9 +34,7 @@ const CommentCard = ({ data }) => {
       <WrapContent>
         <P3>
           <P3div>
-            <Img>
-              <Img1 src={data.profileImage} />
-            </Img>
+            <Img src={data.profileImage} alt="프로필" />
             <P3p>{data.nickname}</P3p>
           </P3div>
           <P3pre>{data.comments}</P3pre>
@@ -154,11 +152,7 @@ const P3 = styled.div`
   color: var(--black);
 `;
 
-const Img1 = styled.img`
-  width: 100%;
-`;
-
-const Img = styled.div`
+const Img = styled.img`
   border-radius: 100%;
   width: 32px;
   height: 32px;

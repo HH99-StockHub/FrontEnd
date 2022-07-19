@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Porfile = ({ img, nickname, userId }) => {
   return (
     <WrapProfile>
-      <img src={img} alt="프로필" />
+      <img src={img} alt="프로필 이미지" />
       <p>
         <Link to={`/search/article/${nickname}/${userId}/1`}>
           by. {nickname} 님

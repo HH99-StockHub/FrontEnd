@@ -70,7 +70,7 @@ const TotalArticleList = ({ data }) => {
               </Random>
               <Just>
                 <Random>
-                  <Img src={data.profileImage} alt="프로필" />
+                  <Img src={data.profileImage} alt="프로필 이미지" />
                   <P3
                     id="userNickname"
                     onClick={(e) => {
