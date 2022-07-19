@@ -1,25 +1,23 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { debounce } from "lodash";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
-
+// 컴포넌트
+import LoadingSpinner from "../../repeat/LoadingSpinner";
+import AddArticleChoosePoint from "./AddArticleChoosePoint";
+import LineChart from "../Chart/LineChart";
 //hook
 import {
   useAddArticleFormMutate,
   useAddArticleFormQuery,
 } from "./useAddArticleFormQuery";
 import { toastify } from "../../custom/toastify";
-
-import { stockData } from "../../Data/stockData";
 // 모듈
+import { stockData } from "../../Data/stockData";
 import { addArticleState, showChart } from "../../state/client/modal";
 //이미지
-import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
-import LoadingSpinner from "../../repeat/LoadingSpinner";
-import LineChart from "../Chart/LineChart";
-import { useCallback } from "react";
 
 const AddArticleForm = () => {
   // recoil
@@ -40,20 +38,12 @@ const AddArticleForm = () => {
   const [stockInput, setStockInput] = useState("");
   //선택 주식 주가
   const [currentStock, setCurrentStock] = useState("현재 주가");
-  // 투자 포인트 데이터
-  const [stockPoint, setStockPoint] = useState([
-    {
-      title: "",
-      content: "",
-    },
-    { title: "", content: "" },
-    { title: "", content: "" },
-  ]);
+
   // title가져오기
   const articleTitle = useRef("");
   const wrapTagStockList = useRef();
-
-  //예시 arr
+  // 투자 포인트
+  const choosePoint = useRef("");
 
   // stockName 전체 부르기
   const { data = stockData } = useAddArticleFormQuery.useGetStockName();
@@ -157,16 +147,21 @@ const AddArticleForm = () => {
   const writeArticle = (e) => {
     e.preventDefault();
     let state = false;
-    countArr.forEach((v, l) => {
+    const refArr = choosePoint.current.children;
+    // console.log(refArr[1].children[1].value);
+
+    // 투자 포인트 공백 체크
+    for (let i = 0; i < refArr.length; i++) {
       if (
-        stockPoint[l]?.content === undefined ||
-        stockPoint[l]?.title === undefined ||
-        stockPoint[l]?.content === "" ||
-        stockPoint[l]?.title === ""
+        refArr[i].children[1].value === undefined ||
+        refArr[i].children[3].value === undefined ||
+        refArr[i].children[1].value === "" ||
+        refArr[i].children[3].value === ""
       ) {
         state = true;
       }
-    });
+    }
+
     if (selectStockState === null || selectStockState) {
       toastify.info("종목을 선택해주세요");
     } else if (articleTitle.current.value === "" || state) {
@@ -176,58 +171,17 @@ const AddArticleForm = () => {
         articleTitle: articleTitle.current.value,
         stockName: stockInput,
       };
-      stockPoint.forEach((v, l) => {
-        data["point" + String(l + 1)] = v.title;
-        data["content" + String(l + 1)] = v.content;
-      });
-      addArticle(data);
-    }
-  };
-  // 투자 포인트 작성하기
-  const addStockPoint = debounce((e) => {
-    const element = e.target;
-    const newStockPoint = [...stockPoint];
-    //input일 때
-    if (element.id !== "") {
-      newStockPoint[element.id] = {
-        ...newStockPoint[element.id],
-        title: element.value,
-      };
-      setStockPoint(newStockPoint);
-      // textarea일 때
-    } else {
-      newStockPoint[element.name] = {
-        ...newStockPoint[element.name],
-        content: element.value,
-      };
-      setStockPoint(newStockPoint);
-    }
-  }, 300);
-
-  // 투자 포인트 input 추가하기
-  const addTextarea = () => {
-    if (countArr.length < 3) {
-      setCountArr([...countArr, { key: key }]);
-      setKey(key + 1);
-      if (countArr.length === 2) setPointBtnState(false);
-    } else {
-      toastify.info("최대 3개까지 등록 가능합니다");
-    }
-  };
-  // 투자 포인트 삭제하기
-  const deleteTextarea = (e, index) => {
-    if (countArr.length !== 1) {
-      const newArr = countArr.filter((v, l) => {
-        return String(l) !== String(index);
-      });
-      setCountArr(newArr);
-      const newStockPoint = stockPoint.filter((v, l) => {
-        return Number(l) !== Number(index);
-      });
-      setStockPoint(newStockPoint);
-      setPointBtnState(true);
-    } else {
-      toastify.info("최소 하나의 투자 포인트가 있어야합니다.");
+      for (let i = 0; i < 3; i++) {
+        if (refArr[i] !== undefined) {
+          data["point" + String(i + 1)] = refArr[i].children[1].value;
+          data["content" + String(i + 1)] = refArr[i].children[3].value;
+        } else {
+          data["point" + String(i + 1)] = "";
+          data["content" + String(i + 1)] = "";
+        }
+      }
+      console.log(data);
+      // addArticle(data);
     }
   };
 
@@ -298,51 +252,7 @@ const AddArticleForm = () => {
                 ref={articleTitle}
               />
             </WrapTitle>
-            <div>
-              {countArr.map((v, l) => {
-                return (
-                  <WrapTextarea key={v.key}>
-                    <WrapPointHeader>
-                      <p>투자 포인트 {l + 1} (최대 3개 작성 가능)</p>
-                      {l === 0 ? null : (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            deleteTextarea(e, l);
-                          }}
-                        >
-                          <XBtnSvg
-                            width="6.59"
-                            height="6.59"
-                            fill="var(--pink1)"
-                          />
-                        </button>
-                      )}
-                    </WrapPointHeader>
-                    <input
-                      id={l}
-                      type="text"
-                      placeholder="투자포인트 요약"
-                      onChange={addStockPoint}
-                    />
-
-                    <br></br>
-                    <TextareaText
-                      name={l}
-                      cols="30"
-                      rows="5"
-                      placeholder="상세내용 작성"
-                      onChange={addStockPoint}
-                    ></TextareaText>
-                  </WrapTextarea>
-                );
-              })}
-            </div>
-            {pointBtnState && (
-              <PlusBtn type="button" onClick={addTextarea}>
-                투자포인트 추가
-              </PlusBtn>
-            )}
+            <AddArticleChoosePoint choosePoint={choosePoint} />
           </ScrollScope>
         </WrapText>
         <WrapBtn>
@@ -446,41 +356,6 @@ const ScrollScope = styled.div`
   }
 `;
 
-const WrapPointHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 9px;
-  > p {
-    font-size: 12px;
-  }
-  > button {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-  }
-`;
-
-const WrapTextarea = styled.div`
-  input {
-    width: 100%;
-    height: 44px;
-    padding: 14.5px 10px;
-    margin-bottom: 8px;
-  }
-`;
-
-const TextareaText = styled.textarea`
-  width: 100%;
-  height: 137px;
-  padding: 10px;
-  margin-bottom: 20px;
-  resize: none;
-`;
-
 const ChartBox = styled.div`
   display: flex;
   gap: 8px;
@@ -544,13 +419,6 @@ const StockList = styled.div`
       }}) {
     background-color: var(--gray1);
   }
-`;
-
-const PlusBtn = styled.button`
-  padding: 8px 12px;
-  font-size: 12px;
-  color: var(--white);
-  background-color: var(--green2);
 `;
 
 const WrapBtn = styled.div`
