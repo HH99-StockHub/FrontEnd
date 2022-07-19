@@ -11,6 +11,8 @@ import styled from "styled-components";
 // query 훅
 import { useTotalPageQuery } from "../components/TotalArticle/useTotalPageQuery";
 import SlideStock from "../repeat/SlideStock";
+import LoadingSpinner from "../repeat/LoadingSpinner";
+import { toastify } from "../custom/toastify";
 
 const TotalArticle = () => {
   // 카테고리별 meta title 변경
@@ -18,11 +20,11 @@ const TotalArticle = () => {
   // URL 정보가져오기
   const { category, page } = useParams();
   // useQuery
-  const { data = [], isLoading } = useTotalPageQuery.useGetAllArticles(
-    category,
-    "page",
-  );
-
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useTotalPageQuery.useGetAllArticles(category, page);
   useEffect(() => {
     switch (category) {
       case "all":
@@ -41,17 +43,34 @@ const TotalArticle = () => {
         break;
     }
   }, [category]);
+
+  // 불러오기 실패
+  if (isError) {
+    toastify.error("불러오기를 실패했습니다");
+  }
+
   return (
     <>
       <SlideStock />
+      <HelmetComponents title={`${titleCategory}`} />
       <Box>
-        <HelmetComponents title={`${titleCategory}`} />
         <TotalArticleHeader />
-        <Div>
-          <TotalArticleBanner />
-          <TotalArticleContent data={data} isLoading={isLoading} />
-          <TotalPagenation category={category} nowPage={page} />
-        </Div>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <Div>
+            <TotalArticleBanner />
+            <TotalArticleContent
+              data={data.content === undefined ? [] : data.content}
+            />
+            <TotalPagenation
+              category={category}
+              nowPage={page}
+              totalPages={data.totalPages}
+              type="total"
+            />
+          </Div>
+        )}
       </Box>
     </>
   );
@@ -63,7 +82,7 @@ const Div = styled.div`
   margin: 0 auto;
 `;
 const Box = styled.div`
-  min-height: 120vh;
+  min-height: 90vh;
   background: #f5f5f5;
 `;
 export default TotalArticle;

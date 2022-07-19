@@ -8,7 +8,9 @@ const CardHeader = ({ title, nickname, userId }) => {
     <Header>
       <div>{title} 분석글</div>
       <div>
-        <Link to={`/search/article/${nickname}/${userId}`}>{nickname} 님</Link>
+        <Link to={`/search/article/${nickname}/${userId}/1`}>
+          {nickname} 님
+        </Link>
       </div>
     </Header>
   );

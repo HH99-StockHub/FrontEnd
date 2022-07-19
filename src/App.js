@@ -37,7 +37,7 @@ function App() {
         <Route path="/detail/article/:id" element={<DetailArticle />} />
         <Route path="/user/kakao/callback" element={<OAuth />} />
         <Route
-          path="/search/article/:category/:keyword"
+          path="/search/article/:category/:keyword/:page"
           element={<SearchArticle />}
         />
       </Routes>
