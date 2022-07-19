@@ -1,23 +1,30 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React, { useEffect, useRef, useState } from "react";
+import { debounce } from "lodash";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+
 //hook
-import { useAddArticleFormMutate } from "./useAddArticleFormQuery";
+import {
+  useAddArticleFormMutate,
+  useAddArticleFormQuery,
+} from "./useAddArticleFormQuery";
 import { toastify } from "../../custom/toastify";
-// 모듈
+
 import { stockData } from "../../Data/stockData";
-import { chartToggleState, togleState } from "../../redux/modules/toggleState";
+// 모듈
+import { addArticleState, showChart } from "../../state/client/modal";
 //이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 import LineChart from "../Chart/LineChart";
+import { useCallback } from "react";
 
 const AddArticleForm = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // recoil
+  const setModalState = useSetRecoilState(showChart);
+  const setFormState = useSetRecoilState(addArticleState);
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
   // key state
@@ -47,8 +54,9 @@ const AddArticleForm = () => {
   const wrapTagStockList = useRef();
 
   //예시 arr
-  const data = stockData;
 
+  // stockName 전체 부르기
+  const { data = stockData } = useAddArticleFormQuery.useGetStockName();
   // useMutation 사용
   const { mutate: addArticle, stockLoading: addLoading } =
     useAddArticleFormMutate.useAddArticleMutation();
@@ -65,11 +73,35 @@ const AddArticleForm = () => {
   const selectStockList = (e) => {
     if (e.target.value === "") {
       setSelectStockState(null);
+      setStockArr([]);
     } else {
-      setSelectStockState(true);
+      sameStock(e.target.value);
     }
+    //debounce로 함수 실행 늦추기
     setStockInput(e.target.value);
   };
+
+  // 검색어와 동일한 data만 색출하기
+  const sameStock = useCallback(
+    debounce((word) => {
+      setSelectStockState(true);
+      setStockIndex(0);
+      const changeData = data.filter((v) => {
+        if (String(word).length !== 0) {
+          return (
+            v.stockName.slice(0, String(word).length).toLowerCase() ===
+              word.toLowerCase() ||
+            v.stockCode.slice(0, String(word).length).toLowerCase() ===
+              word.toLowerCase()
+          );
+        } else {
+          return false;
+        }
+      });
+      setStockArr(changeData);
+    }, 300),
+    [data],
+  );
 
   // 주식 종목 keydownHander
   const keyDownHandler = (e) => {
@@ -152,7 +184,7 @@ const AddArticleForm = () => {
     }
   };
   // 투자 포인트 작성하기
-  const addStockPoint = (e) => {
+  const addStockPoint = debounce((e) => {
     const element = e.target;
     const newStockPoint = [...stockPoint];
     //input일 때
@@ -170,7 +202,8 @@ const AddArticleForm = () => {
       };
       setStockPoint(newStockPoint);
     }
-  };
+  }, 300);
+
   // 투자 포인트 input 추가하기
   const addTextarea = () => {
     if (countArr.length < 3) {
@@ -197,30 +230,6 @@ const AddArticleForm = () => {
       toastify.info("최소 하나의 투자 포인트가 있어야합니다.");
     }
   };
-
-  // 검색어와 동일한 data만 색출하기
-  useEffect(() => {
-    setStockIndex(0);
-    const changeSotck = setTimeout(() => {
-      const changeData = data.filter((v, l) => {
-        if (String(stockInput).length !== 0) {
-          return (
-            v.stockName.slice(0, String(stockInput).length) === stockInput ||
-            v.stockCode.slice(0, String(stockInput).length) === stockInput
-          );
-        } else {
-          return false;
-        }
-      });
-      setStockArr(changeData);
-    }, 300);
-    if (stockInput === "") {
-      setStockArr([]);
-    }
-    return () => {
-      clearTimeout(changeSotck);
-    };
-  }, [stockInput]);
 
   // 토글 창 오픈시 스크롤 막기 , 닫기 클릭 시 해제
   useEffect(() => {
@@ -270,7 +279,7 @@ const AddArticleForm = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    dispatch(chartToggleState(true));
+                    setModalState(true);
                   }}
                 >
                   그래프 보기
@@ -341,7 +350,7 @@ const AddArticleForm = () => {
           <button
             type="button"
             onClick={() => {
-              dispatch(togleState(false));
+              setFormState(false);
             }}
           >
             취소하기
@@ -359,11 +368,13 @@ const WrapForm = styled.div`
   max-width: 720px;
   background-color: var(--white);
 `;
+
 const WrapText = styled.div`
   padding: 24px 79px 48px;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--gray2);
 `;
+
 const Header = styled.div`
   display: flex;
   justify-content: center;
@@ -395,7 +406,9 @@ const WrapSearch = styled.div`
     color: var(--gray3);
   }
 `;
+
 const WrapSelect = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -408,6 +421,7 @@ const WrapSelect = styled.div`
     outline: none;
   }
 `;
+
 const WrapTitle = styled.div`
   margin-top: 25px;
   > p {
@@ -458,6 +472,7 @@ const WrapTextarea = styled.div`
     margin-bottom: 8px;
   }
 `;
+
 const TextareaText = styled.textarea`
   width: 100%;
   height: 137px;
@@ -490,9 +505,9 @@ const ChartBox = styled.div`
 const StockList = styled.div`
   position: absolute;
   border: 1px solid var(--gray2);
-  top: 44px;
+  top: 42px;
   left: 0;
-  width: 385px;
+  width: 100%;
   height: 264px;
   overflow-y: auto;
   background-color: var(--white);
@@ -540,14 +555,11 @@ const PlusBtn = styled.button`
 
 const WrapBtn = styled.div`
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 12px;
-  margin: 24px 0;
+  gap: 22px;
+  margin: 0 79px;
   button {
     width: 100%;
     height: 40px;
-    max-width: 562px;
     color: var(--white);
     &:first-child {
       background-color: var(--blue1);

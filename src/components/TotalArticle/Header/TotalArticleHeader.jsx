@@ -5,7 +5,7 @@ import styled from "styled-components";
 import HeaderCategory from "./HeaderCategory";
 import Search from "./Search";
 
-const TotalArticleHeader = () => {
+const TotalArticleHeader = React.memo(() => {
   return (
     <Wrap>
       <WrapHeader>
@@ -14,7 +14,7 @@ const TotalArticleHeader = () => {
       </WrapHeader>
     </Wrap>
   );
-};
+});
 
 export default TotalArticleHeader;
 
@@ -29,6 +29,6 @@ const WrapHeader = styled.div`
 
 const Wrap = styled.div`
   width: 100%;
-  border-bottom: 1px solid var(--gray3);
+  border-bottom: 1px solid var(--gray2);
   margin-bottom: 36px;
 `;

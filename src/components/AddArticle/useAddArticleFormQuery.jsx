@@ -1,14 +1,14 @@
 import { api } from "../../shared/api";
-import { useMutation, useQueryClient } from "react-query";
-import { useDispatch } from "react-redux";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useSetRecoilState } from "recoil";
 // 모듈
-import { togleState } from "../../redux/modules/toggleState";
+import { addArticleState } from "../../state/client/modal";
 // 훅
 import { toastify } from "../../custom/toastify";
 
 export const useAddArticleFormMutate = {
   useAddArticleMutation: () => {
-    const dispatch = useDispatch();
+    const setFormState = useSetRecoilState(addArticleState);
     const queryClient = useQueryClient();
     const fetcher = async (article) => {
       const { data } = await api.post("/article", article);
@@ -19,7 +19,7 @@ export const useAddArticleFormMutate = {
         if (data) {
           queryClient.invalidateQueries("allArticle");
           toastify.success("작성 완료");
-          dispatch(togleState(false));
+          setFormState(false);
         } else {
           toastify.error("비속어 금지");
         }
@@ -35,5 +35,18 @@ export const useAddArticleFormMutate = {
       return response;
     };
     return useMutation(fetcher, option);
+  },
+};
+
+export const useAddArticleFormQuery = {
+  useGetStockName: () => {
+    const fetcher = async () => {
+      const { data } = await api.get("/stocks");
+      return data;
+    };
+    return useQuery("stockName", fetcher, {
+      staleTime: 1000 * 60 * 30,
+      cacheTime: 1000 * 60 * 30,
+    });
   },
 };

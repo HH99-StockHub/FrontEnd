@@ -43,7 +43,5 @@ const WrapPopular = styled.div`
 `;
 
 const WrapCard = styled.div`
-  width: 188px;
-  display: flex;
-  flex-direction: column;
+  width: 178px;
 `;

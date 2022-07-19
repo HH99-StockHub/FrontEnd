@@ -12,9 +12,7 @@ const Writing = (props) => {
           <P1>
             <div>{stockName}</div>
             <P3>
-              <Img>
-                <Img1 src={profileImage} />
-              </Img>
+              <Img src={profileImage} />
               <Link to={`/search/article/${nickName}/${userId}`}>
                 {nickName}
               </Link>
@@ -80,12 +78,8 @@ const P3 = styled.div`
   color: var(--black);
 `;
 
-const Img1 = styled.img`
-  width: 100%;
-`;
-
-const Img = styled.div`
-  border-radius: 100%;
+const Img = styled.img`
+  border-radius: 50%;
   width: 32px;
   height: 32px;
   overflow: hidden;

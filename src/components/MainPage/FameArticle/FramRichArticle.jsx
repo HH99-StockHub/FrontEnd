@@ -42,5 +42,5 @@ const WrapRich = styled.div`
 `;
 
 const WrapCard = styled.div`
-  width: 188px;
+  width: 178px;
 `;

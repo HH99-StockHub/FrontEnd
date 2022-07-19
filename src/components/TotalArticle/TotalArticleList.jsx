@@ -73,9 +73,7 @@ const TotalArticleList = ({ data, isLoading }) => {
               </Random>
               <Just>
                 <Random>
-                  <Img>
-                    <Img1 src={data.profileImage} alt="프로필" />
-                  </Img>
+                  <Img src={data.profileImage} alt="프로필" />
                   <P3
                     id="userNickname"
                     onClick={(e) => {
@@ -117,6 +115,7 @@ const Content = styled.div`
   display: flex;
   margin-top: 20px;
   gap: 14px;
+  min-height: 100px;
 `;
 
 const P = styled.p`
@@ -177,12 +176,9 @@ const Just = styled.div`
   margin-top: 15px;
 `;
 
-const Img = styled.div`
+const Img = styled.img`
   border-radius: 100%;
   width: 32px;
   height: 32px;
   overflow: hidden;
-`;
-const Img1 = styled.img`
-  width: 100%;
 `;
