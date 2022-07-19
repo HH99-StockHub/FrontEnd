@@ -2,22 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 // 컴포넌트
-import LoadingSpinner from "../../../repeat/LoadingSpinner";
-import MainArticleCard from "./MainArticleCard";
-// 커스텀 훅
-import { useMainPageQuery } from "../useMainPageQuery";
-import useChangeNum from "../../../custom/changeNum";
+import MainArticleContent from "./MainArticleContent";
 
 const MainArticleList = () => {
-  const changeNum = useChangeNum;
-  // 데이터 가져오기 query
-  const {
-    data = [],
-    isLoading,
-    isError,
-    error,
-  } = useMainPageQuery.useGetMainArticles();
-
   return (
     <Table>
       <THead>
@@ -28,23 +15,7 @@ const MainArticleList = () => {
         <p style={{ width: "64px" }}>날짜</p>
         <p style={{ width: "64px" }}>닉네임</p>
       </THead>
-      {isLoading && <LoadingSpinner />}
-
-      {data.map((v) => {
-        return (
-          <MainArticleCard
-            key={v.articleId}
-            date={v.createdAt}
-            title={v.articleTitle}
-            user={v.nickname}
-            watch={changeNum(v.viewCount)}
-            up={changeNum(v.voteUpCount)}
-            down={changeNum(v.voteDownCount)}
-            articleId={v.articleId}
-            userId={v.userId}
-          />
-        );
-      })}
+      <MainArticleContent />
     </Table>
   );
 };
@@ -62,4 +33,5 @@ const THead = styled.div`
   text-align: left;
   background-color: var(--blue1);
   font-size: 12px;
+  color: var(--white);
 `;

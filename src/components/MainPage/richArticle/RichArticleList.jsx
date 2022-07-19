@@ -8,9 +8,15 @@ import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import Porfile from "../common/Porfile";
 // query 훅
 import { useMainPageQuery } from "../useMainPageQuery";
+import { toastify } from "../../../custom/toastify";
 const RichArticleList = () => {
   // useQuery
-  const { data = [], isLoading } = useMainPageQuery.useGetRichArticles();
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useMainPageQuery.useGetRichArticles();
+  if (isError) toastify.error("수익왕 게시글 불러오기를 실패했습니다.");
   return (
     <div>
       <ArticleBox>

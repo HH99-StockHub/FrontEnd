@@ -5,14 +5,10 @@ import { useParams } from "react-router-dom";
 import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
 import TotalArticleBanner from "../components/TotalArticle/TotalArticleBanner";
 import TotalArticleContent from "../components/TotalArticle/TotalArticleContent";
-import TotalPagenation from "../components/TotalArticle/TotalPagenation";
 import HelmetComponents from "../repeat/HelmetComponents";
 import styled from "styled-components";
 // query 훅
-import { useTotalPageQuery } from "../components/TotalArticle/useTotalPageQuery";
 import SlideStock from "../repeat/SlideStock";
-import LoadingSpinner from "../repeat/LoadingSpinner";
-import { toastify } from "../custom/toastify";
 
 const TotalArticle = () => {
   // 카테고리별 meta title 변경
@@ -20,11 +16,7 @@ const TotalArticle = () => {
   // URL 정보가져오기
   const { category, page } = useParams();
   // useQuery
-  const {
-    data = [],
-    isLoading,
-    isError,
-  } = useTotalPageQuery.useGetAllArticles(category, page);
+
   useEffect(() => {
     switch (category) {
       case "all":
@@ -36,18 +28,12 @@ const TotalArticle = () => {
       case "rich":
         setTitleCategory("수익왕 게시판");
         break;
-      case "user":
-        setTitleCategory("내 게시판");
-        break;
       default:
         break;
     }
   }, [category]);
 
   // 불러오기 실패
-  if (isError) {
-    toastify.error("불러오기를 실패했습니다");
-  }
 
   return (
     <>
@@ -55,32 +41,13 @@ const TotalArticle = () => {
       <HelmetComponents title={`${titleCategory}`} />
       <Box>
         <TotalArticleHeader />
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <Div>
-            <TotalArticleBanner />
-            <TotalArticleContent
-              data={data.content === undefined ? [] : data.content}
-            />
-            <TotalPagenation
-              category={category}
-              nowPage={page}
-              totalPages={data.totalPages}
-              type="total"
-            />
-          </Div>
-        )}
+        <TotalArticleBanner />
+        <TotalArticleContent page={page} category={category} />
       </Box>
     </>
   );
 };
 
-const Div = styled.div`
-  max-width: 1240px;
-  width: 80%;
-  margin: 0 auto;
-`;
 const Box = styled.div`
   min-height: 90vh;
   background: #f5f5f5;

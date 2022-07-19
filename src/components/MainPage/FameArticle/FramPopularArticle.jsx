@@ -8,11 +8,17 @@ import FramPopularCard from "./FramPopularCard";
 import { useMainPageQuery } from "../useMainPageQuery";
 import CardHeader from "./CardHeader";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
+import { toastify } from "../../../custom/toastify";
 
 const FramPopularArticle = () => {
   // useQuery
 
-  const { data = [], isLoading } = useMainPageQuery.useGetFamePopularArticle();
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useMainPageQuery.useGetFamePopularArticle();
+  if (isError) toastify.error("Best 인기글 불러오기를 실패했습니다.");
   return (
     <WrapPopular>
       {isLoading && <LoadingSpinner />}
