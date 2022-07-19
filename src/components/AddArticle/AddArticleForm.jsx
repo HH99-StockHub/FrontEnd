@@ -23,12 +23,6 @@ const AddArticleForm = () => {
   // recoil
   const setModalState = useSetRecoilState(showChart);
   const setFormState = useSetRecoilState(addArticleState);
-  // 투자 포인트 map용 잉여 배열
-  const [countArr, setCountArr] = useState([{ key: 0 }]);
-  // key state
-  const [key, setKey] = useState(1);
-  // 포인트 추가하기 버튼 상태
-  const [pointBtnState, setPointBtnState] = useState(true);
   // 주식 선택하기 일치 항목
   const [stockArr, setStockArr] = useState([]);
   const [selectStockState, setSelectStockState] = useState(null);
@@ -52,11 +46,11 @@ const AddArticleForm = () => {
     useAddArticleFormMutate.useAddArticleMutation();
   const { mutate: getStock, isLoading: stockLoading } =
     useAddArticleFormMutate.useGetArticleStock({
-      onSuccess: (data, variables, context) => {
+      onSuccess: (data) => {
         setCurrentStock(data.data);
       },
-      onError: (err) => {
-        toastify.error("에러가 발생했습니다");
+      onError: (data) => {
+        toastify.error("저장에 실패했습니다.");
       },
     });
   // 주식 종목 선택하기 list
@@ -148,7 +142,6 @@ const AddArticleForm = () => {
     e.preventDefault();
     let state = false;
     const refArr = choosePoint.current.children;
-    // console.log(refArr[1].children[1].value);
 
     // 투자 포인트 공백 체크
     for (let i = 0; i < refArr.length; i++) {
@@ -180,8 +173,7 @@ const AddArticleForm = () => {
           data["content" + String(i + 1)] = "";
         }
       }
-      console.log(data);
-      // addArticle(data);
+      addArticle(data);
     }
   };
 
