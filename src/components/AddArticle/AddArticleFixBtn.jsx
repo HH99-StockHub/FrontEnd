@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { toastify } from "../../custom/toastify";
 
 import { getCookie } from "../../shared/Cookie";
@@ -10,7 +10,7 @@ import { addArticleState } from "../../state/client/modal";
 
 const AddArticleFixBtn = React.memo(() => {
   // 토글 state 관리 recoil
-  const [_, setModalState] = useRecoilState(addArticleState);
+  const setModalState = useSetRecoilState(addArticleState);
   // 게시글 작성 토글 오픈
   const openTogle = () => {
     const token = getCookie("token");

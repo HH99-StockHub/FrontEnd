@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 //컴포넌트
 import LineChart from "../../Chart/LineChart";
 import { useDetailArticleGet } from "../useDetailArticle";
@@ -17,7 +17,7 @@ import LoadingSpinner from "../../../repeat/LoadingSpinner";
 const Title = (props) => {
   const { stockName } = props;
   // recoil
-  const [, setChartModal] = useRecoilState(showChart);
+  const setChartModal = useSetRecoilState(showChart);
   const { data = [], isLoading } = useDetailArticleGet.useNewsSearch(stockName);
 
   return (

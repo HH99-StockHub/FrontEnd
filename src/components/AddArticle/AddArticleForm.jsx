@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 //hook
 import {
@@ -23,8 +23,8 @@ import { useCallback } from "react";
 
 const AddArticleForm = () => {
   // recoil
-  const [, setModalState] = useRecoilState(showChart);
-  const [, setFormState] = useRecoilState(addArticleState);
+  const setModalState = useSetRecoilState(showChart);
+  const setFormState = useSetRecoilState(addArticleState);
   // 투자 포인트 map용 잉여 배열
   const [countArr, setCountArr] = useState([{ key: 0 }]);
   // key state
@@ -555,14 +555,11 @@ const PlusBtn = styled.button`
 
 const WrapBtn = styled.div`
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 12px;
-  margin: 24px 0;
+  gap: 22px;
+  margin: 0 79px;
   button {
     width: 100%;
     height: 40px;
-    max-width: 562px;
     color: var(--white);
     &:first-child {
       background-color: var(--blue1);
