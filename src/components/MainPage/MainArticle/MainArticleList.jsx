@@ -8,12 +8,12 @@ const MainArticleList = () => {
   return (
     <Table>
       <THead>
-        <p style={{ width: "244px" }}>제목</p>
+        <p style={{ width: "80px" }}>종목</p>
+        <p style={{ width: "252px" }}>제목</p>
+        <p style={{ width: "56px" }}>글쓴이</p>
+        <p style={{ width: "56px" }}>날짜</p>
+        <p style={{ width: "56px" }}>조회</p>
         <p style={{ width: "56px" }}>추천</p>
-        <p style={{ width: "56px" }}>비추천</p>
-        <p style={{ width: "64px" }}>조회수</p>
-        <p style={{ width: "64px" }}>날짜</p>
-        <p style={{ width: "64px" }}>닉네임</p>
       </THead>
       <MainArticleContent />
     </Table>
@@ -34,4 +34,11 @@ const THead = styled.div`
   background-color: var(--blue1);
   font-size: 12px;
   color: var(--white);
+  p {
+    text-align: right;
+    &:first-child,
+    &:nth-child(2) {
+      text-align: left;
+    }
+  }
 `;
