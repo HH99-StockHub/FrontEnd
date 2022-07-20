@@ -19,7 +19,7 @@ const Comment = ({ id }) => {
     onSuccess: (data) => {
       if (data) {
         writeInput.current.value = "";
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries("CommentInquiry");
         toastify.success("댓글 작성 완료");
       } else {
         toastify.error("비속어 금지");

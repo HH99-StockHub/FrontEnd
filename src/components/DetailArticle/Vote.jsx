@@ -30,7 +30,7 @@ const Vote = (props) => {
         }}
       >
         {" "}
-        반대 {voteDown}
+        비추천 {voteDown}
       </Btn1>
     </BtnBox>
   );

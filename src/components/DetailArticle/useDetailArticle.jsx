@@ -3,7 +3,7 @@ import { useMutation, useQueryClient, useQuery } from "react-query";
 import { toastify } from "../../custom/toastify";
 
 export const useDetailArticleMutate = {
-  //찬성투표
+  //추천투표
   useVoteUpMutation: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
@@ -13,17 +13,20 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries("ContentInquiry");
         toastify.success("투표 완료");
       },
       onError: (data) => {
         if (data.response.data.error === "403") {
           toastify.error(data.response.data.message);
         }
+        if (data.userId !== "") {
+          toastify.error("로그인 후 추천 투표할 수 있습니다");
+        }
       },
     });
   },
-  //반대 투표
+  //비추천 투표
   useVoteDownMutation: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
@@ -33,12 +36,15 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries("ContentInquiry");
         toastify.success("투표 완료");
       },
       onError: (data) => {
         if (data.response.data.error === "403") {
           toastify.error(data.response.data.message);
+        }
+        if (data.userId !== "") {
+          toastify.error("로그인 후 비추천 투표할 수 있습니다");
         }
       },
     });
@@ -62,7 +68,7 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries("ContentInquiry");
         toastify.success("댓글 삭제 완료");
       },
       onError: (data, error, variables, context) => {
@@ -78,7 +84,7 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries("ContentInquiry");
         toastify.success("게시글 삭제 완료");
       },
       onError: (err) => {
