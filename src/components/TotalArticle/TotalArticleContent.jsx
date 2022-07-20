@@ -25,12 +25,12 @@ const TotalArticleContent = ({ category, page }) => {
       ) : (
         <Div>
           <TotalArticleList
-            data={data.content === undefined ? [] : data.content}
+            data={data?.content === undefined ? [] : data.content}
           />
           <TotalPagenation
             category={category}
             nowPage={page}
-            totalPages={data.totalPages}
+            totalPages={data?.totalPages}
             type="total"
           />
         </Div>

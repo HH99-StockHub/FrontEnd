@@ -43,7 +43,7 @@ const Header = React.memo(() => {
       deleteCookie("token");
       localStorage.removeItem("id");
     }
-  }, [setLoginState]);
+  }, []);
   return (
     <Header1>
       <Header2>

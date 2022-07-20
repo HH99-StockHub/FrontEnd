@@ -33,7 +33,7 @@ const SearchArticleContent = ({ category, keyword, page }) => {
             category={category}
             keyword={keyword}
             nowPage={page}
-            totalPages={data.totalPages}
+            totalPages={data?.totalPages}
             type="search"
           />
         </>
