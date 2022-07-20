@@ -20,6 +20,6 @@ const SearchArticle = () => {
 export default SearchArticle;
 
 const WrapContent = styled.div`
-  min-height: 100vh;
+  min-height: 90vh;
   background: #f5f5f5;
 `;

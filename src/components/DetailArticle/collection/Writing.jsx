@@ -13,7 +13,7 @@ const Writing = (props) => {
             <div>{stockName}</div>
             <P3>
               <Img src={profileImage} />
-              <Link to={`/search/article/${nickName}/${userId}`}>
+              <Link to={`/search/article/${nickName}/${userId}/1`}>
                 {nickName}
               </Link>
             </P3>

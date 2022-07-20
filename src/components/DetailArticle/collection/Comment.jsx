@@ -25,7 +25,7 @@ const Comment = ({ id }) => {
         toastify.error("비속어 금지");
       }
     },
-    onError: (data, error, variables, context) => {
+    onError: (data) => {
       if (data.response.state === 400) {
         toastify.error("댓글 내용은 300자 이내로 작성해 주세요.");
       } else {
@@ -38,7 +38,6 @@ const Comment = ({ id }) => {
     data = [],
     isLoading,
     isError,
-    error,
   } = useDetailArticleGet.useCommentInquiry(id);
   if (isError) toastify.error("댓글 불러오기를 실패했습니다.");
 

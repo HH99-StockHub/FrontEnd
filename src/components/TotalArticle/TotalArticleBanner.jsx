@@ -24,7 +24,8 @@ const WrapBanner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  max-width: 1240px;
+  width: 80%;
   height: 154px;
   background: var(--green1);
   border-radius: 6px;

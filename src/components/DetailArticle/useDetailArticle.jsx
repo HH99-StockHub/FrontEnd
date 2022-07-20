@@ -51,7 +51,6 @@ export const useDetailArticleMutate = {
   },
   //댓글 작성
   useWriteComment: (option) => {
-    const queryClient = useQueryClient();
     const fetcher = async ({ write, id }) => {
       const { data } = await api.post(`/articles/${id}/comment`, {
         comments: write,

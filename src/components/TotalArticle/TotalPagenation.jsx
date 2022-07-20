@@ -7,14 +7,14 @@ import { toastify } from "../../custom/toastify";
 import { ReactComponent as Left } from "../../image/Left.svg";
 import { ReactComponent as Right } from "../../image/Right.svg";
 
-const TotalPagenation = ({ category, nowPage }) => {
+const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
   const navigate = useNavigate();
   // 페이지 기준
   const [page, setPage] = useState(1);
   // 버튼 갯수
   const [btnCount, setBtnCount] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   // 예시 마지막 페이지
-  const lastpage = 26;
+  const lastpage = totalPages;
 
   // 현재 버튼에 CSS 주기위한 값
   const nowCssBtn = () => {
@@ -27,7 +27,11 @@ const TotalPagenation = ({ category, nowPage }) => {
 
   // 페이지 클릭 시 페이지 이동하기
   const navigatePage = (page) => {
-    navigate(`/total/${category}/articles/${page}`);
+    if (type === "total") {
+      navigate(`/total/${category}/articles/${page}`);
+    } else {
+      navigate(`/search/article/${category}/${keyword}/${page}`);
+    }
   };
 
   // 이전 페이지 넘기기
@@ -36,7 +40,11 @@ const TotalPagenation = ({ category, nowPage }) => {
       // 첫 페이지 일 경우
       toastify.error("이전 페이지가 존재하지 않습니다");
     } else {
-      navigate(`/total/${category}/articles/${page - 10}`);
+      if (type === "total") {
+        navigate(`/total/${category}/articles/${page}`);
+      } else {
+        navigate(`/search/article/${category}/${keyword}/${page}`);
+      }
       setPage(page - 10);
     }
   };
@@ -46,7 +54,11 @@ const TotalPagenation = ({ category, nowPage }) => {
     if (page + 10 > lastpage) {
       toastify.error(`${lastpage} 페이지가 마지막입니다`);
     } else {
-      navigate(`/total/${category}/articles/${page + 10}`);
+      if (type === "total") {
+        navigate(`/total/${category}/articles/${page}`);
+      } else {
+        navigate(`/search/article/${category}/${keyword}/${page}`);
+      }
       setPage(page + 10);
     }
   };
@@ -70,11 +82,15 @@ const TotalPagenation = ({ category, nowPage }) => {
           String(nowPage.slice(0, 1)) + "0".repeat(Number(nowPage.length) - 1);
         setPage(Number(startPage) + 1);
       }
-    } else {
-      toastify.error("잘못된 접근입니다.");
-      navigate(`/total/${category}/articles/1`);
+    } else if (totalPages !== 0) {
+      toastify.error("해당 페이지는 존재하지 않습니다");
+      if (type === "total") {
+        navigate(`/total/${category}/articles/1`);
+      } else {
+        navigate(`/search/article/${category}/${keyword}/1`);
+      }
     }
-  }, []);
+  }, [category]);
 
   // 마지막 페이지 리스트일 경우 배열 갯수 조절하기
   useEffect(() => {

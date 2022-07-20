@@ -1,6 +1,3 @@
-import React from "react";
-import useSliceNum from "./sliceNum";
-
 const usePriceYield = (lastStock, nowStock) => {
   if (lastStock > nowStock) {
     const interval = Number(nowStock) - Number(lastStock);

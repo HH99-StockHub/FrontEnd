@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
-//컴포넌트
-import LoadingSpinner from "../../repeat/LoadingSpinner";
 
 import useSliceNum from "../../custom/sliceNum";
 // 이미지
@@ -11,14 +9,13 @@ import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
 import { ReactComponent as Vector } from "../../image/Vector.svg";
 import { ReactComponent as Stock } from "../../image/UpStock.svg";
-const TotalArticleList = ({ data, isLoading }) => {
+const TotalArticleList = ({ data }) => {
   // onclick navigate 이벤트 버블링이 있어 하위 요소에 옵션으로 막아둠
   const navigate = useNavigate();
   const sliceNum = useSliceNum;
   return (
     <>
       <Content>
-        {isLoading && <LoadingSpinner />}
         {data.map((data) => {
           return (
             <Box
@@ -29,7 +26,7 @@ const TotalArticleList = ({ data, isLoading }) => {
             >
               <P>{data.stockName}</P>
               <P1>{data.articleTitle}</P1>
-              <Random>
+              <WrapRandom>
                 <Random>
                   <UpSvg
                     width="12.83"
@@ -70,22 +67,28 @@ const TotalArticleList = ({ data, isLoading }) => {
                   />
                   <P2>{data.viewCount}</P2>
                 </Random>
-              </Random>
+              </WrapRandom>
               <Just>
-                <Random>
-                  <Img src={data.profileImage} alt="프로필" />
-                  <P3
-                    id="userNickname"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(
-                        `/search/article/${data.nickname}/${data.userId}`,
-                      );
-                    }}
-                  >
-                    {data.nickname}
-                  </P3>
-                </Random>
+                <WrapBottom>
+                  <div>
+                    <Img src={data.profileImage} alt="프로필 이미지" />
+                    <P3
+                      id="userNickname"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(
+                          `/search/article/${data.nickname}/${data.userId}/1`,
+                        );
+                      }}
+                    >
+                      {data.nickname}
+                    </P3>
+                  </div>
+                  <div>
+                    {true ? <Badge color="var(--blue1)">수익왕</Badge> : null}
+                    {true ? <Badge color="var(--blue2)">인기글</Badge> : null}
+                  </div>
+                </WrapBottom>
                 <P4>{dayjs(data.createdAt).format("YY.MM.DD")}</P4>
               </Just>
             </Box>
@@ -162,17 +165,23 @@ const P4 = styled.p`
   line-height: 17px;
   display: flex;
   align-items: center;
-  color: var(--gray2);
+  color: var(--gray3);
 `;
 const Random = styled.div`
   display: flex;
   align-items: center;
-  gap: 5.58px;
+  gap: 6px;
 `;
 
+const WrapRandom = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
 const Just = styled.div`
   justify-content: space-between;
   display: flex;
+  align-items: center;
   margin-top: 15px;
 `;
 
@@ -181,4 +190,22 @@ const Img = styled.img`
   width: 32px;
   height: 32px;
   overflow: hidden;
+`;
+
+const WrapBottom = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  > div {
+    display: flex;
+    gap: 4px;
+  }
+`;
+
+const Badge = styled.p`
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 50px;
+  background-color: ${({ color }) => color};
+  color: var(--white);
 `;

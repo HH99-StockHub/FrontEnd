@@ -8,6 +8,7 @@ import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import Porfile from "../common/Porfile";
 // 훅
 import { useMainPageQuery } from "../useMainPageQuery";
+import { toastify } from "../../../custom/toastify";
 
 const PopularArticleList = () => {
   // 인기 게시글 데이터 받기
@@ -15,9 +16,8 @@ const PopularArticleList = () => {
     data = [],
     isLoading,
     isError,
-    error,
   } = useMainPageQuery.useGetPopularArticles();
-
+  if (isError) toastify.error("인기글 불러오기를 실패했습니다.");
   return (
     <ArticleBox>
       {isLoading && <LoadingSpinner />}

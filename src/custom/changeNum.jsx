@@ -1,5 +1,3 @@
-import React from "react";
-
 const useChangeNum = (num) => {
   let changeNum;
   if (Number(num) >= 1000000000000) {

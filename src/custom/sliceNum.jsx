@@ -1,5 +1,3 @@
-import React from "react";
-
 // 금액 3자리마다 , 찍기
 const useSliceNum = (price) => {
   const newPrice = parseInt(price * 100) / 100;
