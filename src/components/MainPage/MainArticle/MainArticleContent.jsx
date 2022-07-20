@@ -22,19 +22,7 @@ const MainArticleContent = () => {
   return (
     <>
       {data.map((v) => {
-        return (
-          <MainArticleCard
-            key={v.articleId}
-            date={v.createdAt}
-            title={v.articleTitle}
-            user={v.nickname}
-            watch={changeNum(v.viewCount)}
-            up={changeNum(v.voteUpCount)}
-            down={changeNum(v.voteDownCount)}
-            articleId={v.articleId}
-            userId={v.userId}
-          />
-        );
+        return <MainArticleCard key={v.articleId} data={v} />;
       })}
     </>
   );

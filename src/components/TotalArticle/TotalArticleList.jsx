@@ -26,7 +26,7 @@ const TotalArticleList = ({ data }) => {
             >
               <P>{data.stockName}</P>
               <P1>{data.articleTitle}</P1>
-              <Random>
+              <WrapRandom>
                 <Random>
                   <UpSvg
                     width="12.83"
@@ -67,22 +67,28 @@ const TotalArticleList = ({ data }) => {
                   />
                   <P2>{data.viewCount}</P2>
                 </Random>
-              </Random>
+              </WrapRandom>
               <Just>
-                <Random>
-                  <Img src={data.profileImage} alt="프로필 이미지" />
-                  <P3
-                    id="userNickname"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(
-                        `/search/article/${data.nickname}/${data.userId}/1`,
-                      );
-                    }}
-                  >
-                    {data.nickname}
-                  </P3>
-                </Random>
+                <WrapBottom>
+                  <div>
+                    <Img src={data.profileImage} alt="프로필 이미지" />
+                    <P3
+                      id="userNickname"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(
+                          `/search/article/${data.nickname}/${data.userId}/1`,
+                        );
+                      }}
+                    >
+                      {data.nickname}
+                    </P3>
+                  </div>
+                  <div>
+                    {true ? <Badge color="var(--blue1)">수익왕</Badge> : null}
+                    {true ? <Badge color="var(--blue2)">인기글</Badge> : null}
+                  </div>
+                </WrapBottom>
                 <P4>{dayjs(data.createdAt).format("YY.MM.DD")}</P4>
               </Just>
             </Box>
@@ -159,17 +165,23 @@ const P4 = styled.p`
   line-height: 17px;
   display: flex;
   align-items: center;
-  color: var(--gray2);
+  color: var(--gray3);
 `;
 const Random = styled.div`
   display: flex;
   align-items: center;
-  gap: 5.58px;
+  gap: 6px;
 `;
 
+const WrapRandom = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
 const Just = styled.div`
   justify-content: space-between;
   display: flex;
+  align-items: center;
   margin-top: 15px;
 `;
 
@@ -178,4 +190,22 @@ const Img = styled.img`
   width: 32px;
   height: 32px;
   overflow: hidden;
+`;
+
+const WrapBottom = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  > div {
+    display: flex;
+    gap: 4px;
+  }
+`;
+
+const Badge = styled.p`
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 50px;
+  background-color: ${({ color }) => color};
+  color: var(--white);
 `;

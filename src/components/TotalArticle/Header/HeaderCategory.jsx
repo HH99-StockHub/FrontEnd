@@ -9,7 +9,7 @@ const HeaderCategory = () => {
   // 카테고리 관련 하드코딩 배열
   const arr = [
     { category: "all", name: "전체 게시판" },
-    { category: "popular", name: "인기 게시판" },
+    { category: "popular", name: "인기글 게시판" },
     { category: "rich", name: "수익왕 게시판" },
   ];
   return (
