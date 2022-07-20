@@ -17,6 +17,7 @@ import "./CSS/toastify.css";
 import Footer from "./repeat/Footer";
 import ChartModal from "./components/Chart/ChartModal";
 import AddFormModal from "./components/AddArticle/AddFormModal";
+import Chat from "./Chat";
 
 function App() {
   // 게시글 작성 토글 관리 recoil
@@ -43,6 +44,7 @@ function App() {
       <MenuBtn />
       <Footer />
       <ToastContainer />
+      {/* <Chat /> */}
     </div>
   );
 }
