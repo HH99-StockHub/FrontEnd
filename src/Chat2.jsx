@@ -8,91 +8,91 @@ import { getCookie } from "./shared/Cookie";
 
 const Chat2 = () => {
   const inputRef = useRef(null);
-  // const [roomId, setRoomId] = useState(null);
   const token = getCookie("token");
+  const nickname = localStorage.getItem("id");
   useEffect(() => {
-    console.log(token);
+    // 지금은 소켓 전체를 연결 이후에는 소켓 연결과 구독을 나눌 예정
     SocketConnect(token);
+    return () => {
+      stompDisConnectUnsubscribe();
+    };
   }, []);
 
-  //handshake
-  // const target = "http://3.35.4.42:3000/chat"; // http URL
-  // const target = "http://3.35.4.42/ws-stomp"; // http URL
-  // "/sub"
-  const socket = new SockJS("http://3.38.165.46/gs-guide-websocket");
-  console.log(socket);
+  const socket = new SockJS("http://3.38.165.46/ws");
   const stompClient = Stomp.over(socket);
-  console.log(stompClient);
-  console.log(stompClient.connect);
-  const roomId = "";
 
-  // server에서 Login, passcode 뭐 받는지 확인 필요
+  // 에러
+  const onError = (err) => {
+    console.log(err);
+  };
+
+  //  채팅방 구독
+  const stompSubscribe = () => {
+    stompClient.subscribe(`/chatroom/public`, (response) => {
+      const newMessage = JSON.parse(response.body);
+      console.log(newMessage, "구독인데 이게 데이터로 들어오나?");
+    });
+    // 입장 메세지 보내기
+    userJoinMsg();
+  };
+  // 알림 구독
+  const alarmStomp = () => {
+    stompClient.subscribe(`/chatroom/private/1`, (response) => {
+      const newMessage = JSON.parse(response.body);
+      console.log(newMessage, "구독인데 이게 데이터로 들어오나?");
+    });
+  };
+
+  // socket 연결
   const SocketConnect = (token) => {
-    console.log("연결시도 중");
-    try {
-      console.log("11");
-      stompClient.connect(
-        {
-          // token: token,
-        },
-        () => {
-          console.log("30");
+    stompClient.connect(
+      {
+        token: token,
+      },
+      stompSubscribe,
+      onError,
+    );
+  };
 
-          stompClient.subscribe(
-            `/topic/greetings`,
-            (response) => {
-              console.log("aa");
-              const newMessage = JSON.parse(response.body);
-              console.log(newMessage, "구독인데 이게 데이터로 들어오나?");
-              // console.log("보낸사람:", newMessage.sender);
-              // console.log("받은 메세지:", newMessage.message);
-            },
-            // {
-            //   token: token,
-            // },
-          );
-        },
-      );
+  // socket 연결 해제
+  const stompDisConnectUnsubscribe = () => {
+    try {
+      stompClient.disconnect(stompDissubcribe, { token: token });
     } catch (error) {
-      console.log(error.response);
-      console.log("연결 에러");
+      console.log(error);
     }
   };
 
-  const meetingRoomHandler = () => {
-    const data = {
-      meetingTitle: "string",
-      meetingDate: "string",
-      meetingTime: "00:00",
-      meetingSum: "string",
-      meetingTheme: "string",
-      meetingDuration: "0시간",
-      teamId: 1,
-    };
-    console.log(data);
-    // meetingMutate(data);
+  // 채팅방 구독 해제 키워드는 변경 가능성 있음
+  const stompDissubcribe = () => {
+    stompClient.unsubscribe("sub-0");
   };
 
-  const chattingRoomHandler = () => {
-    const data = {
-      meetingId: 1,
+  // 참가 메세지  메세지 내용은 나중에 상의하여 진행
+  const userJoinMsg = () => {
+    const Msg = {
+      type: "join",
+      senderName: nickname,
     };
-    console.log(data);
+    stompClient.send("/app/message", {}, JSON.stringify(Msg));
   };
 
+  // 보내기전 연결 테스트 함수
   function waitForConnection(stompClient, callback) {
-    console.log("무한으로 보낼때까지 돌려");
     console.log(stompClient);
-    setTimeout(function () {
-      if (stompClient.stompClient.readyState === 1) {
-        callback();
-      } else {
-        waitForConnection(stompClient, callback);
-      }
-    }, 1);
+    // 실제 오류 날때까지 조건 보류
+    // setTimeout(function () {
+    // if(stompClient.ws.XXX === 1)
+    //   if (stompClient.connected === true) {
+    callback();
+    //   } else {
+    //     waitForConnection(stompClient, callback);
+    //   }
+    // }, 100);
   }
 
-  const HandleSend = async (event) => {
+  // 메세지 보내기
+  const HandleSend = (event) => {
     event.preventDefault();
     try {
       const data = {
@@ -102,54 +102,45 @@ const Chat2 = () => {
         sender: "string",
         createdAt: "10시",
       };
-      const token = getCookie("token");
       console.log("보내기 시도");
       waitForConnection(stompClient, function () {
         stompClient.send(
-          "/api/chat/message",
+          "/app/message",
           { token: token },
           JSON.stringify(data),
         );
-        // stompClient.send("/queue/test", {}, "this is a message from the client")
-        console.log("clicked anyway");
-        console.log(JSON.stringify(data));
       });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const callbackFn = (message) => {
-    if (message.body) {
-      console.log(message);
-      alert(`got message with body: ${message.body}`);
-    } else {
-      console.log("got nothing");
-    }
-  };
-
-  // const subscription = stompClient.subscribe("/sub/api/chat/rooms/3", callbackFn)
-
-  // const HandleUnsubscribe = () => {
-  //   subscription.unsubscribe();
-  //   alert("연결 끊김");
-  // };
-
   return (
     <>
       <StChattingContainer>
         <StChattingItem>
-          <button onClick={meetingRoomHandler}>create meeting room</button>
           <br />
-          <button onClick={SocketConnect}>Connect</button>
+          <button
+            onClick={() => {
+              stompSubscribe();
+            }}
+          >
+            Connect
+          </button>
           <br />
-          <button onClick={chattingRoomHandler}>create chatting room</button>
+          <button onClick={alarmStomp}>create chatting room</button>
           <br />
           <form>
             <input type="text" ref={inputRef} id="input" />
-            <input type="submit" value="Send" onClick={HandleSend} />
+            <input type="button" value="Send" onClick={HandleSend} />
           </form>
-
+          <button
+            onClick={() => {
+              stompDissubcribe();
+            }}
+          >
+            asd
+          </button>
           {/* <button onClick={HandleUnsubscribe}>연결 끊기</button> */}
         </StChattingItem>
       </StChattingContainer>

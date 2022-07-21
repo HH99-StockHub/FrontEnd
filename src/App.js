@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <GlobalStyle />
+      <GlobalStyle />
       <AddFormModal />
       <ChartModal />
       <Header />
@@ -41,12 +41,13 @@ function App() {
           path="/search/article/:category/:keyword/:page"
           element={<SearchArticle />}
         />
+        <Route path="/chat" element={<Chat2 />} />
       </Routes>
       <MenuBtn />
       <Footer />
-      <ToastContainer /> */}
+      <ToastContainer />
       {/* <Chat /> */}
-      <Chat2 />
+      {/* <Chat2 /> */}
     </div>
   );
 }

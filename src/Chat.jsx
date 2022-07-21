@@ -7,35 +7,42 @@ import styled from "styled-components";
 import { getCookie } from "./shared/Cookie";
 
 const Chat = () => {
+  const aa = (name) => {
+    let value = "; " + document.cookie;
+    let parts = value.split(`; ${name}=`);
+
+    if (parts.length === 2) {
+      return parts.pop().split(";").shift();
+    }
+  };
   const inputRef = useRef(null);
   // const [roomId, setRoomId] = useState(null);
   const token = getCookie("token");
+  // const newToken = token;
+  const newToken = token?.split(" ")[1];
   useEffect(() => {
-    console.log(token);
-    SocketConnect(token);
+    SocketConnect(newToken);
   });
 
   //handshake
-  const target = "http://3.35.4.42:3000/chat"; // http URL
+  const target = "http://3.35.4.42/chat"; // http URL
   // const target = "http://3.35.4.42/ws-stomp"; // http URL
   // "/sub"
   const socket = new SockJS(target);
-  console.log(socket);
   const ws = Stomp.over(socket);
-  console.log(ws);
-  const roomId = "";
+  const roomId = "2";
 
   // server에서 Login, passcode 뭐 받는지 확인 필요
-  const SocketConnect = (token) => {
+  const SocketConnect = (newToken) => {
     console.log("연결시도 중");
     try {
       ws.connect(
         {
-          token: token,
+          token: newToken,
         },
         () => {
           ws.subscribe(
-            `/rooms/1/messages`,
+            `/app/api/chat/rooms/${roomId}`,
             (response) => {
               console.log("aa");
               const newMessage = JSON.parse(response.body);
@@ -43,9 +50,9 @@ const Chat = () => {
               // console.log("보낸사람:", newMessage.sender);
               // console.log("받은 메세지:", newMessage.message);
             },
-            // {
-            //   token: token,
-            // },
+            {
+              token: newToken,
+            },
           );
         },
       );
@@ -93,15 +100,14 @@ const Chat = () => {
     try {
       const data = {
         type: "TALK",
-        roomId: "2",
-        nickname: "string",
-        sender: "string",
-        createdAt: "10시",
+        roomId: "1",
+        sender: "sender",
+        message: "messageText",
       };
       const token = getCookie("token");
       console.log("보내기 시도");
       waitForConnection(ws, function () {
-        ws.send("/api/chat/message", { token: token }, JSON.stringify(data));
+        ws.send("/api/chat/message", { token: newToken }, JSON.stringify(data));
         // ws.send("/queue/test", {}, "this is a message from the client")
         console.log("clicked anyway");
         console.log(JSON.stringify(data));
@@ -126,7 +132,21 @@ const Chat = () => {
   //   subscription.unsubscribe();
   //   alert("연결 끊김");
   // };
+  const userJoin = (event) => {
+    event.preventDefault();
 
+    var chatMessage = {
+      type: "TALK",
+      roomId: roomId,
+      sender: "sender",
+      message: "messageText",
+    };
+    ws.send(
+      "/pub/api/chat/message",
+      { token: newToken },
+      JSON.stringify(chatMessage),
+    );
+  };
   return (
     <>
       <StChattingContainer>
@@ -139,7 +159,7 @@ const Chat = () => {
           <br />
           <form>
             <input type="text" ref={inputRef} id="input" />
-            <input type="submit" value="Send" onClick={HandleSend} />
+            <input type="submit" value="Send" onClick={userJoin} />
           </form>
 
           {/* <button onClick={HandleUnsubscribe}>연결 끊기</button> */}
