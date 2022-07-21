@@ -18,13 +18,14 @@ import Footer from "./repeat/Footer";
 import ChartModal from "./components/Chart/ChartModal";
 import AddFormModal from "./components/AddArticle/AddFormModal";
 import Chat from "./Chat";
+import Chat2 from "./Chat2";
 
 function App() {
   // 게시글 작성 토글 관리 recoil
 
   return (
     <div className="App">
-      <GlobalStyle />
+      {/* <GlobalStyle />
       <AddFormModal />
       <ChartModal />
       <Header />
@@ -43,8 +44,9 @@ function App() {
       </Routes>
       <MenuBtn />
       <Footer />
-      <ToastContainer />
+      <ToastContainer /> */}
       {/* <Chat /> */}
+      <Chat2 />
     </div>
   );
 }

@@ -6,36 +6,40 @@ import styled from "styled-components";
 
 import { getCookie } from "./shared/Cookie";
 
-const Chat = () => {
+const Chat2 = () => {
   const inputRef = useRef(null);
   // const [roomId, setRoomId] = useState(null);
   const token = getCookie("token");
   useEffect(() => {
     console.log(token);
     SocketConnect(token);
-  });
+  }, []);
 
   //handshake
-  const target = "http://3.35.4.42:3000/chat"; // http URL
+  // const target = "http://3.35.4.42:3000/chat"; // http URL
   // const target = "http://3.35.4.42/ws-stomp"; // http URL
   // "/sub"
-  const socket = new SockJS(target);
+  const socket = new SockJS("http://3.38.165.46/gs-guide-websocket");
   console.log(socket);
-  const ws = Stomp.over(socket);
-  console.log(ws);
+  const stompClient = Stomp.over(socket);
+  console.log(stompClient);
+  console.log(stompClient.connect);
   const roomId = "";
 
   // server에서 Login, passcode 뭐 받는지 확인 필요
   const SocketConnect = (token) => {
     console.log("연결시도 중");
     try {
-      ws.connect(
+      console.log("11");
+      stompClient.connect(
         {
-          token: token,
+          // token: token,
         },
         () => {
-          ws.subscribe(
-            `/rooms/1/messages`,
+          console.log("30");
+
+          stompClient.subscribe(
+            `/topic/greetings`,
             (response) => {
               console.log("aa");
               const newMessage = JSON.parse(response.body);
@@ -76,14 +80,14 @@ const Chat = () => {
     console.log(data);
   };
 
-  function waitForConnection(ws, callback) {
+  function waitForConnection(stompClient, callback) {
     console.log("무한으로 보낼때까지 돌려");
-    console.log(ws);
+    console.log(stompClient);
     setTimeout(function () {
-      if (ws.ws.readyState === 1) {
+      if (stompClient.stompClient.readyState === 1) {
         callback();
       } else {
-        waitForConnection(ws, callback);
+        waitForConnection(stompClient, callback);
       }
     }, 1);
   }
@@ -100,9 +104,13 @@ const Chat = () => {
       };
       const token = getCookie("token");
       console.log("보내기 시도");
-      waitForConnection(ws, function () {
-        ws.send("/api/chat/message", { token: token }, JSON.stringify(data));
-        // ws.send("/queue/test", {}, "this is a message from the client")
+      waitForConnection(stompClient, function () {
+        stompClient.send(
+          "/api/chat/message",
+          { token: token },
+          JSON.stringify(data),
+        );
+        // stompClient.send("/queue/test", {}, "this is a message from the client")
         console.log("clicked anyway");
         console.log(JSON.stringify(data));
       });
@@ -120,7 +128,7 @@ const Chat = () => {
     }
   };
 
-  // const subscription = ws.subscribe("/sub/api/chat/rooms/3", callbackFn)
+  // const subscription = stompClient.subscribe("/sub/api/chat/rooms/3", callbackFn)
 
   // const HandleUnsubscribe = () => {
   //   subscription.unsubscribe();
@@ -149,6 +157,7 @@ const Chat = () => {
   );
 };
 
+export default Chat2;
 const StChattingContainer = styled.div`
   width: 100%;
   height: 100vh;
@@ -164,5 +173,3 @@ const StChattingDisplay = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-export default Chat;
