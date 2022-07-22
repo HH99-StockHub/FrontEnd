@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useDetailArticleMutate } from "./useDetailArticle";
+import { getCookie } from "../../shared/Cookie";
+import { toastify } from "../../custom/toastify";
 
 const Vote = (props) => {
+  const token = getCookie("token");
   const { id, voteUp, voteDown } = props;
   //찬성투표
   const { mutate: InFavor } = useDetailArticleMutate.useVoteUpMutation();
@@ -15,7 +18,11 @@ const Vote = (props) => {
       <Btn
         onClick={() => {
           const data = { postId: id };
-          InFavor(data);
+          if (token === undefined) {
+            toastify.error("로그인 후 투표할 수 있습니다");
+          } else {
+            InFavor(data);
+          }
         }}
       >
         {" "}
@@ -24,7 +31,11 @@ const Vote = (props) => {
       <Btn1
         onClick={() => {
           const data = { postId: id };
-          Negative(data);
+          if (token === undefined) {
+            toastify.error("로그인 후 투표할 수 있습니다");
+          } else {
+            Negative(data);
+          }
         }}
       >
         {" "}
