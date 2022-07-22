@@ -19,6 +19,7 @@ import ChartModal from "./components/Chart/ChartModal";
 import AddFormModal from "./components/AddArticle/AddFormModal";
 import Chat from "./Chat";
 import Chat2 from "./Chat2";
+import Chatting from "./Chat/Chatting";
 
 function App() {
   // 게시글 작성 토글 관리 recoil
@@ -41,7 +42,7 @@ function App() {
           path="/search/article/:category/:keyword/:page"
           element={<SearchArticle />}
         />
-        <Route path="/chat" element={<Chat2 />} />
+        <Route path="/chat" element={<Chatting />} />
       </Routes>
       <MenuBtn />
       <Footer />
