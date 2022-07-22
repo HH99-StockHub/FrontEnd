@@ -7,7 +7,7 @@ import { toastify } from "../../../custom/toastify";
 import { getCookie } from "../../../shared/Cookie";
 import { addArticleState } from "../../../state/client/modal";
 // 이미지
-import { ReactComponent as MainBannerSvg } from "../../../image/MainPageBanner.svg";
+import bannerImg from "../../../image/mainBanner.png";
 
 const ArticleSubHeader = React.memo(() => {
   // 게시글 작성 토글 상태관리 recoil
@@ -22,9 +22,7 @@ const ArticleSubHeader = React.memo(() => {
   };
   return (
     <SubHeader>
-      <WrapSvg>
-        <MainBannerSvg />
-      </WrapSvg>
+      <BannerImg src={bannerImg} alt="배너 이미지" />
       <WrapText>
         <HeadText className="title">
           방구석 애널리스트
@@ -52,7 +50,9 @@ const SubHeader = styled.div`
   height: 332px;
   background-color: var(--green1);
 `;
-const WrapSvg = styled.div`
+const BannerImg = styled.img`
+  width: 442px;
+  height: 259px;
   margin-bottom: 15px;
 `;
 const WrapText = styled.div`

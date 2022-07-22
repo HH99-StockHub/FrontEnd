@@ -9,7 +9,7 @@ import TotalArticle from "./page/TotalArticle";
 import DetailArticle from "./page/DetailArticle";
 import OAuth from "./components/KakaoLogin/OAuth";
 import SearchArticle from "./page/SearchArticle";
-import AddArticleFixBtn from "./components/AddArticle/AddArticleFixBtn";
+import MenuBtn from "./repeat/MenuBtn";
 
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
@@ -27,7 +27,6 @@ function App() {
       <AddFormModal />
       <ChartModal />
       <Header />
-      <AddArticleFixBtn />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route
@@ -41,6 +40,7 @@ function App() {
           element={<SearchArticle />}
         />
       </Routes>
+      <MenuBtn />
       <Footer />
       <ToastContainer />
     </div>
