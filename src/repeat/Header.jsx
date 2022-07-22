@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
+import DropDown from "../components/DrupDown/DrupDown";
 // 훅
 import { getCookie } from "../shared/Cookie";
 import { toastify } from "../custom/toastify";
@@ -56,11 +57,11 @@ const Header = React.memo(() => {
         </Logo1>
         {login ? (
           <WrapMenu>
+            <DropDown />
             <Profile
               src={localStorage.getItem("profileImg")}
               alt="프로필 이미지"
             />
-            <Notice>알림</Notice>
             <button onClick={onLogout}>로그아웃</button>
             <button>내 게시물</button>
             <Writing onClick={openAddArticle}>글작성</Writing>
