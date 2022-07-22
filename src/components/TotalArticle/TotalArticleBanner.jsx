@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 //이미지
-import { ReactComponent as BannerImg } from "../../image/BannerImg.svg";
-
+import bannerImg from "../../image/totalBanner.png";
 const TotalArticleBanner = React.memo(() => {
   return (
     <WrapBanner>
@@ -11,7 +10,7 @@ const TotalArticleBanner = React.memo(() => {
         <br />
         얼마나 수익률이 올랐는지 비교할 수 있어요.
       </BannerText>
-      <BannerImg />
+      <BannerImg src={bannerImg} alt="배너 이미지" />
     </WrapBanner>
   );
 });
@@ -36,4 +35,9 @@ const BannerText = styled.div`
   font-size: 22px;
   line-height: 28px;
   color: var(--white);
+`;
+
+const BannerImg = styled.img`
+  width: 308px;
+  height: 124px;
 `;
