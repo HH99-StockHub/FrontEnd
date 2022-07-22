@@ -10,8 +10,6 @@ const DrupDown = () => {
   const toggling = () => setIsOpen(!isOpen);
   const el = useRef();
 
-  console.log(isOpen);
-
   const handleCloseToggling = (e) => {
     if (el.current && !el.current.contains(e.target)) {
       setIsOpen(false);
