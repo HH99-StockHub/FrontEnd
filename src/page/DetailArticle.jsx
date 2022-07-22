@@ -28,6 +28,7 @@ const DetailArticle = () => {
     isLoading,
     isError,
   } = useDetailArticleGet.useContentInquiry(id);
+  console.log(data);
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
   const [deleteBtn, setDeleteBtn] = useState(false);

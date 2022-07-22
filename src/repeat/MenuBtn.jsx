@@ -23,7 +23,6 @@ const MenuBtn = () => {
       <ChatBtn state={btnState}>
         <BtnSvg width="18px" height="18px" fill="var(--pink1)" />
       </ChatBtn>
-      {/* <BtnSvg width="18px" height="18px" fill="var(--white)" /> */}
       <AddArticleFixBtn state={btnState} />
       <div
         onClick={() => {
