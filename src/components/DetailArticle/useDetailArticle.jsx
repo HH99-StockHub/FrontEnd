@@ -20,9 +20,6 @@ export const useDetailArticleMutate = {
         if (data.response.data.error === "403") {
           toastify.error(data.response.data.message);
         }
-        if (data.userId !== "") {
-          toastify.error("로그인 후 추천 투표할 수 있습니다");
-        }
       },
     });
   },
@@ -42,9 +39,6 @@ export const useDetailArticleMutate = {
       onError: (data) => {
         if (data.response.data.error === "403") {
           toastify.error(data.response.data.message);
-        }
-        if (data.userId !== "") {
-          toastify.error("로그인 후 비추천 투표할 수 있습니다");
         }
       },
     });

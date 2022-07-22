@@ -26,7 +26,7 @@ const ArticleSubHeader = React.memo(() => {
         <MainBannerSvg />
       </WrapSvg>
       <WrapText>
-        <HeadText>
+        <HeadText className="title">
           방구석 애널리스트
           <br />
           <span>'StockHub'</span>입니다
