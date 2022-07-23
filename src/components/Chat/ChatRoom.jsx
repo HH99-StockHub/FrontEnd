@@ -30,6 +30,11 @@ const ChatRoom = () => {
 export default ChatRoom;
 
 const WrapChat = styled.div`
-  border: 1px solid #000;
-  width: 400px;
+  position: absolute;
+  top: -400px;
+  right: 70px;
+  width: 350px;
+  border: 1px solid var(--gray2);
+  background-color: var(--white);
+  padding: 16px 16px 22px;
 `;

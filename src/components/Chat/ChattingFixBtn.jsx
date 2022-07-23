@@ -6,7 +6,7 @@ import ChatRoom from "./ChatRoom";
 import { ReactComponent as BtnSvg } from "../../image/Chat.svg";
 
 const ChattingFixBtn = () => {
-  const [chatState, setChatState] = useState(false);
+  const [chatState, setChatState] = useState(true);
 
   return (
     <WrapChatBox>
@@ -36,10 +36,5 @@ const WrapChatBox = styled.div`
     border-radius: 50%;
     background-color: var(--green1);
     cursor: pointer;
-  }
-  > div {
-    position: absolute;
-    top: -550px;
-    right: 0;
   }
 `;
