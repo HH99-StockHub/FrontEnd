@@ -34,7 +34,9 @@ const ChatText = () => {
       nickname: "sd",
       imgUrl:
         "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
-      message: "메세지",
+      message: `메세지
+      안녕하세요 이지하네요
+      잘 모르겠지만 \n 다들 화이팅`,
       time: "11:11",
     },
     {

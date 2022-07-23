@@ -22,10 +22,22 @@ const AddArticleFixBtn = () => {
   };
 
   return (
-    <div onClick={openTogle}>
+    <WrapAddBtn onClick={openTogle}>
       <BtnSvg width="18px" height="18px" fill="var(--white)" />
-    </div>
+    </WrapAddBtn>
   );
 };
 
 export default AddArticleFixBtn;
+
+const WrapAddBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--green1);
+  cursor: pointer;
+`;
