@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import dayjs from "dayjs";
 // 훅
 import { stompChat } from "../../custom/stomp";
 import { getCookie } from "../../shared/Cookie";
@@ -8,13 +9,31 @@ import { ReactComponent as BtnSvg } from "../../image/ChatSendBtn.svg";
 const ChatInput = () => {
   // 채팅 글
   const message = useRef("");
-  const token = getCookie("token");
   const [textareaState, setTextareaState] = useState(true);
-
+  // 데이터 모으기
+  const token = getCookie("token");
+  const userId = localStorage.getItem("id");
+  const imgUrl = localStorage.getItem("profileImg");
+  const time = () => {
+    const nowHour = dayjs(new Date()).format("H");
+    const nowMin = dayjs(new Date()).format("mm");
+    if (nowHour > 12) {
+      return `오후 ${nowHour - 12}:${nowMin}`;
+    } else {
+      return `오전 ${nowHour}:${nowMin}`;
+    }
+  };
   // 메세지 전송
   const msgSend = () => {
-    const msg = {};
-    stompChat.chatSendMsg(token, msg);
+    const data = {
+      userId: userId,
+      nickName: "btae",
+      imgUrl: imgUrl,
+      time: time(),
+      message: message.current.value,
+    };
+    stompChat.chatSendMsg(token, data);
+    message.current.value = "";
   };
 
   // 텍스트 칸 조정
@@ -29,7 +48,6 @@ const ChatInput = () => {
     if (e.keyCode === 13) {
       if (e.shiftKey === false && message.current.value !== "") {
         msgSend();
-        message.current.value = "";
         setTextareaState(true);
         e.preventDefault();
       } else if (message.current.value === "") {

@@ -6,7 +6,7 @@ import ChatRoom from "./ChatRoom";
 import { ReactComponent as BtnSvg } from "../../image/Chat.svg";
 
 const ChattingFixBtn = () => {
-  const [chatState, setChatState] = useState(true);
+  const [chatState, setChatState] = useState(false);
 
   return (
     <WrapChatBox>

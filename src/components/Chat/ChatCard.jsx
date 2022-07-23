@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const ChatCard = ({ data }) => {
-  const msgType = (data) => {
+  const msgType = () => {
     const userId = localStorage.getItem("id");
     switch (data.type) {
       case "TALK":
-        if (data.nickname === userId) {
+        if (String(data.userId) === userId) {
           return (
             <WrapMyMsg>
               <TextMyMessage>
-                <span>{data.time}</span>
+                <span>{data.sendTime}</span>
                 <pre>{data.message}</pre>
               </TextMyMessage>
             </WrapMyMsg>
@@ -18,27 +18,27 @@ const ChatCard = ({ data }) => {
         } else {
           return (
             <WrapOtherMsg>
-              <img src={data.imgUrl} alt="프로필 사진" />
+              <img src={data.imageUrl} alt="프로필 사진" />
               <TextOtherMessage>
-                <p>{data.nickname}</p>
+                <p>{data.nickName}</p>
                 <div>
                   <pre>{data.message}</pre>
-                  <span>{data.time}</span>
+                  <span>{data.sendTime}</span>
                 </div>
               </TextOtherMessage>
             </WrapOtherMsg>
           );
         }
-      case "JOIN":
+      case "ENTER":
         return (
           <WrapJoin>
-            <p>{data.nickname}님이 입장했습니다</p>
+            <p>{data.nickName}님이 입장했습니다</p>
           </WrapJoin>
         );
       case "ALARM":
         return (
           <WrapOut>
-            <p>{data.nickname}님이 나갔습니다</p>
+            <p>{data.nickName}님이 나갔습니다</p>
           </WrapOut>
         );
       default:
