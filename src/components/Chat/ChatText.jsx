@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 // 컴포넌트
@@ -11,6 +11,9 @@ const ChatText = () => {
   // recoil 채팅 데이터 저장하기
   const [text, setText] = useState();
   const [textList, setTextList] = useState([]);
+
+  // 스크롤 BOX
+  const textBox = useRef("");
 
   // 구독 data
   const token = getCookie("token");
@@ -47,13 +50,11 @@ const ChatText = () => {
     } else if (text !== undefined) {
       setTextList([text]);
     }
+    textBox.current.scrollTop = textBox.current.scrollHeight;
   }, [text]);
 
   return (
-    <WrapText>
-      {/* {textList.map((v, l) => {
-        return <ChatCard key={l} data={v} />;
-      })} */}
+    <WrapText ref={textBox}>
       {textList.length !== 0 ? (
         <>
           {textList.map((v, l) => {
@@ -72,4 +73,19 @@ const WrapText = styled.div`
   flex-direction: column;
   gap: 10px;
   height: 400px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
 `;
