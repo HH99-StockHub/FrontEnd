@@ -38,20 +38,6 @@ const MyDrupDown = () => {
     toastify.success("정상 로그아웃");
   };
 
-  // 토큰, id 유무 체크
-  React.useEffect(() => {
-    const cookie = getCookie("token");
-    const userId = localStorage.getItem("id");
-    const profileImg = localStorage.getItem("profileImg");
-
-    if (cookie !== undefined && userId !== null && profileImg !== null) {
-      setLoginState(true);
-    } else {
-      deleteCookie("token");
-      localStorage.removeItem("id");
-    }
-  }, []);
-
   return (
     <>
       <>
