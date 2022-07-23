@@ -21,15 +21,4 @@ const WrapMenuBtn = styled.div`
   bottom: 58px;
   border-radius: 50px;
   width: 52px;
-  > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 15px 0;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background-color: var(--green1);
-    cursor: pointer;
-  }
 `;

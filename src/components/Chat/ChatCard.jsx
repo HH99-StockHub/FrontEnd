@@ -7,29 +7,29 @@ const ChatCard = ({ data }) => {
       case "TALK":
         if (data.nickname === "btae") {
           return (
-            <WrapMyMsg>
-              <div>
+            <div>
+              <WrapMyMsg>
                 <p>{data.nickname}</p>
                 <img src={data.imgUrl} alt="프로필 사진" />
-              </div>
+              </WrapMyMsg>
               <TextMessage>
                 <span>{data.time}</span>
-                <p>{data.message}</p>
+                <pre>{data.message}</pre>
               </TextMessage>
-            </WrapMyMsg>
+            </div>
           );
         } else {
           return (
-            <WrapOtherMsg>
-              <div>
+            <div>
+              <WrapOtherMsg>
                 <img src={data.imgUrl} alt="프로필 사진" />
                 <p>{data.nickname}</p>
-              </div>
+              </WrapOtherMsg>
               <TextMessage>
-                <p>{data.message}</p>
+                <pre>{data.message}</pre>
                 <span>{data.time}</span>
               </TextMessage>
-            </WrapOtherMsg>
+            </div>
           );
         }
       case "JOIN":
@@ -56,11 +56,9 @@ export default ChatCard;
 
 const WrapOtherMsg = styled.div`
   border: 1px solid #000;
-  > div {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
+  display: flex;
+  gap: 10px;
+  align-items: center;
   img {
     width: 32px;
     height: 32px;
@@ -70,12 +68,10 @@ const WrapOtherMsg = styled.div`
 `;
 const WrapMyMsg = styled.div`
   border: 1px solid #000;
-  > div {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
   img {
     width: 32px;
     height: 32px;
@@ -85,6 +81,9 @@ const WrapMyMsg = styled.div`
 `;
 
 const TextMessage = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
   background-color: aqua;
 `;
 
