@@ -18,6 +18,7 @@ import { stockData } from "../../Data/stockData";
 import { addArticleState, showChart } from "../../state/client/modal";
 //이미지
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
+import useSliceNum from "../../custom/sliceNum";
 
 const AddArticleForm = () => {
   // recoil
@@ -31,14 +32,15 @@ const AddArticleForm = () => {
   // 주식 선택하기 input 변경 값
   const [stockInput, setStockInput] = useState("");
   //선택 주식 주가
-  const [currentStock, setCurrentStock] = useState("현재 주가");
+  const [currentStock, setCurrentStock] = useState("");
 
   // title가져오기
   const articleTitle = useRef("");
   const wrapTagStockList = useRef();
   // 투자 포인트
   const choosePoint = useRef("");
-
+  // ,찍기 훅
+  const sliceNum = useSliceNum;
   // stockName 전체 부르기
   const { data = stockData } = useAddArticleFormQuery.useGetStockName();
   // useMutation 사용
@@ -119,11 +121,16 @@ const AddArticleForm = () => {
             scrollPoint.scrollIntoView();
           }
         }
-      } else if (e.code === "Enter") {
+      } else if (e.code === "Enter" && stockArr[stockIndex - 1] !== undefined) {
         setStockInput(stockArr[stockIndex - 1].stockName);
         setStockIndex(0);
         setSelectStockState(false);
         getStock(stockArr[stockIndex - 1].stockName);
+      } else if (e.code === "Enter") {
+        setStockInput(stockArr[stockIndex].stockName);
+        setStockIndex(0);
+        setSelectStockState(false);
+        getStock(stockArr[stockIndex].stockName);
       }
     }
   };
@@ -213,7 +220,15 @@ const AddArticleForm = () => {
                 </StockList>
               )}
             </WrapSelect>
-            <span>{stockLoading ? <LoadingSpinner /> : currentStock}</span>
+            <span>
+              {stockLoading ? (
+                <LoadingSpinner />
+              ) : currentStock === "" ? (
+                "현재 주가"
+              ) : (
+                sliceNum(currentStock) + " 원"
+              )}
+            </span>
           </WrapSearch>
           <ScrollScope>
             {selectStockState === false && (

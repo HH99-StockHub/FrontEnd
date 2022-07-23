@@ -9,12 +9,14 @@ const ChattingFixBtn = () => {
   const [chatState, setChatState] = useState(false);
 
   return (
-    <WrapChatBox
-      onClick={() => {
-        setChatState(!chatState);
-      }}
-    >
-      <BtnSvg />
+    <WrapChatBox>
+      <button
+        onClick={() => {
+          setChatState(!chatState);
+        }}
+      >
+        <BtnSvg />
+      </button>
       {chatState && <ChatRoom />}
     </WrapChatBox>
   );
@@ -24,9 +26,15 @@ export default ChattingFixBtn;
 
 const WrapChatBox = styled.div`
   position: relative;
-  > div {
-    position: absolute;
-    top: -500px;
-    right: 0;
+  > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--green1);
+    cursor: pointer;
   }
 `;
