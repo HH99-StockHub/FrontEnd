@@ -37,9 +37,4 @@ const WrapChatBox = styled.div`
     background-color: var(--green1);
     cursor: pointer;
   }
-  > div {
-    position: absolute;
-    top: -550px;
-    right: 0;
-  }
 `;

@@ -1,19 +1,11 @@
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
-
-// const socket = new SockJS(process.env.REACT_APP_STOMP_ENDPOINT_KEY);
-const socket = new SockJS("http://3.38.165.46/ws");
+const socket = new SockJS(process.env.REACT_APP_STOMP_ENDPOINT_KEY);
 
 export const stompClient = Stomp.over(socket);
 // 연결
 export const stompConnect = (token) => {
-  stompClient.connect(
-    { token: token },
-    () => {
-      stompChat.subscribeChat(token);
-    },
-    onError,
-  );
+  stompClient.connect({ token: token }, {}, onError);
 };
 // 연결 끊기
 export const stompDisConnect = (token) => {
@@ -36,63 +28,71 @@ function waitForConnection(stompClient, callback) {
 
 // 채팅 stomp
 export const stompChat = {
-  subscribeUrl: "/topic/global-notifications",
+  subscribeUrl: "/sub/topic/stockhub",
   chatSendUrl: `/pub/chat/message`,
   // 구독
-  subscribeChat: (token) => {
+  subscribeChat: (token, data, setText) => {
     stompClient.subscribe(stompChat.subscribeUrl, (response) => {
       const newMessage = JSON.parse(response.body);
-      console.log(newMessage, "구독인데 이게 데이터로 들어오나?");
+      setText(newMessage);
     });
-    stompChat.chatJoinMsg(token);
+    stompChat.chatJoinMsg(token, data);
   },
   // 구독 해제
-  disSubscribeChat: () => {
-    stompChat.chatOutMsg();
+  disSubscribeChat: (token, data) => {
+    stompChat.chatOutMsg(token, data);
     stompClient.unsubscribe("sub-0");
   },
   // 메세지 보내기
-  chatSendMsg: (token, msg) => {
-    const data = {
-      // type: "TALK",
-      // topicName: "corinnechat",
-      // userId: userinfo.userId,
-      // nickname: userinfo.nickname,
-      // imageUrl: userinfo.imageUrl,
-      // exp: userinfo.exp,
-      // sendTime: sendTm,
-      // clear: clear6,
-      // message: inputMessage,
+  chatSendMsg: (token, data) => {
+    const msg = {
+      type: "TALK",
+      userId: data.userId,
+      nickName: data.nickName,
+      imageUrl: data.imgUrl,
+      sendTime: data.time,
+      clear: true,
+      message: data.message,
     };
     stompClient.send(
       // "/app/message",
       stompChat.chatSendUrl,
       { token: token },
-      JSON.stringify(data),
+      JSON.stringify(msg),
     );
   },
   // 참가 메세지
-  chatJoinMsg: (token, msg) => {
-    const Msg = {
-      type: "join",
-      senderName: "nickname",
+  chatJoinMsg: (token, data) => {
+    const msg = {
+      type: "ENTER",
+      userId: data.userId,
+      nickName: data.nickName,
+      imageUrl: data.imgUrl,
+      sendTime: data.time,
+      clear: true,
+      message: "",
     };
     stompClient.send(
       stompChat.chatSendUrl,
       { token: token },
-      JSON.stringify(Msg),
+      JSON.stringify(msg),
     );
   },
   // 퇴장 메세지
-  chatOutMsg: (token, msg) => {
-    const Msg = {
-      type: "join",
-      senderName: "nickname",
+  chatOutMsg: (token, data) => {
+    const msg = {
+      type: "ALARM",
+      userId: data.userId,
+      nickName: data.nickName,
+      imageUrl: data.imgUrl,
+      sendTime: data.time,
+      clear: true,
+      message: `${data.nickName}님이 나가셨습니다.`,
     };
     stompClient.send(
       stompChat.chatSendUrl,
       { token: token },
-      JSON.stringify(Msg),
+      JSON.stringify(msg),
     );
   },
 };
