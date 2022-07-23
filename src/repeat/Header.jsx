@@ -6,45 +6,48 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 import DropDown from "../components/DrupDown/DrupDown";
 // 훅
-import { getCookie } from "../shared/Cookie";
-import { toastify } from "../custom/toastify";
-import { deleteCookie } from "../shared/Cookie";
+// import { getCookie } from "../shared/Cookie";
+// import { toastify } from "../custom/toastify";
+// import { deleteCookie } from "../shared/Cookie";
 // 모듈
 import { addArticleState } from "../state/client/modal";
 import { loginState } from "../state/client/login";
 //이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
+import MyDrupDown from "../components/DrupDown/MyDrupDown";
 
 const Header = React.memo(() => {
   //recoil
   const setFormState = useSetRecoilState(addArticleState);
   const [login, setLoginState] = useRecoilState(loginState);
   const navigate = useNavigate();
-  // 로그아웃
-  const onLogout = (e) => {
-    deleteCookie("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("profileImg");
-    setLoginState(false);
-    toastify.success("정상 로그아웃");
-  };
+  // // 로그아웃
+  // const onLogout = (e) => {
+  //   deleteCookie("token");
+  //   localStorage.removeItem("id");
+  //   localStorage.removeItem("profileImg");
+  //   setLoginState(false);
+  //   toastify.success("정상 로그아웃");
+  // };
 
   const openAddArticle = () => {
     setFormState(true);
   };
 
-  // 토큰, id 유무 체크
-  React.useEffect(() => {
-    const cookie = getCookie("token");
-    const userId = localStorage.getItem("id");
-    const profileImg = localStorage.getItem("profileImg");
-    if (cookie !== undefined && userId !== null && profileImg !== null) {
-      setLoginState(true);
-    } else {
-      deleteCookie("token");
-      localStorage.removeItem("id");
-    }
-  }, []);
+  // // 토큰, id 유무 체크
+  // React.useEffect(() => {
+  //   const cookie = getCookie("token");
+  //   const userId = localStorage.getItem("id");
+  //   const profileImg = localStorage.getItem("profileImg");
+
+  //   if (cookie !== undefined && userId !== null && profileImg !== null) {
+  //     setLoginState(true);
+  //   } else {
+  //     deleteCookie("token");
+  //     localStorage.removeItem("id");
+  //   }
+  // }, []);
+
   return (
     <Header1>
       <Header2>
@@ -62,8 +65,10 @@ const Header = React.memo(() => {
               src={localStorage.getItem("profileImg")}
               alt="프로필 이미지"
             />
-            <button onClick={onLogout}>로그아웃</button>
-            <button>내 게시물</button>
+            <div>이름</div>
+            <MyDrupDown />
+            {/* <button onClick={onLogout}>로그아웃</button>
+            <button>내 게시물</button> */}
             <Writing onClick={openAddArticle}>글작성</Writing>
           </WrapMenu>
         ) : (
