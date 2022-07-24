@@ -7,7 +7,7 @@ import LineChart from "./LineChart";
 // 모듈
 import { showChart } from "../../state/client/modal";
 
-const DetailChart = () => {
+const DetailChart = ({ stockName }) => {
   // 차트 선택
   const [chartState, setChartState] = useState(false);
   // 차트 닫기
@@ -40,7 +40,11 @@ const DetailChart = () => {
           X
         </button>
       </WrapBtn>
-      {chartState ? <LineChart /> : <CandleChart />}
+      {chartState ? (
+        <LineChart stockName={stockName} />
+      ) : (
+        <CandleChart stockName={stockName} />
+      )}
     </WrapChart>
   );
 };
