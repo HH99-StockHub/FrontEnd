@@ -24,27 +24,23 @@ const DrupDown = () => {
   }, []);
 
   return (
-    <>
-      <>
-        <DropDownContainer ref={el}>
-          <DropDownHeader>
-            <button onClick={toggling}>
-              <Notice />
-            </button>
-          </DropDownHeader>
-          {isOpen && (
-            <DropDownListContainer>
-              <DropDownList>
-                <ListItem onClick={() => {}}>공지사항</ListItem>
-                <ListItem onClick={() => {}}>공지사항</ListItem>
-                <ListItem onClick={() => {}}>공지사항</ListItem>
-                <ListItem onClick={() => {}}>공지사항</ListItem>
-              </DropDownList>
-            </DropDownListContainer>
-          )}
-        </DropDownContainer>
-      </>
-    </>
+    <DropDownContainer ref={el}>
+      <DropDownHeader>
+        <button onClick={toggling}>
+          <Notice />
+        </button>
+      </DropDownHeader>
+      {isOpen && (
+        <DropDownListContainer>
+          <DropDownList>
+            <ListItem onClick={() => {}}>공지사항</ListItem>
+            <ListItem onClick={() => {}}>공지사항</ListItem>
+            <ListItem onClick={() => {}}>공지사항</ListItem>
+            <ListItem onClick={() => {}}>공지사항</ListItem>
+          </DropDownList>
+        </DropDownListContainer>
+      )}
+    </DropDownContainer>
   );
 };
 
