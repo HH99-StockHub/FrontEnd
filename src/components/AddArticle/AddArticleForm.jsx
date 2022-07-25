@@ -19,6 +19,7 @@ import { addArticleState, showChart } from "../../state/client/modal";
 //이미지
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import useSliceNum from "../../custom/sliceNum";
+import ChartModal from "../Chart/ChartModal";
 
 const AddArticleForm = () => {
   // recoil
@@ -243,7 +244,7 @@ const AddArticleForm = () => {
                   그래프 보기
                 </button>
                 <div>
-                  <LineChart />
+                  <LineChart stockName={stockInput} />
                 </div>
               </ChartBox>
             )}
@@ -271,6 +272,7 @@ const AddArticleForm = () => {
           </button>
         </WrapBtn>
       </form>
+      {selectStockState === false && <ChartModal stockName={stockInput} />}
     </WrapForm>
   );
 };
@@ -374,6 +376,7 @@ const ChartBox = styled.div`
     font-weight: 700;
   }
   > div {
+    position: relative;
     width: 100%;
     height: 200px;
     border: 1px solid var(--gray3);
