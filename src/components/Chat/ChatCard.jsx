@@ -2,46 +2,43 @@ import React from "react";
 import styled from "styled-components";
 
 const ChatCard = ({ data }) => {
-  const msgType = (data) => {
+  const msgType = () => {
+    const userId = localStorage.getItem("id");
     switch (data.type) {
       case "TALK":
-        if (data.nickname === "btae") {
+        if (String(data.userId) === userId) {
           return (
-            <div>
-              <WrapMyMsg>
-                <p>{data.nickname}</p>
-                <img src={data.imgUrl} alt="프로필 사진" />
-              </WrapMyMsg>
-              <TextMessage>
-                <span>{data.time}</span>
+            <WrapMyMsg>
+              <TextMyMessage>
+                <span>{data.sendTime}</span>
                 <pre>{data.message}</pre>
-              </TextMessage>
-            </div>
+              </TextMyMessage>
+            </WrapMyMsg>
           );
         } else {
           return (
-            <div>
-              <WrapOtherMsg>
-                <img src={data.imgUrl} alt="프로필 사진" />
-                <p>{data.nickname}</p>
-              </WrapOtherMsg>
-              <TextMessage>
-                <pre>{data.message}</pre>
-                <span>{data.time}</span>
-              </TextMessage>
-            </div>
+            <WrapOtherMsg>
+              <img src={data.imageUrl} alt="프로필 사진" />
+              <TextOtherMessage>
+                <p>{data.nickName}</p>
+                <div>
+                  <pre>{data.message}</pre>
+                  <span>{data.sendTime}</span>
+                </div>
+              </TextOtherMessage>
+            </WrapOtherMsg>
           );
         }
-      case "JOIN":
+      case "ENTER":
         return (
           <WrapJoin>
-            <p>{data.nickname}님이 입장했습니다</p>
+            <p>{data.nickName}님이 입장했습니다</p>
           </WrapJoin>
         );
-      case "OUT":
+      case "ALARM":
         return (
           <WrapOut>
-            <p>{data.nickname}님이 나갔습니다</p>
+            <p>{data.nickName}님이 나갔습니다</p>
           </WrapOut>
         );
       default:
@@ -55,49 +52,63 @@ const ChatCard = ({ data }) => {
 export default ChatCard;
 
 const WrapOtherMsg = styled.div`
-  border: 1px solid #000;
   display: flex;
-  gap: 10px;
-  align-items: center;
+  gap: 8px;
   img {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    border: 1px solid #000;
+    border: 1px solid var(--green1);
   }
 `;
 const WrapMyMsg = styled.div`
-  border: 1px solid #000;
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  align-items: center;
-  img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 1px solid #000;
-  }
 `;
 
-const TextMessage = styled.div`
+const TextMyMessage = styled.div`
   display: flex;
   gap: 10px;
   align-items: flex-end;
-  background-color: aqua;
+  pre {
+    padding: 12px;
+    max-width: 230px;
+    background-color: var(--green2);
+    color: var(--white);
+    border-radius: 25px;
+  }
+  span {
+    color: var(--gray3);
+    font-size: 12px;
+  }
+`;
+const TextOtherMessage = styled.div`
+  p {
+    font-size: 14px;
+  }
+  > div {
+    display: flex;
+    align-items: flex-end;
+  }
+  pre {
+    padding: 12px;
+    max-width: 230px;
+    background-color: var(--gray1);
+    border-radius: 25px;
+  }
+  span {
+    color: var(--gray3);
+    font-size: 12px;
+  }
 `;
 
 const WrapJoin = styled.div`
-  border: 1px solid #000;
-  background-color: aliceblue;
   text-align: center;
-  width: 300px;
-  margin: 0 auto;
+  font-size: 12px;
+  color: var(--gray3);
 `;
 const WrapOut = styled.div`
-  border: 1px solid #000;
-  background-color: aliceblue;
   text-align: center;
-  width: 300px;
-  margin: 0 auto;
+  font-size: 12px;
+  color: var(--gray3);
 `;

@@ -104,54 +104,56 @@ export const candleChartDummy = [
     y: [6605, 6608.03, 6598.95, 6604.01],
   },
 ];
-export const lineChartDummy = [
-  {
-    x: new Date("2018-02-11").getTime(),
-    y: 76,
-  },
-  {
-    x: new Date("2018-02-12").getTime(),
-    y: 74,
-  },
-  {
-    x: new Date("2018-02-13").getTime(),
-    y: 76,
-  },
-  {
-    x: new Date("2018-02-14").getTime(),
-    y: 74,
-  },
+export const lineChartDummy = {
+  chart: [
+    {
+      x: new Date("2018-02-11").getTime(),
+      y: 76,
+    },
+    {
+      x: new Date("2018-02-12").getTime(),
+      y: 74,
+    },
+    {
+      x: new Date("2018-02-13").getTime(),
+      y: 76,
+    },
+    {
+      x: new Date("2018-02-14").getTime(),
+      y: 74,
+    },
 
-  {
-    x: new Date("2018-02-15").getTime(),
-    y: 76,
-  },
-  {
-    x: new Date("2018-02-16").getTime(),
-    y: 74,
-  },
-  {
-    x: new Date("2018-02-17").getTime(),
-    y: 76,
-  },
-  {
-    x: new Date("2018-02-18").getTime(),
-    y: 74,
-  },
-  {
-    x: new Date("2018-02-19").getTime(),
-    y: 76,
-  },
-  {
-    x: new Date("2018-02-20").getTime(),
-    y: 74,
-  },
-  {
-    x: new Date("2018-02-21").getTime(),
-    y: 76,
-  },
-  {
-    x: new Date("2018-02-22").getTime(),
-    y: 74,
-  },
-];
+    {
+      x: new Date("2018-02-15").getTime(),
+      y: 76,
+    },
+    {
+      x: new Date("2018-02-16").getTime(),
+      y: 74,
+    },
+    {
+      x: new Date("2018-02-17").getTime(),
+      y: 76,
+    },
+    {
+      x: new Date("2018-02-18").getTime(),
+      y: 74,
+    },
+    {
+      x: new Date("2018-02-19").getTime(),
+      y: 76,
+    },
+    {
+      x: new Date("2018-02-20").getTime(),
+      y: 74,
+    },
+    {
+      x: new Date("2018-02-21").getTime(),
+      y: 76,
+    },
+    {
+      x: new Date("2018-02-22").getTime(),
+      y: 74,
+    },
+  ],
+};

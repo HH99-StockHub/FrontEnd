@@ -3,12 +3,28 @@ import ReactApexChart from "react-apexcharts";
 import dayjs from "dayjs";
 // 잉여데이터
 import { candleChartDummy } from "../../Data/chartDummy";
-const CandleChart = () => {
-  const data = candleChartDummy;
+import { useChartQuery } from "./useChartQuery";
+import { useMemo } from "react";
+import useSliceNum from "../../custom/sliceNum";
+const CandleChart = ({ stockName }) => {
+  // const data = candleChartDummy;
+  const { data = candleChartDummy, isLoading } =
+    useChartQuery.useGetChartData(stockName);
+  const candleChartData = useMemo(() => {
+    const newDataList = [...data.chart].reverse().map((v) => {
+      return {
+        x: new Date(v[0].slice(0, 4), v[0].slice(4, 6) - 1, v[0].slice(6, 8)),
+        y: [v[1], v[2], v[3], v[4]],
+      };
+    });
+    return newDataList;
+  }, [data]);
 
+  // 숫자 , 찍기
+  const sliceNum = useSliceNum;
   const state = {
     theme: {
-      mode: "dark",
+      mode: "light",
       palette: "palette8",
       monochrome: {
         enabled: false,
@@ -17,8 +33,6 @@ const CandleChart = () => {
         shadeIntensity: 1,
       },
     },
-
-    title: { text: undefined, align: "right" },
     chart: {
       zoom: false,
       type: "candlestick",
@@ -62,9 +76,8 @@ const CandleChart = () => {
         offsetX: 0,
         offsetY: 0,
         rotate: 0,
-        // y축 원하는데로 변경하기 , 찍어서 가독성을 높여보자
         formatter: (value) => {
-          return parseInt(value);
+          return sliceNum(parseInt(value)) + "원";
         },
       },
       axisBorder: {
@@ -110,7 +123,7 @@ const CandleChart = () => {
         rotate: 0,
         formatter: function (val, l) {
           // x축 원하는데로 조작하기
-          return dayjs(val).format("MM DD");
+          return dayjs(val).format("MM/DD");
         },
         style: {
           // 하단 날짜 색
@@ -140,23 +153,15 @@ const CandleChart = () => {
       intersect: false,
       inverseOrder: false,
       // 툴 커스텀해서 사용하기
-      custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-        return (
-          "<div>" +
-          "<p>" +
-          data[dataPointIndex].y[0] +
-          "</p>" +
-          "<p>" +
-          data[dataPointIndex].y[1] +
-          "</p>" +
-          "<p>" +
-          data[dataPointIndex].y[2] +
-          "</p>" +
-          "<p>" +
-          data[dataPointIndex].y[3] +
-          "</p>" +
-          "</div>"
-        );
+      // { series, seriesIndex, dataPointIndex, w }
+      custom: function ({ series, dataPointIndex }) {
+        return `<div>
+      <p><span>1 </span> ${candleChartData[dataPointIndex].y[0]} </p>
+      <p><span>2 </span> ${candleChartData[dataPointIndex].y[1]}</p>
+      <p><span>3 </span> ${candleChartData[dataPointIndex].y[2]}</p>
+      <p><span>4 </span> ${candleChartData[dataPointIndex].y[3]}</p>
+    </div>
+          `;
       },
     },
   };
@@ -166,8 +171,7 @@ const CandleChart = () => {
       series={[
         {
           // 툴팁 이름 호버했을 때 보이는
-          name: ["price", "gey"],
-          data: data,
+          data: candleChartData,
         },
       ]}
       type="candlestick"
