@@ -14,6 +14,12 @@ import { loginState } from "../state/client/login";
 //이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 import MyDrupDown from "../components/DrupDown/MyDrupDown";
+import {
+  stompConnect,
+  stompDisConnect,
+  stompLoginConnect,
+  stompNotice,
+} from "../custom/stomp";
 
 const Header = React.memo(() => {
   //recoil
@@ -30,13 +36,17 @@ const Header = React.memo(() => {
     const cookie = getCookie("token");
     const userId = localStorage.getItem("id");
     const profileImg = localStorage.getItem("profileImg");
-
     if (cookie !== undefined && userId !== null && profileImg !== null) {
       setLoginState(true);
+      stompLoginConnect(cookie, userId);
     } else {
+      stompConnect(cookie);
       deleteCookie("token");
       localStorage.removeItem("id");
     }
+    return () => {
+      stompDisConnect(cookie);
+    };
   }, []);
 
   return (

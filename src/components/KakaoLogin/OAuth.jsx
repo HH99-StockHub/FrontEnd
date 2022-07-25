@@ -9,6 +9,7 @@ import LoadingSpinner from "../../repeat/LoadingSpinner";
 import { setCookie, getCookie } from "../../shared/Cookie";
 import { useLoginQuery } from "./useLoginQuery";
 import { toastify } from "../../custom/toastify";
+import { stompNotice } from "../../custom/stomp";
 //모듈
 import { loginState } from "../../state/client/login";
 
@@ -45,6 +46,7 @@ const OAuth = () => {
       localStorage.setItem("id", data.headers.userid);
       localStorage.setItem("profileImg", data.headers.profileimage);
       setLoginState(true);
+      stompNotice.subscribeNotice(data.headers.userid);
       toastify.success("로그인 완료");
       navigate(beforeUrl);
     }

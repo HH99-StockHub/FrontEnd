@@ -1,15 +1,23 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-// 이미지
+// 컴포넌트
 import AddArticleFixBtn from "../components/AddArticle/AddArticleFixBtn";
 import ChattingFixBtn from "../components/Chat/ChattingFixBtn";
+// 모듈
+import { loginState } from "../state/client/login";
 
 const MenuBtn = () => {
+  const login = useRecoilValue(loginState);
   return (
-    <WrapMenuBtn>
-      <AddArticleFixBtn />
-      <ChattingFixBtn />
-    </WrapMenuBtn>
+    <>
+      {login && (
+        <WrapMenuBtn>
+          <AddArticleFixBtn />
+          <ChattingFixBtn />
+        </WrapMenuBtn>
+      )}
+    </>
   );
 };
 
