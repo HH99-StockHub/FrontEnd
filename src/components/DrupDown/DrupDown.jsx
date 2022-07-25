@@ -74,5 +74,6 @@ const DropDownList = styled.div`
 const ListItem = styled.li`
   list-style: none;
   margin-bottom: 0.8em;
+  cursor: pointer;
 `;
 export default DrupDown;
