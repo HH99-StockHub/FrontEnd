@@ -13,7 +13,6 @@ const MainArticleList = () => {
   const isSmall = useMediaQuery({
     query: "(max-width:700px)",
   });
-  console.log(isSmall);
   return (
     <Table>
       {isMiddle ? (

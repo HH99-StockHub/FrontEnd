@@ -20,6 +20,7 @@ import { addArticleState, showChart } from "../../state/client/modal";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import useSliceNum from "../../custom/sliceNum";
 import ChartModal from "../Chart/ChartModal";
+import { useMediaQuery } from "react-responsive";
 
 const AddArticleForm = () => {
   // recoil
@@ -40,12 +41,18 @@ const AddArticleForm = () => {
   const wrapTagStockList = useRef();
   // 투자 포인트
   const choosePoint = useRef("");
+
+  // media
+  const isSmall = useMediaQuery({
+    query: "(max-width:500px)",
+  });
+
   // ,찍기 훅
   const sliceNum = useSliceNum;
   // stockName 전체 부르기
   const { data = stockData } = useAddArticleFormQuery.useGetStockName();
   // useMutation 사용
-  const { mutate: addArticle, stockLoading: addLoading } =
+  const { mutate: addArticle, isLoading: addLoading } =
     useAddArticleFormMutate.useAddArticleMutation();
   const { mutate: getStock, isLoading: stockLoading } =
     useAddArticleFormMutate.useGetArticleStock({
@@ -53,7 +60,7 @@ const AddArticleForm = () => {
         setCurrentStock(data.data);
       },
       onError: (data) => {
-        toastify.error("저장에 실패했습니다.");
+        toastify.error("주가 불러오기를 실패했습니다.");
       },
     });
   // 주식 종목 선택하기 list
@@ -197,41 +204,41 @@ const AddArticleForm = () => {
         </Header>
         <WrapText>
           {addLoading && <LoadingSpinner />}
-          <WrapSearch>
-            <WrapSelect>
-              <input hidden="hidden" />
-              <input
-                type="text"
-                value={stockInput}
-                placeholder="종목검색"
-                onChange={selectStockList}
-                onKeyDown={keyDownHandler}
-              />
-              <SearchSvg width="17.49" height="17.49" fill="var(--green1)" />
-              {selectStockState && (
-                <StockList index={stockIndex} ref={wrapTagStockList}>
-                  {stockArr.map((v) => {
-                    return (
-                      <div key={v.id} onClick={selectStockOne}>
-                        <span>{v.stockCode}</span>
-                        <div>{v.stockName}</div>
-                      </div>
-                    );
-                  })}
-                </StockList>
-              )}
-            </WrapSelect>
-            <span>
-              {stockLoading ? (
-                <LoadingSpinner />
-              ) : currentStock === "" ? (
-                "현재 주가"
-              ) : (
-                sliceNum(currentStock) + " 원"
-              )}
-            </span>
-          </WrapSearch>
           <ScrollScope>
+            <WrapSearch>
+              <WrapSelect>
+                <input hidden="hidden" />
+                <input
+                  type="text"
+                  value={stockInput}
+                  placeholder="종목검색"
+                  onChange={selectStockList}
+                  onKeyDown={keyDownHandler}
+                />
+                <SearchSvg width="17.49" height="17.49" fill="var(--green1)" />
+                {selectStockState && (
+                  <StockList index={stockIndex} ref={wrapTagStockList}>
+                    {stockArr.map((v) => {
+                      return (
+                        <div key={v.id} onClick={selectStockOne}>
+                          <span>{v.stockCode}</span>
+                          <div>{v.stockName}</div>
+                        </div>
+                      );
+                    })}
+                  </StockList>
+                )}
+              </WrapSelect>
+              <span>
+                {stockLoading ? (
+                  <LoadingSpinner />
+                ) : currentStock === "" ? (
+                  "현재 주가"
+                ) : (
+                  sliceNum(currentStock) + " 원"
+                )}
+              </span>
+            </WrapSearch>
             {selectStockState === false && (
               <ChartBox>
                 {/* 모달창 오픈 */}
@@ -304,13 +311,16 @@ const WrapText = styled.div`
   padding: 24px 79px 48px;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--gray2);
+  @media screen and (max-width: 700px) {
+    padding: 24px 0;
+  }
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 67px;
+  height: 50px;
   background-color: var(--green1);
   color: var(--white);
   > p {
@@ -336,6 +346,12 @@ const WrapSearch = styled.div`
     font-size: 12px;
     color: var(--gray3);
   }
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    > span {
+      width: 100%;
+    }
+  }
 `;
 
 const WrapSelect = styled.div`
@@ -343,11 +359,11 @@ const WrapSelect = styled.div`
   display: flex;
   align-items: center;
   padding: 0 10px;
-  width: 385px;
+  width: 100%;
   height: 44px;
   border: 1px solid var(--gray2);
   input {
-    width: 332px;
+    width: 100%;
     border: none;
     outline: none;
   }
@@ -389,9 +405,12 @@ const WrapGoal = styled.div`
       }
     }
   }
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 const ScrollScope = styled.div`
-  max-height: 400px;
+  max-height: 50vh;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -429,8 +448,9 @@ const StockList = styled.div`
   height: 264px;
   overflow-y: auto;
   background-color: var(--white);
+  z-index: 99;
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 0;
   }
   ::-webkit-scrollbar-thumb {
     background-color: #2f3542;
@@ -478,5 +498,8 @@ const WrapBtn = styled.div`
     &:nth-child(2) {
       background-color: var(--gray3);
     }
+  }
+  @media screen and (max-width: 700px) {
+    margin: 24px 0;
   }
 `;
