@@ -19,7 +19,6 @@ import { loginState } from "./state/client/login";
 import GlobalStyle from "./elem/GlobalStyle";
 import "./CSS/toastify.css";
 import Footer from "./repeat/Footer";
-import ChartModal from "./components/Chart/ChartModal";
 import AddFormModal from "./components/AddArticle/AddFormModal";
 import { useEffect } from "react";
 import { stompConnect, stompDisConnect } from "./custom/stomp";
@@ -40,7 +39,6 @@ function App() {
     <div className="App">
       <GlobalStyle />
       <AddFormModal />
-      <ChartModal />
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />

@@ -13,6 +13,7 @@ import { showChart } from "../../../state/client/modal";
 import { ReactComponent as Poly } from "../../../image/Poly.svg.svg";
 import { ReactComponent as Plus } from "../../../image/Plus.svg";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
+import ChartModal from "../../Chart/ChartModal";
 
 const Title = (props) => {
   const { stockName } = props;
@@ -21,92 +22,97 @@ const Title = (props) => {
   const { data = [], isLoading } = useDetailArticleGet.useNewsSearch(stockName);
 
   return (
-    <Box>
-      <NameDiv>
-        <Name>
-          <P>{stockName}</P>
-          <TitleBox>
-            <NameP>8,400</NameP>
-            <TitleDiv>
-              <Poly />
-              <TitleP>7,000</TitleP>
-            </TitleDiv>
-            <TitleDiv>
-              <Plus width="9" height="9" fill="#FF3232" />
-              <TitleP>10%</TitleP>
-            </TitleDiv>
-          </TitleBox>
-          <Box1>
-            <Box1Div>
-              전일
-              <Box1P>78,000</Box1P>
-            </Box1Div>
-            <Box1Div>
-              고가
-              <Box1P>78,000</Box1P>
-            </Box1Div>
-            <Box1Div>
-              거래량
-              <Box1P>78,000(161%)</Box1P>
-            </Box1Div>
-          </Box1>
-          <Box1>
-            <Box2Div>
-              시가
-              <Box1P>78,000</Box1P>
-            </Box2Div>
-            <Box2Div>
-              저가
-              <Box1P>78,000</Box1P>
-            </Box2Div>
-            <Box2Div>
-              거래대금
-              <Box1P>78,000</Box1P>
-            </Box2Div>
-          </Box1>
-        </Name>
-        <MarketDiv>
-          <MarketB>
-            <MarkeTT>일일 그래프</MarkeTT>
-            <MarketGp
-              onClick={() => {
-                setChartModal(true);
-              }}
-            >
-              그래프 보기
-            </MarketGp>
-          </MarketB>
-          <Market>
-            <LineChart />
-          </Market>
-        </MarketDiv>
-      </NameDiv>
-      <NewsBox>
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <>
-            <NewsTitle>{stockName} 관련기사</NewsTitle>
-            {data.map((v, l) => {
-              return (
-                <Newsb
-                  onClick={() => {
-                    window.open(v.link, "_blank");
-                  }}
-                  key={l}
-                >
-                  <News dangerouslySetInnerHTML={{ __html: v.title }}></News>
-                  <NewsP
-                    dangerouslySetInnerHTML={{ __html: v.description }}
-                  ></NewsP>
-                  <NewsP1>{dayjs(v.pubDate).format("YY-MM-DD")}</NewsP1>
-                </Newsb>
-              );
-            })}
-          </>
-        )}
-      </NewsBox>
-    </Box>
+    <>
+      <Box>
+        <NameDiv>
+          <Name>
+            <P>{stockName}</P>
+            <TitleBox>
+              <NameP>8,400</NameP>
+              <TitleDiv>
+                <Poly />
+                <TitleP>7,000</TitleP>
+              </TitleDiv>
+              <TitleDiv>
+                <Plus width="9" height="9" fill="#FF3232" />
+                <TitleP>10%</TitleP>
+              </TitleDiv>
+            </TitleBox>
+            <Box1>
+              <Box1Div>
+                전일
+                <Box1P>78,000</Box1P>
+              </Box1Div>
+              <Box1Div>
+                고가
+                <Box1P>78,000</Box1P>
+              </Box1Div>
+              <Box1Div>
+                거래량
+                <Box1P>78,000(161%)</Box1P>
+              </Box1Div>
+            </Box1>
+            <Box1>
+              <Box2Div>
+                시가
+                <Box1P>78,000</Box1P>
+              </Box2Div>
+              <Box2Div>
+                저가
+                <Box1P>78,000</Box1P>
+              </Box2Div>
+              <Box2Div>
+                거래대금
+                <Box1P>78,000</Box1P>
+              </Box2Div>
+            </Box1>
+          </Name>
+          <MarketDiv>
+            <MarketB>
+              <MarkeTT>일일 그래프</MarkeTT>
+              <MarketGp
+                onClick={() => {
+                  setChartModal(true);
+                }}
+              >
+                그래프 보기
+              </MarketGp>
+            </MarketB>
+            <Market>
+              {stockName !== undefined ? (
+                <LineChart stockName={stockName} />
+              ) : null}
+            </Market>
+          </MarketDiv>
+        </NameDiv>
+        <NewsBox>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <NewsTitle>{stockName} 관련기사</NewsTitle>
+              {data.map((v, l) => {
+                return (
+                  <Newsb
+                    onClick={() => {
+                      window.open(v.link, "_blank");
+                    }}
+                    key={l}
+                  >
+                    <News dangerouslySetInnerHTML={{ __html: v.title }}></News>
+                    <NewsP
+                      dangerouslySetInnerHTML={{ __html: v.description }}
+                    ></NewsP>
+                    <NewsP1>{dayjs(v.pubDate).format("YY-MM-DD")}</NewsP1>
+                  </Newsb>
+                );
+              })}
+            </>
+          )}
+        </NewsBox>
+      </Box>
+      {stockName !== undefined ? <ChartModal stockName={stockName} /> : null}
+    </>
   );
 };
 
@@ -274,6 +280,7 @@ const Name = styled.div`
   padding: 24px 0;
 `;
 const Market = styled.div`
+  position: relative;
   border: 1px solid var(--gray3);
   height: 200px;
   margin-top: 12px;
