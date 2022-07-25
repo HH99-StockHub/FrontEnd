@@ -49,10 +49,10 @@ const MyDrupDown = () => {
             <DropDownListContainer>
               <DropDownList>
                 <ListItem onClick={() => {}}>
-                  내 등급 : [새싹] (156/250)
+                  내 등급 :<ListItemP>[새싹] (156/250)</ListItemP>
                 </ListItem>
-                <ListItem onClick={() => {}}>내 글 모아보기</ListItem>
-                <ListItem onClick={onLogout}>로그아웃</ListItem>
+                <ListItem1 onClick={() => {}}>내 글 모아보기</ListItem1>
+                <ListItem1 onClick={onLogout}>로그아웃</ListItem1>
               </DropDownList>
             </DropDownListContainer>
           )}
@@ -71,15 +71,14 @@ const DropDownHeader = styled.div`
   background: #ffffff;
 `;
 const DropDownListContainer = styled.div``;
+
 const DropDownList = styled.div`
   position: absolute;
-  padding: 10px;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
-  box-sizing: border-box;
-  color: #3faffa;
-  font-size: 1.3rem;
-  font-weight: 500;
+  padding: 8px;
+  background: var(--white);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
   z-index: 50;
   &:first-child {
     padding-top: 0.8em;
@@ -88,5 +87,19 @@ const DropDownList = styled.div`
 const ListItem = styled.li`
   list-style: none;
   margin-bottom: 0.8em;
+  display: flex;
+`;
+
+const ListItem1 = styled.li`
+  list-style: none;
+  margin-bottom: 0.8em;
+  cursor: pointer;
+`;
+
+const ListItemP = styled.p`
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--green1);
 `;
 export default MyDrupDown;
