@@ -40,7 +40,7 @@ const DetailChart = ({ stockName }) => {
           X
         </button>
       </WrapBtn>
-      {chartState ? (
+      {chartState && stockName !== undefined ? (
         <LineChart stockName={stockName} />
       ) : (
         <CandleChart stockName={stockName} />

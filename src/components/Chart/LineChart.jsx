@@ -10,7 +10,7 @@ const LineChart = ({ stockName }) => {
   const { data = lineChartDummy, isLoading } =
     useChartQuery.useGetChartData(stockName);
   const lineChartData = useMemo(() => {
-    const newDataList = data.chart.reverse().map((v) => {
+    const newDataList = [...data.chart].reverse().map((v) => {
       return { x: v[0], y: v[3] };
     });
     return newDataList;

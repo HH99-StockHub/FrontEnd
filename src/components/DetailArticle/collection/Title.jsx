@@ -79,7 +79,9 @@ const Title = (props) => {
               </MarketGp>
             </MarketB>
             <Market>
-              <LineChart stockName={stockName} />
+              {stockName !== undefined ? (
+                <LineChart stockName={stockName} />
+              ) : null}
             </Market>
           </MarketDiv>
         </NameDiv>
@@ -109,7 +111,7 @@ const Title = (props) => {
           )}
         </NewsBox>
       </Box>
-      <ChartModal stockName={stockName} />
+      {stockName !== undefined ? <ChartModal stockName={stockName} /> : null}
     </>
   );
 };

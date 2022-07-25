@@ -11,7 +11,7 @@ const CandleChart = ({ stockName }) => {
   const { data = candleChartDummy, isLoading } =
     useChartQuery.useGetChartData(stockName);
   const candleChartData = useMemo(() => {
-    const newDataList = data.chart.reverse().map((v) => {
+    const newDataList = [...data.chart].reverse().map((v) => {
       return {
         x: new Date(v[0].slice(0, 4), v[0].slice(4, 6) - 1, v[0].slice(6, 8)),
         y: [v[1], v[2], v[3], v[4]],
@@ -171,7 +171,7 @@ const CandleChart = ({ stockName }) => {
       series={[
         {
           // 툴팁 이름 호버했을 때 보이는
-          data: candleChartData.slice(0, 50),
+          data: candleChartData,
         },
       ]}
       type="candlestick"
