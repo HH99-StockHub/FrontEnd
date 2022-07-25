@@ -26,6 +26,9 @@ const ArticleSubHeader = React.memo(() => {
   const isSmall = useMediaQuery({
     query: "(max-width:830px)",
   });
+  const isMostSmall = useMediaQuery({
+    query: "(max-width:355px)",
+  });
   return (
     <SubHeader>
       {isSmall ? (
@@ -43,7 +46,7 @@ const ArticleSubHeader = React.memo(() => {
           </WrapText>
           <MobileStyle>
             <WriteBtn onClick={openTogle}>글쓰러가기</WriteBtn>
-            <BannerImg src={bannerImg} alt="배너 이미지" />
+            {!isMostSmall && <BannerImg src={bannerImg} alt="배너 이미지" />}
           </MobileStyle>
         </div>
       ) : (
