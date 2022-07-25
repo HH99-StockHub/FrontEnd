@@ -8,6 +8,7 @@ import { getCookie } from "../../../shared/Cookie";
 import { addArticleState } from "../../../state/client/modal";
 // 이미지
 import bannerImg from "../../../image/mainBanner.png";
+import { useMediaQuery } from "react-responsive";
 
 const ArticleSubHeader = React.memo(() => {
   // 게시글 작성 토글 상태관리 recoil
@@ -20,21 +21,48 @@ const ArticleSubHeader = React.memo(() => {
       toastify.error("작성 전 로그인이 필요합니다");
     }
   };
+
+  // media
+  const isSmall = useMediaQuery({
+    query: "(max-width:830px)",
+  });
   return (
     <SubHeader>
-      <BannerImg src={bannerImg} alt="배너 이미지" />
-      <WrapText>
-        <HeadText className="title">
-          방구석 애널리스트
-          <br />
-          <span>'StockHub'</span>입니다
-        </HeadText>
-        <SubText>
-          주식 전망글을 작성하고 <br />
-          수익왕이 되는 그 날을 응원합니다!
-        </SubText>
-        <WriteBtn onClick={openTogle}>글쓰러가기</WriteBtn>
-      </WrapText>
+      {isSmall ? (
+        <div>
+          <WrapText>
+            <HeadText className="title">
+              방구석 애널리스트
+              <br />
+              <span>'StockHub'</span>입니다
+            </HeadText>
+            <SubText>
+              주식 전망글을 작성하고 <br />
+              수익왕이 되는 그 날을 응원합니다!
+            </SubText>
+          </WrapText>
+          <MobileStyle>
+            <WriteBtn onClick={openTogle}>글쓰러가기</WriteBtn>
+            <BannerImg src={bannerImg} alt="배너 이미지" />
+          </MobileStyle>
+        </div>
+      ) : (
+        <>
+          <BannerImg src={bannerImg} alt="배너 이미지" />
+          <WrapText>
+            <HeadText className="title">
+              방구석 애널리스트
+              <br />
+              <span>'StockHub'</span>입니다
+            </HeadText>
+            <SubText>
+              주식 전망글을 작성하고 <br />
+              수익왕이 되는 그 날을 응원합니다!
+            </SubText>
+            <WriteBtn onClick={openTogle}>글쓰러가기</WriteBtn>
+          </WrapText>
+        </>
+      )}
     </SubHeader>
   );
 });
@@ -49,15 +77,30 @@ const SubHeader = styled.div`
   width: 100%;
   height: 332px;
   background-color: var(--green1);
+  @media screen and (max-width: 830px) {
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    margin: 0 auto;
+  }
 `;
+
 const BannerImg = styled.img`
   width: 442px;
   height: 259px;
   margin-bottom: 15px;
+  @media screen and (max-width: 830px) {
+    width: 200px;
+    height: 120px;
+    margin: 0;
+  }
 `;
 const WrapText = styled.div`
-  position: relative;
   margin-bottom: 49px;
+  @media screen and (max-width: 830px) {
+    width: 290px;
+    margin: 0;
+  }
 `;
 const HeadText = styled.div`
   padding: 10px;
@@ -87,4 +130,10 @@ const WriteBtn = styled.button`
   font-size: 16px;
   font-weight: 700;
   color: var(--white);
+`;
+
+const MobileStyle = styled.div`
+  @media screen and (max-width: 830px) {
+    display: flex;
+  }
 `;

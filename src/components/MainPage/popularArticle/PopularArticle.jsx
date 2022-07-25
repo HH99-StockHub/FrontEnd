@@ -7,19 +7,25 @@ import PopularArticleList from "./PopularArticleList";
 
 const PopularArticle = () => {
   return (
-    <div>
+    <WrapArticle>
       <ArticleHeader title="인기글" link="/total/popular/articles/1" />
       <WrapCard>
         <PopularArticleList />
       </WrapCard>
-    </div>
+    </WrapArticle>
   );
 };
 
 export default PopularArticle;
+const WrapArticle = styled.div`
+  max-width: 588px;
+  @media screen and (max-width: 700px) {
+    max-width: 500px;
+  }
+`;
 
 const WrapCard = styled.div`
-  width: 588px;
+  width: 100%;
   min-height: 288px;
   margin-bottom: 30px;
 `;
