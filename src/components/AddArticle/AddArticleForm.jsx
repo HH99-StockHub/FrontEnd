@@ -257,6 +257,21 @@ const AddArticleForm = () => {
                 ref={articleTitle}
               />
             </WrapTitle>
+            <WrapGoal>
+              <div>
+                <p>목표 가</p>
+                <div>
+                  <input type="text" placeholder="숫자만 입력" />
+                  <span>원</span>
+                </div>
+              </div>
+              <div>
+                <p>수익률 마감일</p>
+                <div>
+                  <input type="text" placeholder="설정 없음" />
+                </div>
+              </div>
+            </WrapGoal>
             <AddArticleChoosePoint choosePoint={choosePoint} />
           </ScrollScope>
         </WrapText>
@@ -353,7 +368,28 @@ const WrapTitle = styled.div`
     font-size: 12px;
   }
 `;
-
+const WrapGoal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 24px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    font-size: 12px;
+    > div {
+      display: flex;
+      border: 1px solid var(--gray2);
+      padding: 15px 15px 15px 12px;
+      input {
+        border: none;
+        width: 100%;
+      }
+    }
+  }
+`;
 const ScrollScope = styled.div`
   max-height: 400px;
   overflow-y: auto;
