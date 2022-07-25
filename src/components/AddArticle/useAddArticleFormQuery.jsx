@@ -25,7 +25,7 @@ export const useAddArticleFormMutate = {
         }
       },
       onError: (err) => {
-        toastify.error("에러가 발생했습니다.");
+        toastify.error("저장에 실패했습니다");
       },
     });
   },
