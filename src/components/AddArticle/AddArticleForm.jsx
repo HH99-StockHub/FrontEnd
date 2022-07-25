@@ -44,9 +44,8 @@ const AddArticleForm = () => {
 
   // media
   const isSmall = useMediaQuery({
-    query: "(max-width:500px)",
+    query: "(max-height:720px)",
   });
-
   // ,찍기 훅
   const sliceNum = useSliceNum;
   // stockName 전체 부르기
@@ -204,83 +203,175 @@ const AddArticleForm = () => {
         </Header>
         <WrapText>
           {addLoading && <LoadingSpinner />}
-          <ScrollScope>
-            <WrapSearch>
-              <WrapSelect>
-                <input hidden="hidden" />
-                <input
-                  type="text"
-                  value={stockInput}
-                  placeholder="종목검색"
-                  onChange={selectStockList}
-                  onKeyDown={keyDownHandler}
-                />
-                <SearchSvg width="17.49" height="17.49" fill="var(--green1)" />
-                {selectStockState && (
-                  <StockList index={stockIndex} ref={wrapTagStockList}>
-                    {stockArr.map((v) => {
-                      return (
-                        <div key={v.id} onClick={selectStockOne}>
-                          <span>{v.stockCode}</span>
-                          <div>{v.stockName}</div>
-                        </div>
-                      );
-                    })}
-                  </StockList>
+          {isSmall ? (
+            <>
+              <ScrollScope>
+                <WrapSearch>
+                  <WrapSelect>
+                    <input hidden="hidden" />
+                    <input
+                      type="text"
+                      value={stockInput}
+                      placeholder="종목검색"
+                      onChange={selectStockList}
+                      onKeyDown={keyDownHandler}
+                    />
+                    <SearchSvg
+                      width="17.49"
+                      height="17.49"
+                      fill="var(--green1)"
+                    />
+                    {selectStockState && (
+                      <StockList index={stockIndex} ref={wrapTagStockList}>
+                        {stockArr.map((v) => {
+                          return (
+                            <div key={v.id} onClick={selectStockOne}>
+                              <span>{v.stockCode}</span>
+                              <div>{v.stockName}</div>
+                            </div>
+                          );
+                        })}
+                      </StockList>
+                    )}
+                  </WrapSelect>
+                  <span>
+                    {stockLoading ? (
+                      <LoadingSpinner />
+                    ) : currentStock === "" ? (
+                      "현재 주가"
+                    ) : (
+                      sliceNum(currentStock) + " 원"
+                    )}
+                  </span>
+                </WrapSearch>
+                {selectStockState === false && (
+                  <ChartBox>
+                    {/* 모달창 오픈 */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModalState(true);
+                      }}
+                    >
+                      그래프 보기
+                    </button>
+                    <div>
+                      <LineChart stockName={stockInput} />
+                    </div>
+                  </ChartBox>
                 )}
-              </WrapSelect>
-              <span>
-                {stockLoading ? (
-                  <LoadingSpinner />
-                ) : currentStock === "" ? (
-                  "현재 주가"
-                ) : (
-                  sliceNum(currentStock) + " 원"
-                )}
-              </span>
-            </WrapSearch>
-            {selectStockState === false && (
-              <ChartBox>
-                {/* 모달창 오픈 */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setModalState(true);
-                  }}
-                >
-                  그래프 보기
-                </button>
-                <div>
-                  <LineChart stockName={stockInput} />
-                </div>
-              </ChartBox>
-            )}
 
-            <WrapTitle>
-              <p>제목</p>
-              <input
-                type="text"
-                placeholder="제목을 입력해주세요"
-                ref={articleTitle}
-              />
-            </WrapTitle>
-            <WrapGoal>
-              <div>
-                <p>목표 가</p>
-                <div>
-                  <input type="text" placeholder="숫자만 입력" />
-                  <span>원</span>
-                </div>
-              </div>
-              <div>
-                <p>수익률 마감일</p>
-                <div>
-                  <input type="text" placeholder="설정 없음" />
-                </div>
-              </div>
-            </WrapGoal>
-            <AddArticleChoosePoint choosePoint={choosePoint} />
-          </ScrollScope>
+                <WrapTitle>
+                  <p>제목</p>
+                  <input
+                    type="text"
+                    placeholder="제목을 입력해주세요"
+                    ref={articleTitle}
+                  />
+                </WrapTitle>
+                <WrapGoal>
+                  <div>
+                    <p>목표 가</p>
+                    <div>
+                      <input type="text" placeholder="숫자만 입력" />
+                      <span>원</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p>수익률 마감일</p>
+                    <div>
+                      <input type="text" placeholder="설정 없음" />
+                    </div>
+                  </div>
+                </WrapGoal>
+                <AddArticleChoosePoint choosePoint={choosePoint} />
+              </ScrollScope>
+            </>
+          ) : (
+            <>
+              <WrapSearch>
+                <WrapSelect>
+                  <input hidden="hidden" />
+                  <input
+                    type="text"
+                    value={stockInput}
+                    placeholder="종목검색"
+                    onChange={selectStockList}
+                    onKeyDown={keyDownHandler}
+                  />
+                  <SearchSvg
+                    width="17.49"
+                    height="17.49"
+                    fill="var(--green1)"
+                  />
+                  {selectStockState && (
+                    <StockList index={stockIndex} ref={wrapTagStockList}>
+                      {stockArr.map((v) => {
+                        return (
+                          <div key={v.id} onClick={selectStockOne}>
+                            <span>{v.stockCode}</span>
+                            <div>{v.stockName}</div>
+                          </div>
+                        );
+                      })}
+                    </StockList>
+                  )}
+                </WrapSelect>
+                <span>
+                  {stockLoading ? (
+                    <LoadingSpinner />
+                  ) : currentStock === "" ? (
+                    "현재 주가"
+                  ) : (
+                    sliceNum(currentStock) + " 원"
+                  )}
+                </span>
+              </WrapSearch>
+              <ScrollScope>
+                {selectStockState === false && (
+                  <ChartBox>
+                    {/* 모달창 오픈 */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModalState(true);
+                      }}
+                    >
+                      그래프 보기
+                    </button>
+                    <div>
+                      <LineChart stockName={stockInput} />
+                    </div>
+                  </ChartBox>
+                )}
+
+                <WrapTitle>
+                  <p>제목</p>
+                  <input
+                    type="text"
+                    placeholder="제목을 입력해주세요"
+                    ref={articleTitle}
+                  />
+                </WrapTitle>
+                <WrapGoal>
+                  <div>
+                    <p>목표 가</p>
+                    <div>
+                      <input type="text" placeholder="숫자만 입력" />
+                      <span>원</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p>수익률 마감일</p>
+                    <div>
+                      <input type="text" placeholder="설정 없음" />
+                    </div>
+                  </div>
+                </WrapGoal>
+                <AddArticleChoosePoint choosePoint={choosePoint} />
+              </ScrollScope>
+            </>
+          )}
         </WrapText>
         <WrapBtn>
           <button type="submit">게시글 올리기</button>
