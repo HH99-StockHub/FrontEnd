@@ -16,5 +16,5 @@ const MainArticle = () => {
 
 export default MainArticle;
 const WrapBox = styled.div`
-  width: 588px;
+  width: 100%;
 `;

@@ -59,7 +59,6 @@ const WrapSlideStock = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   box-sizing: content-box;
   > div {
-    border: 1px solid #000;
     display: inline-block;
     gap: 16px;
     height: 40px;

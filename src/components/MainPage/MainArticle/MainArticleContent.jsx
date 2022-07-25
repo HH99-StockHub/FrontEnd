@@ -4,12 +4,10 @@ import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import MainArticleCard from "./MainArticleCard";
 
 // 훅
-import useChangeNum from "../../../custom/changeNum";
 import { toastify } from "../../../custom/toastify";
 import { useMainPageQuery } from "../useMainPageQuery";
 
 const MainArticleContent = () => {
-  const changeNum = useChangeNum;
   // 전체 게시물 데이터 query
   const {
     data = [],

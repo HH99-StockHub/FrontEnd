@@ -7,9 +7,7 @@ const Porfile = ({ img, nickname, userId }) => {
     <WrapProfile>
       <img src={img} alt="프로필 이미지" />
       <p>
-        <Link to={`/search/article/${nickname}/${userId}/1`}>
-          by. {nickname} 님
-        </Link>
+        <Link to={`/search/article/${nickname}/${userId}/1`}>{nickname}</Link>
       </p>
     </WrapProfile>
   );
