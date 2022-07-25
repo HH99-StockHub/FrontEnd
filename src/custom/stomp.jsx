@@ -32,11 +32,12 @@ export const stompChat = {
   subscribeUrl: "/sub/topic/stockhub",
   chatSendUrl: `/pub/chat/message`,
   // 구독
-  subscribeChat: (token, data, setText) => {
+  subscribeChat: (token, data, setChatList) => {
     stompClient.subscribe(stompChat.subscribeUrl, (response) => {
       const newMessage = JSON.parse(response.body);
-      console.log(newMessage);
-      setText(newMessage);
+      setChatList((list) => {
+        return [...list, newMessage];
+      });
     });
     stompChat.chatJoinMsg(token, data);
   },
