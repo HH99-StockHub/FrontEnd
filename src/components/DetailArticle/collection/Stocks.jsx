@@ -18,11 +18,12 @@ const Stocks = (props) => {
       </Stock1>
       <Stock1last>
         <Stock1divlast>
-          <Stock1divlastdiv>수익률 마감 일자</Stock1divlastdiv>
-          <Stock1divlastdiv>목표 금액</Stock1divlastdiv>
+          <Stock1divlastdiv>
+            수익률 마감 일자:{dayjs(date).format("YYYY.MM.DD")}
+          </Stock1divlastdiv>
         </Stock1divlast>
         <Stock1div2>
-          {dayjs(date).format("YYYY.MM.DD")}
+          <P4>목표 금액</P4>
           <P3>{sliceNum(stockPriceFirst)} 원</P3>
         </Stock1div2>
       </Stock1last>
@@ -42,7 +43,7 @@ const Stock1divlastdiv = styled.div`
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  color: var(--black);
+  color: var(--gray3);
 `;
 
 const Box = styled.div`
@@ -127,6 +128,13 @@ const P3 = styled.p`
   color: var(--green2);
 `;
 
+const P4 = styled.p`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--black);
+`;
+
 const Stock2 = styled.div`
   flex: 2;
   color: var(--white);
@@ -143,7 +151,7 @@ const Stock2div = styled.div`
 `;
 const Stock3 = styled.div`
   flex: 1.4;
-  background: var(--green1);
+  background: var(--green2);
   color: var(--white);
   font-weight: 700;
   font-size: 12px;
