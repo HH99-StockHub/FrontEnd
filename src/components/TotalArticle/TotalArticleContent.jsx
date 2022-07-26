@@ -42,6 +42,9 @@ const TotalArticleContent = ({ category, page }) => {
 export default TotalArticleContent;
 const Div = styled.div`
   max-width: 1240px;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
+  @media screen and (max-width: 400px) {
+    width: 100%;
+  }
 `;
