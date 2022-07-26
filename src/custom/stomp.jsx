@@ -40,9 +40,16 @@ export const stompChat = {
   subscribeUrl: "/sub/topic/stockhub",
   chatSendUrl: `/pub/chat/message`,
   // 구독
-  subscribeChat: (token, data, setChatList) => {
+  subscribeChat: (token, data, setChatList, setId) => {
     stompClient.subscribe(stompChat.subscribeUrl, (response) => {
       const newMessage = JSON.parse(response.body);
+      const subscribeId = response.headers.subscription;
+      const newKey = subscribeId.split("-");
+      console.log(newKey[0] + "-" + (Number(newKey[1]) + 1));
+      setId(() => {
+        const newKey = subscribeId.split("-");
+        return newKey[0] + "-" + (Number(newKey[1]) + 1);
+      });
       setChatList((list) => {
         return [...list, newMessage];
       });
@@ -50,9 +57,9 @@ export const stompChat = {
     stompChat.chatJoinMsg(token, data);
   },
   // 구독 해제
-  disSubscribeChat: (token, data) => {
+  disSubscribeChat: (token, data, subscribeId) => {
     stompChat.chatOutMsg(token, data);
-    stompClient.unsubscribe("sub-1");
+    stompClient.unsubscribe(subscribeId);
   },
   // 메세지 보내기
   chatSendMsg: (token, data) => {
