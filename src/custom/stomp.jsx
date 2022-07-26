@@ -119,6 +119,7 @@ export const stompNotice = {
   subscribeNotice: (userId, setAlarmList) => {
     stompClient.subscribe(stompNotice.subscribeUrl + userId, (response) => {
       const newMessage = JSON.parse(response.body);
+      console.log(newMessage);
       setAlarmList((list) => {
         return [newMessage, ...list];
       });
