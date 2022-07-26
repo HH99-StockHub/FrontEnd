@@ -7,6 +7,8 @@ import { deleteCookie } from "../../shared/Cookie";
 import { stompNotice } from "../../custom/stomp";
 // 모듈
 import { loginState } from "../../state/client/login";
+import { useMediaQuery } from "react-responsive";
+import { addArticleState } from "../../state/client/modal";
 
 const MyDrupDown = ({ userName }) => {
   /* 유저정보 모달창 */
@@ -16,6 +18,12 @@ const MyDrupDown = ({ userName }) => {
   const el = useRef();
 
   const setLoginState = useSetRecoilState(loginState);
+  const setFormState = useSetRecoilState(addArticleState);
+
+  // media
+  const isSmall = useMediaQuery({
+    query: "(max-width : 370px)",
+  });
 
   const handleCloseToggling = (e) => {
     if (el.current && !el.current.contains(e.target)) {
@@ -50,6 +58,16 @@ const MyDrupDown = ({ userName }) => {
             내 등급 : <ListItemP> [새싹] (156/250)</ListItemP>
           </ListItem>
           <ListItem1 onClick={() => {}}>내 글 모아보기</ListItem1>
+          {isSmall && (
+            <ListItem1
+              onClick={() => {
+                setFormState(true);
+              }}
+            >
+              글작성
+            </ListItem1>
+          )}
+
           <ListItem1 onClick={onLogout}>로그아웃</ListItem1>
         </DropDownList>
       )}
@@ -68,7 +86,7 @@ const DropDownHeader = styled.div`
 const DropDownList = styled.div`
   position: absolute;
   top: 30px;
-  right: 0;
+  right: -80px;
   width: 200px;
   padding: 8px;
   border: 1px solid var(--gray2);

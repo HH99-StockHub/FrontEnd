@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { useMediaQuery } from "react-responsive";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 import MyDrupDown from "../components/HeaderDrupDown/MyDrupDown";
@@ -35,6 +36,11 @@ const Header = React.memo(() => {
   };
   // 알림 recoil
   const setAlarmList = useSetRecoilState(alarmList);
+  // media
+
+  const isSmall = useMediaQuery({
+    query: "(max-width : 370px)",
+  });
   // 토큰, id 유무 체크
   React.useEffect(() => {
     const cookie = getCookie("token");
@@ -74,7 +80,8 @@ const Header = React.memo(() => {
               <MyDrupDown userName={"이름"} />
               <span>하수</span>
             </WrapProfile>
-            <Writing onClick={openAddArticle}>글작성</Writing>
+            {!isSmall && <Writing onClick={openAddArticle}>글작성</Writing>}
+
             <AlarmDrupDown />
           </WrapMenu>
         ) : (
