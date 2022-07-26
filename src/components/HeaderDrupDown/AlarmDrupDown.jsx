@@ -104,15 +104,18 @@ const DropDownContainer = styled.div`
 
 const DropDownHeader = styled.div`
   position: relative;
+  > button {
+    padding: 5px;
+  }
 `;
 const AlarmCount = styled.div`
   position: absolute;
   top: 0;
-  left: 8px;
+  left: 12px;
   width: 25px;
   height: 18px;
   border-radius: 99px;
-  background-color: var(--pink2);
+  background-color: rgba(255, 50, 50, 0.9);
   font-size: 9px;
   color: var(--white);
   text-align: center;
