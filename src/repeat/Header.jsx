@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
-import DropDown from "../components/DrupDown/DrupDown";
-import MyDrupDown from "../components/DrupDown/MyDrupDown";
+import MyDrupDown from "../components/HeaderDrupDown/MyDrupDown";
+import AlarmDrupDown from "../components/HeaderDrupDown/AlarmDrupDown";
 // 훅
 import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
@@ -73,7 +73,7 @@ const Header = React.memo(() => {
             <div>이름</div>
             <MyDrupDown />
             <Writing onClick={openAddArticle}>글작성</Writing>
-            <DropDown />
+            <AlarmDrupDown />
           </WrapMenu>
         ) : (
           <KakaoLogin>카카오로그인</KakaoLogin>

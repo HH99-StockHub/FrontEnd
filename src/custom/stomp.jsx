@@ -117,7 +117,7 @@ export const stompNotice = {
   subscribeUrl: "/sub/topic/stockhub/",
   // 구독
   subscribeNotice: (userId, setAlarmList) => {
-    stompClient.subscribe(stompNotice.subscribeUrl + "1", (response) => {
+    stompClient.subscribe(stompNotice.subscribeUrl + userId, (response) => {
       const newMessage = JSON.parse(response.body);
       setAlarmList((list) => {
         return [newMessage, ...list];
