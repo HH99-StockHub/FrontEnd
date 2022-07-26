@@ -56,7 +56,6 @@ export default MainArticleList;
 
 const Table = styled.div`
   position: relative;
-  min-height: 400px;
 `;
 const THead = styled.div`
   display: flex;
