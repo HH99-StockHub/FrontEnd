@@ -9,13 +9,14 @@ import ChatCard from "./ChatCard";
 import { stompChat } from "../../custom/stomp";
 import { getCookie } from "../../shared/Cookie";
 // 모듈
-import { saveChat } from "../../state/server/chat";
+import { chatSubscribeId, saveChat } from "../../state/server/chat";
 // 이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 const ChatText = ({ setChatState }) => {
   // recoil 채팅 데이터 저장하기
   const [chatList, setChatList] = useRecoilState(saveChat);
-
+  // 구독 id
+  const [subscribeId, setSubscribeId] = useRecoilState(chatSubscribeId);
   // 스크롤 BOX
   const textBox = useRef("");
 
@@ -46,9 +47,9 @@ const ChatText = ({ setChatState }) => {
       imgUrl: imgUrl,
       time: time(),
     };
-    stompChat.subscribeChat(token, data, setChatList);
+    stompChat.subscribeChat(token, data, setChatList, setSubscribeId);
     return () => {
-      stompChat.disSubscribeChat(token, data);
+      stompChat.disSubscribeChat(token, data, subscribeId);
     };
   }, []);
 
