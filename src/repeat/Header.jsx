@@ -66,12 +66,14 @@ const Header = React.memo(() => {
         </Logo1>
         {login ? (
           <WrapMenu>
-            <Profile
-              src={localStorage.getItem("profileImg")}
-              alt="프로필 이미지"
-            />
-            <div>이름</div>
-            <MyDrupDown />
+            <WrapProfile>
+              <Profile
+                src={localStorage.getItem("profileImg")}
+                alt="프로필 이미지"
+              />
+              <MyDrupDown userName={"이름"} />
+              <span>하수</span>
+            </WrapProfile>
             <Writing onClick={openAddArticle}>글작성</Writing>
             <AlarmDrupDown />
           </WrapMenu>
@@ -98,7 +100,8 @@ const Header2 = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 72px;
-  width: 1200px;
+  max-width: 1200px;
+  width: 90%;
   margin: 0 auto;
 `;
 
@@ -120,6 +123,16 @@ const WrapMenu = styled.div`
   }
 `;
 
+const WrapProfile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  > span {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green1);
+  }
+`;
 const Profile = styled.img`
   width: 24px;
   height: 24px;
