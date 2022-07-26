@@ -24,10 +24,16 @@ const WrapBanner = styled.div`
   justify-content: space-between;
   align-items: center;
   max-width: 1240px;
-  width: 80%;
-  height: 154px;
+  width: 90%;
   background: var(--green1);
   border-radius: 6px;
+  @media screen and (max-width: 980px) {
+    flex-direction: column;
+    gap: 25px;
+  }
+  @media screen and (max-width: 760px) {
+    width: 100%;
+  }
 `;
 
 const BannerText = styled.div`

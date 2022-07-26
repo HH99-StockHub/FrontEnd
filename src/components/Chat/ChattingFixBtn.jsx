@@ -17,7 +17,7 @@ const ChattingFixBtn = () => {
       >
         <BtnSvg />
       </button>
-      {chatState && <ChatRoom />}
+      {chatState && <ChatRoom setChatState={setChatState} />}
     </WrapChatBox>
   );
 };

@@ -9,10 +9,183 @@ import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
 import { ReactComponent as Vector } from "../../image/Vector.svg";
 import { ReactComponent as Stock } from "../../image/UpStock.svg";
-const TotalArticleList = ({ data }) => {
+// const TotalArticleList = ({ data }) => {
+const TotalArticleList = ({}) => {
   // onclick navigate 이벤트 버블링이 있어 하위 요소에 옵션으로 막아둠
   const navigate = useNavigate();
   const sliceNum = useSliceNum;
+
+  const data = [
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "박태형",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 400,
+      voteUpCount: 400,
+      voteDownCount: 400,
+      commentCount: 400,
+      viewCount: 400,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 400,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+    {
+      articleId: 1,
+      createdAt: "LocalDateTime",
+      userId: 1,
+      nickname: "String",
+      profileImage: "String",
+      articleTitle: "String",
+      stockName: "String",
+      stockReturn: 0,
+      voteUpCount: 0,
+      voteDownCount: 0,
+      commentCount: 0,
+      viewCount: 0,
+    },
+  ];
+
   return (
     <>
       <Content>
@@ -101,9 +274,23 @@ const TotalArticleList = ({ data }) => {
 
 export default TotalArticleList;
 
+const Content = styled.div`
+  margin-top: 20px;
+  min-height: 100px;
+  width: 100%;
+  display: grid;
+  grid-gap: 14px 14px;
+  grid-template-columns: repeat(3, 1fr);
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 760px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
+
 const Box = styled.div`
   padding: 32px 26px;
-  width: 404px;
   background: var(--white);
   border: 1px solid #ededed;
   display: flex;
@@ -111,14 +298,6 @@ const Box = styled.div`
   flex-direction: column;
   flex-grow: 0;
   cursor: pointer;
-`;
-
-const Content = styled.div`
-  flex-wrap: wrap;
-  display: flex;
-  margin-top: 20px;
-  gap: 14px;
-  min-height: 100px;
 `;
 
 const P = styled.p`
@@ -138,7 +317,6 @@ const P1 = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 342px;
   margin-top: 6px;
   margin-bottom: 14px;
 `;
