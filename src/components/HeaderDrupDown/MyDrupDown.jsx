@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import { ReactComponent as Notice } from "../../image/Notice.svg";
-import { useRef, useEffect } from "react";
-import { getCookie } from "../../shared/Cookie";
+import { useSetRecoilState } from "recoil";
+// 훅
 import { toastify } from "../../custom/toastify";
 import { deleteCookie } from "../../shared/Cookie";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { stompNotice } from "../../custom/stomp";
+// 모듈
 import { loginState } from "../../state/client/login";
 
 const MyDrupDown = () => {
@@ -15,7 +15,7 @@ const MyDrupDown = () => {
   const toggling = () => setIsOpen(!isOpen);
   const el = useRef();
 
-  const [login, setLoginState] = useRecoilState(loginState);
+  const setLoginState = useSetRecoilState(loginState);
 
   const handleCloseToggling = (e) => {
     if (el.current && !el.current.contains(e.target)) {
@@ -30,39 +30,34 @@ const MyDrupDown = () => {
     };
   }, []);
 
-  const onLogout = (e) => {
+  const onLogout = () => {
     deleteCookie("token");
     localStorage.removeItem("id");
     localStorage.removeItem("profileImg");
     setLoginState(false);
+    stompNotice.disSubscribeNotice();
     toastify.success("정상 로그아웃");
   };
 
   return (
-    <>
-      <>
-        <DropDownContainer ref={el}>
-          <DropDownHeader>
-            <button onClick={toggling}>들어갈자리</button>
-          </DropDownHeader>
-          {isOpen && (
-            <DropDownListContainer>
-              <DropDownList>
-                <ListItem onClick={() => {}}>
-                  내 등급 :<ListItemP>[새싹] (156/250)</ListItemP>
-                </ListItem>
-                <ListItem1 onClick={() => {}}>내 글 모아보기</ListItem1>
-                <ListItem1 onClick={onLogout}>로그아웃</ListItem1>
-              </DropDownList>
-            </DropDownListContainer>
-          )}
-        </DropDownContainer>
-      </>
-    </>
+    <div ref={el}>
+      <DropDownHeader>
+        <button onClick={toggling}>들어갈자리</button>
+      </DropDownHeader>
+      {isOpen && (
+        <div>
+          <DropDownList>
+            <ListItem onClick={() => {}}>
+              내 등급 :<ListItemP>[새싹] (156/250)</ListItemP>
+            </ListItem>
+            <ListItem1 onClick={() => {}}>내 글 모아보기</ListItem1>
+            <ListItem1 onClick={onLogout}>로그아웃</ListItem1>
+          </DropDownList>
+        </div>
+      )}
+    </div>
   );
 };
-
-const DropDownContainer = styled.div``;
 
 const DropDownHeader = styled.div`
   font-weight: 500;
@@ -70,7 +65,6 @@ const DropDownHeader = styled.div`
   color: #3faffa;
   background: #ffffff;
 `;
-const DropDownListContainer = styled.div``;
 
 const DropDownList = styled.div`
   position: absolute;

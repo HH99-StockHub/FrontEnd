@@ -26,6 +26,11 @@ export default FameArticle;
 const WrapContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 58px;
-  width: 558px;
+  width: 100%;
+  gap: 40px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 `;

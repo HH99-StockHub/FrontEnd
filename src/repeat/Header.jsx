@@ -4,16 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
-import DropDown from "../components/DrupDown/DrupDown";
+import MyDrupDown from "../components/HeaderDrupDown/MyDrupDown";
+import AlarmDrupDown from "../components/HeaderDrupDown/AlarmDrupDown";
 // 훅
 import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
+import { useAlarmMutate } from "./useRepeatQuery";
+import {
+  stompConnect,
+  stompDisConnect,
+  stompLoginConnect,
+} from "../custom/stomp";
 // 모듈
 import { addArticleState } from "../state/client/modal";
 import { loginState } from "../state/client/login";
+import { alarmList } from "../state/server/alarm";
 //이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
-import MyDrupDown from "../components/DrupDown/MyDrupDown";
 
 const Header = React.memo(() => {
   //recoil
@@ -21,22 +28,30 @@ const Header = React.memo(() => {
   const [login, setLoginState] = useRecoilState(loginState);
   const navigate = useNavigate();
 
+  // 알림 받기
+  const { mutate } = useAlarmMutate.useGetAlarmMutate();
   const openAddArticle = () => {
     setFormState(true);
   };
-
+  // 알림 recoil
+  const setAlarmList = useSetRecoilState(alarmList);
   // 토큰, id 유무 체크
   React.useEffect(() => {
     const cookie = getCookie("token");
     const userId = localStorage.getItem("id");
     const profileImg = localStorage.getItem("profileImg");
-
     if (cookie !== undefined && userId !== null && profileImg !== null) {
       setLoginState(true);
+      stompLoginConnect(cookie, userId, setAlarmList);
+      mutate(userId);
     } else {
+      stompConnect(cookie);
       deleteCookie("token");
       localStorage.removeItem("id");
     }
+    return () => {
+      stompDisConnect(cookie);
+    };
   }, []);
 
   return (
@@ -51,7 +66,6 @@ const Header = React.memo(() => {
         </Logo1>
         {login ? (
           <WrapMenu>
-            <DropDown />
             <Profile
               src={localStorage.getItem("profileImg")}
               alt="프로필 이미지"
@@ -59,6 +73,7 @@ const Header = React.memo(() => {
             <div>이름</div>
             <MyDrupDown />
             <Writing onClick={openAddArticle}>글작성</Writing>
+            <AlarmDrupDown />
           </WrapMenu>
         ) : (
           <KakaoLogin>카카오로그인</KakaoLogin>

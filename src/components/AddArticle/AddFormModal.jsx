@@ -21,12 +21,11 @@ const AddFormModal = () => {
           backgroundColor: "rgba(0,0,0,0.5)",
         },
         content: {
-          border: "1px solid #ccc",
           background: "#fff",
-          overflow: "hidden",
-          width: "720px",
-          height: "700px",
-          margin: "auto",
+          maxWidth: "700px",
+          width: "80%",
+          height: "90%",
+          margin: "0 auto",
         },
       }}
     >

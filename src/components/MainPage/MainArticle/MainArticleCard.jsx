@@ -3,11 +3,19 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import { useMediaQuery } from "react-responsive";
 
 import useChangeNum from "../../../custom/changeNum";
 const MainArticleCard = ({ data }) => {
   const [today, setToday] = useState(dayjs(data.createdAt).format("MM.DD"));
   const changeNum = useChangeNum;
+  // media
+  const isMiddle = useMediaQuery({
+    query: "(max-width:1260px)",
+  });
+  const isSmall = useMediaQuery({
+    query: "(max-width:700px)",
+  });
   useEffect(() => {
     if (
       dayjs(new Date()).format().slice(0, 7) ===
@@ -26,25 +34,68 @@ const MainArticleCard = ({ data }) => {
     }
   }, [data.createdAt]);
   return (
-    <WrapCard>
-      <p style={{ width: "80px" }}>{data.stockName}</p>
-      <div style={{ width: "252px" }}>
-        <p>
-          <Link to={`/detail/article/${data.articleId}`}>
-            {data.articleTitle}
-          </Link>
-        </p>
-        <span>[{data.commentCount}]</span>
-      </div>
-      <p style={{ width: "56px" }}>
-        <Link to={`/search/article/${data.nickname}/${data.userId}/1`}>
-          {data.nickname}
-        </Link>
-      </p>
-      <p style={{ width: "56px" }}>{today}</p>
-      <p style={{ width: "56px" }}>{changeNum(data.viewCount)}</p>
-      <p style={{ width: "56px" }}>{changeNum(data.voteUpCount)}</p>
-    </WrapCard>
+    <>
+      {isMiddle ? (
+        <>
+          {isSmall ? (
+            <WrapCard>
+              <p style={{ width: "80px" }}>{data.stockName}</p>
+              <div style={{ width: "60%" }}>
+                <p>
+                  <Link to={`/detail/article/${data.articleId}`}>
+                    {data.articleTitle}
+                  </Link>
+                </p>
+                <span>[{data.commentCount}]</span>
+              </div>
+              <p style={{ width: "34px" }}>{changeNum(data.voteUpCount)}</p>
+            </WrapCard>
+          ) : (
+            <WrapCard>
+              <p style={{ width: "80px" }}>{data.stockName}</p>
+              <div style={{ width: "60%" }}>
+                <p>
+                  <Link to={`/detail/article/${data.articleId}`}>
+                    {data.articleTitle}
+                  </Link>
+                </p>
+                <span>[{data.commentCount}]</span>
+              </div>
+              <p style={{ width: "56px" }}>
+                <Link to={`/search/article/${data.nickname}/${data.userId}/1`}>
+                  {data.nickname}
+                </Link>
+              </p>
+              <p style={{ width: "56px" }}>{today}</p>
+              <p style={{ width: "56px" }}>{changeNum(data.viewCount)}</p>
+              <p style={{ width: "56px" }}>{changeNum(data.voteUpCount)}</p>
+            </WrapCard>
+          )}
+        </>
+      ) : (
+        <>
+          <WrapCard>
+            <p style={{ width: "80px" }}>{data.stockName}</p>
+            <div style={{ width: "252px" }}>
+              <p>
+                <Link to={`/detail/article/${data.articleId}`}>
+                  {data.articleTitle}
+                </Link>
+              </p>
+              <span>[{data.commentCount}]</span>
+            </div>
+            <p style={{ width: "56px" }}>
+              <Link to={`/search/article/${data.nickname}/${data.userId}/1`}>
+                {data.nickname}
+              </Link>
+            </p>
+            <p style={{ width: "56px" }}>{today}</p>
+            <p style={{ width: "56px" }}>{changeNum(data.viewCount)}</p>
+            <p style={{ width: "56px" }}>{changeNum(data.voteUpCount)}</p>
+          </WrapCard>
+        </>
+      )}
+    </>
   );
 };
 

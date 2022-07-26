@@ -156,10 +156,10 @@ const CandleChart = ({ stockName }) => {
       // { series, seriesIndex, dataPointIndex, w }
       custom: function ({ series, dataPointIndex }) {
         return `<div>
-      <p><span>1 </span> ${candleChartData[dataPointIndex].y[0]} </p>
-      <p><span>2 </span> ${candleChartData[dataPointIndex].y[1]}</p>
-      <p><span>3 </span> ${candleChartData[dataPointIndex].y[2]}</p>
-      <p><span>4 </span> ${candleChartData[dataPointIndex].y[3]}</p>
+      <p><span>시가 : </span> ${candleChartData[dataPointIndex].y[0]} </p>
+      <p><span>고가 : </span> ${candleChartData[dataPointIndex].y[1]}</p>
+      <p><span>저가 : </span> ${candleChartData[dataPointIndex].y[2]}</p>
+      <p><span>종가 : </span> ${candleChartData[dataPointIndex].y[3]}</p>
     </div>
           `;
       },

@@ -39,7 +39,6 @@ const WrapText = styled.div`
   justify-content: space-between;
   width: 100%;
   > p {
-    width: 100%;
     font-size: 14px;
     line-height: 19px;
     display: -webkit-box;

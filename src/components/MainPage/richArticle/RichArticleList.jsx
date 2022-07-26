@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 //컴포넌트
 import CardTextRich from "../common/CardTextRich";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
@@ -12,50 +13,173 @@ import { toastify } from "../../../custom/toastify";
 const RichArticleList = () => {
   // useQuery
   const {
-    data = [],
+    // data = [],
     isLoading,
     isError,
   } = useMainPageQuery.useGetRichArticles();
+
+  // media
+  const isSmall = useMediaQuery({
+    query: "(max-width: 700px)",
+  });
   if (isError) toastify.error("수익왕 게시글 불러오기를 실패했습니다.");
+  const data = [
+    {
+      articleId: 9,
+      articleTitle:
+        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
+      commentCount: 0,
+      createdAt: "2022-07-25T02:29:11.753",
+      nickname: "박태형",
+      profileImage:
+        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
+      stockName: "서연이화",
+      stockReturn: 0,
+      userId: 3,
+      viewCount: 0,
+      voteDownCount: 0,
+      voteUpCount: 0,
+    },
+    {
+      articleId: 9,
+      articleTitle:
+        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
+      commentCount: 0,
+      createdAt: "2022-07-25T02:29:11.753",
+      nickname: "박태형",
+      profileImage:
+        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
+      stockName: "서연이화",
+      stockReturn: 0,
+      userId: 3,
+      viewCount: 0,
+      voteDownCount: 0,
+      voteUpCount: 0,
+    },
+    {
+      articleId: 9,
+      articleTitle:
+        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
+      commentCount: 0,
+      createdAt: "2022-07-25T02:29:11.753",
+      nickname: "박태형",
+      profileImage:
+        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
+      stockName: "서연이화",
+      stockReturn: 0,
+      userId: 3,
+      viewCount: 0,
+      voteDownCount: 0,
+      voteUpCount: 0,
+    },
+    {
+      articleId: 9,
+      articleTitle:
+        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
+      commentCount: 0,
+      createdAt: "2022-07-25T02:29:11.753",
+      nickname: "박태형",
+      profileImage:
+        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
+      stockName: "서연이화",
+      stockReturn: 0,
+      userId: 3,
+      viewCount: 0,
+      voteDownCount: 0,
+      voteUpCount: 0,
+    },
+    {
+      articleId: 9,
+      articleTitle:
+        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
+      commentCount: 0,
+      createdAt: "2022-07-25T02:29:11.753",
+      nickname: "박태형",
+      profileImage:
+        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
+      stockName: "서연이화",
+      stockReturn: 0,
+      userId: 3,
+      viewCount: 0,
+      voteDownCount: 0,
+      voteUpCount: 0,
+    },
+    {
+      articleId: 9,
+      articleTitle:
+        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
+      commentCount: 0,
+      createdAt: "2022-07-25T02:29:11.753",
+      nickname: "박태형",
+      profileImage:
+        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
+      stockName: "서연이화",
+      stockReturn: 0,
+      userId: 3,
+      viewCount: 0,
+      voteDownCount: 0,
+      voteUpCount: 0,
+    },
+  ];
   return (
-    <div>
-      <ArticleBox>
-        {isLoading && <LoadingSpinner />}
-        {data.map((v) => {
-          return (
-            <WrapCard key={v.articleId}>
-              <Link to={`/detail/article/${v.articleId}`}>
-                <CardTextRich stock={v.stockReturn} />
-                <WrapText>{v.articleTitle}</WrapText>
-              </Link>
-              <Porfile
-                img={v.profileImage}
-                nickname={v.nickname}
-                userId={v.userId}
-              />
-            </WrapCard>
-          );
-        })}
-      </ArticleBox>
-    </div>
+    <ArticleBox>
+      {isLoading && <LoadingSpinner />}
+      {isSmall ? (
+        <>
+          {data.slice(0, 4).map((v) => {
+            return (
+              <WrapCard key={v.articleId}>
+                <Link to={`/detail/article/${v.articleId}`}>
+                  <CardTextRich stock={v.stockReturn} />
+                  <WrapText>{v.articleTitle}</WrapText>
+                </Link>
+                <Porfile
+                  img={v.profileImage}
+                  nickname={v.nickname}
+                  userId={v.userId}
+                />
+              </WrapCard>
+            );
+          })}
+        </>
+      ) : (
+        <>
+          {data.map((v) => {
+            return (
+              <WrapCard key={v.articleId}>
+                <Link to={`/detail/article/${v.articleId}`}>
+                  <CardTextRich stock={v.stockReturn} />
+                  <WrapText>{v.articleTitle}</WrapText>
+                </Link>
+                <Porfile
+                  img={v.profileImage}
+                  nickname={v.nickname}
+                  userId={v.userId}
+                />
+              </WrapCard>
+            );
+          })}
+        </>
+      )}
+    </ArticleBox>
   );
 };
 
 export default RichArticleList;
 
 const ArticleBox = styled.div`
-  position: relative;
-  display: flex;
-  gap: 24px 15px;
-  flex-wrap: wrap;
-  width: 588px;
-  min-height: 300px;
+  display: grid;
+  grid-gap: 24px 15px;
+  grid-template-columns: repeat(3, 1fr);
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 const WrapCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 186px;
+  gap: 5px;
   height: 157px;
   padding: 16px;
   border: 1px solid var(--gray2);
@@ -64,7 +188,6 @@ const WrapCard = styled.div`
 
 const WrapText = styled.p`
   display: -webkit-box;
-  margin-top: 12px;
   width: 100%;
   font-size: 18px;
   font-weight: 700;

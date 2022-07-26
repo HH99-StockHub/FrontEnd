@@ -63,7 +63,6 @@ const WrapBtn = styled.div`
     justify-content: center;
     gap: 10%;
     > button {
-      border: 1px solid #000;
       padding: 10px 20px;
       border-radius: 6px;
       &:nth-child(${({ state }) => (state ? 2 : 1)}) {
