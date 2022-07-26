@@ -33,7 +33,7 @@ const LineChart = ({ stockName }) => {
         width: 1,
       },
       // 차트 색 변경
-      colors: ["#f00"],
+      colors: ["#1fb652"],
       chart: {
         // 하단 색
         foreColor: "#373d3f",
@@ -68,11 +68,11 @@ const LineChart = ({ stockName }) => {
           // 그라데이션 색 변경
           inverseColors: false,
           // 색 범위
-          opacityFrom: 0.4,
+          opacityFrom: 0.6,
           // 진하기
-          opacityTo: 0.6,
+          opacityTo: 1,
           // 그라데이션 색 조정
-          stops: [0, 100, 100],
+          stops: [0, 90, 100],
         },
       },
       yaxis: {
