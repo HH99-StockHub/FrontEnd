@@ -130,6 +130,9 @@ const WrapCard = styled.div`
   p:nth-child(3) {
     text-align: right;
     font-weight: 700;
+    @media screen and (max-width: 700px) {
+      color: var(--green1);
+    }
   }
   p:nth-child(4) {
     text-align: right;
