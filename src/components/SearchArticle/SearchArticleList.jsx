@@ -31,10 +31,16 @@ export default SearchArticleList;
 
 const WrapList = styled.div`
   max-width: 1240px;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   margin-top: -12px;
   > p {
     margin-bottom: 24px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 100%;
+    > p {
+      padding-left: 20px;
+    }
   }
 `;

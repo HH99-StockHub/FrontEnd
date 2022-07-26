@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { useMediaQuery } from "react-responsive";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 import MyDrupDown from "../components/HeaderDrupDown/MyDrupDown";
@@ -35,6 +36,11 @@ const Header = React.memo(() => {
   };
   // 알림 recoil
   const setAlarmList = useSetRecoilState(alarmList);
+  // media
+
+  const isSmall = useMediaQuery({
+    query: "(max-width : 370px)",
+  });
   // 토큰, id 유무 체크
   React.useEffect(() => {
     const cookie = getCookie("token");
@@ -66,13 +72,16 @@ const Header = React.memo(() => {
         </Logo1>
         {login ? (
           <WrapMenu>
-            <Profile
-              src={localStorage.getItem("profileImg")}
-              alt="프로필 이미지"
-            />
-            <div>이름</div>
-            <MyDrupDown />
-            <Writing onClick={openAddArticle}>글작성</Writing>
+            <WrapProfile>
+              <Profile
+                src={localStorage.getItem("profileImg")}
+                alt="프로필 이미지"
+              />
+              <MyDrupDown userName={"이름"} />
+              <span>하수</span>
+            </WrapProfile>
+            {!isSmall && <Writing onClick={openAddArticle}>글작성</Writing>}
+
             <AlarmDrupDown />
           </WrapMenu>
         ) : (
@@ -98,7 +107,8 @@ const Header2 = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 72px;
-  width: 1200px;
+  max-width: 1200px;
+  width: 90%;
   margin: 0 auto;
 `;
 
@@ -120,6 +130,16 @@ const WrapMenu = styled.div`
   }
 `;
 
+const WrapProfile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  > span {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green1);
+  }
+`;
 const Profile = styled.img`
   width: 24px;
   height: 24px;

@@ -4,10 +4,10 @@ import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import ChatText from "./ChatText";
 
-const ChatRoom = () => {
+const ChatRoom = ({ setChatState }) => {
   return (
     <WrapChat>
-      <ChatText />
+      <ChatText setChatState={setChatState} />
       <ChatInput />
     </WrapChat>
   );
@@ -23,4 +23,11 @@ const WrapChat = styled.div`
   border: 1px solid var(--gray2);
   background-color: var(--white);
   padding: 16px 16px 22px;
+  @media screen and (max-width: 470px) {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 90%;
+    height: 90%;
+  }
 `;

@@ -2,20 +2,28 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import dayjs from "dayjs";
+import { useMediaQuery } from "react-responsive";
 // 컴포넌트
 import ChatCard from "./ChatCard";
 // 훅
 import { stompChat } from "../../custom/stomp";
 import { getCookie } from "../../shared/Cookie";
 // 모듈
-import { saveChat } from "../../state/server/chat";
-
-const ChatText = () => {
+import { chatSubscribeId, saveChat } from "../../state/server/chat";
+// 이미지
+import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
+const ChatText = ({ setChatState }) => {
   // recoil 채팅 데이터 저장하기
   const [chatList, setChatList] = useRecoilState(saveChat);
-
+  // 구독 id
+  const [subscribeId, setSubscribeId] = useRecoilState(chatSubscribeId);
   // 스크롤 BOX
   const textBox = useRef("");
+
+  // media
+  const isSmall = useMediaQuery({
+    query: "(max-width : 470px)",
+  });
 
   // 구독 data
   const token = getCookie("token");
@@ -39,9 +47,9 @@ const ChatText = () => {
       imgUrl: imgUrl,
       time: time(),
     };
-    stompChat.subscribeChat(token, data, setChatList);
+    stompChat.subscribeChat(token, data, setChatList, setSubscribeId);
     return () => {
-      stompChat.disSubscribeChat(token, data);
+      stompChat.disSubscribeChat(token, data, subscribeId);
     };
   }, []);
 
@@ -51,15 +59,28 @@ const ChatText = () => {
   }, [chatList]);
 
   return (
-    <WrapText ref={textBox}>
-      {chatList.length !== 0 ? (
-        <>
-          {chatList.map((v, l) => {
-            return <ChatCard key={l} data={v} />;
-          })}
-        </>
-      ) : null}
-    </WrapText>
+    <>
+      {isSmall && (
+        <ColseBtn>
+          <button
+            onClick={() => {
+              setChatState(false);
+            }}
+          >
+            <XBtnSvg width={"10px"} height="10px" fill="var(--black)" />
+          </button>
+        </ColseBtn>
+      )}
+      <WrapText ref={textBox}>
+        {chatList.length !== 0 ? (
+          <>
+            {chatList.map((v, l) => {
+              return <ChatCard key={l} data={v} />;
+            })}
+          </>
+        ) : null}
+      </WrapText>
+    </>
   );
 };
 
@@ -69,20 +90,20 @@ const WrapText = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 10px;
   height: 400px;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    width: 10px;
+    width: 0;
   }
-  &::-webkit-scrollbar-thumb {
-    background-color: #2f3542;
-    border-radius: 10px;
-    background-clip: padding-box;
-    border: 2px solid transparent;
+  @media screen and (max-width: 470px) {
+    height: 90%;
   }
-  &::-webkit-scrollbar-track {
-    background-color: grey;
-    border-radius: 10px;
-    box-shadow: inset 0px 0px 5px white;
-  }
+`;
+
+const ColseBtn = styled.div`
+  height: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
 `;

@@ -68,7 +68,7 @@ const CandleChart = ({ stockName }) => {
         minWidth: 0,
         maxWidth: 160,
         style: {
-          colors: ["#FF607C", "#54BA7D"],
+          colors: ["#000"],
           fontSize: "12px",
           fontWeight: 400,
           cssClass: "apexcharts-yaxis-label",
@@ -135,8 +135,8 @@ const CandleChart = ({ stockName }) => {
       candlestick: {
         colors: {
           // 선 색 #으로 표시해야 배경색도 변경
-          upward: "#FF607C",
-          downward: "#54BA7D",
+          upward: "red",
+          downward: "blue",
         },
         wick: {
           // 선 색 채울건지
