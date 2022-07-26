@@ -57,6 +57,14 @@ const PriceTitle = (props) => {
 const Name = styled.div`
   border-bottom: 1px solid var(--gray2);
   padding: 24px 0;
+  @media screen and (max-width: 1100px) {
+    border-bottom: none;
+    width: 528px;
+  }
+  @media screen and (max-width: 750px) {
+    border-bottom: 1px solid var(--gray2);
+    width: 100%;
+  } ;
 `;
 
 const P = styled.p`

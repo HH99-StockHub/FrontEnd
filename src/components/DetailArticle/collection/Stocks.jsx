@@ -11,10 +11,10 @@ const Stocks = (props) => {
     <Box>
       <Div>
         <Stock1>
-          <Stock1div>작성시점 주가</Stock1div>
+          <Stock1div>작성날짜 : {dayjs(date).format("YYYY.MM.DD")}</Stock1div>
           <Stock1div2>
-            작성날짜 : {dayjs(date).format("YYYY.MM.DD")}
-            <P>{sliceNum(stockPriceFirst)} 원</P>
+            <PP>작성시점 주가</PP>
+            <P>{sliceNum(stockPriceFirst)}</P>
           </Stock1div2>
         </Stock1>
         <Stock1last>
@@ -25,14 +25,14 @@ const Stocks = (props) => {
           </Stock1divlast>
           <Stock1div22>
             <P4>목표 금액</P4>
-            <P3>{sliceNum(stockPriceFirst)} 원</P3>
+            <P3>{sliceNum(stockPriceFirst)}</P3>
           </Stock1div22>
         </Stock1last>
       </Div>
       <PriceDiv>
         <Stock2>
           <Stock2div>현재 가</Stock2div>
-          <P1>{sliceNum(stockPriceLast)} 원</P1>
+          <P1>{sliceNum(stockPriceLast)}</P1>
         </Stock2>
         <Stock3>
           <Stock2div>누적 수익률</Stock2div>
@@ -59,8 +59,8 @@ const Stock1divlastdiv = styled.div`
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  color: var(--gray3);
-  @media screen and (max-width: 1470px) {
+  color: var(--white);
+  @media screen and (max-width: 1100px) {
     width: 100%;
     color: var(--white);
     text-align: center;
@@ -71,48 +71,53 @@ const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 20px;
-  @media screen and (max-width: 1470px) {
+  @media screen and (max-width: 1100px) {
     flex-direction: column;
   } ;
 `;
 
 const Stock1 = styled.div`
+  width: 100%;
   width: 226px;
   background: #f7f7f7;
   justify-content: space-between;
   color: #7a7a7a;
-  padding: 13px;
-  @media screen and (max-width: 1470px) {
+  /* padding: 13px; */
+  @media screen and (max-width: 1100px) {
     display: flex;
     flex-direction: column;
     width: 620px;
     padding: 0px;
     > div {
       height: 50%;
-      display: flex;
       padding: 14px 11px;
     }
   }
 `;
 
 const Stock1div = styled.div`
-  color: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 8px;
+  background-color: var(--green1);
   margin-bottom: 4px;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  @media screen and (max-width: 1470px) {
-    order: 2;
+  @media screen and (max-width: 1100px) {
+    color: var(--white);
+    background: var(--green1);
+    width: 100%;
+    text-align: center;
   } ;
 `;
 
 const Stock1last = styled.div`
-  width: 237px;
+  width: 251px;
   background: var(--white);
   border: 1px solid var(--green1);
   color: #7a7a7a;
-  padding: 13px;
-  @media screen and (max-width: 1470px) {
+  @media screen and (max-width: 1100px) {
     width: 620px;
     padding: 0px;
     > div {
@@ -124,13 +129,14 @@ const Stock1last = styled.div`
 `;
 
 const Stock1divlast = styled.div`
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 4px;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  @media screen and (max-width: 1470px) {
+  background: var(--green1);
+  padding: 8px;
+  text-align: center;
+  @media screen and (max-width: 1100px) {
     color: var(--white);
     background: var(--green1);
   } ;
@@ -139,21 +145,18 @@ const Stock1divlast = styled.div`
 const Stock1div2 = styled.div`
   display: flex;
   color: var(--gray3);
+  padding: 8px;
   margin-bottom: 4px;
   justify-content: space-between;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
   align-items: center;
-  @media screen and (max-width: 1470px) {
-    order: 1;
-    color: var(--white);
-    background: var(--green1);
-  } ;
 `;
 
 const Stock1div22 = styled.div`
   display: flex;
+  padding: 8px;
   color: var(--gray3);
   margin-bottom: 4px;
   justify-content: space-between;
@@ -168,6 +171,13 @@ const P = styled.p`
   font-size: 16px;
   line-height: 19px;
 `;
+
+const PP = styled.p`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--black);
+`;
 const P1 = styled.p`
   font-weight: 700;
   font-size: 16px;
@@ -175,6 +185,10 @@ const P1 = styled.p`
   color: var(--white);
   display: flex;
   justify-content: flex-end;
+  margin-top: 19px;
+  @media screen and (max-width: 1100px) {
+    margin-top: 0;
+  } ;
 `;
 
 const P2 = styled.p`
@@ -184,6 +198,10 @@ const P2 = styled.p`
   color: var(--white);
   display: flex;
   justify-content: flex-end;
+  margin-top: 19px;
+  @media screen and (max-width: 1100px) {
+    margin-top: 0;
+  } ;
 `;
 
 const P3 = styled.p`
@@ -206,8 +224,8 @@ const Stock2 = styled.div`
   justify-content: space-between;
   color: var(--white);
   background: var(--green1);
-  padding: 13px;
-  @media screen and (max-width: 1470px) {
+  padding: 0 13px;
+  @media screen and (max-width: 1100px) {
     width: 620px;
     display: flex;
     align-items: center;
@@ -218,6 +236,11 @@ const Stock2div = styled.div`
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
+  margin-top: 10px;
+  @media screen and (max-width: 1100px) {
+    margin-top: 0;
+    padding: 10px 0;
+  } ;
 `;
 const Stock3 = styled.div`
   width: 122px;
@@ -227,8 +250,8 @@ const Stock3 = styled.div`
   justify-content: space-between;
   font-size: 12px;
   line-height: 14px;
-  padding: 13px;
-  @media screen and (max-width: 1470px) {
+  padding: 0 13px;
+  @media screen and (max-width: 1100px) {
     width: 620px;
     display: flex;
     align-items: center;
