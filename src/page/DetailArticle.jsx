@@ -18,6 +18,8 @@ import HelmetComponents from "../repeat/HelmetComponents";
 import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
 import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
 import { toastify } from "../custom/toastify";
+import { screen } from "@testing-library/react";
+import { useMediaQuery } from "react-responsive";
 
 const DetailArticle = () => {
   const navigate = useNavigate();
@@ -41,6 +43,11 @@ const DetailArticle = () => {
   }, [data?.userId]);
 
   if (isError) toastify.error("정보 불러오기를 실패했습니다.");
+
+  const isMiddle = useMediaQuery({
+    query: "(max-width:1470px)",
+  });
+
   return (
     <>
       <HelmetComponents title={`${data.stockName} 게시글`} />
@@ -94,11 +101,11 @@ const DetailArticle = () => {
                 voteUp={data.voteUpCount}
                 voteDown={data.voteDownCount}
               />
-              <Comment id={id} />
+              {!isMiddle && <Comment id={id} />}
             </>
           )}
         </Container>
-        <Title stockName={data.stockName} />
+        <Title stockName={data.stockName} id={id} />
       </Div>
     </>
   );
@@ -106,14 +113,19 @@ const DetailArticle = () => {
 
 const Container = styled.div`
   position: relative;
-  width: 821px;
+  width: 100%;
 `;
+
 const Div = styled.div`
   display: flex;
   gap: 16px;
-  width: 1240px;
+  max-width: 1240px;
   margin: 0 auto;
   position: relative;
+  @media screen and (max-width: 1470px) {
+    flex-direction: column;
+    /* width: 1240px; */
+  } ;
 `;
 
 const BtnBox = styled.div`
@@ -126,4 +138,5 @@ const Btn = styled.button`
   background: var(--white);
   border: 1px solid var(--gray2);
 `;
+
 export default DetailArticle;
