@@ -16,7 +16,7 @@ const Title = (props) => {
   const { data = [], isLoading } = useDetailArticleGet.useNewsSearch(stockName);
 
   const isMiddle = useMediaQuery({
-    query: "(max-width:1470px)",
+    query: "(max-width:1100px)",
   });
 
   return (
@@ -65,9 +65,14 @@ const Newsb = styled.pre`
 `;
 
 const NameDiv = styled.div`
-  /* height: 448px; */
   border: 1px solid var(--gray2);
   padding: 0px 24px;
+  @media screen and (max-width: 1100px) {
+    display: flex;
+  }
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  } ;
 `;
 
 const NewsBox = styled.div`
@@ -124,7 +129,7 @@ const NewsP1 = styled.pre`
 
 const Box = styled.div`
   max-width: 403px;
-  @media screen and (max-width: 1470px) {
+  @media screen and (max-width: 1100px) {
     max-width: 1240px;
   } ;
 `;
