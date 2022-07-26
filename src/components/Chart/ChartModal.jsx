@@ -36,7 +36,7 @@ const ChartModal = ({ stockName }) => {
         },
       }}
     >
-      <DetailChart stockName={stockName} />
+      {stockName !== undefined ? <DetailChart stockName={stockName} /> : null}
     </ReactModal>
   );
 };
