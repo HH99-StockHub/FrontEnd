@@ -12,10 +12,18 @@ export const stompConnect = (token) => {
 export const stompDisConnect = (token) => {
   stompClient.disconnect(stompChat.disSubscribeChat, { token: token });
 };
-
+// 로그인 상태에서 연결
+export const stompLoginConnect = (token, userId, setAlarmList) => {
+  stompClient.connect(
+    { token: token },
+    () => {
+      stompNotice.subscribeNotice(userId, setAlarmList);
+    },
+    onError,
+  );
+};
 // 보내기전 연결 테스트 함수
 function waitForConnection(stompClient, callback) {
-  console.log(stompClient);
   // 실제 오류 날때까지 조건 보류
   // setTimeout(function () {
   // if(stompClient.ws.XXX === 1)
@@ -44,7 +52,7 @@ export const stompChat = {
   // 구독 해제
   disSubscribeChat: (token, data) => {
     stompChat.chatOutMsg(token, data);
-    stompClient.unsubscribe("sub-0");
+    stompClient.unsubscribe("sub-1");
   },
   // 메세지 보내기
   chatSendMsg: (token, data) => {
@@ -106,13 +114,15 @@ const onError = (err) => {
 
 // 알림
 export const stompNotice = {
-  subscribeUrl: "",
-  noticeSendUrl: "",
+  subscribeUrl: "/sub/topic/stockhub/",
   // 구독
-  subscribeNotice: () => {
-    stompClient.subscribe(stompNotice.subscribeUrl, (response) => {
+  subscribeNotice: (userId, setAlarmList) => {
+    stompClient.subscribe(stompNotice.subscribeUrl + userId, (response) => {
       const newMessage = JSON.parse(response.body);
-      console.log(newMessage, "구독인데 이게 데이터로 들어오나?");
+      console.log(newMessage);
+      setAlarmList((list) => {
+        return [newMessage, ...list];
+      });
     });
   },
   // 구독 취소

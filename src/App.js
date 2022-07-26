@@ -2,7 +2,6 @@
 import { Route, Routes } from "react-router-dom";
 import ReactModal from "react-modal";
 import { ToastContainer } from "react-toastify";
-import { useRecoilValue } from "recoil";
 //컴포넌트
 import MainPage from "./page/MainPage";
 import Header from "./repeat/Header";
@@ -11,30 +10,14 @@ import DetailArticle from "./page/DetailArticle";
 import OAuth from "./components/KakaoLogin/OAuth";
 import SearchArticle from "./page/SearchArticle";
 import MenuBtn from "./repeat/MenuBtn";
-
-// 모듈
-import { loginState } from "./state/client/login";
+import Footer from "./repeat/Footer";
+import AddFormModal from "./components/AddArticle/AddFormModal";
 
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import "./CSS/toastify.css";
-import Footer from "./repeat/Footer";
-import AddFormModal from "./components/AddArticle/AddFormModal";
-import { useEffect } from "react";
-import { stompConnect, stompDisConnect } from "./custom/stomp";
-import { getCookie } from "./shared/Cookie";
 
 function App() {
-  const token = getCookie("token");
-  const login = useRecoilValue(loginState);
-  // 게시글 작성 토글 관리 recoil
-  useEffect(() => {
-    stompConnect(token);
-    return () => {
-      stompDisConnect(token);
-    };
-  }, []);
-
   return (
     <div className="App">
       <GlobalStyle />
@@ -53,7 +36,7 @@ function App() {
           element={<SearchArticle />}
         />
       </Routes>
-      {login && <MenuBtn />}
+      <MenuBtn />
       <Footer />
       <ToastContainer />
     </div>
