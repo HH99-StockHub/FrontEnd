@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ProfileImg from "../../elem/ProfileImg";
 
 const ChatCard = ({ data }) => {
   const msgType = () => {
@@ -18,7 +19,7 @@ const ChatCard = ({ data }) => {
         } else {
           return (
             <WrapOtherMsg>
-              <img src={data.imageUrl} alt="프로필 사진" />
+              <ProfileImg size="size2" rank={data.rank} src={data.imageUrl} />
               <TextOtherMessage>
                 <p>{data.nickName}</p>
                 <div>
@@ -54,12 +55,6 @@ export default ChatCard;
 const WrapOtherMsg = styled.div`
   display: flex;
   gap: 8px;
-  img {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 1px solid var(--green1);
-  }
 `;
 const WrapMyMsg = styled.div`
   display: flex;

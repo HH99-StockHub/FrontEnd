@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 //컴포넌트
 import CardTextPopular from "../common/CardTextPopular";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
-import Porfile from "../common/Porfile";
+import Profile from "../common/Profile";
 // 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 import { toastify } from "../../../custom/toastify";
@@ -134,10 +134,11 @@ const PopularArticleList = () => {
                   <CardTextPopular up={v.voteUpCount} />
                   <WrapText>{v.articleTitle}</WrapText>
                 </Link>
-                <Porfile
+                <Profile
                   nickname={v.nickname}
                   img={v.profileImage}
                   userId={v.userId}
+                  rank={v.rank}
                 />
               </WrapCard>
             );
@@ -152,10 +153,11 @@ const PopularArticleList = () => {
                   <CardTextPopular up={v.voteUpCount} />
                   <WrapText>{v.articleTitle}</WrapText>
                 </Link>
-                <Porfile
+                <Profile
                   nickname={v.nickname}
                   img={v.profileImage}
                   userId={v.userId}
+                  rank={v.rank}
                 />
               </WrapCard>
             );
