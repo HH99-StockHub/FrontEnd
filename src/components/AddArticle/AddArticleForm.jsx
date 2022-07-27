@@ -35,7 +35,12 @@ const AddArticleForm = () => {
   const [stockInput, setStockInput] = useState("");
   //선택 주식 주가
   const [currentStock, setCurrentStock] = useState("");
-
+  // 목표 가
+  const [goalPrice, setGoalPrice] = useState("선택 없음");
+  const [goalPriceState, setGoalPriceState] = useState(false);
+  // 수익률 마감일
+  const [goalDate, setGoalDate] = useState("선택 없음");
+  const [goalDateState, setGoalDateState] = useState(false);
   // title가져오기
   const articleTitle = useRef("");
   const wrapTagStockList = useRef();
@@ -253,7 +258,7 @@ const AddArticleForm = () => {
                         setModalState(true);
                       }}
                     >
-                      그래프 보기
+                      차트 상세보기
                     </button>
                     <div>
                       <LineChart stockName={stockInput} />
@@ -271,17 +276,12 @@ const AddArticleForm = () => {
                 </WrapTitle>
                 <WrapGoal>
                   <div>
-                    <p>목표 가</p>
-                    <div>
-                      <input type="text" placeholder="숫자만 입력" />
-                      <span>원</span>
-                    </div>
+                    <p>목표 수익률</p>
+                    <div>{goalPrice}</div>
                   </div>
                   <div>
                     <p>수익률 마감일</p>
-                    <div>
-                      <input type="text" placeholder="설정 없음" />
-                    </div>
+                    <div>{goalDate}</div>
                   </div>
                 </WrapGoal>
                 <AddArticleChoosePoint choosePoint={choosePoint} />
@@ -337,7 +337,7 @@ const AddArticleForm = () => {
                         setModalState(true);
                       }}
                     >
-                      그래프 보기
+                      차트 상세보기
                     </button>
                     <div>
                       <LineChart stockName={stockInput} />
@@ -355,17 +355,59 @@ const AddArticleForm = () => {
                 </WrapTitle>
                 <WrapGoal>
                   <div>
-                    <p>목표 가</p>
-                    <div>
-                      <input type="text" placeholder="숫자만 입력" />
-                      <span>원</span>
-                    </div>
+                    <p>목표 수익률</p>
+                    <GoalPrice
+                      state={goalPrice}
+                      onClick={() => {
+                        setGoalPriceState(!goalPriceState);
+                      }}
+                    >
+                      {goalPrice}
+                    </GoalPrice>
+                    {goalPriceState ? (
+                      <GoalDropDown
+                        onClick={(e) => {
+                          setGoalPrice(e.target.id);
+                          setGoalPriceState(false);
+                        }}
+                      >
+                        <div id="+ 10%">+ 10%</div>
+                        <div id="+ 20%">+ 20%</div>
+                        <div id="+ 30%">+ 30%</div>
+                        <div id="+ 40%">+ 40%</div>
+                        <div id="+ 50%">+ 50%</div>
+                        <div id="+ 100%">+ 100%</div>
+                        <div id="+ 150%">+ 150%</div>
+                        <div id="+ 200%">+ 200%</div>
+                      </GoalDropDown>
+                    ) : null}
                   </div>
                   <div>
                     <p>수익률 마감일</p>
-                    <div>
-                      <input type="text" placeholder="설정 없음" />
-                    </div>
+                    <GoalDate
+                      state={goalDate}
+                      onClick={() => {
+                        setGoalDateState(!goalDateState);
+                      }}
+                    >
+                      {goalDate}
+                    </GoalDate>
+                    {goalDateState ? (
+                      <GoalDropDown
+                        onClick={(e) => {
+                          setGoalDate(e.target.id);
+                          setGoalDateState(false);
+                        }}
+                      >
+                        <div id="2주">2주</div>
+                        <div id="1개월">1개월</div>
+                        <div id="3개월">3개월</div>
+                        <div id="6개월">6개월</div>
+                        <div id="1년">1년</div>
+                        <div id="2년">2년</div>
+                        <div id="3년">3년</div>
+                      </GoalDropDown>
+                    ) : null}
                   </div>
                 </WrapGoal>
                 <AddArticleChoosePoint choosePoint={choosePoint} />
@@ -481,23 +523,47 @@ const WrapGoal = styled.div`
   gap: 8px;
   margin-bottom: 24px;
   > div {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 8px;
     width: 100%;
     font-size: 12px;
-    > div {
-      display: flex;
-      border: 1px solid var(--gray2);
-      padding: 15px 15px 15px 12px;
-      input {
-        border: none;
-        width: 100%;
-      }
-    }
   }
   @media screen and (max-width: 500px) {
     flex-direction: column;
+  }
+`;
+
+const GoalPrice = styled.div`
+  border: 1px solid var(--gray2);
+  padding: 15px 15px 15px 12px;
+  color: ${({ state }) =>
+    state === "선택 없음" ? "var(--gray2)" : "var(--black)"};
+`;
+const GoalDate = styled.div`
+  border: 1px solid var(--gray2);
+  padding: 15px 15px 15px 12px;
+  color: ${({ state }) =>
+    state === "선택 없음" ? "var(--gray2)" : "var(--black)"};
+`;
+const GoalDropDown = styled.div`
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  max-height: 170px;
+  border: 1px solid var(--gray2);
+  background-color: var(--white);
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+  z-index: 99;
+  > div {
+    padding: 15px 15px 15px 12px;
+    &:hover {
+      background-color: var(--gray1);
+    }
   }
 `;
 const ScrollScope = styled.div`
@@ -515,7 +581,7 @@ const ChartBox = styled.div`
   align-items: flex-end;
   > button {
     padding: 10px;
-    width: 85px;
+    width: 100px;
     background-color: var(--green1);
     color: var(--white);
     font-size: 12px;

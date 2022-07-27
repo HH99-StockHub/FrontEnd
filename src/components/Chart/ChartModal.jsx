@@ -30,12 +30,13 @@ const ChartModal = ({ stockName }) => {
           overflow: "hidden",
           outline: "none",
           margin: "auto",
-          width: "900px",
-          height: "500px",
+          maxWidth: "900px",
+          maxHeight: "500px",
+          height: "70vw",
         },
       }}
     >
-      <DetailChart stockName={stockName} />
+      {stockName !== undefined ? <DetailChart stockName={stockName} /> : null}
     </ReactModal>
   );
 };

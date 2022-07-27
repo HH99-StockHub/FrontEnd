@@ -6,8 +6,13 @@ import MainArticleCard from "./MainArticleCard";
 // 훅
 import { toastify } from "../../../custom/toastify";
 import { useMainPageQuery } from "../useMainPageQuery";
+import { useMediaQuery } from "react-responsive";
 
 const MainArticleContent = () => {
+  // media
+  const isSmall = useMediaQuery({
+    query: "(max-width : 700px)",
+  });
   // 전체 게시물 데이터 query
   const {
     data = [],
@@ -19,9 +24,13 @@ const MainArticleContent = () => {
   if (isLoading) return <LoadingSpinner />;
   return (
     <>
-      {data.map((v) => {
-        return <MainArticleCard key={v.articleId} data={v} />;
-      })}
+      {isSmall
+        ? data.slice(0, 5).map((v) => {
+            return <MainArticleCard key={v.articleId} data={v} />;
+          })
+        : data.map((v) => {
+            return <MainArticleCard key={v.articleId} data={v} />;
+          })}
     </>
   );
 };

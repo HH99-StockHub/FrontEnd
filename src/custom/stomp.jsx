@@ -45,7 +45,6 @@ export const stompChat = {
       const newMessage = JSON.parse(response.body);
       const subscribeId = response.headers.subscription;
       const newKey = subscribeId.split("-");
-      console.log(newKey[0] + "-" + (Number(newKey[1]) + 1));
       setId(() => {
         const newKey = subscribeId.split("-");
         return newKey[0] + "-" + (Number(newKey[1]) + 1);
@@ -126,7 +125,6 @@ export const stompNotice = {
   subscribeNotice: (userId, setAlarmList) => {
     stompClient.subscribe(stompNotice.subscribeUrl + userId, (response) => {
       const newMessage = JSON.parse(response.body);
-      console.log(newMessage);
       setAlarmList((list) => {
         return [newMessage, ...list];
       });
