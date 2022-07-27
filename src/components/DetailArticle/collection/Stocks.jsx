@@ -29,7 +29,7 @@ const Stocks = (props) => {
             <Stock1divlastdiv>수익률 마감 일자:{deadline}</Stock1divlastdiv>
           </Stock1divlast>
           <Stock1div22>
-            <P4>목표 금액</P4>
+            <P4>목표 가</P4>
             <P3>{sliceNum(targetReturn)}</P3>
           </Stock1div22>
         </Stock1last>
