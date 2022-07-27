@@ -11,7 +11,7 @@ import { useMediaQuery } from "react-responsive";
 import { addArticleState } from "../../state/client/modal";
 import { useHeaderApi } from "../../repeat/useRepeatQuery";
 
-const MyDrupDown = ({ userName }) => {
+const MyDrupDown = ({ data }) => {
   // 닉네임 변경 모달창
   const [changeNick, setChangeNick] = useState(false);
   // 변경 닉네임 데이터
@@ -57,12 +57,13 @@ const MyDrupDown = ({ userName }) => {
   return (
     <WrapDropDown ref={el}>
       <DropDownHeader>
-        <button onClick={toggling}>{userName}</button>
+        <button onClick={toggling}>{localStorage.getItem("nickName")}</button>
       </DropDownHeader>
       {isOpen && (
         <DropDownList>
           <ListItem onClick={() => {}}>
-            내 등급 : <ListItemP> [새싹] (156/250)</ListItemP>
+            내 등급 :
+            <ListItemP> {` [${data.rank}] : ${data.experience}`}</ListItemP>
           </ListItem>
           <ListItem1
             onClick={() => {

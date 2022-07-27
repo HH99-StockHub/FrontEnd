@@ -66,4 +66,12 @@ export const useHeaderApi = {
       cacheTime: 1000 * 60 * 15,
     });
   },
+  // 등급 받아오기
+  useGetRank: () => {
+    const fetcher = async () => {
+      const { data } = api.post("/user/rank");
+      return data;
+    };
+    return useQuery("rank", fetcher);
+  },
 };
