@@ -30,11 +30,11 @@ const PriceTitle = (props) => {
             <NameP>{data?.stockPrice}</NameP>
             <TitleDiv>
               <Poly />
-              <TitleP>{data?.increment}</TitleP>
+              <TitleP>{data?.change}</TitleP>
             </TitleDiv>
             <TitleDiv>
               <Plus width="9" height="9" fill="#FF3232" />
-              <TitleP>{data?.incrementRate}</TitleP>
+              <TitleP>{data?.changeRate}</TitleP>
             </TitleDiv>
           </TitleBox>
           <Box1>
