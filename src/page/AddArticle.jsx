@@ -4,6 +4,7 @@ import AddArticleForm from "../components/AddArticle/AddArticleForm";
 const AddArticle = () => {
   return (
     <div>
+      1
       <AddArticleForm />
     </div>
   );
