@@ -79,6 +79,7 @@ const DetailArticle = () => {
                 profileImage={data.profileImage}
                 nickName={data.nickname}
                 userId={data.userId}
+                rank={data.rank}
               />
 
               <Stocks

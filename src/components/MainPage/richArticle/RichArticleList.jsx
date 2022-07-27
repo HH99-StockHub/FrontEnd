@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 //컴포넌트
 import CardTextRich from "../common/CardTextRich";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
-import Porfile from "../common/Porfile";
+import Profile from "../common/Profile";
 // query 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 import { toastify } from "../../../custom/toastify";
@@ -133,10 +133,11 @@ const RichArticleList = () => {
                   <CardTextRich stock={v.stockReturn} />
                   <WrapText>{v.articleTitle}</WrapText>
                 </Link>
-                <Porfile
+                <Profile
                   img={v.profileImage}
                   nickname={v.nickname}
                   userId={v.userId}
+                  rank={v.rank}
                 />
               </WrapCard>
             );
@@ -151,10 +152,11 @@ const RichArticleList = () => {
                   <CardTextRich stock={v.stockReturn} />
                   <WrapText>{v.articleTitle}</WrapText>
                 </Link>
-                <Porfile
+                <Profile
                   img={v.profileImage}
                   nickname={v.nickname}
                   userId={v.userId}
+                  rank={v.rank}
                 />
               </WrapCard>
             );

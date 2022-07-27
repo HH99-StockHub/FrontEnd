@@ -248,7 +248,11 @@ const TotalArticleList = ({}) => {
               <Just>
                 <WrapBottom>
                   <div>
-                    <ProfileImg size="size3" src={data.profileImage} />
+                    <ProfileImg
+                      size="size3"
+                      rank={data.rank}
+                      src={data.profileImage}
+                    />
                     <P3
                       id="userNickname"
                       onClick={(e) => {

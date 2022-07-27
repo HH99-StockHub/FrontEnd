@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ProfileImg from "../../../elem/ProfileImg";
 
-const Porfile = ({ img, nickname, userId }) => {
+const Profile = ({ img, nickname, userId, rank }) => {
   return (
     <WrapProfile>
-      <ProfileImg size="size3" src={img} />
+      <ProfileImg size="size3" rank={rank} src={img} />
       <p>
         <Link to={`/search/article/${nickname}/${userId}/1`}>{nickname}</Link>
       </p>
@@ -14,7 +14,7 @@ const Porfile = ({ img, nickname, userId }) => {
   );
 };
 
-export default Porfile;
+export default Profile;
 
 const WrapProfile = styled.div`
   display: flex;

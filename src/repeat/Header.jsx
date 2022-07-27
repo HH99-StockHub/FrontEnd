@@ -76,6 +76,7 @@ const Header = React.memo(() => {
             <WrapProfile>
               <ProfileImg
                 size="size2"
+                rank={""}
                 src={localStorage.getItem("profileImg")}
               />
               <MyDrupDown userName={"이름"} />

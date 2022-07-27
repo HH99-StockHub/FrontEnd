@@ -4,8 +4,15 @@ import styled from "styled-components";
 import ProfileImg from "../../../elem/ProfileImg";
 
 const Writing = (props) => {
-  const { view, stockName, articleTitle, profileImage, nickName, userId } =
-    props;
+  const {
+    view,
+    stockName,
+    articleTitle,
+    profileImage,
+    nickName,
+    userId,
+    rank,
+  } = props;
   return (
     <>
       <Box>
@@ -13,7 +20,7 @@ const Writing = (props) => {
           <P1>
             <div>{stockName}</div>
             <P3>
-              <ProfileImg size="size3" src={profileImage} />
+              <ProfileImg size="size3" rank={rank} src={profileImage} />
               <Link to={`/search/article/${nickName}/${userId}/1`}>
                 {nickName}
               </Link>
