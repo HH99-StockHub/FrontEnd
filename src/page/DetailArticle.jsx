@@ -87,6 +87,8 @@ const DetailArticle = () => {
                 stockReturn={data.stockReturn}
                 stockPriceFirst={data.stockPriceFirst}
                 stockPriceLast={data.stockPriceLast}
+                deadline={data.deadline}
+                targetReturn={data.targetReturn}
               />
               <View
                 content1={data.content1}
