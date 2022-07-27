@@ -60,7 +60,14 @@ const MyDrupDown = ({ data }) => {
   // 닉네임 변경
   const changeNickName = (e) => {
     e.preventDefault();
-    mutate(newNickname.current.value);
+    if (
+      newNickname.current.value === "" ||
+      newNickname.current.value.indexOf(" ") !== -1
+    ) {
+      toastify.error("빈칸이나 공백이 있습니다.");
+    } else {
+      mutate(newNickname.current.value);
+    }
   };
   useEffect(() => {
     window.addEventListener("click", handleCloseToggling);

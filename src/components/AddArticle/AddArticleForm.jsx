@@ -64,7 +64,11 @@ const AddArticleForm = () => {
         setCurrentStock(data.data);
       },
       onError: (data) => {
-        toastify.error("주가 불러오기를 실패했습니다.");
+        if (data.response.status === 404) {
+          toastify.error(data.response.data.message);
+        } else {
+          toastify.error("불러오기에 실패했습니다. 다시 시도해주세요");
+        }
       },
     });
   // 주식 종목 선택하기 list

@@ -7,9 +7,10 @@ export const useDetailArticleMutate = {
   useVoteUpMutation: (articleId) => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.postId}/up`, {
+      const response = await api.post(`/articles/${payload.postId}/up`, {
         voteUpId: payload.voteUpId,
       });
+      return response;
     };
     return useMutation(fetcher, {
       onSuccess: () => {
@@ -19,8 +20,14 @@ export const useDetailArticleMutate = {
         toastify.success("투표 완료");
       },
       onError: (data) => {
-        if (data.response.data.error === "403") {
+        if (
+          data.response.status === 401 ||
+          data.response.status === 403 ||
+          data.response.status === 404
+        ) {
           toastify.error(data.response.data.message);
+        } else {
+          toastify.error("추천에 실패했습니다. 다시 시도해주세요");
         }
       },
     });
@@ -29,9 +36,10 @@ export const useDetailArticleMutate = {
   useVoteDownMutation: (articleId) => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.post(`/articles/${payload.postId}/down`, {
+      const response = await api.post(`/articles/${payload.postId}/down`, {
         voteDownId: payload.voteDownId,
       });
+      return response;
     };
     return useMutation(fetcher, {
       onSuccess: () => {
@@ -40,8 +48,14 @@ export const useDetailArticleMutate = {
         toastify.success("투표 완료");
       },
       onError: (data) => {
-        if (data.response.data.error === "403") {
+        if (
+          data.response.status === 401 ||
+          data.response.status === 403 ||
+          data.response.status === 404
+        ) {
           toastify.error(data.response.data.message);
+        } else {
+          toastify.error("비추천에 실패했습니다. 다시 시도해주세요");
         }
       },
     });
@@ -49,10 +63,10 @@ export const useDetailArticleMutate = {
   //댓글 작성
   useWriteComment: (option) => {
     const fetcher = async ({ write, id }) => {
-      const { data } = await api.post(`/articles/${id}/comment`, {
+      const response = await api.post(`/articles/${id}/comment`, {
         comments: write,
       });
-      return data;
+      return response;
     };
     return useMutation(fetcher, option);
   },
@@ -60,7 +74,8 @@ export const useDetailArticleMutate = {
   useDeleteComment: (articleId) => {
     const queryClient = useQueryClient();
     const fetcher = async (commentId) => {
-      await api.delete(`/comments/${commentId}`);
+      const response = await api.delete(`/comments/${commentId}`);
+      return response;
     };
     return useMutation(fetcher, {
       onSuccess: () => {
@@ -68,8 +83,12 @@ export const useDetailArticleMutate = {
         queryClient.invalidateQueries(["CommentInquiry", articleId]);
         toastify.success("댓글 삭제 완료");
       },
-      onError: (data, error, variables, context) => {
-        toastify.error("삭제 권한이 없습니다.");
+      onError: (data) => {
+        if (data.response.status === 401 || data.response.status === 404) {
+          toastify.error(data.response.data.message);
+        } else {
+          toastify.error("삭제에 실패했습니다. 다시 시도해주세요");
+        }
       },
     });
   },
@@ -77,7 +96,8 @@ export const useDetailArticleMutate = {
   useDeletePost: () => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
-      await api.delete(`/articles/${payload.postId}`);
+      const response = await api.delete(`/articles/${payload.postId}`);
+      return response;
     };
     return useMutation(fetcher, {
       onSuccess: () => {
@@ -85,8 +105,12 @@ export const useDetailArticleMutate = {
         queryClient.invalidateQueries("ContentInquiry");
         toastify.success("게시글 삭제 완료");
       },
-      onError: (err) => {
-        toastify.error("삭제 권한이 없습니다.");
+      onError: (data) => {
+        if (data.response.status === 401 || data.response.status === 404) {
+          toastify.error(data.response.data.message);
+        } else {
+          toastify.error("삭제에 실패했습니다. 다시 시도해주세요");
+        }
       },
     });
   },
