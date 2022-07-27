@@ -29,6 +29,8 @@ const TotalArticleList = ({}) => {
       voteDownCount: 400,
       commentCount: 400,
       viewCount: 400,
+      popularList: true,
+      richList: false,
     },
     {
       articleId: 1,
@@ -258,8 +260,12 @@ const TotalArticleList = ({}) => {
                     </P3>
                   </div>
                   <div>
-                    {true ? <Badge color="var(--blue1)">수익왕</Badge> : null}
-                    {true ? <Badge color="var(--blue2)">인기글</Badge> : null}
+                    {data.richList ? (
+                      <Badge color="var(--blue1)">수익왕</Badge>
+                    ) : null}
+                    {data.popularList ? (
+                      <Badge color="var(--blue2)">인기글</Badge>
+                    ) : null}
                   </div>
                 </WrapBottom>
                 <P4>{dayjs(data.createdAt).format("YY.MM.DD")}</P4>
