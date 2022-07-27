@@ -42,13 +42,15 @@ export const useHeaderApi = {
   // 닉네임 변경
   useChangeNickname: (setChangeNick) => {
     const fetcher = async (nick) => {
-      const response = api.put("/user/nickname", nick);
-      return response;
+      api.put("/user/nickname", nick);
+      return nick;
     };
     return useMutation(fetcher, {
       onSuccess: (data) => {
         //닉네임 저장
         setChangeNick(false);
+        localStorage.setItem("nickName", data);
+        toastify.success(`${data}으로 닉네임 변경을 완료했습니다.`);
       },
       onError: () => {
         toastify.error("닉네임이 유효하지 않습니다");
