@@ -18,7 +18,6 @@ import HelmetComponents from "../repeat/HelmetComponents";
 import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
 import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
 import { toastify } from "../custom/toastify";
-import { screen } from "@testing-library/react";
 import { useMediaQuery } from "react-responsive";
 
 const DetailArticle = () => {
