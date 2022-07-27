@@ -69,7 +69,7 @@ const ChatInput = () => {
     <WrapInput state={textareaState}>
       <textarea
         type="text"
-        placeholder="메시지들 입력해주세요."
+        placeholder="메시지를 입력해주세요."
         ref={message}
         onChange={changeTextLine}
         onKeyDown={msgKeyDown}

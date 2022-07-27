@@ -24,7 +24,7 @@ const ArticleSubHeader = React.memo(() => {
 
   // media
   const isSmall = useMediaQuery({
-    query: "(max-width:830px)",
+    query: "(max-width:900px)",
   });
   const isMostSmall = useMediaQuery({
     query: "(max-width:355px)",
@@ -35,17 +35,17 @@ const ArticleSubHeader = React.memo(() => {
         <div>
           <WrapText>
             <HeadText className="title">
-              방구석 애널리스트
+              방구석 애널리스트들을
               <br />
-              <span>'StockHub'</span>입니다
+              위한<span>StockHub</span>입니다
             </HeadText>
             <SubText>
-              주식 전망글을 작성하고 <br />
-              수익왕이 되는 그 날을 응원합니다!
+              주식 인사이트를 나누고 <br />
+              수익왕이 되는 그날을 응원합니다!
             </SubText>
           </WrapText>
           <MobileStyle>
-            <WriteBtn onClick={openTogle}>글쓰러가기</WriteBtn>
+            <WriteBtn onClick={openTogle}>글 쓰러 가기</WriteBtn>
             {!isMostSmall && <BannerImg src={bannerImg} alt="배너 이미지" />}
           </MobileStyle>
         </div>
@@ -54,15 +54,15 @@ const ArticleSubHeader = React.memo(() => {
           <BannerImg src={bannerImg} alt="배너 이미지" />
           <WrapText>
             <HeadText className="title">
-              방구석 애널리스트
+              방구석 애널리스트들을
               <br />
-              <span>'StockHub'</span>입니다
+              위한<span>StockHub</span>입니다
             </HeadText>
             <SubText>
-              주식 전망글을 작성하고 <br />
-              수익왕이 되는 그 날을 응원합니다!
+              주식 인사이트를 나누고 <br />
+              수익왕이 되는 그날을 응원합니다!
             </SubText>
-            <WriteBtn onClick={openTogle}>글쓰러가기</WriteBtn>
+            <WriteBtn onClick={openTogle}>글 쓰러 가기</WriteBtn>
           </WrapText>
         </>
       )}
@@ -80,7 +80,7 @@ const SubHeader = styled.div`
   width: 100%;
   height: 332px;
   background-color: var(--green1);
-  @media screen and (max-width: 830px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
     gap: 0;
     align-items: center;
@@ -92,7 +92,7 @@ const BannerImg = styled.img`
   width: 442px;
   height: 259px;
   margin-bottom: 15px;
-  @media screen and (max-width: 830px) {
+  @media screen and (max-width: 900px) {
     width: 200px;
     height: 120px;
     margin: 0;
@@ -100,8 +100,8 @@ const BannerImg = styled.img`
 `;
 const WrapText = styled.div`
   margin-bottom: 49px;
-  @media screen and (max-width: 830px) {
-    width: 290px;
+  @media screen and (max-width: 900px) {
+    min-width: 290px;
     margin: 0;
   }
 `;
@@ -136,7 +136,7 @@ const WriteBtn = styled.button`
 `;
 
 const MobileStyle = styled.div`
-  @media screen and (max-width: 830px) {
+  @media screen and (max-width: 900px) {
     display: flex;
   }
 `;
