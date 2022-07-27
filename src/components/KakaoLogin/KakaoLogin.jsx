@@ -1,10 +1,11 @@
 import React from "react";
+import styled from "styled-components";
 import { KAKAO_AUTH_URL } from "../../Auth/kakao";
 //카카오 로그인
 
 const KakaoLogin = () => {
   return (
-    <p
+    <Login
       onClick={() => {
         // 로그인 버튼을 누르는 페이지 url 저장
         const index = window.location.href.indexOf("/", 7);
@@ -13,8 +14,12 @@ const KakaoLogin = () => {
       }}
     >
       카카오로그인
-    </p>
+    </Login>
   );
 };
 
 export default KakaoLogin;
+
+const Login = styled.div`
+  cursor: pointer;
+`;

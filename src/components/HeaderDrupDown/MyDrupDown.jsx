@@ -102,8 +102,11 @@ const MyDrupDown = ({ data }) => {
           <ListItem1
             onClick={() => {
               navigate(
-                `/search/article/박태형/${localStorage.getItem("id")}/1`,
+                `/search/article/${localStorage.getItem(
+                  "nickName",
+                )}/${localStorage.getItem("id")}/1`,
               );
+              setIsOpen(false);
             }}
           >
             내 글 모아보기
