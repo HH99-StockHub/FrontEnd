@@ -57,7 +57,7 @@ export const useDetailArticleMutate = {
     return useMutation(fetcher, option);
   },
   //댓글 삭제
-  useDeleteComment: () => {
+  useDeleteComment: (articleId) => {
     const queryClient = useQueryClient();
     const fetcher = async (commentId) => {
       await api.delete(`/comments/${commentId}`);
@@ -65,7 +65,7 @@ export const useDetailArticleMutate = {
     return useMutation(fetcher, {
       onSuccess: () => {
         queryClient.invalidateQueries("rank");
-        queryClient.invalidateQueries("ContentInquiry");
+        queryClient.invalidateQueries(["CommentInquiry", articleId]);
         toastify.success("댓글 삭제 완료");
       },
       onError: (data, error, variables, context) => {

@@ -19,7 +19,7 @@ const Comment = ({ id }) => {
     onSuccess: (data) => {
       if (data) {
         writeInput.current.value = "";
-        queryClient.invalidateQueries("CommentInquiry");
+        queryClient.invalidateQueries(["CommentInquiry", id]);
         toastify.success("댓글 작성 완료");
       } else {
         toastify.error("비속어 금지");
@@ -75,7 +75,7 @@ const Comment = ({ id }) => {
         ) : (
           <>
             {data.map((v) => {
-              return <CommentCard data={v} key={v.commentId} />;
+              return <CommentCard data={v} articleId={id} key={v.commentId} />;
             })}
           </>
         )}
