@@ -56,10 +56,10 @@ const ArticleSubHeader = React.memo(() => {
             <HeadText className="title">
               방구석 애널리스트들을
               <br />
-              위한<span>StockHub</span>입니다
+              위한<span> StockHub</span>입니다.
             </HeadText>
             <SubText>
-              주식 인사이트를 나누고 <br />
+              투자 인사이트를 나누고 <br />
               수익왕이 되는 그날을 응원합니다!
             </SubText>
             <WriteBtn onClick={openTogle}>글 쓰러 가기</WriteBtn>
@@ -123,6 +123,7 @@ const SubText = styled.div`
   font-size: 18px;
   font-weight: 500;
   color: var(--white);
+  padding-left: 10px;
 `;
 
 const WriteBtn = styled.button`

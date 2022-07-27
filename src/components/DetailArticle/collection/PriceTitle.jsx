@@ -36,7 +36,7 @@ const PriceTitle = (props) => {
               <>
                 <NameP>{sliceNum(data.data?.stockPrice)}</NameP>
                 <TitleDiv>
-                  <>&#9650;;</>
+                  <>&#9650;</>
                   {/* <Poly /> */}
                   <TitleP>{sliceNum(data.data?.change)}</TitleP>
                 </TitleDiv>
@@ -62,11 +62,10 @@ const PriceTitle = (props) => {
                 <NameP>{sliceNum(data.data?.stockPrice)}</NameP>
                 <TitleDiv>
                   {/* <Poly /> */}
-                  <>&ndash;</>
-                  <TitleP>{sliceNum(data.data?.change)}</TitleP>
+                  <TitleP>&ndash;</TitleP>
                 </TitleDiv>
                 <TitleDiv>
-                  <TitleP>{sliceNum(data.data?.changeRate)}%</TitleP>
+                  <TitleP>{sliceNum(data.data?.changeRate)}.00%</TitleP>
                 </TitleDiv>
               </>
             )}
