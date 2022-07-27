@@ -15,6 +15,7 @@ export const useDetailArticleMutate = {
       onSuccess: () => {
         queryClient.invalidateQueries(["voteSign", articleId]);
         queryClient.invalidateQueries(["ContentInquiry", articleId]);
+        queryClient.invalidateQueries("rank");
         toastify.success("투표 완료");
       },
       onError: (data) => {
@@ -63,6 +64,7 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
+        queryClient.invalidateQueries("rank");
         queryClient.invalidateQueries("ContentInquiry");
         toastify.success("댓글 삭제 완료");
       },
@@ -79,6 +81,7 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
+        queryClient.invalidateQueries("rank");
         queryClient.invalidateQueries("ContentInquiry");
         toastify.success("게시글 삭제 완료");
       },

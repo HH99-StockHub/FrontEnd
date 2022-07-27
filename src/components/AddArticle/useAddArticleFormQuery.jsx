@@ -18,6 +18,7 @@ export const useAddArticleFormMutate = {
       onSuccess: (data) => {
         if (data) {
           queryClient.invalidateQueries("allArticle");
+          queryClient.invalidateQueries("rank");
           toastify.success("작성 완료");
           setFormState(false);
         } else {
