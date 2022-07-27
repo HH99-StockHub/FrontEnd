@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import ProfileImg from "../../../elem/ProfileImg";
 
 const Porfile = ({ img, nickname, userId }) => {
   return (
     <WrapProfile>
-      <img src={img} alt="프로필 이미지" />
+      <ProfileImg size="size3" src={img} />
       <p>
         <Link to={`/search/article/${nickname}/${userId}/1`}>{nickname}</Link>
       </p>
@@ -19,11 +20,7 @@ const WrapProfile = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
-  img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-  }
+
   p {
     font-size: 14px;
     font-weight: 300;

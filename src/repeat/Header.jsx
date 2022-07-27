@@ -22,6 +22,7 @@ import { loginState } from "../state/client/login";
 import { alarmList } from "../state/server/alarm";
 //이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
+import ProfileImg from "../elem/ProfileImg";
 
 const Header = React.memo(() => {
   //recoil
@@ -73,9 +74,9 @@ const Header = React.memo(() => {
         {login ? (
           <WrapMenu>
             <WrapProfile>
-              <Profile
+              <ProfileImg
+                size="size2"
                 src={localStorage.getItem("profileImg")}
-                alt="프로필 이미지"
               />
               <MyDrupDown userName={"이름"} />
               <span>하수</span>
@@ -139,16 +140,6 @@ const WrapProfile = styled.div`
     font-weight: 700;
     color: var(--green1);
   }
-`;
-const Profile = styled.img`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-`;
-
-const Notice = styled.button`
-  font-weight: 700;
-  font-size: 12px;
 `;
 
 const Writing = styled.button`

@@ -70,6 +70,7 @@ export const stompChat = {
       sendTime: data.time,
       clear: true,
       message: data.message,
+      rank: data.rank,
     };
     stompClient.send(
       // "/app/message",
@@ -88,6 +89,7 @@ export const stompChat = {
       sendTime: data.time,
       clear: true,
       message: "",
+      rank: data.rank,
     };
     stompClient.send(
       stompChat.chatSendUrl,

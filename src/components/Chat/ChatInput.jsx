@@ -31,6 +31,7 @@ const ChatInput = () => {
       imgUrl: imgUrl,
       time: time(),
       message: message.current.value,
+      rank: "지존",
     };
     stompChat.chatSendMsg(token, data);
     message.current.value = "";

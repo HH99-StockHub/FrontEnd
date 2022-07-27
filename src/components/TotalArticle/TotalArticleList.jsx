@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 import useSliceNum from "../../custom/sliceNum";
+// elem
+import ProfileImg from "../../elem/ProfileImg";
 // 이미지
 import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
@@ -246,7 +248,7 @@ const TotalArticleList = ({}) => {
               <Just>
                 <WrapBottom>
                   <div>
-                    <Img src={data.profileImage} alt="프로필 이미지" />
+                    <ProfileImg size="size3" src={data.profileImage} />
                     <P3
                       id="userNickname"
                       onClick={(e) => {
@@ -367,13 +369,6 @@ const Just = styled.div`
   display: flex;
   align-items: center;
   margin-top: 15px;
-`;
-
-const Img = styled.img`
-  border-radius: 100%;
-  width: 32px;
-  height: 32px;
-  overflow: hidden;
 `;
 
 const WrapBottom = styled.div`
