@@ -114,4 +114,12 @@ export const useDetailArticleGet = {
     };
     return useQuery(["NewsSearch", payload], fetcher);
   },
+  // 주가 상세 정보 가져오기
+  useGetDetailStock: (stockName) => {
+    const fetcher = async () => {
+      const { data } = api.get(`/stock/details/${stockName}`);
+      return data;
+    };
+    return useQuery(["stockDetail", stockName], fetcher);
+  },
 };
