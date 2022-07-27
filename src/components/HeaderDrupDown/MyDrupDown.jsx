@@ -57,6 +57,11 @@ const MyDrupDown = ({ data }) => {
     }
   };
 
+  // 닉네임 변경
+  const changeNickName = (e) => {
+    e.preventDefault();
+    mutate(newNickname.current.value);
+  };
   useEffect(() => {
     window.addEventListener("click", handleCloseToggling);
     return () => {
@@ -125,23 +130,22 @@ const MyDrupDown = ({ data }) => {
       )}
       {changeNick && (
         <ChangeNick>
-          <div>
+          <form
+            onSubmit={(e) => {
+              changeNickName(e);
+            }}
+          >
             <p>닉네임 변경</p>
             <input
               type="text"
               ref={newNickname}
-              placeholder={localStorage.getItem("nickname")}
+              placeholder={localStorage.getItem("nickName")}
             />
             <span>영문/국문/숫자 조합 2~12자리</span>
             <div>
+              <button type="submit">저장</button>
               <button
-                onClick={() => {
-                  mutate(newNickname.current.value);
-                }}
-              >
-                저장
-              </button>
-              <button
+                type="button"
                 onClick={() => {
                   setChangeNick(false);
                 }}
@@ -149,7 +153,7 @@ const MyDrupDown = ({ data }) => {
                 취소
               </button>
             </div>
-          </div>
+          </form>
         </ChangeNick>
       )}
     </WrapDropDown>
@@ -213,7 +217,7 @@ const ChangeNick = styled.div`
   border: 1px solid var(--gray2);
   border-radius: 6px;
   z-index: 99;
-  > div {
+  > form {
     display: flex;
     flex-direction: column;
     justify-content: center;
