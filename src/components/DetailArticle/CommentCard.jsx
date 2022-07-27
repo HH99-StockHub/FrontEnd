@@ -35,7 +35,7 @@ const CommentCard = ({ data }) => {
       <WrapContent>
         <P3>
           <P3div>
-            <ProfileImg size="size3" src={data.profileImage} />
+            <ProfileImg size="size3" rank={data.rank} src={data.profileImage} />
             <P3p>{data.nickname}</P3p>
           </P3div>
           <P3pre>{data.comments}</P3pre>
