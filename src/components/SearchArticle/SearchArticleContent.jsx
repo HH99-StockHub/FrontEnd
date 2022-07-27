@@ -23,7 +23,7 @@ const SearchArticleContent = ({ category, keyword, page }) => {
   return (
     <>
       {data?.totalPages === 0 ? (
-        <NotSearch keyword={keyword} />
+        <NotSearch />
       ) : (
         <>
           <TotalArticleList

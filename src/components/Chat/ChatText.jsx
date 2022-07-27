@@ -43,7 +43,7 @@ const ChatText = ({ setChatState }) => {
   useEffect(() => {
     const data = {
       userId: userId,
-      nickName: "btae",
+      nickName: localStorage.getItem("nickName"),
       imgUrl: imgUrl,
       time: time(),
     };

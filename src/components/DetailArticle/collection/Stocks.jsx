@@ -27,17 +27,22 @@ const Stocks = (props) => {
         <Stock1last>
           <Stock1divlast>
             <Stock1divlastdiv>
-              수익률 마감 일자:{dayjs(deadline).format("YYYY-MM-DD")}
+              수익률 마감 일자 :
+              {dayjs(date).format("YYYY.MM.DD") ===
+              dayjs(deadline).format("YYYY.MM.DD")
+                ? " 해당 없음"
+                : dayjs(deadline).format("YYYY.MM.DD")}
             </Stock1divlastdiv>
           </Stock1divlast>
           <Stock1div22>
             <P4>목표 금액</P4>
             <P3>
-              {sliceNum(
-                parseInt((stockPriceFirst * targetReturn) / 100) +
-                  stockPriceFirst,
-              )}
-              원
+              {targetReturn === 0
+                ? "해당 없음"
+                : `${sliceNum(
+                    parseInt((stockPriceFirst * targetReturn) / 100) +
+                      stockPriceFirst,
+                  )} 원`}
             </P3>
           </Stock1div22>
         </Stock1last>
