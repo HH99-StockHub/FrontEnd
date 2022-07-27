@@ -73,7 +73,7 @@ const Stock1divlastdiv = styled.div`
   font-size: 12px;
   line-height: 14px;
   color: var(--white);
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     width: 100%;
     color: var(--white);
     text-align: center;
@@ -84,7 +84,7 @@ const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 20px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     flex-direction: column;
   } ;
 `;
@@ -96,7 +96,7 @@ const Stock1 = styled.div`
   justify-content: space-between;
   color: #7a7a7a;
   /* padding: 13px; */
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     display: flex;
     flex-direction: column;
     width: 620px;
@@ -117,7 +117,7 @@ const Stock1div = styled.div`
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     color: var(--white);
     background: var(--green1);
     width: 100%;
@@ -130,7 +130,7 @@ const Stock1last = styled.div`
   background: var(--white);
   border: 1px solid var(--green1);
   color: #7a7a7a;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     width: 620px;
     padding: 0px;
     > div {
@@ -149,7 +149,7 @@ const Stock1divlast = styled.div`
   background: var(--green1);
   padding: 8px;
   text-align: center;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     color: var(--white);
     background: var(--green1);
   } ;
@@ -199,7 +199,7 @@ const P1 = styled.p`
   display: flex;
   justify-content: flex-end;
   margin-top: 19px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     margin-top: 0;
   } ;
 `;
@@ -212,7 +212,7 @@ const P2 = styled.p`
   display: flex;
   justify-content: flex-end;
   margin-top: 19px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     margin-top: 0;
   } ;
 `;
@@ -238,7 +238,7 @@ const Stock2 = styled.div`
   color: var(--white);
   background: var(--green1);
   padding: 0 13px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     width: 620px;
     display: flex;
     align-items: center;
@@ -250,7 +250,7 @@ const Stock2div = styled.div`
   font-size: 12px;
   line-height: 14px;
   margin-top: 10px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     margin-top: 0;
     padding: 10px 0;
   } ;
@@ -264,7 +264,7 @@ const Stock3 = styled.div`
   font-size: 12px;
   line-height: 14px;
   padding: 0 13px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     width: 620px;
     display: flex;
     align-items: center;

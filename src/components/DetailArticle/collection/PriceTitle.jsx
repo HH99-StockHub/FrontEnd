@@ -76,7 +76,7 @@ const Name = styled.div`
   padding: 24px 0;
   min-height: 100px;
   border-bottom: 1px solid var(--gray2);
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     border-bottom: none;
     width: 528px;
   }

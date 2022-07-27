@@ -16,7 +16,7 @@ const Title = (props) => {
   const { data = [], isLoading } = useDetailArticleGet.useNewsSearch(stockName);
 
   const isMiddle = useMediaQuery({
-    query: "(max-width:1100px)",
+    query: "(max-width:1240px)",
   });
 
   return (
@@ -67,7 +67,7 @@ const Newsb = styled.pre`
 const NameDiv = styled.div`
   border: 1px solid var(--gray2);
   padding: 0px 24px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     display: flex;
   }
   @media screen and (max-width: 750px) {
@@ -129,7 +129,7 @@ const NewsP1 = styled.pre`
 
 const Box = styled.div`
   max-width: 403px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     max-width: 1240px;
   } ;
 `;
