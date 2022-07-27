@@ -47,6 +47,7 @@ const DetailArticle = () => {
     query: "(max-width:1100px)",
   });
 
+  console.log(data);
   return (
     <>
       <HelmetComponents title={`${data.stockName} 게시글`} />
