@@ -127,8 +127,8 @@ export const useDetailArticleGet = {
   // voteSign
   useGetVoteSign: (articleId) => {
     const fetcher = async () => {
-      const { data } = api.post(`articles/${articleId}/voteSign`);
-      return data;
+      const response = api.post(`articles/${articleId}/voteSign`);
+      return response;
     };
     return useQuery(["voteSign", articleId], fetcher);
   },
