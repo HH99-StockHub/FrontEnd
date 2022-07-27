@@ -13,6 +13,23 @@ import { addArticleState } from "../../state/client/modal";
 import { useHeaderApi } from "../../repeat/useRepeatQuery";
 
 const MyDrupDown = ({ data }) => {
+  // 경험치 총량
+  const experience = () => {
+    switch (data.rank) {
+      case "신입":
+        return 10;
+      case "초보":
+        return 100;
+      case "중수":
+        return 200;
+      case "고수":
+        return 500;
+      case "지존":
+        return "???";
+      default:
+        return 500;
+    }
+  };
   const navigate = useNavigate();
   // 닉네임 변경 모달창
   const [changeNick, setChangeNick] = useState(false);
@@ -65,7 +82,9 @@ const MyDrupDown = ({ data }) => {
         <DropDownList>
           <ListItem onClick={() => {}}>
             내 등급 :
-            <ListItemP> {` [${data?.rank}] : ${data?.experience}`}</ListItemP>
+            <ListItemP>
+              {` [${data?.rank}] : (${data?.experience}/${experience()})`}
+            </ListItemP>
           </ListItem>
           <ListItem1
             onClick={() => {

@@ -71,8 +71,8 @@ export const useHeaderApi = {
   // 등급 받아오기
   useGetRank: () => {
     const fetcher = async () => {
-      const { data } = api.post("/userDetails");
-      return data;
+      const response = api.post("/userDetails");
+      return response;
     };
     return useQuery("rank", fetcher);
   },
