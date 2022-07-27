@@ -21,7 +21,7 @@ const Stocks = (props) => {
           <Stock1div>작성날짜 : {dayjs(date).format("YYYY.MM.DD")}</Stock1div>
           <Stock1div2>
             <PP>작성시점 주가</PP>
-            <P>{sliceNum(stockPriceFirst)}</P>
+            <P>{sliceNum(stockPriceFirst)}원</P>
           </Stock1div2>
         </Stock1>
         <Stock1last>
@@ -33,7 +33,11 @@ const Stocks = (props) => {
           <Stock1div22>
             <P4>목표 금액</P4>
             <P3>
-              {sliceNum(stockPriceFirst * targetReturn + stockPriceFirst)}
+              {sliceNum(
+                parseInt((stockPriceFirst * targetReturn) / 100) +
+                  stockPriceFirst,
+              )}
+              원
             </P3>
           </Stock1div22>
         </Stock1last>
@@ -41,7 +45,7 @@ const Stocks = (props) => {
       <PriceDiv>
         <Stock2>
           <Stock2div>현재 가</Stock2div>
-          <P1>{sliceNum(stockPriceLast)}</P1>
+          <P1>{sliceNum(stockPriceLast)}원</P1>
         </Stock2>
         <Stock3>
           <Stock2div>누적 수익률</Stock2div>
