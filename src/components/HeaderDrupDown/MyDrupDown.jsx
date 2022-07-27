@@ -174,6 +174,7 @@ const ChangeNick = styled.div`
   background-color: var(--white);
   border: 1px solid var(--gray2);
   border-radius: 6px;
+  z-index: 99;
   > div {
     display: flex;
     flex-direction: column;
