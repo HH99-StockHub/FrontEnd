@@ -71,6 +71,10 @@ const TextMyMessage = styled.div`
     background-color: var(--green2);
     color: var(--white);
     border-radius: 25px;
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow: hidden;
   }
   span {
     color: var(--gray3);
