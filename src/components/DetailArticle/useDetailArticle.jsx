@@ -13,10 +13,8 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries(
-          ["ContentInquiry", articleId],
-          ["voteSign", articleId],
-        );
+        queryClient.invalidateQueries(["voteSign", articleId]);
+        queryClient.invalidateQueries(["ContentInquiry", articleId]);
         toastify.success("투표 완료");
       },
       onError: (data) => {
@@ -36,10 +34,8 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries(
-          ["ContentInquiry", articleId],
-          ["voteSign", articleId],
-        );
+        queryClient.invalidateQueries(["voteSign", articleId]);
+        queryClient.invalidateQueries(["ContentInquiry", articleId]);
         toastify.success("투표 완료");
       },
       onError: (data) => {
