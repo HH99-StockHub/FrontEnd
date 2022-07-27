@@ -22,7 +22,7 @@ jobs: # Job 설정
           echo "REACT_APP_KAKAO_API_KEY=$REACT_APP_KAKAO_API_KEY" >> .env.production.local
           echo "REACT_APP_STOMP_ENDPOINT_KEY=$REACT_APP_STOMP_ENDPOINT_KEY" >> .env.production.local
         env:
-          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_SERVER_BASEURL }}
+          REACT_APP_SERVER_BASEURL: ${{ secrets.REACT_APP_SERVER_BASEURL }}
           REACT_APP_KAKAO_REDIRECT_URI: ${{ secrets.REACT_APP_KAKAO_REDIRECT_URI }}
           REACT_APP_KAKAO_API_KEY: ${{ secrets.REACT_APP_KAKAO_API_KEY }}
           REACT_APP_STOMP_ENDPOINT_KEY: ${{ secrets.REACT_APP_STOMP_ENDPOINT_KEY }}

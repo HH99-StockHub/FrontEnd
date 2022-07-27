@@ -18,6 +18,12 @@ import GlobalStyle from "./elem/GlobalStyle";
 import "./CSS/toastify.css";
 
 function App() {
+  console.log(
+    process.env.REACT_APP_SERVER_BASEURL,
+    process.env.REACT_APP_STOMP_ENDPOINT_KEY,
+    process.env.REACT_APP_KAKAO_API_KEY,
+    process.env.REACT_APP_KAKAO_REDIRECT_URI,
+  );
   return (
     <div className="App">
       <GlobalStyle />
