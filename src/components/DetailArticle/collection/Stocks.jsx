@@ -5,7 +5,14 @@ import dayjs from "dayjs";
 import useSliceNum from "../../../custom/sliceNum";
 
 const Stocks = (props) => {
-  const { date, stockReturn, stockPriceFirst, stockPriceLast } = props;
+  const {
+    date,
+    stockReturn,
+    stockPriceFirst,
+    stockPriceLast,
+    deadline,
+    targetReturn,
+  } = props;
   const sliceNum = useSliceNum;
   return (
     <Box>
@@ -19,13 +26,11 @@ const Stocks = (props) => {
         </Stock1>
         <Stock1last>
           <Stock1divlast>
-            <Stock1divlastdiv>
-              수익률 마감 일자:{dayjs(date).format("YYYY.MM.DD")}
-            </Stock1divlastdiv>
+            <Stock1divlastdiv>수익률 마감 일자:{deadline}</Stock1divlastdiv>
           </Stock1divlast>
           <Stock1div22>
             <P4>목표 금액</P4>
-            <P3>{sliceNum(stockPriceFirst)}</P3>
+            <P3>{sliceNum(targetReturn)}</P3>
           </Stock1div22>
         </Stock1last>
       </Div>
