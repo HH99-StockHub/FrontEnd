@@ -49,6 +49,7 @@ const WrapMainContent = styled.div`
     gap: 64px;
     margin: 0 auto;
     > div {
+      min-width: 588px;
       max-width: 588px;
       @media screen and (max-width: 1260px) {
         max-width: 90%;
