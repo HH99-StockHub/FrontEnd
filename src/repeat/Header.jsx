@@ -54,6 +54,7 @@ const Header = React.memo(() => {
   return (
     <Header1>
       <Header2>
+        무중단배포중
         <Logo1>
           <Logo
             onClick={() => {
