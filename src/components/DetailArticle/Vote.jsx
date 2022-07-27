@@ -18,7 +18,6 @@ const Vote = (props) => {
 
   // 투표 상태 확인
   const { data = { data: 0 } } = useDetailArticleGet.useGetVoteSign(id);
-  console.log(data, "투표확인");
 
   return (
     <BtnBox>
