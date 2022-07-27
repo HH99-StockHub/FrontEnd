@@ -12,7 +12,6 @@ import { ReactComponent as UpArrowSvg } from "../image/UpArrow.svg";
 
 const SlideStock = React.memo(() => {
   const { data = { data: [] }, isLoading } = useHeaderApi.useGetSlideStock();
-  console.log(data);
   const date = new Date();
   return (
     <WrapSlideStock>

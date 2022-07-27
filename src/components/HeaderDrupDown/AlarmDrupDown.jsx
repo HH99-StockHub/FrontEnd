@@ -30,7 +30,6 @@ const AlarmDrupDown = () => {
   // 알림 확인
   const { mutate } = useAlarmMutate.useReadAlarmMutate();
   const readAlarm = (noticeId, noticeArticleId) => {
-    console.log(noticeId, noticeArticleId);
     // 읽음 삭제 및 해당 게시글 이동
     mutate(noticeId);
     navigate(`/detail/article/${noticeArticleId}`);
@@ -68,7 +67,6 @@ const AlarmDrupDown = () => {
           ) : (
             <>
               {alarmListData.slice(0, 20).map((v) => {
-                console.log("알람 리스트", v);
                 return (
                   <WrapList key={v.noticeId}>
                     <div>

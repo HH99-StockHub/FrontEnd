@@ -48,6 +48,7 @@ const OAuth = () => {
       navigate(beforeUrl);
     }
     if (data) {
+      console.log(data);
       const accessToken = data.headers.authorization;
       setCookie("token", accessToken);
       localStorage.setItem("id", data.headers.userid);
@@ -57,7 +58,7 @@ const OAuth = () => {
       stompNotice.subscribeNotice(data.headers.userid, setAlarmList);
       mutate(data.headers.userid);
       toastify.success("로그인 완료");
-      navigate(beforeUrl);
+      // navigate(beforeUrl);
     }
   }, [data]);
   return (

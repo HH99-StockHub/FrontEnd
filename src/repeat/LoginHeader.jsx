@@ -28,8 +28,8 @@ const LoginHeader = () => {
   };
 
   useEffect(() => {
-    if (data.rank) {
-      setRank(data.rank);
+    if (data?.rank) {
+      setRank(data?.rank);
     }
   }, [data]);
 
@@ -38,11 +38,11 @@ const LoginHeader = () => {
       <WrapProfile>
         <ProfileImg
           size="size2"
-          rank={data.rank}
+          rank={data?.rank}
           src={localStorage.getItem("profileImg")}
         />
         <MyDrupDown data={data} />
-        <span>{data.rank}</span>
+        <span>{data?.rank}</span>
       </WrapProfile>
       {!isSmall && <Writing onClick={openAddArticle}>글작성</Writing>}
 
