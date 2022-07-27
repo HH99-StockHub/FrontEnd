@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { useSetRecoilState } from "recoil";
@@ -10,6 +10,7 @@ import AlarmDrupDown from "../components/HeaderDrupDown/AlarmDrupDown";
 import { useHeaderApi } from "./useRepeatQuery";
 // 모듈
 import { addArticleState } from "../state/client/modal";
+import { rank } from "../state/server/rank";
 
 const LoginHeader = () => {
   // 등급 정보 받아오기
@@ -20,10 +21,18 @@ const LoginHeader = () => {
   });
   // 글작성 상태
   const setFormState = useSetRecoilState(addArticleState);
+  const setRank = useSetRecoilState(rank);
   // 글작성
   const openAddArticle = () => {
     setFormState(true);
   };
+
+  useEffect(() => {
+    if (data.rank) {
+      setRank(data.rank);
+    }
+  }, [data]);
+
   return (
     <WrapMenu>
       <WrapProfile>

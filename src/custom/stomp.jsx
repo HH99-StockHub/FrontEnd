@@ -44,7 +44,6 @@ export const stompChat = {
     stompClient.subscribe(stompChat.subscribeUrl, (response) => {
       const newMessage = JSON.parse(response.body);
       const subscribeId = response.headers.subscription;
-      const newKey = subscribeId.split("-");
       setId(() => {
         const newKey = subscribeId.split("-");
         return newKey[0] + "-" + (Number(newKey[1]) + 1);
@@ -89,7 +88,7 @@ export const stompChat = {
       sendTime: data.time,
       clear: true,
       message: "",
-      rank: data.rank,
+      rank: data?.rank,
     };
     stompClient.send(
       stompChat.chatSendUrl,
