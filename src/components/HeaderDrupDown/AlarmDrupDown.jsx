@@ -29,10 +29,10 @@ const AlarmDrupDown = () => {
 
   // 알림 확인
   const { mutate } = useAlarmMutate.useReadAlarmMutate();
-  const readAlarm = (noticeId, articleId) => {
+  const readAlarm = (noticeId, noticeArticleId) => {
     // 읽음 삭제 및 해당 게시글 이동
     mutate(noticeId);
-    navigate(`/detail/article/${articleId}`);
+    navigate(`/detail/article/${noticeArticleId}`);
   };
   const deleteAlarm = (noticeId) => {
     mutate(noticeId);
@@ -68,7 +68,7 @@ const AlarmDrupDown = () => {
             <>
               {alarmListData.slice(0, 20).map((v) => {
                 return (
-                  <WrapList>
+                  <WrapList key={v.noticeId}>
                     <div>
                       <span>{dayjs(v.createdAt).format("MM.DD")}</span>
                       <ListItem

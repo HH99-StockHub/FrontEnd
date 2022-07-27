@@ -4,187 +4,18 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 import useSliceNum from "../../custom/sliceNum";
+// elem
+import ProfileImg from "../../elem/ProfileImg";
 // 이미지
 import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
 import { ReactComponent as Vector } from "../../image/Vector.svg";
 import { ReactComponent as Stock } from "../../image/UpStock.svg";
 // const TotalArticleList = ({ data }) => {
-const TotalArticleList = ({}) => {
+const TotalArticleList = ({ data }) => {
   // onclick navigate 이벤트 버블링이 있어 하위 요소에 옵션으로 막아둠
   const navigate = useNavigate();
   const sliceNum = useSliceNum;
-
-  const data = [
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "박태형",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 400,
-      voteUpCount: 400,
-      voteDownCount: 400,
-      commentCount: 400,
-      viewCount: 400,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 400,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-    {
-      articleId: 1,
-      createdAt: "LocalDateTime",
-      userId: 1,
-      nickname: "String",
-      profileImage: "String",
-      articleTitle: "String",
-      stockName: "String",
-      stockReturn: 0,
-      voteUpCount: 0,
-      voteDownCount: 0,
-      commentCount: 0,
-      viewCount: 0,
-    },
-  ];
 
   return (
     <>
@@ -244,7 +75,11 @@ const TotalArticleList = ({}) => {
               <Just>
                 <WrapBottom>
                   <div>
-                    <Img src={data.profileImage} alt="프로필 이미지" />
+                    <ProfileImg
+                      size="size3"
+                      rank={data.rank}
+                      src={data.profileImage}
+                    />
                     <P3
                       id="userNickname"
                       onClick={(e) => {
@@ -258,8 +93,12 @@ const TotalArticleList = ({}) => {
                     </P3>
                   </div>
                   <div>
-                    {true ? <Badge color="var(--blue1)">수익왕</Badge> : null}
-                    {true ? <Badge color="var(--blue2)">인기글</Badge> : null}
+                    {data.richList ? (
+                      <Badge color="var(--blue1)">수익왕</Badge>
+                    ) : null}
+                    {data.popularList ? (
+                      <Badge color="var(--blue2)">인기글</Badge>
+                    ) : null}
                   </div>
                 </WrapBottom>
                 <P4>{dayjs(data.createdAt).format("YY.MM.DD")}</P4>
@@ -361,13 +200,6 @@ const Just = styled.div`
   display: flex;
   align-items: center;
   margin-top: 15px;
-`;
-
-const Img = styled.img`
-  border-radius: 100%;
-  width: 32px;
-  height: 32px;
-  overflow: hidden;
 `;
 
 const WrapBottom = styled.div`

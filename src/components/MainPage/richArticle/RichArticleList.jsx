@@ -6,14 +6,14 @@ import { useMediaQuery } from "react-responsive";
 //컴포넌트
 import CardTextRich from "../common/CardTextRich";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
-import Porfile from "../common/Porfile";
+import Profile from "../common/Profile";
 // query 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 import { toastify } from "../../../custom/toastify";
 const RichArticleList = () => {
   // useQuery
   const {
-    // data = [],
+    data = [],
     isLoading,
     isError,
   } = useMainPageQuery.useGetRichArticles();
@@ -23,104 +23,7 @@ const RichArticleList = () => {
     query: "(max-width: 700px)",
   });
   if (isError) toastify.error("수익왕 게시글 불러오기를 실패했습니다.");
-  const data = [
-    {
-      articleId: 9,
-      articleTitle:
-        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
-      commentCount: 0,
-      createdAt: "2022-07-25T02:29:11.753",
-      nickname: "박태형",
-      profileImage:
-        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
-      stockName: "서연이화",
-      stockReturn: 0,
-      userId: 3,
-      viewCount: 0,
-      voteDownCount: 0,
-      voteUpCount: 0,
-    },
-    {
-      articleId: 9,
-      articleTitle:
-        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
-      commentCount: 0,
-      createdAt: "2022-07-25T02:29:11.753",
-      nickname: "박태형",
-      profileImage:
-        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
-      stockName: "서연이화",
-      stockReturn: 0,
-      userId: 3,
-      viewCount: 0,
-      voteDownCount: 0,
-      voteUpCount: 0,
-    },
-    {
-      articleId: 9,
-      articleTitle:
-        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
-      commentCount: 0,
-      createdAt: "2022-07-25T02:29:11.753",
-      nickname: "박태형",
-      profileImage:
-        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
-      stockName: "서연이화",
-      stockReturn: 0,
-      userId: 3,
-      viewCount: 0,
-      voteDownCount: 0,
-      voteUpCount: 0,
-    },
-    {
-      articleId: 9,
-      articleTitle:
-        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
-      commentCount: 0,
-      createdAt: "2022-07-25T02:29:11.753",
-      nickname: "박태형",
-      profileImage:
-        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
-      stockName: "서연이화",
-      stockReturn: 0,
-      userId: 3,
-      viewCount: 0,
-      voteDownCount: 0,
-      voteUpCount: 0,
-    },
-    {
-      articleId: 9,
-      articleTitle:
-        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
-      commentCount: 0,
-      createdAt: "2022-07-25T02:29:11.753",
-      nickname: "박태형",
-      profileImage:
-        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
-      stockName: "서연이화",
-      stockReturn: 0,
-      userId: 3,
-      viewCount: 0,
-      voteDownCount: 0,
-      voteUpCount: 0,
-    },
-    {
-      articleId: 9,
-      articleTitle:
-        "가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사",
-      commentCount: 0,
-      createdAt: "2022-07-25T02:29:11.753",
-      nickname: "박태형",
-      profileImage:
-        "http://k.kakaocdn.net/dn/blMVJu/btrEPPM8P1C/9dOnQhSR3750TmF69k6mG0/img_640x640.jpg",
-      stockName: "서연이화",
-      stockReturn: 0,
-      userId: 3,
-      viewCount: 0,
-      voteDownCount: 0,
-      voteUpCount: 0,
-    },
-  ];
+
   return (
     <ArticleBox>
       {isLoading && <LoadingSpinner />}
@@ -133,10 +36,11 @@ const RichArticleList = () => {
                   <CardTextRich stock={v.stockReturn} />
                   <WrapText>{v.articleTitle}</WrapText>
                 </Link>
-                <Porfile
+                <Profile
                   img={v.profileImage}
                   nickname={v.nickname}
                   userId={v.userId}
+                  rank={v.rank}
                 />
               </WrapCard>
             );
@@ -151,10 +55,11 @@ const RichArticleList = () => {
                   <CardTextRich stock={v.stockReturn} />
                   <WrapText>{v.articleTitle}</WrapText>
                 </Link>
-                <Porfile
+                <Profile
                   img={v.profileImage}
                   nickname={v.nickname}
                   userId={v.userId}
+                  rank={v.rank}
                 />
               </WrapCard>
             );

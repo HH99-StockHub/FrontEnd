@@ -1,38 +1,48 @@
 //패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
+import dayjs from "dayjs";
 import React from "react";
 import styled, { keyframes } from "styled-components";
+// 컴포넌트
+import LoadingSpinner from "./LoadingSpinner";
+// 훅
+import { useHeaderApi } from "./useRepeatQuery";
+
 //이미지
 import { ReactComponent as UpArrowSvg } from "../image/UpArrow.svg";
 
 const SlideStock = React.memo(() => {
-  // 예시 잉여 arr
-  const data = [1, 2, 3, 4, 6, 6, 77, 6, 123, 512, 123, 51];
+  const { data = { data: [] }, isLoading } = useHeaderApi.useGetSlideStock();
+  const date = new Date();
   return (
     <WrapSlideStock>
-      <div>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
         <div>
-          <StockItem>
-            <span>22-06-27</span>
-          </StockItem>
-          {data.map((v, l) => {
-            return (
-              <StockBox key={l}>
-                <StockItem>
-                  <p>
-                    S&P 500 <span>4,530.41</span>
-                  </p>
-                </StockItem>
-                <StockItem>
-                  <TickerPoint>
-                    <span>-1.56</span>
-                    <UpArrowSvg />
-                  </TickerPoint>
-                </StockItem>
-              </StockBox>
-            );
-          })}
+          <div>
+            <StockItem>
+              <span>{dayjs(date).format("YY-MM-DD")}</span>
+            </StockItem>
+            {data.data.map((v) => {
+              return (
+                <StockBox key={v.id}>
+                  <StockItem>
+                    <p>
+                      {v.indexName} <span>{v.lastPrice}</span>
+                    </p>
+                  </StockItem>
+                  <StockItem>
+                    <TickerPoint>
+                      <p>{v.change} </p>
+                      <span>({v.changeRate})</span>
+                    </TickerPoint>
+                  </StockItem>
+                </StockBox>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </WrapSlideStock>
   );
 });

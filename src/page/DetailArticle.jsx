@@ -18,7 +18,6 @@ import HelmetComponents from "../repeat/HelmetComponents";
 import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
 import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
 import { toastify } from "../custom/toastify";
-import { screen } from "@testing-library/react";
 import { useMediaQuery } from "react-responsive";
 
 const DetailArticle = () => {
@@ -45,7 +44,7 @@ const DetailArticle = () => {
   if (isError) toastify.error("정보 불러오기를 실패했습니다.");
 
   const isMiddle = useMediaQuery({
-    query: "(max-width:1100px)",
+    query: "(max-width:1240px)",
   });
 
   return (
@@ -80,6 +79,7 @@ const DetailArticle = () => {
                 profileImage={data.profileImage}
                 nickName={data.nickname}
                 userId={data.userId}
+                rank={data.rank}
               />
 
               <Stocks
@@ -124,7 +124,7 @@ const Div = styled.div`
   max-width: 1240px;
   margin: 0 auto;
   position: relative;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     flex-direction: column;
     width: 90%;
   } ;

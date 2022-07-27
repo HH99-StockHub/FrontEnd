@@ -99,9 +99,11 @@ const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
       // 마지막 페이지 리스트일 경우
     } else if (Number(page + 4) > Number(totalPages)) {
       const count = String(totalPages).slice(-1);
-      setBtnCount(btnCount.slice(0, Number(count)));
+      const arr = [1, 2, 3, 4, 5];
+
+      setBtnCount(arr.slice(0, Number(count)));
     }
-  }, [page]);
+  }, [page, category, totalPages, keyword]);
   return (
     <WrapAllBtn>
       <button onClick={navigatePrevious}>

@@ -179,6 +179,8 @@ const AddArticleForm = () => {
       const data = {
         articleTitle: articleTitle.current.value,
         stockName: stockInput,
+        timeLimit: goalDate,
+        targetReturn: Number(goalPrice.slice(2, goalPrice.indexOf("%"))),
       };
       for (let i = 0; i < 3; i++) {
         if (refArr[i] !== undefined) {

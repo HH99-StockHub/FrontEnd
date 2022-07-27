@@ -31,7 +31,7 @@ const TitleGraph = (props) => {
 
 const MarketDiv = styled.div`
   padding: 24px 0px;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     width: 528px;
   }
   @media screen and (max-width: 750px) {

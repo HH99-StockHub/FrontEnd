@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import ProfileImg from "../../elem/ProfileImg";
 // query 훅
 import { useDetailArticleMutate } from "./useDetailArticle";
 
@@ -34,7 +35,7 @@ const CommentCard = ({ data }) => {
       <WrapContent>
         <P3>
           <P3div>
-            <Img src={data.profileImage} alt="프로필" />
+            <ProfileImg size="size3" rank={data.rank} src={data.profileImage} />
             <P3p>{data.nickname}</P3p>
           </P3div>
           <P3pre>{data.comments}</P3pre>
@@ -150,11 +151,4 @@ const P3 = styled.div`
   line-height: 17px;
   align-items: center;
   color: var(--black);
-`;
-
-const Img = styled.img`
-  border-radius: 100%;
-  width: 32px;
-  height: 32px;
-  overflow: hidden;
 `;
