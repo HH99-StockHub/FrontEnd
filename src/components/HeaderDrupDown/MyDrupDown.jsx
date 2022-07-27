@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 // 훅
 import { toastify } from "../../custom/toastify";
 import { deleteCookie } from "../../shared/Cookie";
@@ -12,6 +13,24 @@ import { addArticleState } from "../../state/client/modal";
 import { useHeaderApi } from "../../repeat/useRepeatQuery";
 
 const MyDrupDown = ({ data }) => {
+  // 경험치 총량
+  const experience = () => {
+    switch (data.rank) {
+      case "신입":
+        return 10;
+      case "초보":
+        return 100;
+      case "중수":
+        return 200;
+      case "고수":
+        return 500;
+      case "지존":
+        return "???";
+      default:
+        return 500;
+    }
+  };
+  const navigate = useNavigate();
   // 닉네임 변경 모달창
   const [changeNick, setChangeNick] = useState(false);
   // 변경 닉네임 데이터
@@ -38,6 +57,11 @@ const MyDrupDown = ({ data }) => {
     }
   };
 
+  // 닉네임 변경
+  const changeNickName = (e) => {
+    e.preventDefault();
+    mutate(newNickname.current.value);
+  };
   useEffect(() => {
     window.addEventListener("click", handleCloseToggling);
     return () => {
@@ -63,48 +87,65 @@ const MyDrupDown = ({ data }) => {
         <DropDownList>
           <ListItem onClick={() => {}}>
             내 등급 :
-            <ListItemP> {` [${data.rank}] : ${data.experience}`}</ListItemP>
+            <ListItemP>
+              {` [${data?.rank}] : (${data?.experience}/${experience()})`}
+            </ListItemP>
           </ListItem>
           <ListItem1
             onClick={() => {
               setChangeNick(true);
+              setIsOpen(false);
             }}
           >
             닉네임 변경
           </ListItem1>
-          <ListItem1 onClick={() => {}}>내 글 모아보기</ListItem1>
+          <ListItem1
+            onClick={() => {
+              navigate(
+                `/search/article/박태형/${localStorage.getItem("id")}/1`,
+              );
+            }}
+          >
+            내 글 모아보기
+          </ListItem1>
           {isSmall && (
             <ListItem1
               onClick={() => {
                 setFormState(true);
+                setIsOpen(false);
               }}
             >
               글작성
             </ListItem1>
           )}
-
-          <ListItem1 onClick={onLogout}>로그아웃</ListItem1>
+          <ListItem1
+            onClick={() => {
+              onLogout();
+              setIsOpen(false);
+            }}
+          >
+            로그아웃
+          </ListItem1>
         </DropDownList>
       )}
       {changeNick && (
         <ChangeNick>
-          <div>
+          <form
+            onSubmit={(e) => {
+              changeNickName(e);
+            }}
+          >
             <p>닉네임 변경</p>
             <input
               type="text"
               ref={newNickname}
-              placeholder={localStorage.getItem("nickname")}
+              placeholder={localStorage.getItem("nickName")}
             />
             <span>영문/국문/숫자 조합 2~12자리</span>
             <div>
+              <button type="submit">저장</button>
               <button
-                onClick={() => {
-                  mutate(newNickname.current.value);
-                }}
-              >
-                저장
-              </button>
-              <button
+                type="button"
                 onClick={() => {
                   setChangeNick(false);
                 }}
@@ -112,7 +153,7 @@ const MyDrupDown = ({ data }) => {
                 취소
               </button>
             </div>
-          </div>
+          </form>
         </ChangeNick>
       )}
     </WrapDropDown>
@@ -176,7 +217,7 @@ const ChangeNick = styled.div`
   border: 1px solid var(--gray2);
   border-radius: 6px;
   z-index: 99;
-  > div {
+  > form {
     display: flex;
     flex-direction: column;
     justify-content: center;

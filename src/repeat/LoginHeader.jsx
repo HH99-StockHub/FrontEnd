@@ -14,7 +14,8 @@ import { rank } from "../state/server/rank";
 
 const LoginHeader = () => {
   // 등급 정보 받아오기
-  const { data } = useHeaderApi.useGetRank();
+  const { data = { data: { rank: "신입", experience: 0 } } } =
+    useHeaderApi.useGetRank();
   // media
   const isSmall = useMediaQuery({
     query: "(max-width : 370px)",
@@ -28,21 +29,21 @@ const LoginHeader = () => {
   };
 
   useEffect(() => {
-    if (data.rank) {
-      setRank(data.rank);
+    if (data.data?.rank) {
+      setRank(data.data?.rank);
     }
-  }, [data]);
+  }, [data.data]);
 
   return (
     <WrapMenu>
-      <WrapProfile>
+      <WrapProfile state={data.data.rank}>
         <ProfileImg
           size="size2"
-          rank={data.rank}
+          rank={data.data?.rank}
           src={localStorage.getItem("profileImg")}
         />
-        <MyDrupDown data={data} />
-        <span>{data.rank}</span>
+        <MyDrupDown data={data.data} />
+        <span>{data.data?.rank}</span>
       </WrapProfile>
       {!isSmall && <Writing onClick={openAddArticle}>글작성</Writing>}
 
@@ -72,7 +73,22 @@ const WrapProfile = styled.div`
   > span {
     font-size: 12px;
     font-weight: 700;
-    color: var(--green1);
+    color: ${({ state }) => {
+      switch (state) {
+        case "신입":
+          return "var(--green1)";
+        case "초보":
+          return "var(--green2)";
+        case "중수":
+          return "var(--blue1)";
+        case "고수":
+          return "var(--blue2)";
+        case "지존":
+          return "var(--pink2)";
+        default:
+          return "var(--pink2)";
+      }
+    }};
   }
 `;
 

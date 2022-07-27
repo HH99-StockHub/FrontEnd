@@ -44,7 +44,7 @@ const DetailArticle = () => {
   if (isError) toastify.error("정보 불러오기를 실패했습니다.");
 
   const isMiddle = useMediaQuery({
-    query: "(max-width:1100px)",
+    query: "(max-width:1240px)",
   });
 
   return (
@@ -124,7 +124,7 @@ const Div = styled.div`
   max-width: 1240px;
   margin: 0 auto;
   position: relative;
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     flex-direction: column;
     width: 90%;
   } ;

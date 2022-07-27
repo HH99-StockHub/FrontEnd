@@ -6,15 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
 
- 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="shortcut icon" href="./favicon.ico" />
 
     <title>StockHub</title>
     <meta property="og:title" content="StockHub" />
     <meta property="og:description" content="방구석 애널리스트 StockHub" />
-    <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWfP8tjfyfgjWvA4qRXaee-4hJuAlN8Sy7Gg&usqp=CAU" />
+    <meta
+      property="og:image"
+      content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWfP8tjfyfgjWvA4qRXaee-4hJuAlN8Sy7Gg&usqp=CAU"
+    />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-235359379-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-235359379-1");
+    </script>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>

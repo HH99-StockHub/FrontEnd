@@ -42,13 +42,15 @@ export const useHeaderApi = {
   // 닉네임 변경
   useChangeNickname: (setChangeNick) => {
     const fetcher = async (nick) => {
-      const response = api.put("/user/nickname", { newNickname: nick });
-      return response;
+      api.put("/user/nickname", nick);
+      return nick;
     };
     return useMutation(fetcher, {
       onSuccess: (data) => {
         //닉네임 저장
         setChangeNick(false);
+        localStorage.setItem("nickName", data);
+        toastify.success(`${data}으로 닉네임 변경을 완료했습니다.`);
       },
       onError: () => {
         toastify.error("닉네임이 유효하지 않습니다");
@@ -59,8 +61,8 @@ export const useHeaderApi = {
   // stock 슬라이드 배너
   useGetSlideStock: () => {
     const fetcher = async () => {
-      const { data } = api.get("/indices");
-      return data;
+      const response = api.get("/indices");
+      return response;
     };
     return useQuery("slideStock", fetcher, {
       cacheTime: 1000 * 60 * 15,
@@ -69,8 +71,8 @@ export const useHeaderApi = {
   // 등급 받아오기
   useGetRank: () => {
     const fetcher = async () => {
-      const { data } = api.post("/user/rank");
-      return data;
+      const response = api.post("/userDetails");
+      return response;
     };
     return useQuery("rank", fetcher);
   },

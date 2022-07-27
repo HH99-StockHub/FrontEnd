@@ -10,12 +10,17 @@ import { useDetailArticleGet } from "../useDetailArticle";
 import { ReactComponent as Poly } from "../../../image/Poly.svg.svg";
 import { ReactComponent as Plus } from "../../../image/Plus.svg";
 import { toastify } from "../../../custom/toastify";
+import useSliceNum from "../../../custom/sliceNum";
 
 const PriceTitle = (props) => {
   const { stockName } = props;
 
-  const { data, isLoading, isError } =
-    useDetailArticleGet.useGetDetailStock(stockName);
+  const sliceNum = useSliceNum;
+  const {
+    data = { data: [] },
+    isLoading,
+    isError,
+  } = useDetailArticleGet.useGetDetailStock(stockName);
   if (isError) {
     toastify.error("주가 상세정보를 불러오지 못했습니다");
   }
@@ -26,43 +31,66 @@ const PriceTitle = (props) => {
       ) : (
         <>
           <P>{stockName}</P>
-          <TitleBox>
-            <NameP>{data?.stockPrice}</NameP>
-            <TitleDiv>
-              <Poly />
-              <TitleP>{data?.change}</TitleP>
-            </TitleDiv>
-            <TitleDiv>
-              <Plus width="9" height="9" fill="#FF3232" />
-              <TitleP>{data?.changeRate}</TitleP>
-            </TitleDiv>
+          <TitleBox state={data.data?.change}>
+            {data.data?.change > 0 ? (
+              <>
+                <NameP>{sliceNum(data.data?.stockPrice)}</NameP>
+                <TitleDiv>
+                  <Poly />
+                  <TitleP>{sliceNum(data.data?.change)}</TitleP>
+                </TitleDiv>
+                <TitleDiv>
+                  <Plus width="9" height="9" fill="var(--pink2)" />
+                  <TitleP>{sliceNum(data.data?.changeRate)}%</TitleP>
+                </TitleDiv>
+              </>
+            ) : data.data?.change < 0 ? (
+              <>
+                <NameP>{sliceNum(data.data?.stockPrice)}</NameP>
+                <TitleDiv>
+                  <Poly />
+                  <TitleP>{sliceNum(data.data?.change)}</TitleP>
+                </TitleDiv>
+                <TitleDiv>
+                  {/* <Plus width="9" height="9" fill="var(--pink2)" /> */}
+                  <TitleP>{sliceNum(data.data?.changeRate)}%</TitleP>
+                </TitleDiv>
+              </>
+            ) : (
+              <>
+                <NameP>{sliceNum(data.data?.stockPrice)}</NameP>
+                <TitleDiv>
+                  <Poly />
+                  <TitleP>{sliceNum(data.data?.change)}</TitleP>
+                </TitleDiv>
+                <TitleDiv>
+                  <TitleP>{sliceNum(data.data?.changeRate)}%</TitleP>
+                </TitleDiv>
+              </>
+            )}
           </TitleBox>
           <Box1>
             <Box1Div>
               전일
-              <Box1P>{data?.lastPrice}</Box1P>
+              <Box1P>{sliceNum(data.data?.lastPrice)}</Box1P>
             </Box1Div>
             <Box1Div>
               고가
-              <Box1P>{data?.highPrice}</Box1P>
+              <Box1P>{sliceNum(data.data?.highPrice)}</Box1P>
             </Box1Div>
             <Box1Div>
               거래량
-              <Box1P>{data?.tradeVolume}</Box1P>
+              <Box1P>{sliceNum(data.data?.tradeVolume)}</Box1P>
             </Box1Div>
           </Box1>
           <Box1>
             <Box2Div>
               시가
-              <Box1P>{data?.startPrice}</Box1P>
+              <Box1P>{sliceNum(data.data?.startPrice)}</Box1P>
             </Box2Div>
             <Box2Div>
               저가
-              <Box1P>{data?.lowPrice}</Box1P>
-            </Box2Div>
-            <Box2Div>
-              거래대금
-              <Box1P>78,000</Box1P>
+              <Box1P>{sliceNum(data.data?.lowPrice)}</Box1P>
             </Box2Div>
           </Box1>
         </>
@@ -76,7 +104,7 @@ const Name = styled.div`
   padding: 24px 0;
   min-height: 100px;
   border-bottom: 1px solid var(--gray2);
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1240px) {
     border-bottom: none;
     width: 528px;
   }
@@ -95,13 +123,14 @@ const P = styled.p`
 const TitleBox = styled.div`
   display: flex;
   margin-top: 12px;
+  color: ${({ state }) =>
+    state > 0 ? "var(--pink2)" : state < 0 ? "var(--blue2)" : "var(--black)"};
 `;
 
 const NameP = styled.p`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  color: var(--pink2);
 `;
 
 const TitleDiv = styled.div`
@@ -118,7 +147,6 @@ const TitleP = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: var(--pink2);
 `;
 
 const Box1 = styled.div`

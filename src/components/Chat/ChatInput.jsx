@@ -33,7 +33,7 @@ const ChatInput = () => {
   const msgSend = () => {
     const data = {
       userId: userId,
-      nickName: "btae",
+      nickName: localStorage.getItem("nickName"),
       imgUrl: imgUrl,
       time: time(),
       message: message.current.value,

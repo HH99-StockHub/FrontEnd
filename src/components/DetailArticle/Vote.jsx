@@ -17,12 +17,12 @@ const Vote = (props) => {
   const { mutate: Negative } = useDetailArticleMutate.useVoteDownMutation(id);
 
   // 투표 상태 확인
-  const { data } = useDetailArticleGet.useGetVoteSign(id);
+  const { data = { data: 0 } } = useDetailArticleGet.useGetVoteSign(id);
 
   return (
     <BtnBox>
       <Btn
-        state={data}
+        state={data.data}
         onClick={() => {
           const data = { postId: id };
           if (token === undefined) {
@@ -35,7 +35,7 @@ const Vote = (props) => {
         추천 {voteUp}
       </Btn>
       <Btn1
-        state={data}
+        state={data.data}
         onClick={() => {
           const data = { postId: id };
           if (token === undefined) {

@@ -4,11 +4,11 @@ import styled from "styled-components";
 // 이미지
 import { ReactComponent as NotSvg } from "../../image/NotSearchArticle.svg";
 
-const NotSearch = ({ keyword }) => {
+const NotSearch = () => {
   return (
     <WrapBox>
       <NotSvg />
-      <p>{keyword} 관련 게시글이 없습니다.</p>
+      <p>관련 게시글이 없습니다.</p>
     </WrapBox>
   );
 };
