@@ -11,7 +11,8 @@ import { useHeaderApi } from "./useRepeatQuery";
 import { ReactComponent as UpArrowSvg } from "../image/UpArrow.svg";
 
 const SlideStock = React.memo(() => {
-  const { data = [], isLoading } = useHeaderApi.useGetSlideStock();
+  const { data = { data: [] }, isLoading } = useHeaderApi.useGetSlideStock();
+  console.log(data);
   const date = new Date();
   return (
     <WrapSlideStock>
@@ -23,7 +24,7 @@ const SlideStock = React.memo(() => {
             <StockItem>
               <span>{dayjs(date).format("YY-MM-DD")}</span>
             </StockItem>
-            {data.map((v) => {
+            {data.data.map((v) => {
               return (
                 <StockBox key={v.id}>
                   <StockItem>
@@ -35,7 +36,6 @@ const SlideStock = React.memo(() => {
                     <TickerPoint>
                       <p>{v.change} </p>
                       <span>({v.changeRate})</span>
-                      <UpArrowSvg />
                     </TickerPoint>
                   </StockItem>
                 </StockBox>

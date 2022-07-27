@@ -59,8 +59,8 @@ export const useHeaderApi = {
   // stock 슬라이드 배너
   useGetSlideStock: () => {
     const fetcher = async () => {
-      const { data } = api.get("/indices");
-      return data;
+      const response = api.get("/indices");
+      return response;
     };
     return useQuery("slideStock", fetcher, {
       cacheTime: 1000 * 60 * 15,
