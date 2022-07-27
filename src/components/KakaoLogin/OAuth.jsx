@@ -53,7 +53,7 @@ const OAuth = () => {
       setCookie("token", accessToken);
       localStorage.setItem("id", data.headers.userid);
       localStorage.setItem("profileImg", data.headers.profileimage);
-      localStorage.setItem("nickName", data.headers.nickname);
+      localStorage.setItem("nickName", decodeURI(data.headers.nickname));
       setLoginState(true);
       stompNotice.subscribeNotice(data.headers.userid, setAlarmList);
       mutate(data.headers.userid);

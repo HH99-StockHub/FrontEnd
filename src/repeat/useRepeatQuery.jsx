@@ -42,7 +42,7 @@ export const useHeaderApi = {
   // 닉네임 변경
   useChangeNickname: (setChangeNick) => {
     const fetcher = async (nick) => {
-      const response = api.put("/user/nickname", { newNickname: nick });
+      const response = api.put("/user/nickname", nick);
       return response;
     };
     return useMutation(fetcher, {
@@ -69,7 +69,7 @@ export const useHeaderApi = {
   // 등급 받아오기
   useGetRank: () => {
     const fetcher = async () => {
-      const { data } = api.post("/user/rank");
+      const { data } = api.post("/userDetails");
       return data;
     };
     return useQuery("rank", fetcher);
