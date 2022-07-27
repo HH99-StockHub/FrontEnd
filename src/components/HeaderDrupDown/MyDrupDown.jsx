@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 // 훅
 import { toastify } from "../../custom/toastify";
 import { deleteCookie } from "../../shared/Cookie";
@@ -12,6 +13,7 @@ import { addArticleState } from "../../state/client/modal";
 import { useHeaderApi } from "../../repeat/useRepeatQuery";
 
 const MyDrupDown = ({ data }) => {
+  const navigate = useNavigate();
   // 닉네임 변경 모달창
   const [changeNick, setChangeNick] = useState(false);
   // 변경 닉네임 데이터
@@ -68,22 +70,38 @@ const MyDrupDown = ({ data }) => {
           <ListItem1
             onClick={() => {
               setChangeNick(true);
+              setIsOpen(false);
             }}
           >
             닉네임 변경
           </ListItem1>
-          <ListItem1 onClick={() => {}}>내 글 모아보기</ListItem1>
+          <ListItem1
+            onClick={() => {
+              navigate(
+                `/search/article/박태형/${localStorage.getItem("id")}/1`,
+              );
+            }}
+          >
+            내 글 모아보기
+          </ListItem1>
           {isSmall && (
             <ListItem1
               onClick={() => {
                 setFormState(true);
+                setIsOpen(false);
               }}
             >
               글작성
             </ListItem1>
           )}
-
-          <ListItem1 onClick={onLogout}>로그아웃</ListItem1>
+          <ListItem1
+            onClick={() => {
+              onLogout();
+              setIsOpen(false);
+            }}
+          >
+            로그아웃
+          </ListItem1>
         </DropDownList>
       )}
       {changeNick && (
