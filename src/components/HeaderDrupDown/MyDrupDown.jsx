@@ -63,7 +63,7 @@ const MyDrupDown = ({ data }) => {
         <DropDownList>
           <ListItem onClick={() => {}}>
             내 등급 :
-            <ListItemP> {` [${data.rank}] : ${data.experience}`}</ListItemP>
+            <ListItemP> {` [${data?.rank}] : ${data?.experience}`}</ListItemP>
           </ListItem>
           <ListItem1
             onClick={() => {
