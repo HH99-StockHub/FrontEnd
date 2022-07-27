@@ -30,65 +30,74 @@ const DetailChart = ({ stockName }) => {
     <WrapChart>
       <WrapBtn state={chartState}>
         <div>
-          <button
-            onClick={() => {
-              if (chartCount * 2 <= data.chart.length) {
-                if (chartStandard + chartCount * 2 > data.chart.length) {
-                  setChartStandard(data.chart.length - chartCount * 2);
+          <div>
+            <AdjustmentBtn
+              state={chartState}
+              onClick={() => {
+                if (
+                  chartStandard + chartMove <
+                  data.chart.length - chartCount
+                ) {
+                  setChartStandard(chartStandard + chartMove);
+                } else {
+                  setChartStandard(data.chart.length - chartCount);
                 }
-                setChartCount(chartCount * 2);
-                setChartMove(parseInt((chartCount * 2) / 3));
-              } else {
-                setChartStandard(0);
-                setChartCount(data.chart.length);
-                setChartMove(parseInt(data.chart.length / 3));
-              }
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              if (chartCount > 10) {
-                setChartCount(parseInt(chartCount / 2));
-                setChartMove(parseInt(chartCount / 2 / 3));
-              } else {
-                setChartCount(5);
-                setChartMove(parseInt(2));
-              }
-            }}
-          >
-            +
-          </button>
-          <button
-            onClick={() => {
-              if (chartStandard + chartMove < data.chart.length - chartCount) {
-                setChartStandard(chartStandard + chartMove);
-              } else {
-                setChartStandard(data.chart.length - chartCount);
-              }
-            }}
-          >
-            왼쪽
-          </button>
-          <button
-            onClick={() => {
-              if (chartStandard - chartMove > 0) {
-                setChartStandard(chartStandard - chartMove);
-              } else {
-                setChartStandard(0);
-              }
-            }}
-          >
-            오른쪽
-          </button>
-          <button
-            onClick={() => {
-              setChartState(false);
-            }}
-          >
-            일봉 차트
-          </button>
+              }}
+            >
+              &#8592;
+            </AdjustmentBtn>
+            <AdjustmentBtn
+              state={chartState}
+              onClick={() => {
+                if (chartCount * 2 <= data.chart.length) {
+                  if (chartStandard + chartCount * 2 > data.chart.length) {
+                    setChartStandard(data.chart.length - chartCount * 2);
+                  }
+                  setChartCount(chartCount * 2);
+                  setChartMove(parseInt((chartCount * 2) / 3));
+                } else {
+                  setChartStandard(0);
+                  setChartCount(data.chart.length);
+                  setChartMove(parseInt(data.chart.length / 3));
+                }
+              }}
+            >
+              -
+            </AdjustmentBtn>
+            <button
+              onClick={() => {
+                setChartState(false);
+              }}
+            >
+              일봉 차트
+            </button>
+            <AdjustmentBtn
+              state={chartState}
+              onClick={() => {
+                if (chartCount > 10) {
+                  setChartCount(parseInt(chartCount / 2));
+                  setChartMove(parseInt(chartCount / 2 / 3));
+                } else {
+                  setChartCount(5);
+                  setChartMove(parseInt(2));
+                }
+              }}
+            >
+              +
+            </AdjustmentBtn>
+            <AdjustmentBtn
+              state={chartState}
+              onClick={() => {
+                if (chartStandard - chartMove > 0) {
+                  setChartStandard(chartStandard - chartMove);
+                } else {
+                  setChartStandard(0);
+                }
+              }}
+            >
+              &#8594;
+            </AdjustmentBtn>
+          </div>
           <button
             onClick={() => {
               setChartState(true);
@@ -136,13 +145,32 @@ const WrapBtn = styled.div`
     display: flex;
     justify-content: center;
     gap: 10%;
+    > div {
+      display: flex;
+      gap: 5px;
+      > button {
+        padding: 10px 20px;
+        border-radius: 6px;
+        &:nth-child(3) {
+          ${({ state }) => {
+            return !state
+              ? "background-color: var(--green1);color: var(--white); "
+              : null;
+          }}
+          border: 1px solid var(--green1);
+        }
+      }
+    }
     > button {
       padding: 10px 20px;
       border-radius: 6px;
-      &:nth-child(${({ state }) => (state ? 2 : 1)}) {
-        background-color: var(--green1);
-        color: var(--white);
-        border: 1px solid var(--green1);
+      border: 1px solid #000;
+      &:nth-child(2) {
+        ${({ state }) => {
+          return state
+            ? "background-color: var(--green1);color: var(--white); "
+            : null;
+        }}
       }
     }
   }
@@ -152,6 +180,11 @@ const WrapBtn = styled.div`
     right: 0;
     width: 20px;
     height: 20px;
-    border: 1px solid #000;
   }
+`;
+
+const AdjustmentBtn = styled.button`
+  border: 1px solid var(--gray3);
+  border-radius: 6px;
+  ${({ state }) => (state ? "display:none;" : null)}
 `;
