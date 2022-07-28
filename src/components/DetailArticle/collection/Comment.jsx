@@ -19,17 +19,22 @@ const Comment = ({ id }) => {
     onSuccess: (data) => {
       if (data) {
         writeInput.current.value = "";
-        queryClient.invalidateQueries("CommentInquiry");
+        queryClient.invalidateQueries(["CommentInquiry", id]);
         toastify.success("댓글 작성 완료");
       } else {
-        toastify.error("비속어 금지");
+        toastify.error("비속어를 포함할 수 없습니다.");
       }
     },
     onError: (data) => {
-      if (data.response.state === 400) {
-        toastify.error("댓글 내용은 300자 이내로 작성해 주세요.");
+      if (
+        data.response.status === 401 ||
+        data.response.status === 404 ||
+        data.response.status === 406 ||
+        data.response.status === 411
+      ) {
+        toastify.error(data.response.data.message);
       } else {
-        toastify.error("예상치 못한 에러가 발생했습니다.");
+        toastify.error("댓글 작성에 실패했습니다. 다시 시도해주세요");
       }
     },
   });
@@ -75,7 +80,7 @@ const Comment = ({ id }) => {
         ) : (
           <>
             {data.map((v) => {
-              return <CommentCard data={v} key={v.commentId} />;
+              return <CommentCard data={v} articleId={id} key={v.commentId} />;
             })}
           </>
         )}

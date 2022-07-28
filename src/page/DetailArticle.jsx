@@ -46,7 +46,6 @@ const DetailArticle = () => {
   const isMiddle = useMediaQuery({
     query: "(max-width:1240px)",
   });
-
   return (
     <>
       <HelmetComponents title={`${data.stockName} 게시글`} />
@@ -99,6 +98,7 @@ const DetailArticle = () => {
                 point3={data.point3}
               />
               <Vote
+                userId={data.userId}
                 id={id}
                 voteUp={data.voteUpCount}
                 voteDown={data.voteDownCount}

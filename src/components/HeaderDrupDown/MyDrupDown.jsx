@@ -60,7 +60,14 @@ const MyDrupDown = ({ data }) => {
   // 닉네임 변경
   const changeNickName = (e) => {
     e.preventDefault();
-    mutate(newNickname.current.value);
+    if (
+      newNickname.current.value === "" ||
+      newNickname.current.value.indexOf(" ") !== -1
+    ) {
+      toastify.error("빈칸이나 공백이 있습니다.");
+    } else {
+      mutate(newNickname.current.value);
+    }
   };
   useEffect(() => {
     window.addEventListener("click", handleCloseToggling);
@@ -102,8 +109,11 @@ const MyDrupDown = ({ data }) => {
           <ListItem1
             onClick={() => {
               navigate(
-                `/search/article/박태형/${localStorage.getItem("id")}/1`,
+                `/search/article/${localStorage.getItem(
+                  "nickName",
+                )}/${localStorage.getItem("id")}/1`,
               );
+              setIsOpen(false);
             }}
           >
             내 글 모아보기

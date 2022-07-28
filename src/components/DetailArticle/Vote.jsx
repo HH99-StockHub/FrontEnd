@@ -9,7 +9,8 @@ import { toastify } from "../../custom/toastify";
 
 const Vote = (props) => {
   const token = getCookie("token");
-  const { id, voteUp, voteDown } = props;
+  const { userId, id, voteUp, voteDown } = props;
+
   //찬성투표
   const { mutate: InFavor } = useDetailArticleMutate.useVoteUpMutation(id);
 
@@ -27,6 +28,8 @@ const Vote = (props) => {
           const data = { postId: id };
           if (token === undefined) {
             toastify.error("로그인 후 투표할 수 있습니다");
+          } else if (userId === Number(localStorage.getItem("id"))) {
+            toastify.error("본인 게시글에는 투표할 수 없습니다.");
           } else {
             InFavor(data);
           }
@@ -40,6 +43,8 @@ const Vote = (props) => {
           const data = { postId: id };
           if (token === undefined) {
             toastify.error("로그인 후 투표할 수 있습니다");
+          } else if (userId === Number(localStorage.getItem("id"))) {
+            toastify.error("본인 게시글에는 투표할 수 없습니다.");
           } else {
             Negative(data);
           }

@@ -5,6 +5,7 @@ import { alarmList } from "../state/server/alarm";
 import { toastify } from "../custom/toastify";
 
 export const useAlarmMutate = {
+  // 알림받기
   useGetAlarmMutate: () => {
     const setAlarmList = useSetRecoilState(alarmList);
     const fetcher = async (userId) => {
@@ -19,6 +20,7 @@ export const useAlarmMutate = {
       },
     });
   },
+  // 알림 삭제하기
   useReadAlarmMutate: () => {
     const setAlarmList = useSetRecoilState(alarmList);
     const fetcher = async (noticeId) => {
@@ -42,18 +44,26 @@ export const useHeaderApi = {
   // 닉네임 변경
   useChangeNickname: (setChangeNick) => {
     const fetcher = async (nick) => {
-      api.put("/user/nickname", nick);
-      return nick;
+      const response = api.put("/user/nickname", nick);
+
+      return { nick: nick, response: response };
     };
     return useMutation(fetcher, {
       onSuccess: (data) => {
         //닉네임 저장
         setChangeNick(false);
-        localStorage.setItem("nickName", data);
-        toastify.success(`${data}으로 닉네임 변경을 완료했습니다.`);
+        localStorage.setItem("nickName", data.nick);
+        toastify.success(`${data.nick}으로 닉네임 변경을 완료했습니다.`);
       },
-      onError: () => {
-        toastify.error("닉네임이 유효하지 않습니다");
+      onError: (data) => {
+        if (
+          data.response.response.status === 401 ||
+          data.response.response.status === 406
+        ) {
+          toastify.error(data.response.data.message);
+        } else {
+          toastify.error("닉네임 변경에 실패했습니다. 다시 시도해주세요");
+        }
       },
     });
   },
