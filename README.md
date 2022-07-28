@@ -11,7 +11,7 @@
 | Frontend Github Link | https://github.com/HH99-StockHub/FrontEnd 
 | 박태형VL             |  https://github.com/bigtae1007             | FE / React  |
 | 정신영               | https://github.com/sinyoung12              | FE / React  |
-| Backend Github Link  | https://github.com/GyuwonY/corinne_BE      |
+| Backend Github Link  | https://github.com/HH99-StockHub/BackEnd  |
 | 조한울L              | https://github.com/gaius365                | BE / Spring |
 | 문준호               | https://github.com/mjoonho                 | BE / Spring |
 | 주 희                | https://github.com/Joo-hui                 | BE / Spring |
