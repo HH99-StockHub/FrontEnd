@@ -43,6 +43,7 @@ const FramPopularArticle = () => {
 
 export default FramPopularArticle;
 const WrapPopular = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   gap: 12px;

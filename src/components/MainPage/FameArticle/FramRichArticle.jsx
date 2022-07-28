@@ -42,6 +42,7 @@ const FramRichArticle = () => {
 
 export default FramRichArticle;
 const WrapRich = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   gap: 12px;
