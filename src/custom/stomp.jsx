@@ -1,6 +1,6 @@
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
-const socket = new SockJS("http://3.38.165.46/stomp");
+const socket = new SockJS("http://3.35.4.42/stomp");
 
 export const stompClient = Stomp.over(socket);
 // 연결
