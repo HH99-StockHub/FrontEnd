@@ -57,6 +57,7 @@
 <details markdown="1">
 <summary>이슈 </summary>
 https://github.com/HH99-StockHub/FrontEnd/issues/49
+https://github.com/HH99-StockHub/FrontEnd/issues/37
 </details>
 
 
