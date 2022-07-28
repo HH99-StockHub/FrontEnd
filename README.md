@@ -53,5 +53,17 @@
 <img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=green"> <br>
 <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">
 
+## 🔥  Trouble Shooting
+<details markdown="1">
+<summary>이벤트 리스너 처리</summary>
+• 문제상황
+- 투표 등 이벤트 발생 시 서버와 클라이언트 간 중복 통신 발생
+- 응답받는 데이터의 수가 무한으로 늘어나는 이슈 발견
+- 게임 방 생성시 A라는 사람이 게임룸을 만들 때 마다, 점차 A의 수가 늘어나는 현상 발생
+• 해결방안
+- 소켓의 이벤트리스닝이 중복으로 발생 : 중복 발생 억제
+- 소켓 받는 부분을 한 곳으로 모아 리덕스로 관리
+- 필요없어진 소켓을 off 처리
+</details>
 
 
