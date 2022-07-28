@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 import dayjs from "dayjs";
+import { useMediaQuery } from "react-responsive";
 // 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 // 잉여데이터
@@ -17,6 +18,10 @@ const CandleChart = ({
   data = candleChartDummy,
   isLoading,
 }) => {
+  const isMiddle = useMediaQuery({
+    query: "(max-width : 500px)",
+  });
+
   // 차트 데이터 정렬
   const candleChartData = useMemo(() => {
     const newDataList = [...data.chart].map((v) => {
@@ -81,18 +86,20 @@ const CandleChart = ({
           fontWeight: 400,
           cssClass: "apexcharts-yaxis-label",
         },
-        offsetX: 0,
+        offsetX: isMiddle ? 5 : 0,
         offsetY: 0,
         rotate: 0,
         formatter: (value) => {
-          return sliceNum(parseInt(value)) + "원";
+          return isMiddle
+            ? sliceNum(parseInt(value))
+            : sliceNum(parseInt(value)) + "원";
         },
       },
       axisBorder: {
         // y축 마지막 선 색
         show: true,
         color: "#78909C",
-        offsetX: 0,
+        offsetX: isMiddle ? -5 : 0,
         offsetY: 0,
       },
       axisTicks: {
@@ -100,9 +107,8 @@ const CandleChart = ({
         show: true,
         borderType: "solid",
         color: "#f00",
-        width: 6,
-        offsetX: 0,
-        offsetY: 0,
+        width: isMiddle ? 3 : 6,
+        offsetX: isMiddle ? 5 : 0,
       },
       // 가로선 색 위로 보일지 선 색 두께
       crosshairs: {
@@ -124,7 +130,7 @@ const CandleChart = ({
       // type에 따라 그래프가 약간씩 달라짐, date는 축소도 되고 확대하면 넓게
       type: "category",
       //하단 갯수
-      tickAmount: 6,
+      tickAmount: isMiddle ? 2 : 6,
       labels: {
         show: true,
         // 1자로만 보이게

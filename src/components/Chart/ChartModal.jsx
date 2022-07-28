@@ -1,6 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { useRecoilState } from "recoil";
+import { useMediaQuery } from "react-responsive";
 
 // 모듈
 import { showChart } from "../../state/client/modal";
@@ -8,6 +9,11 @@ import DetailChart from "./DetailChart";
 
 const ChartModal = ({ stockName }) => {
   const [chartModalState, setChartModalState] = useRecoilState(showChart);
+
+  const isSmall = useMediaQuery({
+    query: "(max-width : 600px)",
+  });
+
   return (
     <ReactModal
       isOpen={chartModalState}
