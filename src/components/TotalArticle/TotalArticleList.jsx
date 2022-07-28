@@ -147,17 +147,26 @@ const P = styled.p`
 `;
 
 const P1 = styled.p`
+  display: -webkit-box;
+  margin-bottom: 14px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  color: var(--black);
+  overflow: hidden;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: var(--black);
-  margin-bottom: 14px;
-  display: block;
-  white-space: nowrap;
+  max-width: 350px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 6px;
-  margin-bottom: 14px;
+  @media screen and (max-width: 1200px) {
+    max-width: 450px;
+  }
+  @media screen and (max-width: 760px) {
+    max-width: 600px;
+  }
 `;
 
 const P2 = styled.p`

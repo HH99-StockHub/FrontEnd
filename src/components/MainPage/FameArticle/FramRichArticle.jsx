@@ -42,12 +42,11 @@ const FramRichArticle = () => {
 
 export default FramRichArticle;
 const WrapRich = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 12px;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 12px;
   @media screen and (max-width: 700px) {
-    flex-direction: column;
+    grid-template-columns: repeat(1, 1fr);
   }
 `;
 
