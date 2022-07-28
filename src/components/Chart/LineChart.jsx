@@ -1,10 +1,13 @@
-import dayjs from "dayjs";
 import React, { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
-import useSliceNum from "../../custom/sliceNum";
-import { lineChartDummy } from "../../Data/chartDummy";
+import { useMediaQuery } from "react-responsive";
+// 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
+// 훅
+import useSliceNum from "../../custom/sliceNum";
+
 import { useChartQuery } from "./useChartQuery";
+import { lineChartDummy } from "../../Data/chartDummy";
 
 const LineChart = ({ stockName }) => {
   const { data = lineChartDummy, isLoading } =
@@ -18,7 +21,12 @@ const LineChart = ({ stockName }) => {
 
   // 숫자 , 찍기
   const sliceNum = useSliceNum;
-
+  const isMiddle = useMediaQuery({
+    query: "(max-width : 500px)",
+  });
+  const isSmall = useMediaQuery({
+    query: "(max-width : 400px)",
+  });
   const state = {
     series: [
       {
@@ -79,15 +87,19 @@ const LineChart = ({ stockName }) => {
         opposite: true,
         //y축에 나타나는 가격 tooltip과는 따로 논다
         labels: {
-          formatter: function (value) {
-            return sliceNum(parseInt(value)) + "원";
-          },
+          formatter: isSmall
+            ? function (value) {
+                return String(value).slice(0, -3) + "천";
+              }
+            : function (value) {
+                return sliceNum(parseInt(value)) + "원";
+              },
         },
       },
       xaxis: {
         type: "category",
         // 갯수
-        tickAmount: 5,
+        tickAmount: isMiddle ? 2 : 6,
         labels: {
           offsetX: 4,
           rotate: 0,

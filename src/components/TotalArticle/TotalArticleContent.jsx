@@ -10,14 +10,10 @@ import { useTotalPageQuery } from "./useTotalPageQuery";
 import { toastify } from "../../custom/toastify";
 
 const TotalArticleContent = ({ category, page }) => {
-  // return <TotalArticleList data={data} isLoading={isLoading} />;
   const { data, isLoading, isError } = useTotalPageQuery.useGetAllArticles(
     category,
     page,
   );
-  if (isError) {
-    toastify.error("불러오기를 실패했습니다");
-  }
   return (
     <>
       {isLoading ? (

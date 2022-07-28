@@ -25,5 +25,11 @@ const WrapProfile = styled.div`
     font-size: 14px;
     font-weight: 300;
     color: var(--gray3);
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;

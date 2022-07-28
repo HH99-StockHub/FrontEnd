@@ -28,7 +28,17 @@ const TotalArticleList = ({ data }) => {
                 navigate(`/detail/article/${data.articleId}`);
               }}
             >
-              <P>{data.stockName}</P>
+              <WrapBadge>
+                <P>{data.stockName}</P>
+                <div>
+                  {data.richList ? (
+                    <Badge color="var(--blue1)">수익왕</Badge>
+                  ) : null}
+                  {data.popularList ? (
+                    <Badge color="var(--blue2)">인기글</Badge>
+                  ) : null}
+                </div>
+              </WrapBadge>
               <P1>{data.articleTitle}</P1>
               <WrapRandom>
                 <Random>
@@ -92,14 +102,6 @@ const TotalArticleList = ({ data }) => {
                       {data.nickname}
                     </P3>
                   </div>
-                  <div>
-                    {data.richList ? (
-                      <Badge color="var(--blue1)">수익왕</Badge>
-                    ) : null}
-                    {data.popularList ? (
-                      <Badge color="var(--blue2)">인기글</Badge>
-                    ) : null}
-                  </div>
                 </WrapBottom>
                 <P4>{dayjs(data.createdAt).format("YY.MM.DD")}</P4>
               </Just>
@@ -139,6 +141,16 @@ const Box = styled.div`
   cursor: pointer;
 `;
 
+const WrapBadge = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > div {
+    display: flex;
+    gap: 4px;
+  }
+`;
+
 const P = styled.p`
   font-weight: 400;
   font-size: 14px;
@@ -147,17 +159,26 @@ const P = styled.p`
 `;
 
 const P1 = styled.p`
+  display: -webkit-box;
+  margin-bottom: 14px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  color: var(--black);
+  overflow: hidden;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: var(--black);
-  margin-bottom: 14px;
-  display: block;
-  white-space: nowrap;
+  max-width: 350px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 6px;
-  margin-bottom: 14px;
+  @media screen and (max-width: 1200px) {
+    max-width: 450px;
+  }
+  @media screen and (max-width: 760px) {
+    max-width: 600px;
+  }
 `;
 
 const P2 = styled.p`
@@ -174,6 +195,12 @@ const P3 = styled.p`
   display: flex;
   align-items: center;
   color: var(--black);
+  display: -webkit-box;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const P4 = styled.p`
