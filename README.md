@@ -60,6 +60,7 @@ https://github.com/HH99-StockHub/FrontEnd/issues/49<br/>
 https://github.com/HH99-StockHub/FrontEnd/issues/37<br/>
 https://github.com/HH99-StockHub/FrontEnd/issues/11<br/>
 https://github.com/HH99-StockHub/FrontEnd/issues/6<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/1<br/>
 </details>
 
 
