@@ -195,6 +195,12 @@ const P3 = styled.p`
   display: flex;
   align-items: center;
   color: var(--black);
+  display: -webkit-box;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const P4 = styled.p`

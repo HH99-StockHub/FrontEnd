@@ -9,7 +9,7 @@ const CardHeader = ({ title, nickname, userId }) => {
       <div>{title} 분석글</div>
       <div>
         <Link to={`/search/article/${nickname}/${userId}/1`}>
-          {nickname} 님
+          <p>{nickname} 님</p>
         </Link>
       </div>
     </Header>
@@ -36,6 +36,14 @@ const Header = styled.div`
     font-weight: 700;
     display: inline-block;
     line-height: 1;
+    p {
+      display: -webkit-box;
+      white-space: normal;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   div:first-child {
     font-size: 12px;
