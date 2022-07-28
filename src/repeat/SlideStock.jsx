@@ -20,16 +20,12 @@ const SlideStock = React.memo(() => {
       ) : (
         <div>
           <div>
-            <StockItem>
-              <span>{dayjs(date).format("YY-MM-DD")}</span>
-            </StockItem>
             {data.data.map((v) => {
               return (
                 <StockBox key={v.id}>
                   <StockItem>
-                    <p>
-                      {v.indexName} <span>{v.lastPrice}</span>
-                    </p>
+                    <p>{v.indexName} </p>
+                    <span>{v.lastPrice}</span>
                   </StockItem>
                   <StockItem>
                     <TickerPoint>
@@ -82,11 +78,11 @@ const WrapSlideStock = styled.div`
     animation-timing-function: linear;
     -webkit-animation-name: ${ticker};
     animation-name: ${ticker};
-    -webkit-animation-duration: 15s;
-    animation-duration: 15s;
+    -webkit-animation-duration: 60s;
+    animation-duration: 60s;
     > div {
       display: flex;
-      gap: 8px;
+      gap: 80px;
       align-items: center;
       height: 38px;
     }
@@ -96,17 +92,21 @@ const WrapSlideStock = styled.div`
 const StockItem = styled.div`
   display: flex;
   font-size: 1rem;
-  color: #3cc572;
+  gap: 8px;
+  color: var(--green1);
   font-size: 16px;
+  > p {
+    font-weight: 700;
+  }
 `;
 
 const StockBox = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 10px;
 `;
 
 const TickerPoint = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 `;

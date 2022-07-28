@@ -45,7 +45,7 @@ const LoginHeader = () => {
         <MyDrupDown data={data.data} />
         <span>{data.data?.rank}</span>
       </WrapProfile>
-      {!isSmall && <Writing onClick={openAddArticle}>글작성</Writing>}
+      {!isSmall && <Writing onClick={openAddArticle}>글쓰기</Writing>}
 
       <AlarmDrupDown />
     </WrapMenu>

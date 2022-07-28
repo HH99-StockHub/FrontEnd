@@ -25,8 +25,17 @@ export const useAddArticleFormMutate = {
           toastify.error("비속어 금지");
         }
       },
-      onError: (err) => {
-        toastify.error("저장에 실패했습니다");
+      onError: (data) => {
+        if (
+          data.response.status === 400 ||
+          data.response.status === 404 ||
+          data.response.status === 406 ||
+          data.response.status === 411
+        ) {
+          toastify.error(data.response.data.message);
+        } else {
+          toastify.error("저장에 실패했습니다. 다시 시도해주세요");
+        }
       },
     });
   },

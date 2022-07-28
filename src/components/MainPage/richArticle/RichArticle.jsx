@@ -8,7 +8,7 @@ import RichArticleList from "./RichArticleList";
 const RichArticle = () => {
   return (
     <WrapArticle>
-      <ArticleHeader title="수익왕 게시글" link="/total/rich/articles/1" />
+      <ArticleHeader title="수익왕 게시판" link="/total/rich/articles/1" />
       <WrapCard>
         <RichArticleList />
       </WrapCard>

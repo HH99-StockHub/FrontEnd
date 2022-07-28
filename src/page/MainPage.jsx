@@ -53,6 +53,8 @@ const WrapMainContent = styled.div`
       max-width: 588px;
       @media screen and (max-width: 1260px) {
         max-width: 90%;
+        width: 90%;
+        min-width: 0;
       }
     }
     @media screen and (max-width: 1260px) {

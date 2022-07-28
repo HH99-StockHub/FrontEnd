@@ -8,7 +8,7 @@ import MainArticleList from "./MainArticleList";
 const MainArticle = () => {
   return (
     <WrapBox>
-      <ArticleHeader title="전체 게시물" link="/total/all/articles/1" />
+      <ArticleHeader title="전체 게시판" link="/total/all/articles/1" />
       <MainArticleList />
     </WrapBox>
   );

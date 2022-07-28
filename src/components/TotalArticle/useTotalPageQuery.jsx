@@ -6,7 +6,7 @@ export const useTotalPageQuery = {
   useGetAllArticles: (category, page) => {
     const fetcher = async () => {
       const { data } = await api.get(
-        `/${category}/articles?page=${page}&size=3`,
+        `/${category}/articles?page=${page}&size=12`,
       );
       return data;
     };

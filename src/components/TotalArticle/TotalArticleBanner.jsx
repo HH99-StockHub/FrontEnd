@@ -6,9 +6,8 @@ const TotalArticleBanner = React.memo(() => {
   return (
     <WrapBanner>
       <BannerText>
-        내 주식의 매매 포인트 3가지를 작성하여 수익왕에 도전하세요.
-        <br />
-        얼마나 수익률이 올랐는지 비교할 수 있어요.
+        주식 종목에 대한 투자 포인트를 공유하고 애널리스트가 되어보세요.
+        <br /> 해당 종목에 대한 수익률과 더불어 다른 유저들의 반응을 보여줄게요.
       </BannerText>
       <BannerImg src={bannerImg} alt="배너 이미지" />
     </WrapBanner>
