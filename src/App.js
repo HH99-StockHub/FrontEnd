@@ -12,6 +12,7 @@ import SearchArticle from "./page/SearchArticle";
 import MenuBtn from "./repeat/MenuBtn";
 import Footer from "./repeat/Footer";
 import AddFormModal from "./components/AddArticle/AddFormModal";
+import NotFound from "./page/NotFound";
 
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
@@ -35,6 +36,7 @@ function App() {
           path="/search/article/:category/:keyword/:page"
           element={<SearchArticle />}
         />
+        <Route path={"*"} element={<NotFound />} />
       </Routes>
       <MenuBtn />
       <Footer />

@@ -14,6 +14,9 @@ import { useAlarmMutate } from "../../repeat/useRepeatQuery";
 //모듈
 import { loginState } from "../../state/client/login";
 import { alarmList } from "../../state/server/alarm";
+//이미지
+import LodingImg from "../../image/Loding.webp";
+import styled from "styled-components";
 
 const OAuth = () => {
   // recoil
@@ -63,9 +66,26 @@ const OAuth = () => {
   return (
     <>
       {isLoading && <LoadingSpinner />}
-      <div>카카오 로그인 중입니다. 잠시만 기달려주세요</div>
+      <Loding>
+        카카오 로그인 중....
+        <Img src={LodingImg} alt="로딩 페이지" />
+      </Loding>
     </>
   );
 };
 
+const Loding = styled.div`
+  padding: 110px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
+
+const Img = styled.img`
+  margin-left: 30px;
+`;
 export default OAuth;
