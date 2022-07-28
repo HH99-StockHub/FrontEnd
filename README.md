@@ -1,7 +1,26 @@
+# [StockHub] "방구석 애널리스트"컨셉의 주식 종목 추천 게시판 사이트  
+(이미지)
+
+## 📆 프로젝트 기간
+2022/06/24 ~ 2022/08/05
+배포
+
+## 팀원소개
+| Name                 | GitHub / Contact                          | Position    |
+| -------------------- | --------------------------------------    | ----------- |
+| Frontend Github Link | https://github.com/HH99-StockHub/FrontEnd 
+| 박태형VL             |  https://github.com/bigtae1007             | FE / React  |
+| 정신영               | https://github.com/sinyoung12              | FE / React  |
+| Backend Github Link  | https://github.com/GyuwonY/corinne_BE      |
+| 조한울L              | https://github.com/gaius365                | BE / Spring |
+| 문준호               | https://github.com/mjoonho                 | BE / Spring |
+| 주 희                | https://github.com/Joo-hui                 | BE / Spring |
+| Designer             |                                            | Designer   |
+| 이은지               |                                            |            |
+
+
 ## 서비스 아키텍처
 
-
-## 프론트엔드 아키텍처
 
 ## ⚙ 주요 기능
 - **게시글 작성/삭제**: KOSPI/KOSDAQ 상장 주식을 한 가지 선택하여 그 주식에 대한 매수 의견을 게시
@@ -19,12 +38,6 @@
 - **알림 기능**: 인기글/수익왕 달성, 댓글, 찬반투표 등에 대한 알림
 - **채팅방**: 로그인한 유저들끼리 토론할 수 있는 채팅방
 
-
-## 📆 프로젝트 기간
-2022/06/24 ~ 2022/08/05
-배포
-
-
 ## 기술스택
 
 #### :boom: Frontend
@@ -39,17 +52,5 @@
 <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=pink">  <br> 
 <img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=green"> <br>
 
-## 팀원소개
-| Name                 | GitHub / Contact                          | Position    |
-| -------------------- | --------------------------------------    | ----------- |
-| Frontend Github Link | https://github.com/HH99-StockHub/FrontEnd 
-| 박태형VL             |  https://github.com/bigtae1007             | FE / React  |
-| 정신영               | https://github.com/sinyoung12              | FE / React  |
-| Backend Github Link  | https://github.com/GyuwonY/corinne_BE      |
-| 조한울L              | https://github.com/gaius365                | BE / Spring |
-| 문준호               | https://github.com/mjoonho                 | BE / Spring |
-| 주 희                | https://github.com/Joo-hui                 | BE / Spring |
-| Designer             |                                            | Designer   |
-| 이은지               |                                            |            |
 
 
