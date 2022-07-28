@@ -7,8 +7,6 @@
 ## 기술스택
 
 #### :boom: Frontend
-<img src="https://img.shields.io/badge/next.js-000000?style=flat&logo=next.js&logoColor=white"><br/>
-<img src="https://img.shields.io/badge/vercel-000000?style=flat&logo=vercel&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/redux-764abc?style=flat&logo=redux&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/tailwindCSS-06b6d4?style=flat&logo=tailwindCSS&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/PostCSS-dd3a0a?style=flat&logo=POSTCSS&logoColor=white"><br/>
