@@ -15,7 +15,7 @@ const Search = () => {
   const submit = (e) => {
     e.preventDefault();
     if (searchInput.current.value.trim() !== "") {
-      navigate(`/search/article/keyword/${searchInput.current.value}`);
+      navigate(`/search/article/keyword/${searchInput.current.value}/1`);
       searchInput.current.value = "";
     } else {
       toastify.error("최소 한 글자라도 입력해야합니다");

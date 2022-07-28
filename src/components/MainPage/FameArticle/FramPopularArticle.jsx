@@ -4,15 +4,22 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 //컴포넌트
 import FramPopularCard from "./FramPopularCard";
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
+import CardHeader from "./CardHeader";
 // 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
-import CardHeader from "./CardHeader";
-import LoadingSpinner from "../../../repeat/LoadingSpinner";
+import { toastify } from "../../../custom/toastify";
 
 const FramPopularArticle = () => {
   // useQuery
 
-  const { data = [], isLoading } = useMainPageQuery.useGetFamePopularArticle();
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useMainPageQuery.useGetFamePopularArticle();
+  if (isError) toastify.error("Best 인기글 불러오기를 실패했습니다.");
+
   return (
     <WrapPopular>
       {isLoading && <LoadingSpinner />}
@@ -36,12 +43,15 @@ const FramPopularArticle = () => {
 
 export default FramPopularArticle;
 const WrapPopular = styled.div`
-  position: relative;
+  width: 100%;
   display: flex;
   gap: 12px;
-  min-height: 168px;
+  justify-content: space-between;
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 const WrapCard = styled.div`
-  width: 178px;
+  width: 100%;
 `;

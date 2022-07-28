@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // 이미지
-import { ReactComponent as ArticleSvg } from "../../../image/Article.svg";
 import { ReactComponent as PlusSvg } from "../../../image/Plus.svg";
 
 const ArticleHeader = React.memo(({ title, link }) => {

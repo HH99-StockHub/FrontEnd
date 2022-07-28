@@ -5,7 +5,9 @@ export const useTotalPageQuery = {
   // ALL 카테고리 별로 게시글 가져오기
   useGetAllArticles: (category, page) => {
     const fetcher = async () => {
-      const { data } = await api.get(`/${category}/articles`);
+      const { data } = await api.get(
+        `/${category}/articles?page=${page}&size=3`,
+      );
       return data;
     };
 
@@ -27,6 +29,4 @@ export const useTotalPageQuery = {
     };
     return useQuery("keywords", fetcher);
   },
-  // //종목 뉴스 검색
-  // useGetNewsSearch:
 };

@@ -3,34 +3,29 @@ import React, { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
-
+// 컴포넌트
+import LoadingSpinner from "../../repeat/LoadingSpinner";
+import AddArticleChoosePoint from "./AddArticleChoosePoint";
+import LineChart from "../Chart/LineChart";
 //hook
 import {
   useAddArticleFormMutate,
   useAddArticleFormQuery,
 } from "./useAddArticleFormQuery";
 import { toastify } from "../../custom/toastify";
-
-import { stockData } from "../../Data/stockData";
 // 모듈
+import { stockData } from "../../Data/stockData";
 import { addArticleState, showChart } from "../../state/client/modal";
 //이미지
-import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
-import LoadingSpinner from "../../repeat/LoadingSpinner";
-import LineChart from "../Chart/LineChart";
-import { useCallback } from "react";
+import useSliceNum from "../../custom/sliceNum";
+import ChartModal from "../Chart/ChartModal";
+import { useMediaQuery } from "react-responsive";
 
 const AddArticleForm = () => {
   // recoil
   const setModalState = useSetRecoilState(showChart);
   const setFormState = useSetRecoilState(addArticleState);
-  // 투자 포인트 map용 잉여 배열
-  const [countArr, setCountArr] = useState([{ key: 0 }]);
-  // key state
-  const [key, setKey] = useState(1);
-  // 포인트 추가하기 버튼 상태
-  const [pointBtnState, setPointBtnState] = useState(true);
   // 주식 선택하기 일치 항목
   const [stockArr, setStockArr] = useState([]);
   const [selectStockState, setSelectStockState] = useState(null);
@@ -39,34 +34,37 @@ const AddArticleForm = () => {
   // 주식 선택하기 input 변경 값
   const [stockInput, setStockInput] = useState("");
   //선택 주식 주가
-  const [currentStock, setCurrentStock] = useState("현재 주가");
-  // 투자 포인트 데이터
-  const [stockPoint, setStockPoint] = useState([
-    {
-      title: "",
-      content: "",
-    },
-    { title: "", content: "" },
-    { title: "", content: "" },
-  ]);
+  const [currentStock, setCurrentStock] = useState("");
+  // 목표 가
+  const [goalPrice, setGoalPrice] = useState("선택 없음");
+  const [goalPriceState, setGoalPriceState] = useState(false);
+  // 수익률 마감일
+  const [goalDate, setGoalDate] = useState("선택 없음");
+  const [goalDateState, setGoalDateState] = useState(false);
   // title가져오기
   const articleTitle = useRef("");
   const wrapTagStockList = useRef();
+  // 투자 포인트
+  const choosePoint = useRef("");
 
-  //예시 arr
-
+  // media
+  const isSmall = useMediaQuery({
+    query: "(max-height:720px)",
+  });
+  // ,찍기 훅
+  const sliceNum = useSliceNum;
   // stockName 전체 부르기
   const { data = stockData } = useAddArticleFormQuery.useGetStockName();
   // useMutation 사용
-  const { mutate: addArticle, stockLoading: addLoading } =
+  const { mutate: addArticle, isLoading: addLoading } =
     useAddArticleFormMutate.useAddArticleMutation();
   const { mutate: getStock, isLoading: stockLoading } =
     useAddArticleFormMutate.useGetArticleStock({
-      onSuccess: (data, variables, context) => {
+      onSuccess: (data) => {
         setCurrentStock(data.data);
       },
-      onError: (err) => {
-        toastify.error("에러가 발생했습니다");
+      onError: (data) => {
+        toastify.error("주가 불러오기를 실패했습니다.");
       },
     });
   // 주식 종목 선택하기 list
@@ -82,26 +80,23 @@ const AddArticleForm = () => {
   };
 
   // 검색어와 동일한 data만 색출하기
-  const sameStock = useCallback(
-    debounce((word) => {
-      setSelectStockState(true);
-      setStockIndex(0);
-      const changeData = data.filter((v) => {
-        if (String(word).length !== 0) {
-          return (
-            v.stockName.slice(0, String(word).length).toLowerCase() ===
-              word.toLowerCase() ||
-            v.stockCode.slice(0, String(word).length).toLowerCase() ===
-              word.toLowerCase()
-          );
-        } else {
-          return false;
-        }
-      });
-      setStockArr(changeData);
-    }, 300),
-    [data],
-  );
+  const sameStock = debounce((word) => {
+    setSelectStockState(true);
+    setStockIndex(0);
+    const changeData = data.filter((v) => {
+      if (String(word).length !== 0) {
+        return (
+          v.stockName.slice(0, String(word).length).toLowerCase() ===
+            word.toLowerCase() ||
+          v.stockCode.slice(0, String(word).length).toLowerCase() ===
+            word.toLowerCase()
+        );
+      } else {
+        return false;
+      }
+    });
+    setStockArr(changeData);
+  }, 300);
 
   // 주식 종목 keydownHander
   const keyDownHandler = (e) => {
@@ -138,11 +133,16 @@ const AddArticleForm = () => {
             scrollPoint.scrollIntoView();
           }
         }
-      } else if (e.code === "Enter") {
+      } else if (e.code === "Enter" && stockArr[stockIndex - 1] !== undefined) {
         setStockInput(stockArr[stockIndex - 1].stockName);
         setStockIndex(0);
         setSelectStockState(false);
         getStock(stockArr[stockIndex - 1].stockName);
+      } else if (e.code === "Enter") {
+        setStockInput(stockArr[stockIndex].stockName);
+        setStockIndex(0);
+        setSelectStockState(false);
+        getStock(stockArr[stockIndex].stockName);
       }
     }
   };
@@ -157,16 +157,20 @@ const AddArticleForm = () => {
   const writeArticle = (e) => {
     e.preventDefault();
     let state = false;
-    countArr.forEach((v, l) => {
+    const refArr = choosePoint.current.children;
+
+    // 투자 포인트 공백 체크
+    for (let i = 0; i < refArr.length; i++) {
       if (
-        stockPoint[l]?.content === undefined ||
-        stockPoint[l]?.title === undefined ||
-        stockPoint[l]?.content === "" ||
-        stockPoint[l]?.title === ""
+        refArr[i].children[1].value === undefined ||
+        refArr[i].children[3].value === undefined ||
+        refArr[i].children[1].value === "" ||
+        refArr[i].children[3].value === ""
       ) {
         state = true;
       }
-    });
+    }
+
     if (selectStockState === null || selectStockState) {
       toastify.info("종목을 선택해주세요");
     } else if (articleTitle.current.value === "" || state) {
@@ -175,59 +179,19 @@ const AddArticleForm = () => {
       const data = {
         articleTitle: articleTitle.current.value,
         stockName: stockInput,
+        timeLimit: goalDate,
+        targetReturn: Number(goalPrice.slice(2, goalPrice.indexOf("%"))),
       };
-      stockPoint.forEach((v, l) => {
-        data["point" + String(l + 1)] = v.title;
-        data["content" + String(l + 1)] = v.content;
-      });
+      for (let i = 0; i < 3; i++) {
+        if (refArr[i] !== undefined) {
+          data["point" + String(i + 1)] = refArr[i].children[1].value;
+          data["content" + String(i + 1)] = refArr[i].children[3].value;
+        } else {
+          data["point" + String(i + 1)] = "";
+          data["content" + String(i + 1)] = "";
+        }
+      }
       addArticle(data);
-    }
-  };
-  // 투자 포인트 작성하기
-  const addStockPoint = debounce((e) => {
-    const element = e.target;
-    const newStockPoint = [...stockPoint];
-    //input일 때
-    if (element.id !== "") {
-      newStockPoint[element.id] = {
-        ...newStockPoint[element.id],
-        title: element.value,
-      };
-      setStockPoint(newStockPoint);
-      // textarea일 때
-    } else {
-      newStockPoint[element.name] = {
-        ...newStockPoint[element.name],
-        content: element.value,
-      };
-      setStockPoint(newStockPoint);
-    }
-  }, 300);
-
-  // 투자 포인트 input 추가하기
-  const addTextarea = () => {
-    if (countArr.length < 3) {
-      setCountArr([...countArr, { key: key }]);
-      setKey(key + 1);
-      if (countArr.length === 2) setPointBtnState(false);
-    } else {
-      toastify.info("최대 3개까지 등록 가능합니다");
-    }
-  };
-  // 투자 포인트 삭제하기
-  const deleteTextarea = (e, index) => {
-    if (countArr.length !== 1) {
-      const newArr = countArr.filter((v, l) => {
-        return String(l) !== String(index);
-      });
-      setCountArr(newArr);
-      const newStockPoint = stockPoint.filter((v, l) => {
-        return Number(l) !== Number(index);
-      });
-      setStockPoint(newStockPoint);
-      setPointBtnState(true);
-    } else {
-      toastify.info("최소 하나의 투자 포인트가 있어야합니다.");
     }
   };
 
@@ -246,104 +210,212 @@ const AddArticleForm = () => {
         </Header>
         <WrapText>
           {addLoading && <LoadingSpinner />}
-          <WrapSearch>
-            <WrapSelect>
-              <input hidden="hidden" />
-              <input
-                type="text"
-                value={stockInput}
-                placeholder="종목검색"
-                onChange={selectStockList}
-                onKeyDown={keyDownHandler}
-              />
-              <SearchSvg width="17.49" height="17.49" fill="var(--green1)" />
-              {selectStockState && (
-                <StockList index={stockIndex} ref={wrapTagStockList}>
-                  {stockArr.map((v) => {
-                    return (
-                      <div key={v.id} onClick={selectStockOne}>
-                        <span>{v.stockCode}</span>
-                        <div>{v.stockName}</div>
-                      </div>
-                    );
-                  })}
-                </StockList>
-              )}
-            </WrapSelect>
-            <span>{stockLoading ? <LoadingSpinner /> : currentStock}</span>
-          </WrapSearch>
-          <ScrollScope>
-            {selectStockState === false && (
-              <ChartBox>
-                {/* 모달창 오픈 */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setModalState(true);
-                  }}
-                >
-                  그래프 보기
-                </button>
-                <div>
-                  <LineChart />
-                </div>
-              </ChartBox>
-            )}
-
-            <WrapTitle>
-              <p>제목</p>
-              <input
-                type="text"
-                placeholder="제목을 입력해주세요"
-                ref={articleTitle}
-              />
-            </WrapTitle>
-            <div>
-              {countArr.map((v, l) => {
-                return (
-                  <WrapTextarea key={v.key}>
-                    <WrapPointHeader>
-                      <p>투자 포인트 {l + 1} (최대 3개 작성 가능)</p>
-                      {l === 0 ? null : (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            deleteTextarea(e, l);
-                          }}
-                        >
-                          <XBtnSvg
-                            width="6.59"
-                            height="6.59"
-                            fill="var(--pink1)"
-                          />
-                        </button>
-                      )}
-                    </WrapPointHeader>
+          {isSmall ? (
+            <>
+              <ScrollScope>
+                <WrapSearch>
+                  <WrapSelect>
+                    <input hidden="hidden" />
                     <input
-                      id={l}
                       type="text"
-                      placeholder="투자포인트 요약"
-                      onChange={addStockPoint}
+                      value={stockInput}
+                      placeholder="종목검색"
+                      onChange={selectStockList}
+                      onKeyDown={keyDownHandler}
                     />
+                    <SearchSvg
+                      width="17.49"
+                      height="17.49"
+                      fill="var(--green1)"
+                    />
+                    {selectStockState && (
+                      <StockList index={stockIndex} ref={wrapTagStockList}>
+                        {stockArr.map((v) => {
+                          return (
+                            <div key={v.id} onClick={selectStockOne}>
+                              <span>{v.stockCode}</span>
+                              <div>{v.stockName}</div>
+                            </div>
+                          );
+                        })}
+                      </StockList>
+                    )}
+                  </WrapSelect>
+                  <span>
+                    {stockLoading ? (
+                      <LoadingSpinner />
+                    ) : currentStock === "" ? (
+                      "현재 주가"
+                    ) : (
+                      sliceNum(currentStock) + " 원"
+                    )}
+                  </span>
+                </WrapSearch>
+                {selectStockState === false && (
+                  <ChartBox>
+                    {/* 모달창 오픈 */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModalState(true);
+                      }}
+                    >
+                      차트 상세보기
+                    </button>
+                    <div>
+                      <LineChart stockName={stockInput} />
+                    </div>
+                  </ChartBox>
+                )}
 
-                    <br></br>
-                    <TextareaText
-                      name={l}
-                      cols="30"
-                      rows="5"
-                      placeholder="상세내용 작성"
-                      onChange={addStockPoint}
-                    ></TextareaText>
-                  </WrapTextarea>
-                );
-              })}
-            </div>
-            {pointBtnState && (
-              <PlusBtn type="button" onClick={addTextarea}>
-                투자포인트 추가
-              </PlusBtn>
-            )}
-          </ScrollScope>
+                <WrapTitle>
+                  <p>제목</p>
+                  <input
+                    type="text"
+                    placeholder="제목을 입력해주세요"
+                    ref={articleTitle}
+                  />
+                </WrapTitle>
+                <WrapGoal>
+                  <div>
+                    <p>목표 수익률</p>
+                    <div>{goalPrice}</div>
+                  </div>
+                  <div>
+                    <p>수익률 마감일</p>
+                    <div>{goalDate}</div>
+                  </div>
+                </WrapGoal>
+                <AddArticleChoosePoint choosePoint={choosePoint} />
+              </ScrollScope>
+            </>
+          ) : (
+            <>
+              <WrapSearch>
+                <WrapSelect>
+                  <input hidden="hidden" />
+                  <input
+                    type="text"
+                    value={stockInput}
+                    placeholder="종목검색"
+                    onChange={selectStockList}
+                    onKeyDown={keyDownHandler}
+                  />
+                  <SearchSvg
+                    width="17.49"
+                    height="17.49"
+                    fill="var(--green1)"
+                  />
+                  {selectStockState && (
+                    <StockList index={stockIndex} ref={wrapTagStockList}>
+                      {stockArr.map((v) => {
+                        return (
+                          <div key={v.id} onClick={selectStockOne}>
+                            <span>{v.stockCode}</span>
+                            <div>{v.stockName}</div>
+                          </div>
+                        );
+                      })}
+                    </StockList>
+                  )}
+                </WrapSelect>
+                <span>
+                  {stockLoading ? (
+                    <LoadingSpinner />
+                  ) : currentStock === "" ? (
+                    "현재 주가"
+                  ) : (
+                    sliceNum(currentStock) + " 원"
+                  )}
+                </span>
+              </WrapSearch>
+              <ScrollScope>
+                {selectStockState === false && (
+                  <ChartBox>
+                    {/* 모달창 오픈 */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModalState(true);
+                      }}
+                    >
+                      차트 상세보기
+                    </button>
+                    <div>
+                      <LineChart stockName={stockInput} />
+                    </div>
+                  </ChartBox>
+                )}
+
+                <WrapTitle>
+                  <p>제목</p>
+                  <input
+                    type="text"
+                    placeholder="제목을 입력해주세요"
+                    ref={articleTitle}
+                  />
+                </WrapTitle>
+                <WrapGoal>
+                  <div>
+                    <p>목표 수익률</p>
+                    <GoalPrice
+                      state={goalPrice}
+                      onClick={() => {
+                        setGoalPriceState(!goalPriceState);
+                      }}
+                    >
+                      {goalPrice}
+                    </GoalPrice>
+                    {goalPriceState ? (
+                      <GoalDropDown
+                        onClick={(e) => {
+                          setGoalPrice(e.target.id);
+                          setGoalPriceState(false);
+                        }}
+                      >
+                        <div id="+ 10%">+ 10%</div>
+                        <div id="+ 20%">+ 20%</div>
+                        <div id="+ 30%">+ 30%</div>
+                        <div id="+ 40%">+ 40%</div>
+                        <div id="+ 50%">+ 50%</div>
+                        <div id="+ 100%">+ 100%</div>
+                        <div id="+ 150%">+ 150%</div>
+                        <div id="+ 200%">+ 200%</div>
+                      </GoalDropDown>
+                    ) : null}
+                  </div>
+                  <div>
+                    <p>수익률 마감일</p>
+                    <GoalDate
+                      state={goalDate}
+                      onClick={() => {
+                        setGoalDateState(!goalDateState);
+                      }}
+                    >
+                      {goalDate}
+                    </GoalDate>
+                    {goalDateState ? (
+                      <GoalDropDown
+                        onClick={(e) => {
+                          setGoalDate(e.target.id);
+                          setGoalDateState(false);
+                        }}
+                      >
+                        <div id="2주">2주</div>
+                        <div id="1개월">1개월</div>
+                        <div id="3개월">3개월</div>
+                        <div id="6개월">6개월</div>
+                        <div id="1년">1년</div>
+                        <div id="2년">2년</div>
+                        <div id="3년">3년</div>
+                      </GoalDropDown>
+                    ) : null}
+                  </div>
+                </WrapGoal>
+                <AddArticleChoosePoint choosePoint={choosePoint} />
+              </ScrollScope>
+            </>
+          )}
         </WrapText>
         <WrapBtn>
           <button type="submit">게시글 올리기</button>
@@ -357,6 +429,7 @@ const AddArticleForm = () => {
           </button>
         </WrapBtn>
       </form>
+      {selectStockState === false && <ChartModal stockName={stockInput} />}
     </WrapForm>
   );
 };
@@ -373,13 +446,16 @@ const WrapText = styled.div`
   padding: 24px 79px 48px;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--gray2);
+  @media screen and (max-width: 700px) {
+    padding: 24px 0;
+  }
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 67px;
+  height: 50px;
   background-color: var(--green1);
   color: var(--white);
   > p {
@@ -405,6 +481,12 @@ const WrapSearch = styled.div`
     font-size: 12px;
     color: var(--gray3);
   }
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    > span {
+      width: 100%;
+    }
+  }
 `;
 
 const WrapSelect = styled.div`
@@ -412,11 +494,11 @@ const WrapSelect = styled.div`
   display: flex;
   align-items: center;
   padding: 0 10px;
-  width: 385px;
+  width: 100%;
   height: 44px;
   border: 1px solid var(--gray2);
   input {
-    width: 332px;
+    width: 100%;
     border: none;
     outline: none;
   }
@@ -437,48 +519,61 @@ const WrapTitle = styled.div`
     font-size: 12px;
   }
 `;
+const WrapGoal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 24px;
+  > div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    font-size: 12px;
+  }
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
+`;
 
-const ScrollScope = styled.div`
-  max-height: 400px;
+const GoalPrice = styled.div`
+  border: 1px solid var(--gray2);
+  padding: 15px 15px 15px 12px;
+  color: ${({ state }) =>
+    state === "선택 없음" ? "var(--gray2)" : "var(--black)"};
+`;
+const GoalDate = styled.div`
+  border: 1px solid var(--gray2);
+  padding: 15px 15px 15px 12px;
+  color: ${({ state }) =>
+    state === "선택 없음" ? "var(--gray2)" : "var(--black)"};
+`;
+const GoalDropDown = styled.div`
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  max-height: 170px;
+  border: 1px solid var(--gray2);
+  background-color: var(--white);
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 0;
   }
-`;
-
-const WrapPointHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 9px;
-  > p {
-    font-size: 12px;
-  }
-  > button {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
+  z-index: 99;
+  > div {
+    padding: 15px 15px 15px 12px;
+    &:hover {
+      background-color: var(--gray1);
+    }
   }
 `;
-
-const WrapTextarea = styled.div`
-  input {
-    width: 100%;
-    height: 44px;
-    padding: 14.5px 10px;
-    margin-bottom: 8px;
+const ScrollScope = styled.div`
+  max-height: 50vh;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 0;
   }
-`;
-
-const TextareaText = styled.textarea`
-  width: 100%;
-  height: 137px;
-  padding: 10px;
-  margin-bottom: 20px;
-  resize: none;
 `;
 
 const ChartBox = styled.div`
@@ -488,13 +583,14 @@ const ChartBox = styled.div`
   align-items: flex-end;
   > button {
     padding: 10px;
-    width: 85px;
+    width: 100px;
     background-color: var(--green1);
     color: var(--white);
     font-size: 12px;
     font-weight: 700;
   }
   > div {
+    position: relative;
     width: 100%;
     height: 200px;
     border: 1px solid var(--gray3);
@@ -511,8 +607,9 @@ const StockList = styled.div`
   height: 264px;
   overflow-y: auto;
   background-color: var(--white);
+  z-index: 99;
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 0;
   }
   ::-webkit-scrollbar-thumb {
     background-color: #2f3542;
@@ -546,13 +643,6 @@ const StockList = styled.div`
   }
 `;
 
-const PlusBtn = styled.button`
-  padding: 8px 12px;
-  font-size: 12px;
-  color: var(--white);
-  background-color: var(--green2);
-`;
-
 const WrapBtn = styled.div`
   display: flex;
   gap: 22px;
@@ -567,5 +657,8 @@ const WrapBtn = styled.div`
     &:nth-child(2) {
       background-color: var(--gray3);
     }
+  }
+  @media screen and (max-width: 700px) {
+    margin: 24px 0;
   }
 `;

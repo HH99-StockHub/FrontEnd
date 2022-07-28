@@ -8,7 +8,7 @@ import { getCookie } from "../../shared/Cookie";
 import { ReactComponent as BtnSvg } from "../../image/AddArticle.svg";
 import { addArticleState } from "../../state/client/modal";
 
-const AddArticleFixBtn = React.memo(() => {
+const AddArticleFixBtn = () => {
   // 토글 state 관리 recoil
   const setModalState = useSetRecoilState(addArticleState);
   // 게시글 작성 토글 오픈
@@ -22,25 +22,22 @@ const AddArticleFixBtn = React.memo(() => {
   };
 
   return (
-    <Btn onClick={openTogle}>
+    <WrapAddBtn onClick={openTogle}>
       <BtnSvg width="18px" height="18px" fill="var(--white)" />
-    </Btn>
+    </WrapAddBtn>
   );
-});
+};
 
 export default AddArticleFixBtn;
 
-const Btn = styled.div`
-  position: fixed;
-  right: 48px;
-  bottom: 118px;
+const WrapAddBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 15px 0;
   width: 52px;
   height: 52px;
   border-radius: 50%;
   background-color: var(--green1);
   cursor: pointer;
-  z-index: 99;
 `;

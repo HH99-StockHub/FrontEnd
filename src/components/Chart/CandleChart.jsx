@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 import dayjs from "dayjs";
+// 컴포넌트
+import LoadingSpinner from "../../repeat/LoadingSpinner";
 // 잉여데이터
 import { candleChartDummy } from "../../Data/chartDummy";
-const CandleChart = () => {
-  const data = candleChartDummy;
+// 훅
+import useSliceNum from "../../custom/sliceNum";
+// 모듈
 
+const CandleChart = ({
+  stockName,
+  chartCount,
+  chartMove,
+  chartStandard,
+  data = candleChartDummy,
+  isLoading,
+}) => {
+  // 차트 데이터 정렬
+  const candleChartData = useMemo(() => {
+    const newDataList = [...data.chart].map((v) => {
+      return {
+        x: new Date(v[0].slice(0, 4), v[0].slice(4, 6) - 1, v[0].slice(6, 8)),
+        y: [v[1], v[2], v[3], v[4]],
+      };
+    });
+    return newDataList;
+  }, [data]);
+
+  // 숫자 , 찍기
+  const sliceNum = useSliceNum;
   const state = {
     theme: {
-      mode: "dark",
+      mode: "light",
       palette: "palette8",
       monochrome: {
         enabled: false,
@@ -17,8 +41,6 @@ const CandleChart = () => {
         shadeIntensity: 1,
       },
     },
-
-    title: { text: undefined, align: "right" },
     chart: {
       zoom: false,
       type: "candlestick",
@@ -54,7 +76,7 @@ const CandleChart = () => {
         minWidth: 0,
         maxWidth: 160,
         style: {
-          colors: ["#FF607C", "#54BA7D"],
+          colors: ["#000"],
           fontSize: "12px",
           fontWeight: 400,
           cssClass: "apexcharts-yaxis-label",
@@ -62,9 +84,8 @@ const CandleChart = () => {
         offsetX: 0,
         offsetY: 0,
         rotate: 0,
-        // y축 원하는데로 변경하기 , 찍어서 가독성을 높여보자
         formatter: (value) => {
-          return parseInt(value);
+          return sliceNum(parseInt(value)) + "원";
         },
       },
       axisBorder: {
@@ -110,7 +131,7 @@ const CandleChart = () => {
         rotate: 0,
         formatter: function (val, l) {
           // x축 원하는데로 조작하기
-          return dayjs(val).format("MM DD");
+          return dayjs(val).format("MM/DD");
         },
         style: {
           // 하단 날짜 색
@@ -122,8 +143,8 @@ const CandleChart = () => {
       candlestick: {
         colors: {
           // 선 색 #으로 표시해야 배경색도 변경
-          upward: "#FF607C",
-          downward: "#54BA7D",
+          upward: "#f00",
+          downward: "#00f",
         },
         wick: {
           // 선 색 채울건지
@@ -135,44 +156,55 @@ const CandleChart = () => {
       // 마우스 올리면 커스텀 할 수 있는 것
       enabled: true,
       shared: true,
-      followCursor: true,
+      followCursor: false,
       // x축 값 보이기
       intersect: false,
       inverseOrder: false,
       // 툴 커스텀해서 사용하기
-      custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-        return (
-          "<div>" +
-          "<p>" +
-          data[dataPointIndex].y[0] +
-          "</p>" +
-          "<p>" +
-          data[dataPointIndex].y[1] +
-          "</p>" +
-          "<p>" +
-          data[dataPointIndex].y[2] +
-          "</p>" +
-          "<p>" +
-          data[dataPointIndex].y[3] +
-          "</p>" +
-          "</div>"
-        );
+      // { series, seriesIndex, dataPointIndex, w }
+      custom: function ({ series, dataPointIndex }) {
+        return `<div>
+      <p><span>시가 : </span> ${sliceNum(
+        candleChartData[dataPointIndex].y[0],
+      )} 원 </p>
+      <p><span>고가 : </span> ${sliceNum(
+        candleChartData[dataPointIndex].y[1],
+      )} 원</p>
+      <p><span>저가 : </span> ${sliceNum(
+        candleChartData[dataPointIndex].y[2],
+      )} 원</p>
+      <p><span>종가 : </span> ${sliceNum(
+        candleChartData[dataPointIndex].y[3],
+      )} 원</p>
+    </div>
+          `;
       },
     },
   };
   return (
-    <ReactApexChart
-      options={state}
-      series={[
-        {
-          // 툴팁 이름 호버했을 때 보이는
-          name: ["price", "gey"],
-          data: data,
-        },
-      ]}
-      type="candlestick"
-      height="100%"
-    />
+    <>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <ReactApexChart
+          options={state}
+          series={[
+            {
+              // 툴팁 이름 호버했을 때 보이는
+              data: candleChartData
+                .slice(
+                  chartStandard,
+                  Number(chartCount) + Number(chartStandard),
+                )
+                .reverse(),
+              // data: candleChartData,
+            },
+          ]}
+          type="candlestick"
+          height="100%"
+        />
+      )}
+    </>
   );
 };
 

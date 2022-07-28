@@ -6,9 +6,8 @@ import { useRecoilState } from "recoil";
 import { showChart } from "../../state/client/modal";
 import DetailChart from "./DetailChart";
 
-const ChartModal = () => {
+const ChartModal = ({ stockName }) => {
   const [chartModalState, setChartModalState] = useRecoilState(showChart);
-
   return (
     <ReactModal
       isOpen={chartModalState}
@@ -31,12 +30,13 @@ const ChartModal = () => {
           overflow: "hidden",
           outline: "none",
           margin: "auto",
-          width: "900px",
-          height: "500px",
+          maxWidth: "900px",
+          maxHeight: "500px",
+          height: "70vw",
         },
       }}
     >
-      <DetailChart />
+      {stockName !== undefined ? <DetailChart stockName={stockName} /> : null}
     </ReactModal>
   );
 };

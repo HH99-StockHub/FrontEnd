@@ -1,20 +1,24 @@
-import React from "react";
-import Vote from "../components/DetailArticle/Vote";
-import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
-import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+// 컴포넌트
+import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
 import Title from "../components/DetailArticle/collection/Title";
 import Writing from "../components/DetailArticle/collection/Writing";
 import Stocks from "../components/DetailArticle/collection/Stocks";
 import View from "../components/DetailArticle/collection/View";
 import Comment from "../components/DetailArticle/collection/Comment";
-import { useParams } from "react-router-dom";
-import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
-import { useNavigate } from "react-router-dom";
+import Vote from "../components/DetailArticle/Vote";
 import SlideStock from "../repeat/SlideStock";
-import { useEffect, useState } from "react";
 import LoadingSpinner from "../repeat/LoadingSpinner";
 import HelmetComponents from "../repeat/HelmetComponents";
+// 훅
+import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
+import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
+import { toastify } from "../custom/toastify";
+import { useMediaQuery } from "react-responsive";
 
 const DetailArticle = () => {
   const navigate = useNavigate();
@@ -24,7 +28,6 @@ const DetailArticle = () => {
     data = [],
     isLoading,
     isError,
-    error,
   } = useDetailArticleGet.useContentInquiry(id);
   //게시글삭제
   const { mutate } = useDetailArticleMutate.useDeletePost();
@@ -37,6 +40,12 @@ const DetailArticle = () => {
       setDeleteBtn(false);
     }
   }, [data?.userId]);
+
+  if (isError) toastify.error("정보 불러오기를 실패했습니다.");
+
+  const isMiddle = useMediaQuery({
+    query: "(max-width:1240px)",
+  });
 
   return (
     <>
@@ -70,6 +79,7 @@ const DetailArticle = () => {
                 profileImage={data.profileImage}
                 nickName={data.nickname}
                 userId={data.userId}
+                rank={data.rank}
               />
 
               <Stocks
@@ -77,6 +87,8 @@ const DetailArticle = () => {
                 stockReturn={data.stockReturn}
                 stockPriceFirst={data.stockPriceFirst}
                 stockPriceLast={data.stockPriceLast}
+                deadline={data.deadline}
+                targetReturn={data.targetReturn}
               />
               <View
                 content1={data.content1}
@@ -91,11 +103,11 @@ const DetailArticle = () => {
                 voteUp={data.voteUpCount}
                 voteDown={data.voteDownCount}
               />
-              <Comment id={id} />
+              {!isMiddle && <Comment id={id} />}
             </>
           )}
         </Container>
-        <Title stockName={data.stockName} />
+        <Title stockName={data.stockName} id={id} />
       </Div>
     </>
   );
@@ -103,14 +115,19 @@ const DetailArticle = () => {
 
 const Container = styled.div`
   position: relative;
-  width: 821px;
+  width: 100%;
 `;
+
 const Div = styled.div`
   display: flex;
   gap: 16px;
-  width: 1240px;
+  max-width: 1240px;
   margin: 0 auto;
   position: relative;
+  @media screen and (max-width: 1240px) {
+    flex-direction: column;
+    width: 90%;
+  } ;
 `;
 
 const BtnBox = styled.div`
@@ -123,4 +140,5 @@ const Btn = styled.button`
   background: var(--white);
   border: 1px solid var(--gray2);
 `;
+
 export default DetailArticle;

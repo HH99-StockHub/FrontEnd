@@ -1,10 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import ProfileImg from "../../../elem/ProfileImg";
 
 const Writing = (props) => {
-  const { view, stockName, articleTitle, profileImage, nickName, userId } =
-    props;
+  const {
+    view,
+    stockName,
+    articleTitle,
+    profileImage,
+    nickName,
+    userId,
+    rank,
+  } = props;
   return (
     <>
       <Box>
@@ -12,8 +20,8 @@ const Writing = (props) => {
           <P1>
             <div>{stockName}</div>
             <P3>
-              <Img src={profileImage} />
-              <Link to={`/search/article/${nickName}/${userId}`}>
+              <ProfileImg size="size3" rank={rank} src={profileImage} />
+              <Link to={`/search/article/${nickName}/${userId}/1`}>
                 {nickName}
               </Link>
             </P3>
@@ -76,13 +84,6 @@ const P3 = styled.div`
   display: flex;
   align-items: center;
   color: var(--black);
-`;
-
-const Img = styled.img`
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  overflow: hidden;
 `;
 
 export default Writing;

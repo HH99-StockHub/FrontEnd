@@ -39,9 +39,28 @@ const WrapMainContent = styled.div`
   gap: 64px;
   margin: 0 auto;
   margin-top: 64px;
+  @media screen and (max-width: 1260px) {
+    gap: 44px;
+  }
   > div {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 64px;
+    margin: 0 auto;
+    > div {
+      min-width: 588px;
+      max-width: 588px;
+      @media screen and (max-width: 1260px) {
+        max-width: 90%;
+      }
+    }
+    @media screen and (max-width: 1260px) {
+      flex-direction: column;
+      gap: 44px;
+      margin: 0 auto;
+      align-items: center;
+      justify-content: center;
+    }
   }
 `;

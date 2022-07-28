@@ -2,12 +2,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 //컴포넌트
 import CardTextPopular from "../common/CardTextPopular";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
-import Porfile from "../common/Porfile";
+import Profile from "../common/Profile";
 // 훅
 import { useMainPageQuery } from "../useMainPageQuery";
+import { toastify } from "../../../custom/toastify";
 
 const PopularArticleList = () => {
   // 인기 게시글 데이터 받기
@@ -15,29 +17,56 @@ const PopularArticleList = () => {
     data = [],
     isLoading,
     isError,
-    error,
   } = useMainPageQuery.useGetPopularArticles();
+
+  // media
+  const isSmall = useMediaQuery({
+    query: "(max-width: 700px)",
+  });
+  if (isError) toastify.error("인기글 불러오기를 실패했습니다.");
 
   return (
     <ArticleBox>
       {isLoading && <LoadingSpinner />}
-      {data.map((v) => {
-        return (
-          <WrapCard key={v.articleId}>
-            <Link to={`/detail/article/${v.articleId}`}>
-              <WrapImgText>
-                <CardTextPopular up={v.voteUpCount} />
-              </WrapImgText>
-              <WrapText>{v.articleTitle}</WrapText>
-            </Link>
-            <Porfile
-              nickname={v.nickname}
-              img={v.profileImage}
-              userId={v.userId}
-            />
-          </WrapCard>
-        );
-      })}
+      {isSmall ? (
+        <>
+          {data.slice(0, 4).map((v) => {
+            return (
+              <WrapCard key={v.articleId}>
+                <Link to={`/detail/article/${v.articleId}`}>
+                  <CardTextPopular up={v.voteUpCount} />
+                  <WrapText>{v.articleTitle}</WrapText>
+                </Link>
+                <Profile
+                  nickname={v.nickname}
+                  img={v.profileImage}
+                  userId={v.userId}
+                  rank={v.rank}
+                />
+              </WrapCard>
+            );
+          })}
+        </>
+      ) : (
+        <>
+          {data.map((v) => {
+            return (
+              <WrapCard key={v.articleId}>
+                <Link to={`/detail/article/${v.articleId}`}>
+                  <CardTextPopular up={v.voteUpCount} />
+                  <WrapText>{v.articleTitle}</WrapText>
+                </Link>
+                <Profile
+                  nickname={v.nickname}
+                  img={v.profileImage}
+                  userId={v.userId}
+                  rank={v.rank}
+                />
+              </WrapCard>
+            );
+          })}
+        </>
+      )}
     </ArticleBox>
   );
 };
@@ -45,13 +74,12 @@ const PopularArticleList = () => {
 export default PopularArticleList;
 
 const ArticleBox = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: flex-start;
-  gap: 24px 15px;
-  flex-wrap: wrap;
-  width: 588px;
-  min-height: 300px;
+  display: grid;
+  grid-gap: 24px 15px;
+  grid-template-columns: repeat(3, 1fr);
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const WrapCard = styled.div`
@@ -59,25 +87,18 @@ const WrapCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 5px;
-  width: 186px;
   height: 157px;
   padding: 16px;
   border: 1px solid var(--gray2);
   border-radius: 6px;
 `;
-const WrapImgText = styled.div`
-  display: flex;
-  gap: 9px;
-`;
 
 const WrapText = styled.p`
   display: -webkit-box;
-  margin-top: 10px;
+  width: 100%;
   font-size: 18px;
-  font-weight: 300;
   line-height: 26px;
   font-weight: 700;
-  width: 100%;
   white-space: normal;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

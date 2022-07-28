@@ -3,8 +3,8 @@ import { useMutation, useQueryClient, useQuery } from "react-query";
 import { toastify } from "../../custom/toastify";
 
 export const useDetailArticleMutate = {
-  //찬성투표
-  useVoteUpMutation: () => {
+  //추천투표
+  useVoteUpMutation: (articleId) => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
       await api.post(`/articles/${payload.postId}/up`, {
@@ -13,7 +13,9 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries(["voteSign", articleId]);
+        queryClient.invalidateQueries(["ContentInquiry", articleId]);
+        queryClient.invalidateQueries("rank");
         toastify.success("투표 완료");
       },
       onError: (data) => {
@@ -23,8 +25,8 @@ export const useDetailArticleMutate = {
       },
     });
   },
-  //반대 투표
-  useVoteDownMutation: () => {
+  //비추천 투표
+  useVoteDownMutation: (articleId) => {
     const queryClient = useQueryClient();
     const fetcher = async (payload) => {
       await api.post(`/articles/${payload.postId}/down`, {
@@ -33,7 +35,8 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries(["voteSign", articleId]);
+        queryClient.invalidateQueries(["ContentInquiry", articleId]);
         toastify.success("투표 완료");
       },
       onError: (data) => {
@@ -45,7 +48,6 @@ export const useDetailArticleMutate = {
   },
   //댓글 작성
   useWriteComment: (option) => {
-    const queryClient = useQueryClient();
     const fetcher = async ({ write, id }) => {
       const { data } = await api.post(`/articles/${id}/comment`, {
         comments: write,
@@ -62,7 +64,8 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries("rank");
+        queryClient.invalidateQueries("ContentInquiry");
         toastify.success("댓글 삭제 완료");
       },
       onError: (data, error, variables, context) => {
@@ -78,7 +81,8 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries("rank");
+        queryClient.invalidateQueries("ContentInquiry");
         toastify.success("게시글 삭제 완료");
       },
       onError: (err) => {
@@ -114,5 +118,21 @@ export const useDetailArticleGet = {
       }
     };
     return useQuery(["NewsSearch", payload], fetcher);
+  },
+  // 주가 상세 정보 가져오기
+  useGetDetailStock: (stockName) => {
+    const fetcher = async () => {
+      const response = api.get(`/stock/details/${stockName}`);
+      return response;
+    };
+    return useQuery(["stockDetail", stockName], fetcher);
+  },
+  // voteSign
+  useGetVoteSign: (articleId) => {
+    const fetcher = async () => {
+      const response = api.post(`articles/${articleId}/voteSign`);
+      return response;
+    };
+    return useQuery(["voteSign", articleId], fetcher);
   },
 };

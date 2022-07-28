@@ -9,25 +9,20 @@ import TotalArticle from "./page/TotalArticle";
 import DetailArticle from "./page/DetailArticle";
 import OAuth from "./components/KakaoLogin/OAuth";
 import SearchArticle from "./page/SearchArticle";
-import AddArticleFixBtn from "./components/AddArticle/AddArticleFixBtn";
+import MenuBtn from "./repeat/MenuBtn";
+import Footer from "./repeat/Footer";
+import AddFormModal from "./components/AddArticle/AddFormModal";
 
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import "./CSS/toastify.css";
-import Footer from "./repeat/Footer";
-import ChartModal from "./components/Chart/ChartModal";
-import AddFormModal from "./components/AddArticle/AddFormModal";
 
 function App() {
-  // 게시글 작성 토글 관리 recoil
-
   return (
     <div className="App">
       <GlobalStyle />
       <AddFormModal />
-      <ChartModal />
       <Header />
-      <AddArticleFixBtn />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route
@@ -37,10 +32,11 @@ function App() {
         <Route path="/detail/article/:id" element={<DetailArticle />} />
         <Route path="/user/kakao/callback" element={<OAuth />} />
         <Route
-          path="/search/article/:category/:keyword"
+          path="/search/article/:category/:keyword/:page"
           element={<SearchArticle />}
         />
       </Routes>
+      <MenuBtn />
       <Footer />
       <ToastContainer />
     </div>

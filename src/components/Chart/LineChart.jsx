@@ -1,15 +1,30 @@
 import dayjs from "dayjs";
-import React from "react";
+import React, { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
+import useSliceNum from "../../custom/sliceNum";
 import { lineChartDummy } from "../../Data/chartDummy";
+import LoadingSpinner from "../../repeat/LoadingSpinner";
+import { useChartQuery } from "./useChartQuery";
 
-const LineChart = () => {
+const LineChart = ({ stockName }) => {
+  const { data = lineChartDummy, isLoading } =
+    useChartQuery.useGetChartData(stockName);
+  const lineChartData = useMemo(() => {
+    const newDataList = [...data.chart].reverse().map((v) => {
+      return { x: v[0], y: v[3] };
+    });
+    return newDataList;
+  }, [data]);
+
+  // 숫자 , 찍기
+  const sliceNum = useSliceNum;
+
   const state = {
     series: [
       {
         // tool에 표시될 내용
-        name: "마감 가",
-        data: lineChartDummy,
+        name: "종가",
+        data: lineChartData,
       },
     ],
     options: {
@@ -18,7 +33,7 @@ const LineChart = () => {
         width: 1,
       },
       // 차트 색 변경
-      colors: ["#f00"],
+      colors: ["#1fb652"],
       chart: {
         // 하단 색
         foreColor: "#373d3f",
@@ -53,19 +68,19 @@ const LineChart = () => {
           // 그라데이션 색 변경
           inverseColors: false,
           // 색 범위
-          opacityFrom: 0.4,
+          opacityFrom: 0.6,
           // 진하기
-          opacityTo: 0.6,
+          opacityTo: 1,
           // 그라데이션 색 조정
-          stops: [0, 100, 100],
+          stops: [0, 90, 100],
         },
       },
       yaxis: {
         opposite: true,
         //y축에 나타나는 가격 tooltip과는 따로 논다
         labels: {
-          formatter: function (val) {
-            return val;
+          formatter: function (value) {
+            return sliceNum(parseInt(value)) + "원";
           },
         },
       },
@@ -74,8 +89,10 @@ const LineChart = () => {
         // 갯수
         tickAmount: 5,
         labels: {
-          formatter: function (val) {
-            return dayjs(new Date(val)).format("YY / DD");
+          offsetX: 4,
+          rotate: 0,
+          formatter: function (value) {
+            return `${value?.slice(4, 6)}/${value?.slice(6, 8)}`;
           },
         },
       },
@@ -83,20 +100,26 @@ const LineChart = () => {
         shared: false,
         // tooltip에서 나타내는 y축 수치
         y: {
-          formatter: function (val) {
-            return val;
+          formatter: function (value) {
+            return sliceNum(parseInt(value)) + "원";
           },
         },
       },
     },
   };
   return (
-    <ReactApexChart
-      options={state.options}
-      series={state.series}
-      type="area"
-      height="100%"
-    />
+    <>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <ReactApexChart
+          options={state.options}
+          series={state.series}
+          type="area"
+          height="100%"
+        />
+      )}
+    </>
   );
 };
 
