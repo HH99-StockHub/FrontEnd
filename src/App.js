@@ -24,8 +24,7 @@ function App() {
     <div className="App">
       <GlobalStyle />
       <AddFormModal />
-      {/* <Header /> */}
-      <SlideStock />
+      <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route
