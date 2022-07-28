@@ -42,6 +42,7 @@ const FramRichArticle = () => {
 
 export default FramRichArticle;
 const WrapRich = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 12px;

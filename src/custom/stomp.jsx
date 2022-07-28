@@ -1,11 +1,13 @@
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 
-const socket = new SockJS(process.env.REACT_APP_STOMP_ENDPOINT_KEY);
-
-export const stompClient = Stomp.over(socket);
+let socket = null;
+let stompClient = null;
 // 연결
 export const stompConnect = (token) => {
+  socket = new SockJS(process.env.REACT_APP_STOMP_ENDPOINT_KEY);
+
+  stompClient = Stomp.over(socket);
   stompClient.connect({ token: token }, {}, onError);
 };
 // 연결 끊기
@@ -14,6 +16,9 @@ export const stompDisConnect = (token) => {
 };
 // 로그인 상태에서 연결
 export const stompLoginConnect = (token, userId, setAlarmList) => {
+  socket = new SockJS(process.env.REACT_APP_STOMP_ENDPOINT_KEY);
+
+  stompClient = Stomp.over(socket);
   stompClient.connect(
     { token: token },
     () => {
