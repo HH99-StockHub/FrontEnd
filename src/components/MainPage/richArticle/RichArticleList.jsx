@@ -73,6 +73,7 @@ const RichArticleList = () => {
 export default RichArticleList;
 
 const ArticleBox = styled.div`
+  position: relative;
   display: grid;
   grid-gap: 24px 15px;
   grid-template-columns: repeat(3, 1fr);

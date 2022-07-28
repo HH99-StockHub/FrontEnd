@@ -43,6 +43,7 @@ const FramPopularArticle = () => {
 
 export default FramPopularArticle;
 const WrapPopular = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 12px;
