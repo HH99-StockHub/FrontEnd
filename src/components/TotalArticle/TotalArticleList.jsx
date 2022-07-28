@@ -28,7 +28,17 @@ const TotalArticleList = ({ data }) => {
                 navigate(`/detail/article/${data.articleId}`);
               }}
             >
-              <P>{data.stockName}</P>
+              <WrapBadge>
+                <P>{data.stockName}</P>
+                <div>
+                  {data.richList ? (
+                    <Badge color="var(--blue1)">수익왕</Badge>
+                  ) : null}
+                  {data.popularList ? (
+                    <Badge color="var(--blue2)">인기글</Badge>
+                  ) : null}
+                </div>
+              </WrapBadge>
               <P1>{data.articleTitle}</P1>
               <WrapRandom>
                 <Random>
@@ -92,14 +102,6 @@ const TotalArticleList = ({ data }) => {
                       {data.nickname}
                     </P3>
                   </div>
-                  <div>
-                    {data.richList ? (
-                      <Badge color="var(--blue1)">수익왕</Badge>
-                    ) : null}
-                    {data.popularList ? (
-                      <Badge color="var(--blue2)">인기글</Badge>
-                    ) : null}
-                  </div>
                 </WrapBottom>
                 <P4>{dayjs(data.createdAt).format("YY.MM.DD")}</P4>
               </Just>
@@ -137,6 +139,16 @@ const Box = styled.div`
   flex-direction: column;
   flex-grow: 0;
   cursor: pointer;
+`;
+
+const WrapBadge = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > div {
+    display: flex;
+    gap: 4px;
+  }
 `;
 
 const P = styled.p`
