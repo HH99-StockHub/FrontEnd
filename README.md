@@ -51,6 +51,7 @@
 <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=purple">  <br> 
 <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=pink">  <br> 
 <img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=green"> <br>
+<img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">
 
 
 
