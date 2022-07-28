@@ -16,6 +16,6 @@ export const useGetSearchArticle = {
           return user;
       }
     };
-    return useQuery(["searchArticle", category, keyword], fetcher);
+    return useQuery(["searchArticle", category, keyword, page], fetcher);
   },
 };
