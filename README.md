@@ -55,6 +55,7 @@
 
 ## 🔥  Trouble Shooting
 <details markdown="1">
+<summary>이슈 </summary>
 https://github.com/HH99-StockHub/FrontEnd/issues/49
 </details>
 
