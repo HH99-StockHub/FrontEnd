@@ -87,8 +87,8 @@ const MyDrupDown = ({ data }) => {
 
   return (
     <WrapDropDown ref={el}>
-      <DropDownHeader>
-        <button onClick={toggling}>{localStorage.getItem("nickName")}</button>
+      <DropDownHeader onClick={toggling}>
+        {localStorage.getItem("nickName")}
       </DropDownHeader>
       {isOpen && (
         <DropDownList>
@@ -178,6 +178,13 @@ const WrapDropDown = styled.div`
 
 const DropDownHeader = styled.div`
   font-size: 12px;
+  cursor: pointer;
+  display: -webkit-box;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const DropDownList = styled.div`

@@ -50,7 +50,7 @@ const DetailArticle = () => {
     <>
       <HelmetComponents title={`${data.stockName} 게시글`} />
       <SlideStock />
-      <TotalArticleHeader />
+      <TotalArticleHeader detail={false} />
       <Div>
         <Container>
           {isLoading ? (

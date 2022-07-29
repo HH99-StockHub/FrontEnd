@@ -37,7 +37,6 @@ const WrapMainContent = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 64px;
-  margin: 0 auto;
   margin-top: 64px;
   @media screen and (max-width: 1260px) {
     gap: 44px;
@@ -45,7 +44,6 @@ const WrapMainContent = styled.div`
   > div {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     gap: 64px;
     margin: 0 auto;
     > div {
@@ -61,6 +59,7 @@ const WrapMainContent = styled.div`
       flex-direction: column;
       gap: 44px;
       margin: 0 auto;
+      width: 100%;
       align-items: center;
       justify-content: center;
     }

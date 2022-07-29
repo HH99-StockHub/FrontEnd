@@ -18,7 +18,11 @@ const LoginHeader = () => {
     useHeaderApi.useGetRank();
   // media
   const isSmall = useMediaQuery({
-    query: "(max-width : 370px)",
+    query: "(max-width : 500px)",
+  });
+
+  const isMostSmall = useMediaQuery({
+    query: "(max-width : 420px)",
   });
   // 글작성 상태
   const setFormState = useSetRecoilState(addArticleState);
@@ -43,7 +47,7 @@ const LoginHeader = () => {
           src={localStorage.getItem("profileImg")}
         />
         <MyDrupDown data={data.data} />
-        <span>{data.data?.rank}</span>
+        {!isMostSmall && <span>{data.data?.rank}</span>}
       </WrapProfile>
       {!isSmall && <Writing onClick={openAddArticle}>글쓰기</Writing>}
 
@@ -70,6 +74,7 @@ const WrapProfile = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-left: 10px;
   > span {
     font-size: 12px;
     font-weight: 700;

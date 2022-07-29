@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import useChangeNum from "../../../custom/changeNum";
 import ProfileImg from "../../../elem/ProfileImg";
 
 const Writing = (props) => {
@@ -13,6 +14,7 @@ const Writing = (props) => {
     userId,
     rank,
   } = props;
+  const changeNum = useChangeNum;
   return (
     <>
       <Box>
@@ -29,7 +31,7 @@ const Writing = (props) => {
         </Sam>
         <Div>
           <P2>{articleTitle}</P2>
-          <P>조회 {123444}</P>
+          <P>조회 {changeNum(view)}</P>
         </Div>
       </Box>
     </>
@@ -66,7 +68,6 @@ const P = styled.p`
   font-size: 12px;
   line-height: 15px;
   text-align: right;
-  border: 1px solid #000;
   @media screen and (max-width: 800px) {
     width: 150px;
     line-height: 20px;
@@ -87,7 +88,6 @@ const P2 = styled.p`
   font-size: 22px;
   line-height: 26px;
   word-break: break-all;
-  border: 1px solid #000;
 `;
 
 const P3 = styled.div`
@@ -97,7 +97,7 @@ const P3 = styled.div`
   line-height: 17px;
   display: flex;
   align-items: center;
-  color: var(--black);
+  width: 210px;
 `;
 
 export default Writing;

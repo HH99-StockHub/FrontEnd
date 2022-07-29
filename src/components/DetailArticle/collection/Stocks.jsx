@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
+import { useMediaQuery } from "react-responsive";
 // 훅
 import useSliceNum from "../../../custom/sliceNum";
 
@@ -14,6 +15,11 @@ const Stocks = (props) => {
     targetReturn,
   } = props;
   const sliceNum = useSliceNum;
+
+  const isMiddle = useMediaQuery({
+    query: "(max-width:500px)",
+  });
+
   return (
     <Box>
       <Div>
@@ -30,7 +36,9 @@ const Stocks = (props) => {
               수익률 마감 일자 :
               {dayjs(date).format("YYYY.MM.DD") ===
               dayjs(deadline).format("YYYY.MM.DD")
-                ? " 해당 없음"
+                ? isMiddle
+                  ? " -"
+                  : "해당 없음"
                 : dayjs(deadline).format("YYYY.MM.DD")}
             </Stock1divlastdiv>
           </Stock1divlast>
@@ -38,7 +46,9 @@ const Stocks = (props) => {
             <P4>목표 금액</P4>
             <P3>
               {targetReturn === 0
-                ? "해당 없음"
+                ? isMiddle
+                  ? "-"
+                  : "해당 없음"
                 : `${sliceNum(
                     parseInt((stockPriceFirst * targetReturn) / 100) +
                       stockPriceFirst,
@@ -105,9 +115,7 @@ const Stock1 = styled.div`
     display: flex;
     flex-direction: column;
     width: 620px;
-    padding: 0px;
     > div {
-      height: 50%;
       padding: 14px 11px;
     }
   }
@@ -124,7 +132,6 @@ const Stock1div = styled.div`
   line-height: 14px;
   @media screen and (max-width: 1240px) {
     color: var(--white);
-    background: var(--green1);
     width: 100%;
     text-align: center;
   } ;
@@ -139,7 +146,6 @@ const Stock1last = styled.div`
     width: 620px;
     padding: 0px;
     > div {
-      height: 50%;
       display: flex;
       padding: 14px 11px;
     }
@@ -147,16 +153,16 @@ const Stock1last = styled.div`
 `;
 
 const Stock1divlast = styled.div`
+  color: var(--white);
+  text-align: center;
+  padding: 8px;
+  background-color: var(--green1);
   margin-bottom: 4px;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  background: var(--green1);
-  padding: 8px;
-  text-align: center;
   @media screen and (max-width: 1240px) {
     color: var(--white);
-    background: var(--green1);
   } ;
 `;
 
@@ -170,6 +176,10 @@ const Stock1div2 = styled.div`
   font-size: 12px;
   line-height: 14px;
   align-items: center;
+  @media screen and (max-width: 465px) {
+    flex-direction: column;
+    gap: 6px;
+  }
 `;
 
 const Stock1div22 = styled.div`
@@ -188,6 +198,9 @@ const P = styled.p`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
+  @media screen and (max-width: 465px) {
+    font-size: 14px;
+  }
 `;
 
 const PP = styled.p`
@@ -206,7 +219,10 @@ const P1 = styled.p`
   margin-top: 19px;
   @media screen and (max-width: 1240px) {
     margin-top: 0;
-  } ;
+  }
+  @media screen and (max-width: 465px) {
+    font-size: 14px;
+  }
 `;
 
 const P2 = styled.p`
@@ -219,7 +235,10 @@ const P2 = styled.p`
   margin-top: 19px;
   @media screen and (max-width: 1240px) {
     margin-top: 0;
-  } ;
+  }
+  @media screen and (max-width: 465px) {
+    font-size: 14px;
+  }
 `;
 
 const P3 = styled.p`
@@ -227,6 +246,9 @@ const P3 = styled.p`
   font-size: 16px;
   line-height: 19px;
   color: var(--green2);
+  @media screen and (max-width: 465px) {
+    font-size: 14px;
+  }
 `;
 
 const P4 = styled.p`
