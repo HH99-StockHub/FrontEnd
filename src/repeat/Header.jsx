@@ -62,7 +62,7 @@ const Header = () => {
             }}
           />
         </Logo1>
-        {/* {login ? <LoginHeader /> : <KakaoLogin>카카오로그인</KakaoLogin>} */}
+        {login ? <LoginHeader /> : <KakaoLogin>카카오로그인</KakaoLogin>}
       </Header2>
     </Header1>
   );
