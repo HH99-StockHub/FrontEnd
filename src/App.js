@@ -17,12 +17,15 @@ import NotFound from "./page/NotFound";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import "./CSS/toastify.css";
+import SlideStock from "./repeat/SlideStock";
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
+
       <AddFormModal />
+      <SlideStock />
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
