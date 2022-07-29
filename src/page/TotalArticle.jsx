@@ -49,6 +49,7 @@ const TotalArticle = () => {
 };
 
 const Box = styled.div`
+  position: relative;
   min-height: 90vh;
   background: #f5f5f5;
 `;

@@ -7,17 +7,12 @@ import TotalArticleList from "./TotalArticleList";
 import TotalPagenation from "./TotalPagenation";
 // 훅
 import { useTotalPageQuery } from "./useTotalPageQuery";
-import { toastify } from "../../custom/toastify";
 
 const TotalArticleContent = ({ category, page }) => {
-  // return <TotalArticleList data={data} isLoading={isLoading} />;
-  const { data, isLoading, isError } = useTotalPageQuery.useGetAllArticles(
+  const { data, isLoading } = useTotalPageQuery.useGetAllArticles(
     category,
     page,
   );
-  if (isError) {
-    toastify.error("불러오기를 실패했습니다");
-  }
   return (
     <>
       {isLoading ? (

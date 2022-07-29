@@ -24,13 +24,9 @@ const MainArticleContent = () => {
   if (isLoading) return <LoadingSpinner />;
   return (
     <>
-      {isSmall
-        ? data.slice(0, 5).map((v) => {
-            return <MainArticleCard key={v.articleId} data={v} />;
-          })
-        : data.map((v) => {
-            return <MainArticleCard key={v.articleId} data={v} />;
-          })}
+      {data.map((v) => {
+        return <MainArticleCard key={v.articleId} data={v} />;
+      })}
     </>
   );
 };

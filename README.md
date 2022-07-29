@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# [StockHub] 
+(이미지)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📆 프로젝트 기간
+2022/06/24 ~ 2022/08/05
+배포
 
-## Available Scripts
+## 팀원소개
+| Name                 | GitHub / Contact                          | Position    |
+| -------------------- | --------------------------------------    | ----------- |
+| Frontend Github Link | https://github.com/HH99-StockHub/FrontEnd 
+| 박태형VL             |  https://github.com/bigtae1007             | FE / React  |
+| 정신영               | https://github.com/sinyoung12              | FE / React  |
+| Backend Github Link  | https://github.com/HH99-StockHub/BackEnd  |
+| 조한울L              | https://github.com/gaius365                | BE / Spring |
+| 문준호               | https://github.com/mjoonho                 | BE / Spring |
+| 주 희                | https://github.com/Joo-hui                 | BE / Spring |
+| Designer             |                                            | Designer   |
+| 이은지               |                                            |            |
 
-In the project directory, you can run:
 
-### `yarn start`
+## 서비스 아키텍처
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙ 주요 기능
+- **게시글 작성/삭제**: KOSPI/KOSDAQ 상장 주식을 한 가지 선택하여 그 주식에 대한 매수 의견을 게시
+- **찬반 투표**: 타인의 게시글에 대해 찬성/반대의 투표를 행사 또는 수정행사 가능
+- **댓글 작성/삭제**
+- **수익률 기록**: 게시글이 작성 시점부터 게시글 조회 시점까지의 수익률을 표시
+- **기사 표시**: 게시글 해당 종목명으로 검색했을 때 나오는 네이버 기사를 표시
+- **모아보기**: 본인 및 타 유저의 게시글을 모아보기
+- **인기글 게시판 등록**: 1) 3표 이상의 찬성 표를 획득 + 2) 2배수 이상의 찬성/반대 비율 달성
+- **수익왕 게시판 등록**: 5% 이상의 수익률 달성
+- **목표수익률**: 게시글 작성 시 목표수익률 설정 (+10%, +20%, + 30%, +50%, +100%, +150%, +200%)
+- **메인 배너**: 종합 주가 지수 정보를 배너에 흐르는 형태로 게시
+- **주가 차트**: 게시글 해당 종목의 1년치 선차트, 일봉차트 표시
+- **랭크 시스템**: 게시글/댓글 작성 실적과 인기글 달성 업적을 점수화 해서 랭크 시스템을 적용 (신입 0점 - 초보 10점 - 중수 100점 - 고수 200점 - 지존 500점 / 게시글 작성 +30점, 댓글 작성 +5점, 인기글 달성 +50점)
+- **알림 기능**: 인기글/수익왕 달성, 댓글, 찬반투표 등에 대한 알림
+- **채팅방**: 로그인한 유저들끼리 토론할 수 있는 채팅방
 
-### `yarn test`
+## 기술스택
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### :boom: Frontend
+<div>
+<img src="https://img.shields.io/badge/sockjs-1877F2?style=flat&logo=ssockjs&logoColor=white">
+<img src="https://img.shields.io/badge/stomp-1877F2?style=flat&logo=stomp&logoColor=white">
+<img src="https://img.shields.io/badge/Chart.js-ff6384?style=flat&logo=Chart.js&logoColor=white"><br>
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <br>
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">  
+<img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=purple"><br> 
+<img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=pink">
+<img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=green"> <br>
+<img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">
+  <div/>
 
-### `yarn build`
+## 🔥  Trouble Shooting
+<details markdown="1">
+<summary>이슈 </summary>
+https://github.com/HH99-StockHub/FrontEnd/issues/49<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/37<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/11<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/6<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/1<br/>
+</details>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -10,10 +10,16 @@ import { ReactComponent as Right } from "../../image/Right.svg";
 const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
   const navigate = useNavigate();
   // 페이지 기준
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(nowPage);
   // 버튼 갯수
-  const [btnCount, setBtnCount] = useState([1, 2, 3, 4, 5]);
-
+  const standardPage = Math.ceil(page / 5) * 5;
+  const [btnCount, setBtnCount] = useState([
+    standardPage - 4,
+    standardPage - 3,
+    standardPage - 2,
+    standardPage - 1,
+    standardPage,
+  ]);
   // 현재 버튼에 CSS 주기위한 값
   const nowCssBtn = () => {
     if (Number(nowPage) % 5 === 0) {
@@ -34,14 +40,14 @@ const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
 
   // 이전 페이지 넘기기
   const navigatePrevious = () => {
-    if (page === 1) {
+    if (Number(btnCount[0]) === 1) {
       // 첫 페이지 일 경우
       toastify.error("이전 페이지가 존재하지 않습니다");
     } else {
       if (type === "total") {
-        navigate(`/total/${category}/articles/${page}`);
+        navigate(`/total/${category}/articles/${btnCount[0] - 1}`);
       } else {
-        navigate(`/search/article/${category}/${keyword}/${page}`);
+        navigate(`/search/article/${category}/${keyword}/${btnCount[0] - 1}`);
       }
       setPage(page - 5);
     }
@@ -49,26 +55,49 @@ const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
   // 다음 페이지 넘기기
   const navigateNext = () => {
     // 다음 페이지가 전체 페이지를 넘을 경우
-    if (page + 5 > totalPages) {
+    if (Number(btnCount[0]) + 5 > totalPages) {
       toastify.error(`${totalPages} 페이지가 마지막입니다`);
     } else {
       if (type === "total") {
-        navigate(`/total/${category}/articles/${page}`);
+        navigate(`/total/${category}/articles/${Number(btnCount[4]) + 1}`);
       } else {
-        navigate(`/search/article/${category}/${keyword}/${page}`);
+        navigate(
+          `/search/article/${category}/${keyword}/${Number(btnCount[4]) + 1}`,
+        );
       }
-      setPage(page + 5);
     }
   };
-
+  useEffect(() => {
+    setPage(nowPage);
+    const standardPage = Math.ceil(nowPage / 5) * 5;
+    if (totalPages < standardPage) {
+      setBtnCount(
+        [
+          standardPage - 4,
+          standardPage - 3,
+          standardPage - 2,
+          standardPage - 1,
+          standardPage,
+        ].slice(0, totalPages % 5),
+      );
+    } else {
+      setBtnCount([
+        standardPage - 4,
+        standardPage - 3,
+        standardPage - 2,
+        standardPage - 1,
+        standardPage,
+      ]);
+    }
+  }, [nowPage, totalPages]);
   // 주소에 따라 page 설정하기
   useEffect(() => {
     // 페이지가 있을 경우, 없으면 페이지 1번으로
     if (Number(nowPage) <= totalPages && Number(nowPage) >= 1) {
-      // 페이지가 한 자릿수 이거나 10일 경우
+      // 페이지가 한 자릿수 이거나 5일 경우
       if (nowPage.length === 1 || Number(nowPage) === 5) {
         setPage(1);
-        // 페이지가 10의 배수일 경우
+        // 페이지가 5의 배수일 경우
       } else if (Number(nowPage) % 5 === 0) {
         const startPage =
           String(nowPage.slice(0, 1) - 1) +
@@ -89,21 +118,6 @@ const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
       }
     }
   }, [category]);
-
-  // 마지막 페이지 리스트일 경우 배열 갯수 조절하기
-  useEffect(() => {
-    // 마지막 페이지에서 역순 할 경우
-    if (Number(page + 4) < Number(totalPages) && btnCount.length !== 5) {
-      const arr = [1, 2, 3, 4, 5];
-      setBtnCount(arr);
-      // 마지막 페이지 리스트일 경우
-    } else if (Number(page + 4) > Number(totalPages)) {
-      const count = String(totalPages).slice(-1);
-      const arr = [1, 2, 3, 4, 5];
-
-      setBtnCount(arr.slice(0, Number(count)));
-    }
-  }, [page, category, totalPages, keyword]);
   return (
     <WrapAllBtn>
       <button onClick={navigatePrevious}>
@@ -115,10 +129,10 @@ const TotalPagenation = ({ category, nowPage, totalPages, type, keyword }) => {
             <button
               key={v}
               onClick={() => {
-                navigatePage(Number(page) + Number(l));
+                navigatePage(v);
               }}
             >
-              {Number(page) + Number(l)}
+              {v}
             </button>
           );
         })}

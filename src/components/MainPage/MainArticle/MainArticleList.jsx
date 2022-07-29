@@ -56,6 +56,8 @@ export default MainArticleList;
 
 const Table = styled.div`
   position: relative;
+  min-height: 300px;
+  width: 100%;
 `;
 const THead = styled.div`
   display: flex;
@@ -65,6 +67,7 @@ const THead = styled.div`
   background-color: var(--blue1);
   font-size: 12px;
   color: var(--white);
+  width: 100%;
   p {
     text-align: right;
     &:first-child,

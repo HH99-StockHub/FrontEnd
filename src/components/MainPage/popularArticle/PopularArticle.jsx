@@ -18,6 +18,7 @@ const PopularArticle = () => {
 
 export default PopularArticle;
 const WrapArticle = styled.div`
+  min-height: 200px;
   max-width: 588px;
   @media screen and (max-width: 700px) {
     max-width: 500px;

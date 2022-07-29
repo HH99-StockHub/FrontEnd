@@ -21,7 +21,7 @@ import { alarmList } from "../state/server/alarm";
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 import LoginHeader from "./LoginHeader";
 
-const Header = React.memo(() => {
+const Header = () => {
   //recoil
   const [login, setLoginState] = useRecoilState(loginState);
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ const Header = React.memo(() => {
       </Header2>
     </Header1>
   );
-});
+};
 
 export default Header;
 

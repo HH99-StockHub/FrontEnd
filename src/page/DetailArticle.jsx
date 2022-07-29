@@ -116,6 +116,10 @@ const DetailArticle = () => {
 const Container = styled.div`
   position: relative;
   width: 100%;
+  max-width: 820px;
+  @media screen and (max-width: 1240px) {
+    max-width: 1240px;
+  }
 `;
 
 const Div = styled.div`

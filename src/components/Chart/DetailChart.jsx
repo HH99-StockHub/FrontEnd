@@ -14,7 +14,9 @@ const DetailChart = ({ stockName }) => {
   const isMiddle = useMediaQuery({
     query: "(max-width : 720px)",
   });
-
+  const isSmall = useMediaQuery({
+    query: "(max-width : 530px)",
+  });
   // 차트 선택
   const [chartState, setChartState] = useState(false);
   // 캔들 차트 상태관리
@@ -28,7 +30,7 @@ const DetailChart = ({ stockName }) => {
 
   return (
     <WrapChart>
-      <WrapBtn state={chartState}>
+      <WrapBtn>
         <div>
           <div>
             <AdjustmentBtn
@@ -64,13 +66,14 @@ const DetailChart = ({ stockName }) => {
             >
               -
             </AdjustmentBtn>
-            <button
+            <DayChart
+              state={chartState}
               onClick={() => {
                 setChartState(false);
               }}
             >
-              일봉 차트
-            </button>
+              {isSmall ? "일봉" : "일봉 차트"}
+            </DayChart>
             <AdjustmentBtn
               state={chartState}
               onClick={() => {
@@ -98,13 +101,14 @@ const DetailChart = ({ stockName }) => {
               &#8594;
             </AdjustmentBtn>
           </div>
-          <button
+          <YearChart
+            state={chartState}
             onClick={() => {
               setChartState(true);
             }}
           >
-            선 차트
-          </button>
+            {isSmall ? "1년" : "선 차트"}
+          </YearChart>
         </div>
         <button
           onClick={() => {
@@ -143,35 +147,15 @@ const WrapBtn = styled.div`
   position: relative;
   > div {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 10%;
+    width: 85%;
+    @media screen and (max-width: 600px) {
+      gap: 8px;
+    }
     > div {
       display: flex;
       gap: 5px;
-      > button {
-        padding: 10px 20px;
-        border-radius: 6px;
-        &:nth-child(3) {
-          ${({ state }) => {
-            return !state
-              ? "background-color: var(--green1);color: var(--white); "
-              : null;
-          }}
-          border: 1px solid var(--green1);
-        }
-      }
-    }
-    > button {
-      padding: 10px 20px;
-      border-radius: 6px;
-      border: 1px solid #000;
-      &:nth-child(2) {
-        ${({ state }) => {
-          return state
-            ? "background-color: var(--green1);color: var(--white); "
-            : null;
-        }}
-      }
     }
   }
   > button {
@@ -182,9 +166,45 @@ const WrapBtn = styled.div`
     height: 20px;
   }
 `;
-
+const DayChart = styled.button`
+  ${({ state }) => {
+    return !state
+      ? "background-color: var(--green1);color: var(--white); "
+      : null;
+  }}
+  padding: 10px 20px;
+  width: 100px;
+  border-radius: 6px;
+  border: 1px solid var(--green1);
+  @media screen and (max-width: 530px) {
+    padding: 5px 10px;
+    width: 50px;
+  }
+`;
+const YearChart = styled.button`
+  ${({ state }) => {
+    return state
+      ? "background-color: var(--green1);color: var(--white); "
+      : null;
+  }}
+  padding: 10px 20px;
+  width: 100px;
+  border-radius: 6px;
+  border: 1px solid var(--green1);
+  @media screen and (max-width: 530px) {
+    padding: 5px 10px;
+    width: 50px;
+  }
+`;
 const AdjustmentBtn = styled.button`
   border: 1px solid var(--gray3);
   border-radius: 6px;
+  padding: 0 10px;
   ${({ state }) => (state ? "display:none;" : null)}
+  @media screen and (max-width: 430px) {
+    padding: 0 4px;
+  }
+  @media screen and (max-width: 360px) {
+    padding: 0 2px;
+  }
 `;

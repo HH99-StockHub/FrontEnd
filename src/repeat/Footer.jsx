@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Footer = () => {
-  return <WrapFooter>footer</WrapFooter>;
+  return <WrapFooter></WrapFooter>;
 };
 
 export default Footer;

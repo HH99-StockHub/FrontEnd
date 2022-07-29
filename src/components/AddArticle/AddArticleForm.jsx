@@ -90,10 +90,11 @@ const AddArticleForm = () => {
     const changeData = data.filter((v) => {
       if (String(word).length !== 0) {
         return (
-          v.stockName.slice(0, String(word).length).toLowerCase() ===
+          (v.stockName.slice(0, String(word).length).toLowerCase() ===
             word.toLowerCase() ||
-          v.stockCode.slice(0, String(word).length).toLowerCase() ===
-            word.toLowerCase()
+            v.stockCode.slice(0, String(word).length).toLowerCase() ===
+              word.toLowerCase()) &&
+          v.stockName.indexOf("%") == -1
         );
       } else {
         return false;
