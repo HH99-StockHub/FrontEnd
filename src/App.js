@@ -25,7 +25,6 @@ function App() {
       <GlobalStyle />
 
       <AddFormModal />
-      <SlideStock />
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
