@@ -14,8 +14,8 @@ import { useHeaderApi } from "../../repeat/useRepeatQuery";
 
 const MyDrupDown = ({ data }) => {
   // 경험치 총량
-  const experience = () => {
-    switch (data.rank) {
+  const expPoint = () => {
+    switch (data.rankTitle) {
       case "신입":
         return 10;
       case "초보":
@@ -95,7 +95,7 @@ const MyDrupDown = ({ data }) => {
           <ListItem onClick={() => {}}>
             내 등급 :
             <ListItemP>
-              {` [${data?.rank}] : (${data?.experience}/${experience()})`}
+              {` [${data?.rankTitle}] : (${data?.expPoint}/${expPoint()})`}
             </ListItemP>
           </ListItem>
           <ListItem1

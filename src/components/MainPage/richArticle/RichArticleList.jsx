@@ -40,7 +40,7 @@ const RichArticleList = () => {
                   img={v.profileImage}
                   nickname={v.nickname}
                   userId={v.userId}
-                  rank={v.rank}
+                  rank={v.rankTitle}
                 />
               </WrapCard>
             );
@@ -59,7 +59,7 @@ const RichArticleList = () => {
                   img={v.profileImage}
                   nickname={v.nickname}
                   userId={v.userId}
-                  rank={v.rank}
+                  rank={v.rankTitle}
                 />
               </WrapCard>
             );

@@ -14,7 +14,7 @@ import { rank } from "../state/server/rank";
 
 const LoginHeader = () => {
   // 등급 정보 받아오기
-  const { data = { data: { rank: "신입", experience: 0 } } } =
+  const { data = { data: { rankTitle: "신입", expPoint: 0 } } } =
     useHeaderApi.useGetRank();
   // media
   const isSmall = useMediaQuery({
@@ -33,21 +33,21 @@ const LoginHeader = () => {
   };
 
   useEffect(() => {
-    if (data.data?.rank) {
-      setRank(data.data?.rank);
+    if (data.data?.rankTitle) {
+      setRank(data.data?.rankTitle);
     }
   }, [data.data]);
 
   return (
     <WrapMenu>
-      <WrapProfile state={data.data.rank}>
+      <WrapProfile state={data.data.rankTitle}>
         <ProfileImg
           size="size2"
-          rank={data.data?.rank}
+          rankTitle={data.data?.rankTitle}
           src={localStorage.getItem("profileImg")}
         />
         <MyDrupDown data={data.data} />
-        {!isMostSmall && <span>{data.data?.rank}</span>}
+        {!isMostSmall && <span>{data.data?.rankTitle}</span>}
       </WrapProfile>
       {!isSmall && <Writing onClick={openAddArticle}>글쓰기</Writing>}
 
