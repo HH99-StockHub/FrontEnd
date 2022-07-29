@@ -152,6 +152,10 @@ const TitleP = styled.div`
 
 const Box1 = styled.div`
   display: flex;
+  font-size: 12px;
+  @media screen and (max-width: 375px) {
+    font-size: 10px;
+  }
 `;
 
 const Box1Div = styled.div`
@@ -159,13 +163,11 @@ const Box1Div = styled.div`
   display: flex;
   margin-top: 24px;
   font-weight: 400;
-  font-size: 12px;
   line-height: 14px;
 `;
 
 const Box1P = styled.p`
   font-weight: 400;
-  font-size: 12px;
   line-height: 14px;
   margin-right: 32px;
 `;
@@ -175,7 +177,6 @@ const Box2Div = styled.div`
   display: flex;
   margin-top: 12px;
   font-weight: 400;
-  font-size: 12px;
   line-height: 14px;
 `;
 

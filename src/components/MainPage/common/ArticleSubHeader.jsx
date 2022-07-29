@@ -116,6 +116,9 @@ const HeadText = styled.div`
   span {
     font-weight: 700;
   }
+  @media screen and (max-width: 360px) {
+    font-size: 30px;
+  }
 `;
 
 const SubText = styled.div`

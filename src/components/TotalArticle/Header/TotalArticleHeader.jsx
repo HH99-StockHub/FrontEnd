@@ -6,7 +6,7 @@ import styled from "styled-components";
 import HeaderCategory from "./HeaderCategory";
 import Search from "./Search";
 
-const TotalArticleHeader = React.memo(() => {
+const TotalArticleHeader = React.memo(({ detail = true }) => {
   const isSmall = useMediaQuery({
     query: "(max-width: 760px)",
   });
@@ -19,7 +19,7 @@ const TotalArticleHeader = React.memo(() => {
           {!isSmall && <Search />}
         </WrapHeader>
       </Wrap>
-      {isSmall && <Search />}
+      {isSmall && detail && <Search />}
     </WrapSmallMedia>
   );
 });
