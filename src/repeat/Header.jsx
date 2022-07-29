@@ -22,7 +22,6 @@ import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 import LoginHeader from "./LoginHeader";
 
 const Header = () => {
-  console.log("aa");
   //recoil
   const [login, setLoginState] = useRecoilState(loginState);
   const navigate = useNavigate();
@@ -62,7 +61,7 @@ const Header = () => {
             }}
           />
         </Logo1>
-        {/* {login ? <LoginHeader /> : <KakaoLogin>카카오로그인</KakaoLogin>} */}
+        {login ? <LoginHeader /> : <KakaoLogin>카카오로그인</KakaoLogin>}
       </Header2>
     </Header1>
   );

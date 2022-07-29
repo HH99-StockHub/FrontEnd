@@ -7,10 +7,9 @@ import TotalArticleList from "./TotalArticleList";
 import TotalPagenation from "./TotalPagenation";
 // 훅
 import { useTotalPageQuery } from "./useTotalPageQuery";
-import { toastify } from "../../custom/toastify";
 
 const TotalArticleContent = ({ category, page }) => {
-  const { data, isLoading, isError } = useTotalPageQuery.useGetAllArticles(
+  const { data, isLoading } = useTotalPageQuery.useGetAllArticles(
     category,
     page,
   );

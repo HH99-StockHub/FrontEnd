@@ -13,13 +13,13 @@ const TitleGraph = (props) => {
   return (
     <MarketDiv>
       <MarketB>
-        <MarkeTT>일일 그래프</MarkeTT>
+        <MarkeTT>1년 차트</MarkeTT>
         <MarketGp
           onClick={() => {
             setChartModal(true);
           }}
         >
-          그래프 보기
+          차트 상세보기
         </MarketGp>
       </MarketB>
       <Market>

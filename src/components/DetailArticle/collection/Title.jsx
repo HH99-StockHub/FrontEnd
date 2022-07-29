@@ -81,6 +81,7 @@ const NewsBox = styled.div`
   border: 1px solid var(--gray2);
   margin-top: 24px;
   padding: 24px 24px;
+  min-height: 200px;
 `;
 
 const NewsTitle = styled.div`
@@ -128,9 +129,9 @@ const NewsP1 = styled.pre`
 `;
 
 const Box = styled.div`
-  max-width: 403px;
+  min-width: 403px;
   @media screen and (max-width: 1240px) {
-    max-width: 1240px;
+    min-width: 0px;
   } ;
 `;
 
