@@ -91,13 +91,14 @@ const WrapText = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-bottom: 10px;
-  height: 400px;
   overflow-y: auto;
+  height: 400px;
+
   &::-webkit-scrollbar {
     width: 0;
   }
   @media screen and (max-width: 470px) {
-    height: 90%;
+    height: 70%;
   }
 `;
 
