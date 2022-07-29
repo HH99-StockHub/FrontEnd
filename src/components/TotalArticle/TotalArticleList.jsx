@@ -87,7 +87,7 @@ const TotalArticleList = ({ data }) => {
                   <div>
                     <ProfileImg
                       size="size3"
-                      rank={data.rank}
+                      rank={data.rankTitle}
                       src={data.profileImage}
                     />
                     <P3

@@ -55,7 +55,11 @@ const CommentCard = ({ data, articleId }) => {
       <WrapContent>
         <P3>
           <P3div>
-            <ProfileImg size="size3" rank={data.rank} src={data.profileImage} />
+            <ProfileImg
+              size="size3"
+              rank={data.rankTitle}
+              src={data.profileImage}
+            />
             <Link to={`/search/article/${data.nickname}/${data.userId}/1`}>
               <P3p>{data.nickname}</P3p>
             </Link>

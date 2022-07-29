@@ -14,8 +14,8 @@ import { useHeaderApi } from "../../repeat/useRepeatQuery";
 
 const MyDrupDown = ({ data }) => {
   // 경험치 총량
-  const experience = () => {
-    switch (data.rank) {
+  const expPoint = () => {
+    switch (data.rankTitle) {
       case "신입":
         return 10;
       case "초보":
@@ -87,15 +87,15 @@ const MyDrupDown = ({ data }) => {
 
   return (
     <WrapDropDown ref={el}>
-      <DropDownHeader>
-        <button onClick={toggling}>{localStorage.getItem("nickName")}</button>
+      <DropDownHeader onClick={toggling}>
+        {localStorage.getItem("nickName")}
       </DropDownHeader>
       {isOpen && (
         <DropDownList>
           <ListItem onClick={() => {}}>
             내 등급 :
             <ListItemP>
-              {` [${data?.rank}] : (${data?.experience}/${experience()})`}
+              {` [${data?.rankTitle}] : (${data?.expPoint}/${expPoint()})`}
             </ListItemP>
           </ListItem>
           <ListItem1
@@ -178,6 +178,13 @@ const WrapDropDown = styled.div`
 
 const DropDownHeader = styled.div`
   font-size: 12px;
+  cursor: pointer;
+  display: -webkit-box;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const DropDownList = styled.div`

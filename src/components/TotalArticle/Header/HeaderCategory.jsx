@@ -50,6 +50,9 @@ const CurrentCategory = styled.div`
   font-weight: 700;
   border-radius: 25px;
   font-size: 14px;
+  @media screen and (max-width: 370px) {
+    font-size: 12px;
+  }
 `;
 
 const Category = styled.div`
@@ -61,4 +64,7 @@ const Category = styled.div`
   height: 40px;
   font-weight: 700;
   font-size: 14px;
+  @media screen and (max-width: 370px) {
+    font-size: 12px;
+  }
 `;

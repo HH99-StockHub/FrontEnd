@@ -44,7 +44,7 @@ export const useHeaderApi = {
   // 닉네임 변경
   useChangeNickname: (setChangeNick) => {
     const fetcher = async (nick) => {
-      const response = api.put("/user/nickname", nick);
+      const response = await api.put("/user/nickname", nick);
 
       return { nick: nick, response: response };
     };
@@ -57,8 +57,8 @@ export const useHeaderApi = {
       },
       onError: (data) => {
         if (
-          data.response.response.status === 401 ||
-          data.response.response.status === 406
+          data.response.data.status === 401 ||
+          data.response.data.status === 406
         ) {
           toastify.error(data.response.data.message);
         } else {

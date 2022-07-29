@@ -8,7 +8,7 @@ const KakaoLogin = () => {
     <Login
       onClick={() => {
         // 로그인 버튼을 누르는 페이지 url 저장
-        const index = window.location.href.indexOf("/", 7);
+        const index = window.location.href.indexOf("/", 9);
         sessionStorage.setItem("url", window.location.href.substring(index));
         window.location.href = KAKAO_AUTH_URL;
       }}
