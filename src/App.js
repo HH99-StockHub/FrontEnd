@@ -17,7 +17,6 @@ import NotFound from "./page/NotFound";
 //CSS
 import GlobalStyle from "./elem/GlobalStyle";
 import "./CSS/toastify.css";
-import SlideStock from "./repeat/SlideStock";
 
 function App() {
   return (

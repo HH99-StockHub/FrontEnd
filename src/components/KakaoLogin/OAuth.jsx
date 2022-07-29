@@ -25,7 +25,7 @@ const OAuth = () => {
   // calllback으로 받은 인가코드
   const code = new URL(window.location.href).searchParams.get("code");
   const beforeUrl = sessionStorage.getItem("url");
-  // 로그인하기
+  // // 로그인하기
   const {
     data = false,
     isLoading,
@@ -65,9 +65,11 @@ const OAuth = () => {
   }, [data]);
   return (
     <>
-      {isLoading && <LoadingSpinner />}
       <Loding>
-        카카오 로그인 중....
+        <div>
+          <p> 카카오 로그인 중</p>
+          <span>{true && <LoadingSpinner />}</span>
+        </div>
         <Img src={LodingImg} alt="로딩 페이지" />
       </Loding>
     </>
@@ -83,6 +85,19 @@ const Loding = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  > div {
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 460px) {
+      flex-direction: column;
+    }
+
+    > span {
+      position: relative;
+      width: 120px;
+      height: 20px;
+    }
+  }
 `;
 
 const Img = styled.img`

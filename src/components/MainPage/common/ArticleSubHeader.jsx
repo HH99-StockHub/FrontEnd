@@ -37,10 +37,10 @@ const ArticleSubHeader = React.memo(() => {
             <HeadText className="title">
               방구석 애널리스트들을
               <br />
-              위한<span>StockHub</span>입니다
+              위한<span> Stock Hub</span>입니다.
             </HeadText>
             <SubText>
-              주식 인사이트를 나누고 <br />
+              투자 인사이트를 나누고 <br />
               수익왕이 되는 그날을 응원합니다!
             </SubText>
           </WrapText>
@@ -56,7 +56,7 @@ const ArticleSubHeader = React.memo(() => {
             <HeadText className="title">
               방구석 애널리스트들을
               <br />
-              위한<span> StockHub</span>입니다.
+              위한<span> Stock Hub</span>입니다.
             </HeadText>
             <SubText>
               투자 인사이트를 나누고 <br />

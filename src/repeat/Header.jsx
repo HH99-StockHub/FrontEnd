@@ -22,7 +22,6 @@ import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 import LoginHeader from "./LoginHeader";
 
 const Header = () => {
-  console.log("aa");
   //recoil
   const [login, setLoginState] = useRecoilState(loginState);
   const navigate = useNavigate();

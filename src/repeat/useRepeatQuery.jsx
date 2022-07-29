@@ -53,7 +53,7 @@ export const useHeaderApi = {
         //닉네임 저장
         setChangeNick(false);
         localStorage.setItem("nickName", data.nick);
-        toastify.success(`${data.nick}으로 닉네임 변경을 완료했습니다.`);
+        toastify.success(`${data.nick}(으)로 닉네임 변경을 완료했습니다.`);
       },
       onError: (data) => {
         if (

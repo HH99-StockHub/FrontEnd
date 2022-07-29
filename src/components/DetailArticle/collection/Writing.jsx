@@ -18,7 +18,7 @@ const Writing = (props) => {
       <Box>
         <Sam>
           <P1>
-            <div>{stockName}</div>
+            <StockName>{stockName}</StockName>
             <P3>
               <ProfileImg size="size3" rank={rank} src={profileImage} />
               <Link to={`/search/article/${nickName}/${userId}/1`}>
@@ -29,7 +29,7 @@ const Writing = (props) => {
         </Sam>
         <Div>
           <P2>{articleTitle}</P2>
-          <P>조회 {view}</P>
+          <P>조회 {123444}</P>
         </Div>
       </Box>
     </>
@@ -49,16 +49,28 @@ const Sam = styled.div`
   margin-bottom: 8px;
 `;
 
+const StockName = styled.p`
+  word-break: break-all;
+`;
+
 const Div = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: space-between;
+  align-items: flex-end;
 `;
 
 const P = styled.p`
+  width: 100px;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
+  text-align: right;
+  border: 1px solid #000;
+  @media screen and (max-width: 800px) {
+    width: 150px;
+    line-height: 20px;
+  }
 `;
 
 const P1 = styled.div`
@@ -74,6 +86,8 @@ const P2 = styled.p`
   font-weight: 700;
   font-size: 22px;
   line-height: 26px;
+  word-break: break-all;
+  border: 1px solid #000;
 `;
 
 const P3 = styled.div`

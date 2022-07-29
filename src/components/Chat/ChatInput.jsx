@@ -45,8 +45,13 @@ const ChatInput = () => {
 
   // 텍스트 칸 조정
   const changeTextLine = (e) => {
-    if (e.target.value.indexOf("\n") === -1 && !textareaState) {
+    if (
+      (e.target.value.indexOf("\n") === -1 && textareaState) ||
+      (e.target.value.indexOf("\n") === -1 && !textareaState)
+    ) {
       setTextareaState(true);
+    } else {
+      setTextareaState(false);
     }
   };
   // keyDown Event
@@ -55,12 +60,9 @@ const ChatInput = () => {
     if (e.keyCode === 13) {
       if (e.shiftKey === false && message.current.value !== "") {
         msgSend();
-        setTextareaState(true);
         e.preventDefault();
       } else if (message.current.value === "") {
         e.preventDefault();
-      } else {
-        setTextareaState(false);
       }
     }
   };

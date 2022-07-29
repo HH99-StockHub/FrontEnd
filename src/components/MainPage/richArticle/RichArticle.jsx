@@ -20,6 +20,7 @@ export default RichArticle;
 
 const WrapArticle = styled.div`
   max-width: 588px;
+  min-height: 200px;
   @media screen and (max-width: 700px) {
     max-width: 500px;
   }
