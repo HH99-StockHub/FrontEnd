@@ -43,7 +43,7 @@ const LoginHeader = () => {
       <WrapProfile state={data.data.rankTitle}>
         <ProfileImg
           size="size2"
-          rankTitle={data.data?.rankTitle}
+          rank={data.data?.rankTitle}
           src={localStorage.getItem("profileImg")}
         />
         <MyDrupDown data={data.data} />

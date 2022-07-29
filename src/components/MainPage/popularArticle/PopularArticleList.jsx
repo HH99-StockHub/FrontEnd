@@ -18,7 +18,6 @@ const PopularArticleList = () => {
     isLoading,
     isError,
   } = useMainPageQuery.useGetPopularArticles();
-
   // media
   const isSmall = useMediaQuery({
     query: "(max-width: 700px)",

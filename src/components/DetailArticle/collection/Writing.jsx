@@ -97,7 +97,6 @@ const P3 = styled.div`
   line-height: 17px;
   display: flex;
   align-items: center;
-  width: 210px;
 `;
 
 export default Writing;
