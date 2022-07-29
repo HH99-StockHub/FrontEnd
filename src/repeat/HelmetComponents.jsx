@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-
+import ogImg from "../image/kakaoImg.webp";
 const HelmetComponents = React.memo(({ title }) => {
   return (
     <Helmet>
@@ -15,11 +15,7 @@ const HelmetComponents = React.memo(({ title }) => {
         content="방구석 애널리스트 Stock Hub"
         data-react-helmet="true"
       />
-      <meta
-        property="og:image"
-        content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWfP8tjfyfgjWvA4qRXaee-4hJuAlN8Sy7Gg&usqp=CAU"
-        data-react-helmet="true"
-      />
+      <meta property="og:image" content={ogImg} data-react-helmet="true" />
     </Helmet>
   );
 });
