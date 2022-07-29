@@ -23,7 +23,9 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
+
       <AddFormModal />
+      <SlideStock />
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
