@@ -48,8 +48,11 @@ const AddArticleForm = () => {
   const choosePoint = useRef("");
 
   // media
-  const isSmall = useMediaQuery({
+  const isSmallHeight = useMediaQuery({
     query: "(max-height:720px)",
+  });
+  const isSmallWidth = useMediaQuery({
+    query: "(max-width:500px)",
   });
   // ,찍기 훅
   const sliceNum = useSliceNum;
@@ -215,7 +218,7 @@ const AddArticleForm = () => {
         </Header>
         <WrapText>
           {addLoading && <LoadingSpinner />}
-          {isSmall ? (
+          {isSmallHeight || isSmallWidth ? (
             <>
               <ScrollScope>
                 <WrapSearch>
