@@ -74,7 +74,7 @@ const OAuth = () => {
 };
 
 const Loding = styled.div`
-  padding: 110px;
+  padding: 138px;
   font-weight: 700;
   font-size: 14px;
   line-height: 17px;
