@@ -287,11 +287,58 @@ const AddArticleForm = () => {
                 <WrapGoal>
                   <div>
                     <p>목표 수익률</p>
-                    <div>{goalPrice}</div>
+                    <GoalPrice
+                      state={goalPrice}
+                      onClick={() => {
+                        setGoalPriceState(!goalPriceState);
+                      }}
+                    >
+                      {goalPrice}
+                    </GoalPrice>
+                    {goalPriceState ? (
+                      <GoalDropDown
+                        onClick={(e) => {
+                          setGoalPrice(e.target.id);
+                          setGoalPriceState(false);
+                        }}
+                      >
+                        <div id="+ 10%">+ 10%</div>
+                        <div id="+ 20%">+ 20%</div>
+                        <div id="+ 30%">+ 30%</div>
+                        <div id="+ 40%">+ 40%</div>
+                        <div id="+ 50%">+ 50%</div>
+                        <div id="+ 100%">+ 100%</div>
+                        <div id="+ 150%">+ 150%</div>
+                        <div id="+ 200%">+ 200%</div>
+                      </GoalDropDown>
+                    ) : null}
                   </div>
                   <div>
                     <p>수익률 마감일</p>
-                    <div>{goalDate}</div>
+                    <GoalDate
+                      state={goalDate}
+                      onClick={() => {
+                        setGoalDateState(!goalDateState);
+                      }}
+                    >
+                      {goalDate}
+                    </GoalDate>
+                    {goalDateState ? (
+                      <GoalDropDown
+                        onClick={(e) => {
+                          setGoalDate(e.target.id);
+                          setGoalDateState(false);
+                        }}
+                      >
+                        <div id="2주">2주</div>
+                        <div id="1개월">1개월</div>
+                        <div id="3개월">3개월</div>
+                        <div id="6개월">6개월</div>
+                        <div id="1년">1년</div>
+                        <div id="2년">2년</div>
+                        <div id="3년">3년</div>
+                      </GoalDropDown>
+                    ) : null}
                   </div>
                 </WrapGoal>
                 <AddArticleChoosePoint choosePoint={choosePoint} />
