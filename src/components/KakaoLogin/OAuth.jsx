@@ -66,10 +66,7 @@ const OAuth = () => {
   return (
     <>
       <Loding>
-        <div>
-          <p> 카카오 로그인 중</p>
-          <span>{true && <LoadingSpinner />}</span>
-        </div>
+        <P>카카오 로그인 중....</P>
         <Img src={LodingImg} alt="로딩 페이지" />
       </Loding>
     </>
@@ -77,7 +74,7 @@ const OAuth = () => {
 };
 
 const Loding = styled.div`
-  padding: 110px;
+  padding: 138px;
   font-weight: 700;
   font-size: 14px;
   line-height: 17px;
@@ -98,6 +95,10 @@ const Loding = styled.div`
       height: 20px;
     }
   }
+`;
+
+const P = styled.p`
+  margin-bottom: 55px;
 `;
 
 const Img = styled.img`
