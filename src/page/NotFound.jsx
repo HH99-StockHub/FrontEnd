@@ -21,7 +21,7 @@ const NotFound = () => {
 export default NotFound;
 
 const Not404 = styled.div`
-  padding: 120px;
+  padding: 149px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +42,7 @@ const HomeBt = styled.button`
 `;
 
 const ImgN404 = styled.img`
-  margin-bottom: 7px;
+  margin-bottom: 16px;
 `;
 
 const PageP = styled.p`

@@ -67,7 +67,7 @@ const OAuth = () => {
     <>
       {isLoading && <LoadingSpinner />}
       <Loding>
-        카카오 로그인 중....
+        <P>카카오 로그인 중....</P>
         <Img src={LodingImg} alt="로딩 페이지" />
       </Loding>
     </>
@@ -83,6 +83,10 @@ const Loding = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+`;
+
+const P = styled.p`
+  margin-bottom: 55px;
 `;
 
 const Img = styled.img`
