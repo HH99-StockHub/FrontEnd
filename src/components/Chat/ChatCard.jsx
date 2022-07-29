@@ -19,7 +19,11 @@ const ChatCard = ({ data }) => {
         } else {
           return (
             <WrapOtherMsg>
-              <ProfileImg size="size2" rank={data.rank} src={data.imageUrl} />
+              <ProfileImg
+                size="size2"
+                rank={data.rankTitle}
+                src={data.imageUrl}
+              />
               <TextOtherMessage>
                 <p>{data.nickName}</p>
                 <div>

@@ -41,7 +41,7 @@ const PopularArticleList = () => {
                   nickname={v.nickname}
                   img={v.profileImage}
                   userId={v.userId}
-                  rank={v.rank}
+                  rank={v.rankTitle}
                 />
               </WrapCard>
             );
@@ -60,7 +60,7 @@ const PopularArticleList = () => {
                   nickname={v.nickname}
                   img={v.profileImage}
                   userId={v.userId}
-                  rank={v.rank}
+                  rank={v.rankTitle}
                 />
               </WrapCard>
             );
