@@ -235,6 +235,7 @@ const WrapBottom = styled.div`
   gap: 7px;
   > div {
     display: flex;
+    align-items: center;
     gap: 4px;
   }
 `;
