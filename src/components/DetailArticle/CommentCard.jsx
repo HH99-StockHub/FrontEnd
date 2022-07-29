@@ -170,6 +170,8 @@ const P3pre = styled.pre`
   line-height: 18px;
   order: 1;
   flex-grow: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
 `;
 
 const P3 = styled.div`
