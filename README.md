@@ -44,6 +44,7 @@
 
 #### :boom: Frontend
 <div>
+  ![악시오스](https://user-images.githubusercontent.com/97425158/161745239-453b4075-7bd0-4c63-9c5a-5c1d76021b8d.svg)
 <img src="https://img.shields.io/badge/sockjs-1877F2?style=flat&logo=ssockjs&logoColor=white">
 <img src="https://img.shields.io/badge/stomp-1877F2?style=flat&logo=stomp&logoColor=white">
 <img src="https://img.shields.io/badge/ApexChart-1877F2?style=flat&logo=ApexChart&logoColor=white"><br/>
