@@ -70,7 +70,7 @@ https://github.com/HH99-StockHub/FrontEnd/issues/11 KaKao 로그인 시 useQuery
 https://github.com/HH99-StockHub/FrontEnd/issues/37 게시글 검색 버튼을 클릭했을 때 useQuery 실행하기<br/>
 https://github.com/HH99-StockHub/FrontEnd/issues/49 상세페이지에서 게시글 삭제버튼이 자신이 쓴 글이면 true로 바꿔 화면에 보이게하고<br/>
 다른 사람의 글이면 false로 바꿔 게시글 삭제 버튼이 화면에 안보이게 하기<br/>
-  https://github.com/HH99-StockHub/FrontEnd/issues/64
+  https://github.com/HH99-StockHub/FrontEnd/issues/64 stockHub 성능검사 기록지<
 </details>
 
 ## 👀  FE 컨벤션
