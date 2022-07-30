@@ -98,13 +98,13 @@ const WrapText = styled.div`
     width: 0;
   }
   @media screen and (max-width: 470px) {
-    height: 70%;
-  }
-  @media screen and (max-height: 800px) {
-    height: 85%;
-  }
-  @media screen and (max-height: 570px) {
-    height: 80%;
+    height: 90%;
+    @media screen and (max-height: 800px) {
+      height: 85%;
+    }
+    @media screen and (max-height: 570px) {
+      height: 80%;
+    }
   }
 `;
 
