@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import { useSetRecoilState } from "recoil";
 // 컴포넌트
 import ProfileImg from "../elem/ProfileImg";
-import MyDrupDown from "../components/HeaderDrupDown/MyDrupDown";
+import MyDrupDown from "../components/HeaderDrupDown/MyDropDown/MyDrupDown";
 import AlarmDrupDown from "../components/HeaderDrupDown/AlarmDrupDown";
 //훅
 import { useHeaderApi } from "./useRepeatQuery";
