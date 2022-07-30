@@ -37,8 +37,8 @@ const ChartModal = ({ stockName }) => {
           outline: "none",
           margin: "auto",
           maxWidth: "900px",
-          maxHeight: "500px",
-          height: "70vw",
+          maxHeight: "800px",
+          height: "80vw",
         },
       }}
     >
