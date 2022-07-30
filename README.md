@@ -71,7 +71,7 @@ https://github.com/HH99-StockHub/FrontEnd/issues/49 상세페이지에서 게시
 ## 👀  FE 컨벤션
 <details markdown="1">
 <summary>WIKI</summary>
-  DD
+https://github.com/HH99-StockHub/FrontEnd/wiki/FE-:-Git-Flow
 
 </details>
 
