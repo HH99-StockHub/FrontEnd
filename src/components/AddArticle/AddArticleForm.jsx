@@ -624,10 +624,19 @@ const GoalDropDown = styled.div`
   }
 `;
 const ScrollScope = styled.div`
-  max-height: 50vh;
+  max-height: 60vh;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 0;
+  }
+  @media screen and (max-height: 770px) {
+    max-height: 55vh;
+  }
+  @media screen and (max-height: 660px) {
+    max-height: 50vh;
+  }
+  @media screen and (max-height: 575px) {
+    max-height: 40vh;
   }
 `;
 

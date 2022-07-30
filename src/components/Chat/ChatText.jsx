@@ -100,6 +100,12 @@ const WrapText = styled.div`
   @media screen and (max-width: 470px) {
     height: 70%;
   }
+  @media screen and (max-height: 800px) {
+    height: 85%;
+  }
+  @media screen and (max-height: 570px) {
+    height: 80%;
+  }
 `;
 
 const ColseBtn = styled.div`
