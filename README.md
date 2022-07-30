@@ -60,11 +60,12 @@
 ## 🔥  Trouble Shooting
 <details markdown="1">
 <summary>이슈 </summary>
-https://github.com/HH99-StockHub/FrontEnd/issues/49<br/>
-https://github.com/HH99-StockHub/FrontEnd/issues/37<br/>
-https://github.com/HH99-StockHub/FrontEnd/issues/11<br/>
-https://github.com/HH99-StockHub/FrontEnd/issues/6<br/>
-https://github.com/HH99-StockHub/FrontEnd/issues/1<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/1 게시글 작성에서 작성 포인트를 작성하고 중간에 내용을 삭제하면 그 하단부는 다 초기화 되는 현상<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/6 네이버 검색처럼 주식 종목 선택할 때 방향키로 선택할 수 있게 만들기<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/11 KaKao 로그인 시 useQuery 두번 요청<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/37 게시글 검색 버튼을 클릭했을 때 useQuery 실행하기<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/49 상세페이지에서 게시글 삭제버튼이 자신이 쓴 글이면 true로 바꿔 화면에 보이게하고<br/>
+다른 사람의 글이면 false로 바꿔 게시글 삭제 버튼이 화면에 안보이게 하기<br/>
 </details>
 
 
