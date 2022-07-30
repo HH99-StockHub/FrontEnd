@@ -10,11 +10,11 @@ const FameArticle = () => {
   return (
     <WrapContent>
       <div>
-        <ArticleHeader title="BEST 인기글" />
+        <ArticleHeader title="인기글 TOP3" />
         <FramPopularArticle />
       </div>
       <div>
-        <ArticleHeader title="BEST 수익왕" />
+        <ArticleHeader title="수익왕 TOP3" />
         <FramRichArticle />
       </div>
     </WrapContent>
