@@ -46,8 +46,8 @@ const AlarmDrupDown = () => {
 
   return (
     <DropDownContainer ref={el}>
-      <DropDownHeader>
-        <button onClick={toggling}>
+      <DropDownHeader onClick={toggling}>
+        <button>
           <Notice />
         </button>
         {alarmListData.length !== 0 ? (

@@ -1,15 +1,13 @@
 import { api } from "../../shared/api";
-import { useQuery } from "react-query";
+import { useMutation } from "react-query";
 
 export const useLoginQuery = {
   //kakao login
-  useKaKaoLogin: (code) => {
-    const fetcher = async () => {
+  useKaKaoLogin: (option) => {
+    const fetcher = async (code) => {
       const response = await api.get(`/user/kakao/callback?code=${code}`);
       return response;
     };
-    return useQuery("kakoLogin", fetcher, {
-      refetchOnWindowFocus: false,
-    });
+    return useMutation(fetcher, option);
   },
 };

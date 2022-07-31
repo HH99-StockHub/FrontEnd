@@ -3,14 +3,15 @@ import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 // 훅
-import { toastify } from "../../custom/toastify";
-import { deleteCookie } from "../../shared/Cookie";
-import { stompNotice } from "../../custom/stomp";
+import { toastify } from "../../../custom/toastify";
+import { deleteCookie } from "../../../shared/Cookie";
+import { stompNotice } from "../../../custom/stomp";
 // 모듈
-import { loginState } from "../../state/client/login";
+import { loginState } from "../../../state/client/login";
 import { useMediaQuery } from "react-responsive";
-import { addArticleState } from "../../state/client/modal";
-import { useHeaderApi } from "../../repeat/useRepeatQuery";
+import { addArticleState } from "../../../state/client/modal";
+import ChangeNick from "./ChangeNick";
+import MyRankInfo from "./MyRankInfo";
 
 const MyDrupDown = ({ data }) => {
   // 경험치 총량
@@ -31,12 +32,10 @@ const MyDrupDown = ({ data }) => {
     }
   };
   const navigate = useNavigate();
-  // 닉네임 변경 모달창
+  // 추가 드롭다운 창
+  const [rankInfo, setRankInfo] = useState(false);
   const [changeNick, setChangeNick] = useState(false);
-  // 변경 닉네임 데이터
-  const newNickname = useRef("");
-  // 변경 요청
-  const { mutate } = useHeaderApi.useChangeNickname(setChangeNick);
+
   /* 유저정보 모달창 */
   //드롭다운 메뉴
   const [isOpen, setIsOpen] = useState(false);
@@ -48,27 +47,17 @@ const MyDrupDown = ({ data }) => {
 
   // media
   const isSmall = useMediaQuery({
-    query: "(max-width : 370px)",
+    query: "(max-width : 500px)",
   });
 
   const handleCloseToggling = (e) => {
     if (el.current && !el.current.contains(e.target)) {
+      setChangeNick(false);
+      setRankInfo(false);
       setIsOpen(false);
     }
   };
 
-  // 닉네임 변경
-  const changeNickName = (e) => {
-    e.preventDefault();
-    if (
-      newNickname.current.value === "" ||
-      newNickname.current.value.indexOf(" ") !== -1
-    ) {
-      toastify.error("빈칸이나 공백이 있습니다.");
-    } else {
-      mutate(newNickname.current.value);
-    }
-  };
   useEffect(() => {
     window.addEventListener("click", handleCloseToggling);
     return () => {
@@ -91,8 +80,23 @@ const MyDrupDown = ({ data }) => {
         {localStorage.getItem("nickName")}
       </DropDownHeader>
       {isOpen && (
-        <DropDownList>
-          <ListItem onClick={() => {}}>
+        <DropDownList state={rankInfo}>
+          {isSmall && (
+            <ListItem1
+              onClick={() => {
+                setFormState(true);
+                setIsOpen(false);
+              }}
+            >
+              글쓰기
+            </ListItem1>
+          )}
+          <ListItem
+            onClick={() => {
+              setChangeNick(false);
+              setRankInfo(!rankInfo);
+            }}
+          >
             내 등급 :
             <ListItemP>
               {` [${data?.rankTitle}] : (${data?.expPoint}/${expPoint()})`}
@@ -100,11 +104,11 @@ const MyDrupDown = ({ data }) => {
           </ListItem>
           <ListItem1
             onClick={() => {
-              setChangeNick(true);
-              setIsOpen(false);
+              setRankInfo(false);
+              setChangeNick(!changeNick);
             }}
           >
-            닉네임 변경
+            닉네임 수정
           </ListItem1>
           <ListItem1
             onClick={() => {
@@ -118,16 +122,6 @@ const MyDrupDown = ({ data }) => {
           >
             내 글 모아보기
           </ListItem1>
-          {isSmall && (
-            <ListItem1
-              onClick={() => {
-                setFormState(true);
-                setIsOpen(false);
-              }}
-            >
-              글작성
-            </ListItem1>
-          )}
           <ListItem1
             onClick={() => {
               onLogout();
@@ -136,35 +130,15 @@ const MyDrupDown = ({ data }) => {
           >
             로그아웃
           </ListItem1>
-        </DropDownList>
-      )}
-      {changeNick && (
-        <ChangeNick>
-          <form
-            onSubmit={(e) => {
-              changeNickName(e);
-            }}
-          >
-            <p>닉네임 변경</p>
-            <input
-              type="text"
-              ref={newNickname}
-              placeholder={localStorage.getItem("nickName")}
+          {rankInfo && (
+            <MyRankInfo
+              rank={data?.rankTitle}
+              exp={data?.expPoint}
+              setRankInfo={setRankInfo}
             />
-            <span>영문/국문/숫자 조합 2~12자리</span>
-            <div>
-              <button type="submit">저장</button>
-              <button
-                type="button"
-                onClick={() => {
-                  setChangeNick(false);
-                }}
-              >
-                취소
-              </button>
-            </div>
-          </form>
-        </ChangeNick>
+          )}
+          {changeNick && <ChangeNick setChangeNick={setChangeNick} />}
+        </DropDownList>
       )}
     </WrapDropDown>
   );
@@ -190,15 +164,26 @@ const DropDownHeader = styled.div`
 const DropDownList = styled.div`
   position: absolute;
   top: 30px;
-  right: -80px;
-  width: 200px;
-  padding: 8px;
-  border: 1px solid var(--gray2);
+  right: ${({ state }) => {
+    return state ? "180px" : "-60px";
+  }};
+  width: 180px;
+  padding: 8px 0;
   border-radius: 6px;
   background: var(--white);
   font-size: 12px;
   line-height: 14px;
   z-index: 99;
+  > p:hover {
+    background-color: var(--green1);
+    color: var(--white);
+    > span {
+      color: var(--white);
+    }
+  }
+  @media screen and (max-width: 440px) {
+    right: -40px;
+  }
 `;
 const ListItem = styled.p`
   padding: 8px;
@@ -215,56 +200,4 @@ const ListItemP = styled.span`
   font-weight: 700;
   font-size: 12px;
   color: var(--green1);
-`;
-
-const ChangeNick = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  margin: auto;
-  max-width: 600px;
-  max-height: 400px;
-  width: 90vw;
-  height: 70vw;
-  background-color: var(--white);
-  border: 1px solid var(--gray2);
-  border-radius: 6px;
-  z-index: 99;
-  > form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    max-width: 400px;
-    width: 80vw;
-    max-height: 300px;
-    height: 60vw;
-    margin: 0 auto;
-    > input {
-      padding: 15px 10px;
-    }
-    > span {
-      color: var(--gray3);
-      font-size: 12px;
-    }
-    > div {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      > button {
-        width: 100%;
-        padding: 10px 0;
-        border-radius: 6px;
-        border: 1px solid var(--green1);
-        &:first-child {
-          background-color: var(--green1);
-          color: var(--white);
-        }
-      }
-    }
-  }
 `;
