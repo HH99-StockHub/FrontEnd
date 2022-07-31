@@ -189,6 +189,7 @@ const ListItem = styled.p`
   padding: 8px;
   display: flex;
   gap: 4px;
+  cursor: pointer;
 `;
 
 const ListItem1 = styled.p`
