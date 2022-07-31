@@ -11,6 +11,8 @@ import { useHeaderApi } from "./useRepeatQuery";
 // 모듈
 import { addArticleState } from "../state/client/modal";
 import { rank } from "../state/server/rank";
+// 이미지
+import { ReactComponent as DownArrowSvg } from "../image/DownArrow.svg";
 
 const LoginHeader = () => {
   // 등급 정보 받아오기
@@ -40,14 +42,14 @@ const LoginHeader = () => {
 
   return (
     <WrapMenu>
-      <WrapProfile state={data.data.rankTitle}>
+      <WrapProfile>
         <ProfileImg
           size="size2"
           rank={data.data?.rankTitle}
           src={localStorage.getItem("profileImg")}
         />
         <MyDrupDown data={data.data} />
-        {!isMostSmall && <span>{data.data?.rankTitle}</span>}
+        <DownArrowSvg />
       </WrapProfile>
       {!isSmall && <Writing onClick={openAddArticle}>글쓰기</Writing>}
 
@@ -75,26 +77,6 @@ const WrapProfile = styled.div`
   align-items: center;
   gap: 8px;
   margin-left: 10px;
-  > span {
-    font-size: 12px;
-    font-weight: 700;
-    color: ${({ state }) => {
-      switch (state) {
-        case "신입":
-          return "var(--green1)";
-        case "초보":
-          return "var(--green2)";
-        case "중수":
-          return "var(--blue1)";
-        case "고수":
-          return "var(--blue2)";
-        case "지존":
-          return "var(--pink2)";
-        default:
-          return "var(--pink2)";
-      }
-    }};
-  }
 `;
 
 const Writing = styled.button`

@@ -49,7 +49,9 @@ const MyDrupDown = ({ data }) => {
   const isSmall = useMediaQuery({
     query: "(max-width : 500px)",
   });
-
+  const isMostSmall = useMediaQuery({
+    query: "(max-width : 420px)",
+  });
   const handleCloseToggling = (e) => {
     if (el.current && !el.current.contains(e.target)) {
       setChangeNick(false);
@@ -76,9 +78,10 @@ const MyDrupDown = ({ data }) => {
 
   return (
     <WrapDropDown ref={el}>
-      <DropDownHeader onClick={toggling}>
-        {localStorage.getItem("nickName")}
-      </DropDownHeader>
+      <WrapNameRank state={data.rankTitle} onClick={toggling}>
+        <DropDownHeader>{localStorage.getItem("nickName")}</DropDownHeader>
+        {!isMostSmall && <span>{data.rankTitle}</span>}
+      </WrapNameRank>
       {isOpen && (
         <DropDownList state={rankInfo}>
           {isSmall && (
@@ -150,9 +153,34 @@ const WrapDropDown = styled.div`
   position: relative;
 `;
 
+const WrapNameRank = styled.div`
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+  > span {
+    font-size: 12px;
+    font-weight: 700;
+    color: ${({ state }) => {
+      switch (state) {
+        case "신입":
+          return "var(--green1)";
+        case "초보":
+          return "var(--green2)";
+        case "중수":
+          return "var(--blue1)";
+        case "고수":
+          return "var(--blue2)";
+        case "지존":
+          return "var(--pink2)";
+        default:
+          return "var(--pink2)";
+      }
+    }};
+  }
+`;
+
 const DropDownHeader = styled.div`
   font-size: 12px;
-  cursor: pointer;
   display: -webkit-box;
   white-space: normal;
   -webkit-line-clamp: 1;
