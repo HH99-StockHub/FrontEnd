@@ -77,6 +77,16 @@ const WrapRankInfo = styled.div`
   height: 100%;
   background-color: var(--white);
   border-radius: 6px;
+  @media screen and (max-width: 440px) {
+    position: fixed;
+    height: 200px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    margin: auto;
+  }
 `;
 const WrapText = styled.div`
   display: flex;

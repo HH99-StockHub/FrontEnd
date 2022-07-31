@@ -27,7 +27,6 @@ const ChangeNick = ({ setChangeNick }) => {
           changeNickName(e);
         }}
       >
-        <p>닉네임 변경</p>
         <DivBox>
           <span>현재 닉네임</span>
           <p>{localStorage.getItem("nickName")}</p>
@@ -88,10 +87,10 @@ const ChangeNickBox = styled.div`
     }
     > div {
       display: flex;
-      justify-content: center;
+      justify-content: left;
       gap: 30px;
       > button {
-        width: 100%;
+        width: 64px;
         padding: 10px 0;
         border-radius: 6px;
         border: 1px solid var(--green1);

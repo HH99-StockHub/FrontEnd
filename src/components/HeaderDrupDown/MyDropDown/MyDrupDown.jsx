@@ -93,6 +93,7 @@ const MyDrupDown = ({ data }) => {
           )}
           <ListItem
             onClick={() => {
+              setChangeNick(false);
               setRankInfo(!rankInfo);
             }}
           >
@@ -103,10 +104,11 @@ const MyDrupDown = ({ data }) => {
           </ListItem>
           <ListItem1
             onClick={() => {
+              setRankInfo(false);
               setChangeNick(!changeNick);
             }}
           >
-            닉네임 변경
+            닉네임 수정
           </ListItem1>
           <ListItem1
             onClick={() => {
@@ -179,7 +181,7 @@ const DropDownList = styled.div`
       color: var(--white);
     }
   }
-  @media screen and (max-width: 420px) {
+  @media screen and (max-width: 440px) {
     right: -40px;
   }
 `;

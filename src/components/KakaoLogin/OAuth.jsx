@@ -54,7 +54,6 @@ const OAuth = () => {
       toastify.info("이미 로그인 됐습니다.");
       navigate(-1);
     } else {
-      console.log("로그인 시도");
       login(code);
     }
   }, []);
