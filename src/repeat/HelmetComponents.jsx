@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import ogImg from "../image/kakaoImg.webp";
+import ogImg from "../image/kakao.webp";
 const HelmetComponents = React.memo(({ title }) => {
   return (
     <Helmet>
