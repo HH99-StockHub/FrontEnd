@@ -21,5 +21,7 @@ const KakaoLogin = () => {
 export default KakaoLogin;
 
 const Login = styled.div`
+  font-size: 12px;
+  color: var(--green1);
   cursor: pointer;
 `;

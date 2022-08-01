@@ -39,34 +39,48 @@ const MyRankInfo = ({ rank, exp, setRankInfo }) => {
     }
   };
   return (
-    <WrapRankInfo>
-      <div>
-        <button
-          onClick={() => {
-            setRankInfo(false);
-          }}
-        >
-          <XBtn width="9px" height="9px" fill="var(--black)" />
-        </button>
-      </div>
-      <WrapText>
+    <>
+      <Back />
+      <WrapRankInfo>
         <div>
-          <p>
-            {nickName}님은 <RankColor state={rank}>{rank}</RankColor>
-            입니다.
-          </p>
-          <p>
-            <NextRankColor state={rank}>{nextRank()}</NextRankColor>
-            {nextExp()}
-          </p>
+          <button
+            onClick={() => {
+              setRankInfo(false);
+            }}
+          >
+            <XBtn width="9px" height="9px" fill="var(--black)" />
+          </button>
         </div>
-        <p>게시글 작성 + 30점, 댓글 작성 +5점, 인기글 달성 +50점</p>
-      </WrapText>
-    </WrapRankInfo>
+        <WrapText>
+          <div>
+            <p>
+              {nickName}님은 <RankColor state={rank}>{rank}</RankColor>
+              입니다.
+            </p>
+            <p>
+              <NextRankColor state={rank}>{nextRank()}</NextRankColor>
+              {nextExp()}
+            </p>
+          </div>
+          <p>게시글 작성 + 30점, 댓글 작성 +5점, 인기글 달성 +50점</p>
+        </WrapText>
+      </WrapRankInfo>
+    </>
   );
 };
 
 export default MyRankInfo;
+
+const Back = styled.div`
+  @media screen and (max-width: 460px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+`;
 
 const WrapRankInfo = styled.div`
   position: absolute;
@@ -77,9 +91,9 @@ const WrapRankInfo = styled.div`
   height: 100%;
   background-color: var(--white);
   border-radius: 6px;
-  @media screen and (max-width: 440px) {
+  @media screen and (max-width: 460px) {
     position: fixed;
-    height: 200px;
+    height: 136px;
     top: 0;
     left: 0;
     right: 0;

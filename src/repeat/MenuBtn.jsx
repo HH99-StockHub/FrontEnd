@@ -29,4 +29,9 @@ const WrapMenuBtn = styled.div`
   bottom: 58px;
   border-radius: 50px;
   width: 52px;
+  @media screen and (max-width: 680px) {
+    position: fixed;
+    right: 18px;
+    bottom: 9px;
+  }
 `;

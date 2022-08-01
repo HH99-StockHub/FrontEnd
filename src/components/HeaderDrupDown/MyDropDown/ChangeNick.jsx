@@ -21,38 +21,52 @@ const ChangeNick = ({ setChangeNick }) => {
     }
   };
   return (
-    <ChangeNickBox>
-      <form
-        onSubmit={(e) => {
-          changeNickName(e);
-        }}
-      >
-        <DivBox>
-          <span>현재 닉네임</span>
-          <p>{localStorage.getItem("nickName")}</p>
-        </DivBox>
-        <DivBox>
-          <span>변경 닉네임</span>
-          <input type="text" ref={newNickname} />
-        </DivBox>
-        <span>영문/국문/숫자 조합 2~12자리</span>
-        <div>
-          <button type="submit">저장</button>
-          <button
-            type="button"
-            onClick={() => {
-              setChangeNick(false);
-            }}
-          >
-            취소
-          </button>
-        </div>
-      </form>
-    </ChangeNickBox>
+    <>
+      <Back></Back>
+      <ChangeNickBox>
+        <form
+          onSubmit={(e) => {
+            changeNickName(e);
+          }}
+        >
+          <div>
+            <DivBox>
+              <span>현재 닉네임</span>
+              <p>{localStorage.getItem("nickName")}</p>
+            </DivBox>
+            <DivBox>
+              <span>변경 닉네임</span>
+              <input type="text" ref={newNickname} />
+            </DivBox>
+            <span>영문/국문/숫자 조합 2~12자리</span>
+          </div>
+          <div>
+            <button type="submit">저장</button>
+            <button
+              type="button"
+              onClick={() => {
+                setChangeNick(false);
+              }}
+            >
+              취소
+            </button>
+          </div>
+        </form>
+      </ChangeNickBox>
+    </>
   );
 };
 
 export default ChangeNick;
+
+const Back = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+`;
 
 const ChangeNickBox = styled.div`
   position: fixed;
@@ -63,10 +77,11 @@ const ChangeNickBox = styled.div`
   display: flex;
   align-items: center;
   margin: auto;
-  max-width: 600px;
-  max-height: 400px;
-  width: 90vw;
-  height: 70vw;
+  max-width: 320px;
+  max-height: 220px;
+  width: 90%;
+  height: 90vw;
+  padding: 30px 30px 20px 30px;
   background-color: var(--white);
   border: 1px solid var(--gray2);
   border-radius: 6px;
@@ -81,22 +96,32 @@ const ChangeNickBox = styled.div`
     max-height: 300px;
     height: 60vw;
     margin: 0 auto;
-    > span {
-      color: var(--gray3);
-      font-size: 12px;
-    }
-    > div {
+
+    > div:first-child {
       display: flex;
+      flex-direction: column;
       justify-content: left;
-      gap: 30px;
+      gap: 9px;
+      > span {
+        color: var(--gray3);
+        font-size: 12px;
+        text-align: right;
+        margin-right: 8px;
+      }
+    }
+    > div:nth-child(2) {
+      display: flex;
+      gap: 8px;
       > button {
-        width: 64px;
-        padding: 10px 0;
-        border-radius: 6px;
-        border: 1px solid var(--green1);
+        width: 85px;
+        height: 34px;
+        border: 1px solid var(--gray2);
+        font-size: 12px;
+        color: var(--gray3);
         &:first-child {
           background-color: var(--green1);
           color: var(--white);
+          border: 1px solid var(--green1);
         }
       }
     }
@@ -107,7 +132,9 @@ const DivBox = styled.div`
   display: flex;
   align-items: center;
   gap: 21px;
-
+  > span {
+    font-weight: 500;
+  }
   > p,
   input {
     max-width: 220px;

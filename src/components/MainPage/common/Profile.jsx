@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ProfileImg from "../../../elem/ProfileImg";
 
-const Profile = ({ img, nickname, userId, rank }) => {
+const Profile = ({ img, nickname, userId, rank = "no" }) => {
   return (
     <WrapProfile>
       <ProfileImg size="size3" rank={rank} src={img} />

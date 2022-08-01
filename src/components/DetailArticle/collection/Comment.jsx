@@ -125,7 +125,8 @@ const Btn = styled.button`
 const Views = styled.textarea`
   color: var(--black);
   flex: 8;
-  font-weight: 700;
+  font-weight: 400;
+  font-size: 12px;
   border: 0;
   padding: 10px;
   height: 100%;

@@ -32,6 +32,8 @@ const StImg = styled.img`
         return rank4;
       case "지존":
         return rank5;
+      case "no":
+        return rankNo;
       default:
         return rank5;
     }
@@ -65,4 +67,7 @@ export const rank4 = css`
 `;
 export const rank5 = css`
   border: 1px solid var(--pink2);
+`;
+export const rankNo = css`
+  border: none;
 `;

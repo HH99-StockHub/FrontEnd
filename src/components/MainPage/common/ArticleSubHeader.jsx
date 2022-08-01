@@ -76,10 +76,10 @@ const SubHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 77px;
+  gap: 153px;
   width: 100%;
   height: 332px;
-  background-color: var(--green1);
+  background: linear-gradient(90deg, #52b97b 0%, #3f957b 100.51%);
   @media screen and (max-width: 900px) {
     flex-direction: column;
     gap: 0;
@@ -106,11 +106,10 @@ const WrapText = styled.div`
   }
 `;
 const HeadText = styled.div`
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 32px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  font-size: 30px;
   height: 94px;
-  border-bottom: 21px solid var(--green2);
   color: var(--white);
   font-weight: 400;
   span {
@@ -126,14 +125,13 @@ const SubText = styled.div`
   font-size: 18px;
   font-weight: 500;
   color: var(--white);
-  padding-left: 10px;
 `;
 
 const WriteBtn = styled.button`
   width: 152px;
   height: 46px;
   border-radius: 50px;
-  background-color: var(--green3);
+  background-color: var(--green1);
   font-size: 16px;
   font-weight: 700;
   color: var(--white);
