@@ -2,11 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
-// 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
 import LoginHeader from "./LoginHeader";
-
-// 훅
 import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
 import { useAlarmMutate } from "./useRepeatQuery";
@@ -15,10 +12,8 @@ import {
   stompDisConnect,
   stompLoginConnect,
 } from "../custom/stomp";
-// 모듈
 import { loginState } from "../state/client/login";
 import { alarmList } from "../state/server/alarm";
-//이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
 
 const Header = () => {

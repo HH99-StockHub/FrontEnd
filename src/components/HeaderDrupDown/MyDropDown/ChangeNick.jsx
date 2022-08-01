@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-// 훅
 import { toastify } from "../../../custom/toastify";
 import { useHeaderApi } from "../../../repeat/useRepeatQuery";
 

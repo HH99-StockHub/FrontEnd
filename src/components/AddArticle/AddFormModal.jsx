@@ -2,7 +2,6 @@ import React from "react";
 import ReactModal from "react-modal";
 import { useRecoilValue } from "recoil";
 import AddArticle from "../../page/AddArticle";
-// 모듈
 import { addArticleState } from "../../state/client/modal";
 
 const AddFormModal = () => {

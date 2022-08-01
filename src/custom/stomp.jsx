@@ -28,18 +28,6 @@ export const stompLoginConnect = (token, userId, setAlarmList) => {
     onError,
   );
 };
-// 보내기전 연결 테스트 함수
-function waitForConnection(stompClient, callback) {
-  // 실제 오류 날때까지 조건 보류
-  // setTimeout(function () {
-  // if(stompClient.ws.XXX === 1)
-  //   if (stompClient.connected === true) {
-  callback();
-  //   } else {
-  //     waitForConnection(stompClient, callback);
-  //   }
-  // }, 100);
-}
 
 // 채팅 stomp
 export const stompChat = {

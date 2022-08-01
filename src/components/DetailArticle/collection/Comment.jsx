@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useQueryClient } from "react-query";
-// 컴포넌트
 import CommentCard from "../CommentCard";
-// 훅
 import { getCookie } from "../../../shared/Cookie";
 import { toastify } from "../../../custom/toastify";
 import {

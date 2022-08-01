@@ -2,11 +2,9 @@ import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-// 훅
 import { toastify } from "../../../custom/toastify";
 import { deleteCookie } from "../../../shared/Cookie";
 import { stompNotice } from "../../../custom/stomp";
-// 모듈
 import { loginState } from "../../../state/client/login";
 import { useMediaQuery } from "react-responsive";
 import { addArticleState } from "../../../state/client/modal";

@@ -2,12 +2,9 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import dayjs from "dayjs";
-// 훅
 import { stompChat } from "../../custom/stomp";
 import { getCookie } from "../../shared/Cookie";
-// 모듈
 import { rank } from "../../state/server/rank";
-//이미지
 import { ReactComponent as BtnSvg } from "../../image/ChatSendBtn.svg";
 
 const ChatInput = () => {

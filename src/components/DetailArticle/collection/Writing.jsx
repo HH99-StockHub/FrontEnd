@@ -4,18 +4,17 @@ import styled from "styled-components";
 import useChangeNum from "../../../custom/changeNum";
 import ProfileImg from "../../../elem/ProfileImg";
 
-const Writing = (props) => {
-  const {
-    view,
-    stockName,
-    articleTitle,
-    profileImage,
-    nickName,
-    userId,
-    rank,
-    richList = false,
-    popularList = false,
-  } = props;
+const Writing = ({
+  view,
+  stockName,
+  articleTitle,
+  profileImage,
+  nickName,
+  userId,
+  rank,
+  richList = false,
+  popularList = false,
+}) => {
   const changeNum = useChangeNum;
   return (
     <>

@@ -1,22 +1,16 @@
-//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React, { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
-// 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 import AddArticleChoosePoint from "./AddArticleChoosePoint";
 import LineChart from "../Chart/LineChart";
-//hook
 import {
   useAddArticleFormMutate,
   useAddArticleFormQuery,
 } from "./useAddArticleFormQuery";
 import { toastify } from "../../custom/toastify";
-// 모듈
-import { stockData } from "../../Data/stockData";
 import { addArticleState, showChart } from "../../state/client/modal";
-//이미지
 import { ReactComponent as SearchSvg } from "../../image/Search.svg";
 import useSliceNum from "../../custom/sliceNum";
 import ChartModal from "../Chart/ChartModal";
@@ -57,7 +51,7 @@ const AddArticleForm = () => {
   // ,찍기 훅
   const sliceNum = useSliceNum;
   // stockName 전체 부르기
-  const { data = stockData } = useAddArticleFormQuery.useGetStockName();
+  const { data } = useAddArticleFormQuery.useGetStockName();
   // useMutation 사용
   const { mutate: addArticle, isLoading: addLoading } =
     useAddArticleFormMutate.useAddArticleMutation();

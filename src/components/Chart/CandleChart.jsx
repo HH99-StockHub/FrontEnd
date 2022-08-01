@@ -2,22 +2,10 @@ import React, { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 import dayjs from "dayjs";
 import { useMediaQuery } from "react-responsive";
-// 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
-// 잉여데이터
-import { candleChartDummy } from "../../Data/chartDummy";
-// 훅
 import useSliceNum from "../../custom/sliceNum";
-// 모듈
 
-const CandleChart = ({
-  stockName,
-  chartCount,
-  chartMove,
-  chartStandard,
-  data = candleChartDummy,
-  isLoading,
-}) => {
+const CandleChart = ({ chartCount, chartStandard, data, isLoading }) => {
   const isMiddle = useMediaQuery({
     query: "(max-width : 500px)",
   });

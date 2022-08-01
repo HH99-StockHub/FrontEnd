@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
 import { toastify } from "../../custom/toastify";
-
 import { getCookie } from "../../shared/Cookie";
-// 이미지
 import { ReactComponent as BtnSvg } from "../../image/AddArticle.svg";
 import { addArticleState } from "../../state/client/modal";
 

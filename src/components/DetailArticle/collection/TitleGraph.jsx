@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
-//컴포넌트
 import LineChart from "../../Chart/LineChart";
-//모듈
 import { showChart } from "../../../state/client/modal";
 
-const TitleGraph = (props) => {
-  const { stockName } = props;
+const TitleGraph = ({ stockName }) => {
   const setChartModal = useSetRecoilState(showChart);
 
   return (

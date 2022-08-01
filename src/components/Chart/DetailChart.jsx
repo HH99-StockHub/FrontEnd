@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
-// 컴포넌트
 import CandleChart from "./CandleChart";
 import LineChart from "./LineChart";
-// 모듈
 import { showChart } from "../../state/client/modal";
 import { useChartQuery } from "./useChartQuery";
-// 이미지
 import { ReactComponent as MinusSvg } from "../../image/Reduction.svg";
 import { ReactComponent as LeftSvg } from "../../image/LeftChart.svg";
 import { ReactComponent as RightSvg } from "../../image/RightChart.svg";
@@ -28,8 +25,6 @@ const DetailChart = ({ stockName }) => {
   const [chartCount, setChartCount] = useState(isMiddle ? 25 : 50);
   const [chartMove, setChartMove] = useState(parseInt(chartCount / 3));
   const [chartStandard, setChartStandard] = useState(0);
-  // 차트 닫기
-  const modalState = useSetRecoilState(showChart);
   // 차트 호출
   const { data, isLoading } = useChartQuery.useGetChartData(stockName);
   // 확대
