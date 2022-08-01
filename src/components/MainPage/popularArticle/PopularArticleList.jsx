@@ -18,6 +18,7 @@ const PopularArticleList = () => {
     isLoading,
     isError,
   } = useMainPageQuery.useGetPopularArticles();
+  const arr = [0, 1, 2, 3, 4, 5];
   // media
   const isSmall = useMediaQuery({
     query: "(max-width: 700px)",
@@ -29,17 +30,21 @@ const PopularArticleList = () => {
       {isLoading && <LoadingSpinner />}
       {isSmall ? (
         <>
-          {data.slice(0, 4).map((v) => {
-            return (
-              <WrapCard key={v.articleId}>
-                <Link to={`/detail/article/${v.articleId}`}>
-                  <CardTextPopular up={v.voteUpCount} />
-                  <WrapText>{v.articleTitle}</WrapText>
+          {arr.slice(0, 4).map((v, l) => {
+            return data[l] === undefined ? (
+              <NoCard>
+                전망글을 달성하고 <br /> 인기글에 도전하세요
+              </NoCard>
+            ) : (
+              <WrapCard key={data[l].articleId}>
+                <Link to={`/detail/article/${data[l].articleId}`}>
+                  <CardTextPopular up={data[l].voteUpCount} />
+                  <WrapText>{data[l].articleTitle}</WrapText>
                 </Link>
                 <Profile
-                  nickname={v.nickname}
-                  img={v.profileImage}
-                  userId={v.userId}
+                  nickname={data[l].nickname}
+                  img={data[l].profileImage}
+                  userId={data[l].userId}
                 />
               </WrapCard>
             );
@@ -47,17 +52,21 @@ const PopularArticleList = () => {
         </>
       ) : (
         <>
-          {data.map((v) => {
-            return (
-              <WrapCard key={v.articleId}>
-                <Link to={`/detail/article/${v.articleId}`}>
-                  <CardTextPopular up={v.voteUpCount} />
-                  <WrapText>{v.articleTitle}</WrapText>
+          {arr.map((v, l) => {
+            return data[l] === undefined ? (
+              <NoCard>
+                전망글을 달성하고 <br /> 인기글에 도전하세요
+              </NoCard>
+            ) : (
+              <WrapCard key={data[l].articleId}>
+                <Link to={`/detail/article/${data[l].articleId}`}>
+                  <CardTextPopular up={data[l].voteUpCount} />
+                  <WrapText>{data[l].articleTitle}</WrapText>
                 </Link>
                 <Profile
-                  nickname={v.nickname}
-                  img={v.profileImage}
-                  userId={v.userId}
+                  nickname={data[l].nickname}
+                  img={data[l].profileImage}
+                  userId={data[l].userId}
                 />
               </WrapCard>
             );
@@ -107,4 +116,18 @@ const WrapText = styled.p`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+const NoCard = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 28px;
+  color: var(--gray3);
+  font-size: 16px;
+  font-weight: 700;
+  background-color: var(--gray1);
+  border: 1px solid var(--gray2);
+  border-radius: 6px;
+  min-height: 150px;
 `;
