@@ -158,7 +158,7 @@ const WrapChart = styled.div`
     height: 70%;
   }
   @media screen and (max-width: 580px) {
-    height: 60%;
+    height: 70%;
   }
 `;
 
