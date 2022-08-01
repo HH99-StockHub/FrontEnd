@@ -4,9 +4,19 @@
 
 
 
-## 📆 프로젝트 기간
+## 📆 프로젝트 소개
+Web Site https://stockhub.co.kr/
+
+Stock Hub는 내가 선택한 종목에 대한 매수 의견을 공유하는 장소입니다.
+다른 사용자들로부터 게시글에 대한 평가를 받는 것은 물론, 게시글 작성 시점부터의 수익률도 보여줘요!
+사고 싶은 종목이 있는데, 내 생각이 맞는지 확신이 없다면 Stock Hub의 고수들에게 검증을 받아보시죠!
+숨어있던 방구석 애널리스트들이 마음껏 목소리를 내는 그날까지 화이팅입니다!
+
+## 프로젝트 기간 및 환경 
 2022/06/24 ~ 2022/08/05 <br/>
-배포 2022/07/29 완료
+FrontEnd : React<br/>
+BackEnd : SpringBoot<br/>
+
 
 ## 팀원소개
 | Name                 | GitHub / Contact                          | Position    |
@@ -19,12 +29,23 @@
 | 문준호               | https://github.com/mjoonho                 | BE / Spring |
 | 주 희                | https://github.com/Joo-hui                 | BE / Spring |
 | Designer             |                                            |            |
-| 이은지               |                                            | Designer   |
+| 이은지               |           momo1038@naver.com               | Designer   |
 
 
 ## 서비스 아키텍처
 ![image](https://user-images.githubusercontent.com/105052690/182089297-8820db66-92b1-4f2b-91cc-269ef61f8e9d.png)
 
+## 와이어프레임
+<details markdown="1">
+<summary>피그마 </summary>
+https://www.figma.com/file/xg1wpWqkAv4cK4DIYlfHjV/%ED%95%AD%ED%95%B499_StockHub?node-id=0%3A1
+</details>
+
+## 팀 노션
+<details markdown="1">
+<summary>노션 </summary>
+https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
+</details>
 
 ## ⚙ 주요 기능
 - **게시글 작성/삭제**: KOSPI/KOSDAQ 상장 주식을 한 가지 선택하여 그 주식에 대한 매수 의견을 게시
