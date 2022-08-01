@@ -13,8 +13,8 @@ const Writing = (props) => {
     nickName,
     userId,
     rank,
-    richList = true,
-    popularList = true,
+    richList = false,
+    popularList = false,
   } = props;
   const changeNum = useChangeNum;
   return (
