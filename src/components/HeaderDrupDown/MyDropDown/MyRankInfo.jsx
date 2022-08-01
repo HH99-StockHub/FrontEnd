@@ -79,7 +79,7 @@ const WrapRankInfo = styled.div`
   border-radius: 6px;
   @media screen and (max-width: 440px) {
     position: fixed;
-    height: 200px;
+    height: 136px;
     top: 0;
     left: 0;
     right: 0;
