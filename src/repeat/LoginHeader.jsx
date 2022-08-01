@@ -20,12 +20,9 @@ const LoginHeader = () => {
     useHeaderApi.useGetRank();
   // media
   const isSmall = useMediaQuery({
-    query: "(max-width : 500px)",
+    query: "(max-width : 520px)",
   });
 
-  const isMostSmall = useMediaQuery({
-    query: "(max-width : 420px)",
-  });
   // 글작성 상태
   const setFormState = useSetRecoilState(addArticleState);
   const setRank = useSetRecoilState(rank);

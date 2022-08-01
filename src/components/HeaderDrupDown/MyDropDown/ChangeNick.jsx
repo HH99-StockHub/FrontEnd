@@ -21,40 +21,52 @@ const ChangeNick = ({ setChangeNick }) => {
     }
   };
   return (
-    <ChangeNickBox>
-      <form
-        onSubmit={(e) => {
-          changeNickName(e);
-        }}
-      >
-        <div>
-          <DivBox>
-            <span>현재 닉네임</span>
-            <p>{localStorage.getItem("nickName")}</p>
-          </DivBox>
-          <DivBox>
-            <span>변경 닉네임</span>
-            <input type="text" ref={newNickname} />
-          </DivBox>
-          <span>영문/국문/숫자 조합 2~12자리</span>
-        </div>
-        <div>
-          <button type="submit">저장</button>
-          <button
-            type="button"
-            onClick={() => {
-              setChangeNick(false);
-            }}
-          >
-            취소
-          </button>
-        </div>
-      </form>
-    </ChangeNickBox>
+    <>
+      <Back></Back>
+      <ChangeNickBox>
+        <form
+          onSubmit={(e) => {
+            changeNickName(e);
+          }}
+        >
+          <div>
+            <DivBox>
+              <span>현재 닉네임</span>
+              <p>{localStorage.getItem("nickName")}</p>
+            </DivBox>
+            <DivBox>
+              <span>변경 닉네임</span>
+              <input type="text" ref={newNickname} />
+            </DivBox>
+            <span>영문/국문/숫자 조합 2~12자리</span>
+          </div>
+          <div>
+            <button type="submit">저장</button>
+            <button
+              type="button"
+              onClick={() => {
+                setChangeNick(false);
+              }}
+            >
+              취소
+            </button>
+          </div>
+        </form>
+      </ChangeNickBox>
+    </>
   );
 };
 
 export default ChangeNick;
+
+const Back = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+`;
 
 const ChangeNickBox = styled.div`
   position: fixed;

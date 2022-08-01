@@ -47,7 +47,7 @@ const MyDrupDown = ({ data }) => {
 
   // media
   const isSmall = useMediaQuery({
-    query: "(max-width : 500px)",
+    query: "(max-width : 520px)",
   });
   const isMostSmall = useMediaQuery({
     query: "(max-width : 420px)",
@@ -209,7 +209,7 @@ const DropDownList = styled.div`
       color: var(--white);
     }
   }
-  @media screen and (max-width: 440px) {
+  @media screen and (max-width: 460px) {
     right: -40px;
   }
 `;
