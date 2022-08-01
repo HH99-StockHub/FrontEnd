@@ -32,7 +32,7 @@ const RichArticleList = () => {
           {arr.slice(0, 4).map((v, l) => {
             return data[l] === undefined ? (
               <NoCard>
-                전망글을 달성하고 <br /> 수익왕에 도전하세요
+                게시글을 작성하고 <br /> 수익왕에 도전하세요
               </NoCard>
             ) : (
               <WrapCard key={data[l].articleId}>
