@@ -45,6 +45,9 @@ const Header = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    a {
+      display: flex;
+    }
   }
   div:first-child {
     font-size: 12px;
