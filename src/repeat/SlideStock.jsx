@@ -82,7 +82,7 @@ const WrapSlideStock = styled.div`
     animation-duration: 60s;
     > div {
       display: flex;
-      gap: 80px;
+      gap: 40px;
       align-items: center;
       height: 38px;
     }
