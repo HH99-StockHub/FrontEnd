@@ -1,9 +1,7 @@
 import { api } from "../../shared/api";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSetRecoilState } from "recoil";
-// 모듈
 import { addArticleState } from "../../state/client/modal";
-// 훅
 import { toastify } from "../../custom/toastify";
 
 export const useAddArticleFormMutate = {

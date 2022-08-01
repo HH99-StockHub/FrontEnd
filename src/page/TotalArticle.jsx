@@ -1,13 +1,10 @@
-//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// 컴포넌트
 import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
 import TotalArticleBanner from "../components/TotalArticle/TotalArticleBanner";
 import TotalArticleContent from "../components/TotalArticle/TotalArticleContent";
 import HelmetComponents from "../repeat/HelmetComponents";
 import styled from "styled-components";
-// query 훅
 import SlideStock from "../repeat/SlideStock";
 
 const TotalArticle = () => {
@@ -51,6 +48,7 @@ const TotalArticle = () => {
 const Box = styled.div`
   position: relative;
   min-height: 90vh;
+  padding-bottom: 100px;
   background: #f5f5f5;
 `;
 export default TotalArticle;

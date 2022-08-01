@@ -3,15 +3,12 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import dayjs from "dayjs";
 import { useMediaQuery } from "react-responsive";
-// 컴포넌트
 import ChatCard from "./ChatCard";
-// 훅
 import { stompChat } from "../../custom/stomp";
 import { getCookie } from "../../shared/Cookie";
-// 모듈
 import { chatSubscribeId, saveChat } from "../../state/server/chat";
-// 이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
+
 const ChatText = ({ setChatState }) => {
   // recoil 채팅 데이터 저장하기
   const [chatList, setChatList] = useRecoilState(saveChat);

@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-//훅
 import { toastify } from "../../custom/toastify";
-// 이미지
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 
 const AddArticleChoosePoint = ({ choosePoint }) => {

@@ -2,8 +2,6 @@ import React from "react";
 import ReactModal from "react-modal";
 import { useRecoilState } from "recoil";
 import { useMediaQuery } from "react-responsive";
-
-// 모듈
 import { showChart } from "../../state/client/modal";
 import DetailChart from "./DetailChart";
 

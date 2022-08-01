@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// 컴포넌트
 import ChatRoom from "./ChatRoom";
-// 이미지
 import { ReactComponent as BtnSvg } from "../../image/Chat.svg";
 
 const ChattingFixBtn = () => {

@@ -2,18 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import { useMediaQuery } from "react-responsive";
-// 훅
 import useSliceNum from "../../../custom/sliceNum";
 
-const Stocks = (props) => {
-  const {
-    date,
-    stockReturn,
-    stockPriceFirst,
-    stockPriceLast,
-    deadline,
-    targetReturn,
-  } = props;
+const Stocks = ({
+  date,
+  stockReturn,
+  stockPriceFirst,
+  stockPriceLast,
+  deadline,
+  targetReturn,
+}) => {
   const sliceNum = useSliceNum;
 
   const isMiddle = useMediaQuery({

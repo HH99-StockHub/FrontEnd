@@ -1,16 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useQueryClient } from "react-query";
-// 컴포넌트
 import CommentCard from "../CommentCard";
-// 훅
+import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import { getCookie } from "../../../shared/Cookie";
 import { toastify } from "../../../custom/toastify";
 import {
   useDetailArticleGet,
   useDetailArticleMutate,
 } from "../useDetailArticle";
-import LoadingSpinner from "../../../repeat/LoadingSpinner";
 
 const Comment = ({ id }) => {
   const queryClient = useQueryClient();

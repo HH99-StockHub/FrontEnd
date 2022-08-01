@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-//컴포넌트
 import ChatInput from "./ChatInput";
 import ChatText from "./ChatText";
 
