@@ -6,7 +6,7 @@ import Img from "../../../image/CardHeader.webp";
 const CardHeader = ({ title, nickname, userId }) => {
   return (
     <Header>
-      <div>{title} 분석글</div>
+      <div>{title}</div>
       <div>
         <Link to={`/search/article/${nickname}/${userId}/1`}>
           <p>{nickname + " "} </p>
