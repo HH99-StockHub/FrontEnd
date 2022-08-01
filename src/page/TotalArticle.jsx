@@ -51,6 +51,7 @@ const TotalArticle = () => {
 const Box = styled.div`
   position: relative;
   min-height: 90vh;
+  padding-bottom: 100px;
   background: #f5f5f5;
 `;
 export default TotalArticle;

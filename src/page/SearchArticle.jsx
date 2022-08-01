@@ -20,6 +20,8 @@ const SearchArticle = () => {
 export default SearchArticle;
 
 const WrapContent = styled.div`
+  position: relative;
   min-height: 90vh;
   background: #f5f5f5;
+  padding-bottom: 100px;
 `;
