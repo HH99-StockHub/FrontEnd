@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 export const useChartQuery = {
   useGetChartData: (stockName) => {
     const fetcher = async () => {
-      const { data } = await api.post(`chart`, stockName);
+      const { data } = await api.post(`/chart`, stockName);
       return data;
     };
     return useQuery(["chart", stockName], fetcher, {
