@@ -146,7 +146,7 @@ export const useDetailArticleGet = {
   // 주가 상세 정보 가져오기
   useGetDetailStock: (stockName) => {
     const fetcher = async () => {
-      const response = api.get(`/stock/details`, stockName);
+      const response = api.post(`/stock/details`, stockName);
       return response;
     };
     return useQuery(["stockDetail", stockName], fetcher);

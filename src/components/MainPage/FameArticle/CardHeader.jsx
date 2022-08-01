@@ -52,5 +52,11 @@ const Header = styled.div`
   div:first-child {
     font-size: 12px;
     font-weight: 400;
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
