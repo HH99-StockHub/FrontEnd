@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 // 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
+import LoginHeader from "./LoginHeader";
 
 // 훅
 import { getCookie } from "../shared/Cookie";
@@ -19,7 +20,6 @@ import { loginState } from "../state/client/login";
 import { alarmList } from "../state/server/alarm";
 //이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
-import LoginHeader from "./LoginHeader";
 
 const Header = () => {
   //recoil
@@ -56,6 +56,9 @@ const Header = () => {
       <Header2>
         <Logo1>
           <Logo
+            fill="#54BA7D"
+            width="100"
+            height="16"
             onClick={() => {
               navigate("/");
             }}
