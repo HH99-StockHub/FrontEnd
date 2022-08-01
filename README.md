@@ -74,6 +74,7 @@ https://github.com/HH99-StockHub/FrontEnd/issues/11 KaKao 로그인 시 로그�
 https://github.com/HH99-StockHub/FrontEnd/issues/37 특정 submit 이벤트 시 useQuery 실행하기<br/>
 https://github.com/HH99-StockHub/FrontEnd/issues/49 상세페이지에서 게시글 삭제버튼이 자신이 쓴 글이면 true로 바꿔 화면에 보이게하고<br/>
 다른 사람의 글이면 false로 바꿔 게시글 삭제 버튼이 화면에 안보이게 하기<br/>
+https://github.com/HH99-StockHub/FrontEnd/issues/122 도메인 주소와 S3 주소에 버전이 다른 이슈
 </details>
 
 ## 👀  FE 컨벤션
