@@ -22,7 +22,7 @@
 
 
 ## 서비스 아키텍처
-
+https://swift-pelican-d17.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fdb3e2a51-7190-40d2-bc9b-b8aaca3449b0%2F_2022-08-01_15.33.00.png?table=block&id=61f47877-89aa-4451-9f69-df828b3f850e&spaceId=cbf430a4-d8bb-4f7d-a431-fd2d6438f7fe&width=2000&userId=&cache=v2
 
 ## ⚙ 주요 기능
 - **게시글 작성/삭제**: KOSPI/KOSDAQ 상장 주식을 한 가지 선택하여 그 주식에 대한 매수 의견을 게시
