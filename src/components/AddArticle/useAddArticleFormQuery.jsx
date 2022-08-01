@@ -17,7 +17,7 @@ export const useAddArticleFormMutate = {
     return useMutation(fetcher, {
       onSuccess: (data) => {
         if (data) {
-          queryClient.invalidateQueries("allArticle");
+          queryClient.invalidateQueries(["allArticle"]);
           queryClient.invalidateQueries("rank");
           toastify.success("작성 완료");
           setFormState(false);
