@@ -1,11 +1,8 @@
 import React, { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 import { useMediaQuery } from "react-responsive";
-// 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
-// 훅
 import useSliceNum from "../../custom/sliceNum";
-
 import { useChartQuery } from "./useChartQuery";
 import { lineChartDummy } from "../../Data/chartDummy";
 

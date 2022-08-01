@@ -1,9 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-//이미지
 import NotFoundImg from "../image/NotFound.webp";
 import Img404 from "../image/Img404.webp";
-import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (

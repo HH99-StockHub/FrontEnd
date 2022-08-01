@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 import { ReactComponent as XBtn } from "../../../image/XBtn.svg";
 
 const MyRankInfo = ({ rank, exp, setRankInfo }) => {

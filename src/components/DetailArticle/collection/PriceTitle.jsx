@@ -1,20 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-
-// 컴포넌트
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
-// 훅
 import { useDetailArticleGet } from "../useDetailArticle";
-
-//이미지
-import { ReactComponent as Poly } from "../../../image/Poly.svg.svg";
-import { ReactComponent as Plus } from "../../../image/Plus.svg";
-import { toastify } from "../../../custom/toastify";
 import useSliceNum from "../../../custom/sliceNum";
+import { toastify } from "../../../custom/toastify";
+import { ReactComponent as Plus } from "../../../image/Plus.svg";
 
-const PriceTitle = (props) => {
-  const { stockName } = props;
-
+const PriceTitle = ({ stockName }) => {
   const sliceNum = useSliceNum;
   const {
     data = { data: [] },
@@ -37,7 +29,6 @@ const PriceTitle = (props) => {
                 <NameP>{sliceNum(data.data?.stockPrice)}</NameP>
                 <TitleDiv>
                   <>&#9650;</>
-                  {/* <Poly /> */}
                   <TitleP>{sliceNum(data.data?.change)}</TitleP>
                 </TitleDiv>
                 <TitleDiv>
@@ -61,7 +52,6 @@ const PriceTitle = (props) => {
               <>
                 <NameP>{sliceNum(data.data?.stockPrice)}</NameP>
                 <TitleDiv>
-                  {/* <Poly /> */}
                   <TitleP>&ndash;</TitleP>
                 </TitleDiv>
                 <TitleDiv>
