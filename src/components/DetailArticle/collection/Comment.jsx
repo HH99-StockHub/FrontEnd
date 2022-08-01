@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useQueryClient } from "react-query";
-// 컴포넌트
 import CommentCard from "../CommentCard";
-// 훅
 import { getCookie } from "../../../shared/Cookie";
 import { toastify } from "../../../custom/toastify";
 import {
@@ -20,6 +18,7 @@ const Comment = ({ id }) => {
       if (data) {
         writeInput.current.value = "";
         queryClient.invalidateQueries(["CommentInquiry", id]);
+        queryClient.invalidateQueries(["myRank"]);
         toastify.success("댓글 작성 완료");
       } else {
         toastify.error("비속어를 포함할 수 없습니다.");
@@ -125,7 +124,8 @@ const Btn = styled.button`
 const Views = styled.textarea`
   color: var(--black);
   flex: 8;
-  font-weight: 700;
+  font-weight: 400;
+  font-size: 12px;
   border: 0;
   padding: 10px;
   height: 100%;

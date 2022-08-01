@@ -18,20 +18,25 @@ const FramRichArticle = () => {
     isError,
   } = useMainPageQuery.useGetFameRichArticle();
   if (isError) toastify.error("Best 수익왕 불러오기를 실패했습니다.");
+  const arr = [0, 1, 2];
 
   return (
     <WrapRich>
       {isLoading && <LoadingSpinner />}
-      {data.map((v, l) => {
-        return (
-          <WrapCard key={v.articleId}>
+      {arr.map((v, l) => {
+        return data[l] === undefined ? (
+          <NoCard>
+            게시글을 작성하고 <br /> 수익왕에 도전하세요
+          </NoCard>
+        ) : (
+          <WrapCard key={data[l].articleId}>
             <CardHeader
-              nickname={v.nickname}
-              title={v.stockName}
-              userId={v.userId}
+              nickname={data[l].nickname}
+              title={data[l].stockName}
+              userId={data[l].userId}
             />
-            <Link to={`/detail/article/${v.articleId}`}>
-              <FramRichCard data={v} index={l} />
+            <Link to={`/detail/article/${data[l].articleId}`}>
+              <FramRichCard data={data[l]} index={l} />
             </Link>
           </WrapCard>
         );
@@ -53,4 +58,18 @@ const WrapRich = styled.div`
 
 const WrapCard = styled.div`
   width: 100%;
+`;
+
+const NoCard = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 28px;
+  color: var(--gray3);
+  font-size: 16px;
+  font-weight: 700;
+  background-color: var(--gray1);
+  border: 1px solid var(--gray2);
+  border-radius: 6px;
+  min-height: 150px;
 `;

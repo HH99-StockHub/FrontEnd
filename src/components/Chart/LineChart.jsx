@@ -7,11 +7,9 @@ import LoadingSpinner from "../../repeat/LoadingSpinner";
 import useSliceNum from "../../custom/sliceNum";
 
 import { useChartQuery } from "./useChartQuery";
-import { lineChartDummy } from "../../Data/chartDummy";
 
 const LineChart = ({ stockName }) => {
-  const { data = lineChartDummy, isLoading } =
-    useChartQuery.useGetChartData(stockName);
+  const { data, isLoading } = useChartQuery.useGetChartData(stockName);
   const lineChartData = useMemo(() => {
     const newDataList = [...data.chart].reverse().map((v) => {
       return { x: v[0], y: v[3] };

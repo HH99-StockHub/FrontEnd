@@ -2,10 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
-// 컴포넌트
 import KakaoLogin from "../components/KakaoLogin/KakaoLogin";
-
-// 훅
+import LoginHeader from "./LoginHeader";
 import { getCookie } from "../shared/Cookie";
 import { deleteCookie } from "../shared/Cookie";
 import { useAlarmMutate } from "./useRepeatQuery";
@@ -14,12 +12,9 @@ import {
   stompDisConnect,
   stompLoginConnect,
 } from "../custom/stomp";
-// 모듈
 import { loginState } from "../state/client/login";
 import { alarmList } from "../state/server/alarm";
-//이미지
 import { ReactComponent as Logo } from "../../src/image/Logo.svg";
-import LoginHeader from "./LoginHeader";
 
 const Header = () => {
   //recoil
@@ -56,6 +51,9 @@ const Header = () => {
       <Header2>
         <Logo1>
           <Logo
+            fill="#54BA7D"
+            width="100"
+            height="16"
             onClick={() => {
               navigate("/");
             }}

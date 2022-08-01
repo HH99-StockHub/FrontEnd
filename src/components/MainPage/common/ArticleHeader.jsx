@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ReactComponent as RightSvg } from "../../../image/RightArrow.svg";
 
 // 이미지
 import { ReactComponent as PlusSvg } from "../../../image/Plus.svg";
@@ -12,7 +13,8 @@ const ArticleHeader = React.memo(({ title, link }) => {
       <WrapTitle>{title}</WrapTitle>
       {link && (
         <Link to={link}>
-          <PlusSvg width={"10px"} height="10px" fill="#54BA7D" />
+          <p>더보기</p>
+          <RightSvg />
         </Link>
       )}
     </WrapHead>
@@ -23,14 +25,15 @@ export default ArticleHeader;
 const WrapHead = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 12px;
   margin-bottom: 24px;
   a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 24px;
-    height: 24px;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--green1);
   }
 `;
 

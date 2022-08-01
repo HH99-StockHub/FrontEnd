@@ -16,7 +16,6 @@ export const useDetailArticleMutate = {
       onSuccess: () => {
         queryClient.invalidateQueries(["voteSign", articleId]);
         queryClient.invalidateQueries(["ContentInquiry", articleId]);
-        queryClient.invalidateQueries("rank");
         toastify.success("투표 완료");
       },
       onError: (data) => {
@@ -79,7 +78,7 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries("rank");
+        queryClient.invalidateQueries(["myRank"]);
         queryClient.invalidateQueries(["CommentInquiry", articleId]);
         toastify.success("댓글 삭제 완료");
       },
@@ -101,8 +100,9 @@ export const useDetailArticleMutate = {
     };
     return useMutation(fetcher, {
       onSuccess: () => {
-        queryClient.invalidateQueries("rank");
-        queryClient.invalidateQueries("ContentInquiry");
+        queryClient.invalidateQueries(["myRank"]);
+        queryClient.invalidateQueries(["ContentInquiry"]);
+        queryClient.invalidateQueries(["allArticle"]);
         toastify.success("게시글 삭제 완료");
       },
       onError: (data) => {
@@ -146,7 +146,7 @@ export const useDetailArticleGet = {
   // 주가 상세 정보 가져오기
   useGetDetailStock: (stockName) => {
     const fetcher = async () => {
-      const response = api.get(`/stock/details/${stockName}`);
+      const response = api.post(`/stock/details`, stockName);
       return response;
     };
     return useQuery(["stockDetail", stockName], fetcher);

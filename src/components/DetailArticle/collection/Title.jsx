@@ -6,13 +6,11 @@ import { useDetailArticleGet } from "../useDetailArticle";
 import TitleGraph from "./TitleGraph";
 import PriceTitle from "./PriceTitle";
 import Comment from "./Comment";
-
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import ChartModal from "../../Chart/ChartModal";
 import { useMediaQuery } from "react-responsive";
 
-const Title = (props) => {
-  const { stockName, id } = props;
+const Title = ({ stockName, id }) => {
   const { data = [], isLoading } = useDetailArticleGet.useNewsSearch(stockName);
 
   const isMiddle = useMediaQuery({

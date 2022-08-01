@@ -3,9 +3,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
-// 훅
 import { useAlarmMutate } from "../../repeat/useRepeatQuery";
-// 모듈
 import { alarmList } from "../../state/server/alarm";
 // 이미지
 import { ReactComponent as Notice } from "../../image/Notice.svg";
@@ -13,7 +11,6 @@ import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 
 const AlarmDrupDown = () => {
   const navigate = useNavigate();
-  /* 유저정보 모달창 */
   //드롭다운 메뉴
   const [isOpen, setIsOpen] = React.useState(false);
   const toggling = () => setIsOpen(!isOpen);
@@ -46,8 +43,8 @@ const AlarmDrupDown = () => {
 
   return (
     <DropDownContainer ref={el}>
-      <DropDownHeader>
-        <button onClick={toggling}>
+      <DropDownHeader onClick={toggling}>
+        <button>
           <Notice />
         </button>
         {alarmListData.length !== 0 ? (

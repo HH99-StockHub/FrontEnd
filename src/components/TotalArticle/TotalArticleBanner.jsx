@@ -24,7 +24,7 @@ const WrapBanner = styled.div`
   align-items: center;
   max-width: 1240px;
   width: 90%;
-  background: var(--green1);
+  background: linear-gradient(90deg, #52b97b 0%, #3f957b 100.51%);
   border-radius: 6px;
   @media screen and (max-width: 980px) {
     flex-direction: column;
@@ -37,7 +37,7 @@ const WrapBanner = styled.div`
 
 const BannerText = styled.div`
   font-weight: 400;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 28px;
   color: var(--white);
 `;

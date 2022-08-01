@@ -58,6 +58,8 @@ const Table = styled.div`
   position: relative;
   min-height: 300px;
   width: 100%;
+  border: 1px solid var(--gray2);
+  border-radius: 6px;
 `;
 const THead = styled.div`
   display: flex;

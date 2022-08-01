@@ -1,9 +1,7 @@
 import { api } from "../../shared/api";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSetRecoilState } from "recoil";
-// 모듈
 import { addArticleState } from "../../state/client/modal";
-// 훅
 import { toastify } from "../../custom/toastify";
 
 export const useAddArticleFormMutate = {
@@ -17,7 +15,7 @@ export const useAddArticleFormMutate = {
     return useMutation(fetcher, {
       onSuccess: (data) => {
         if (data) {
-          queryClient.invalidateQueries("allArticle");
+          queryClient.invalidateQueries(["allArticle"]);
           queryClient.invalidateQueries("rank");
           toastify.success("작성 완료");
           setFormState(false);
@@ -41,7 +39,7 @@ export const useAddArticleFormMutate = {
   },
   useGetArticleStock: (option) => {
     const fetcher = async (article) => {
-      const response = await api.get(`/stock/price/${article}`);
+      const response = await api.post(`/stock/price`, article);
       return response;
     };
     return useMutation(fetcher, option);

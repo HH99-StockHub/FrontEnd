@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const View = (props) => {
-  const { content1, content2, content3, point1, point2, point3 } = props;
+const View = ({ content1, content2, content3, point1, point2, point3 }) => {
   return (
     <Box>
       {content1 ? (
@@ -48,6 +47,7 @@ const BoxDiv = styled.div`
 
 const Views = styled.div`
   color: var(--black);
+  font-size: 16px;
   font-weight: 700;
   padding: 3px 0;
 `;
@@ -57,8 +57,8 @@ const Contents = styled.pre`
   height: 150px;
   width: 100%;
   resize: none;
-  line-height: 18px;
-  font-size: 16px;
+  line-height: 22px;
+  font-size: 14px;
   font-weight: 400;
   overflow: auto;
   white-space: pre-wrap;

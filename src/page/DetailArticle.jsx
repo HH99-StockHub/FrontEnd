@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
-// 컴포넌트
 import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
 import Title from "../components/DetailArticle/collection/Title";
 import Writing from "../components/DetailArticle/collection/Writing";
@@ -14,7 +12,6 @@ import Vote from "../components/DetailArticle/Vote";
 import SlideStock from "../repeat/SlideStock";
 import LoadingSpinner from "../repeat/LoadingSpinner";
 import HelmetComponents from "../repeat/HelmetComponents";
-// 훅
 import { useDetailArticleMutate } from "../components/DetailArticle/useDetailArticle";
 import { useDetailArticleGet } from "../components/DetailArticle/useDetailArticle";
 import { toastify } from "../custom/toastify";
@@ -79,6 +76,8 @@ const DetailArticle = () => {
                 nickName={data.nickname}
                 userId={data.userId}
                 rank={data.rankTitle}
+                richList={data.richList}
+                popularList={data.popularList}
               />
 
               <Stocks

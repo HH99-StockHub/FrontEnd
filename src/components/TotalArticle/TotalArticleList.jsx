@@ -242,7 +242,7 @@ const WrapBottom = styled.div`
 
 const Badge = styled.p`
   padding: 4px 8px;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 50px;
   background-color: ${({ color }) => color};
   color: var(--white);

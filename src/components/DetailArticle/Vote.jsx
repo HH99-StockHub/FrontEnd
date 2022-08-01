@@ -7,9 +7,8 @@ import {
 import { getCookie } from "../../shared/Cookie";
 import { toastify } from "../../custom/toastify";
 
-const Vote = (props) => {
+const Vote = ({ userId, id, voteUp, voteDown }) => {
   const token = getCookie("token");
-  const { userId, id, voteUp, voteDown } = props;
 
   //찬성투표
   const { mutate: InFavor } = useDetailArticleMutate.useVoteUpMutation(id);

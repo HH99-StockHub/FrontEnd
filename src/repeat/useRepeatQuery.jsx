@@ -84,6 +84,6 @@ export const useHeaderApi = {
       const response = api.post("/userDetails");
       return response;
     };
-    return useQuery("rank", fetcher);
+    return useQuery(["rank", "myRank"], fetcher);
   },
 };
