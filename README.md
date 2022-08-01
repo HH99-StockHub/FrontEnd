@@ -1,5 +1,6 @@
 # [StockHub] 
-![KakaoTalk_20220729_160912463](https://user-images.githubusercontent.com/105052690/181703671-b380ca2e-bc55-418a-a9f2-7264d4a77f25.jpg)
+![카카오배너](https://user-images.githubusercontent.com/97582834/182103465-5b03ff2a-89b1-41de-b333-a0f40b70f83f.jpg)
+
 
 
 
