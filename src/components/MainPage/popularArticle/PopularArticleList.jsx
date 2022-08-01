@@ -40,7 +40,6 @@ const PopularArticleList = () => {
                   nickname={v.nickname}
                   img={v.profileImage}
                   userId={v.userId}
-                  rank={v.rankTitle}
                 />
               </WrapCard>
             );
@@ -59,7 +58,6 @@ const PopularArticleList = () => {
                   nickname={v.nickname}
                   img={v.profileImage}
                   userId={v.userId}
-                  rank={v.rankTitle}
                 />
               </WrapCard>
             );
@@ -91,6 +89,11 @@ const WrapCard = styled.div`
   padding: 16px;
   border: 1px solid var(--gray2);
   border-radius: 6px;
+  > a {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 `;
 
 const WrapText = styled.p`
