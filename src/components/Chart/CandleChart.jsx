@@ -124,14 +124,14 @@ const CandleChart = ({
       // type에 따라 그래프가 약간씩 달라짐, date는 축소도 되고 확대하면 넓게
       type: "category",
       //하단 갯수
-      tickAmount: isMiddle ? 2 : 6,
+      tickAmount: isMiddle ? 2 : 4,
       labels: {
         show: true,
         // 1자로만 보이게
         rotate: 0,
         formatter: function (val, l) {
           // x축 원하는데로 조작하기
-          if (dayjs(new Date().format("YY")) === dayjs(val).format("YY")) {
+          if (dayjs(new Date()).format("YY") === dayjs(val).format("YY")) {
             return dayjs(val).format("MM/DD");
           } else {
             return dayjs(val).format("YY/MM/DD");
@@ -165,8 +165,7 @@ const CandleChart = ({
       intersect: false,
       inverseOrder: false,
       // 툴 커스텀해서 사용하기
-      // { series, seriesIndex, dataPointIndex, w }
-      custom: function ({ series, dataPointIndex }) {
+      custom: function ({ dataPointIndex }) {
         return `<div>
       <p><span>시가 : </span> ${sliceNum(
         candleChartData[dataPointIndex].y[0],

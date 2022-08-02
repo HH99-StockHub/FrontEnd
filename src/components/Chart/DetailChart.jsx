@@ -62,8 +62,8 @@ const DetailChart = ({ stockName }) => {
       setChartStandard(chartStandard + chartMove);
     } else {
       setChartStandard(data.chart.length - chartCount);
+      toastify.info("최대 입니다");
     }
-    toastify.info("최대 입니다");
   };
   // 오른쪽 이동
   const moveRight = () => {

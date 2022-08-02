@@ -97,7 +97,7 @@ const LineChart = ({ stockName }) => {
       xaxis: {
         type: "category",
         // 갯수
-        tickAmount: isMiddle ? 2 : 6,
+        tickAmount: isMiddle ? 2 : 4,
         labels: {
           offsetX: 4,
           rotate: 0,
