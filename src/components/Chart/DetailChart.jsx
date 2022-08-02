@@ -77,14 +77,14 @@ const DetailChart = ({ stockName }) => {
           {chartState ? null : (
             <>
               <div>
-                <button onClick={plus}>
+                <button onClick={minus}>
                   {isSmall ? (
                     <PlusSvg width="20" heigth="20" />
                   ) : (
                     <PlusSvg width="31" heigth="31" />
                   )}
                 </button>
-                <button onClick={minus}>
+                <button onClick={plus}>
                   {isSmall ? (
                     <MinusSvg width="27" heigth="27" />
                   ) : (
