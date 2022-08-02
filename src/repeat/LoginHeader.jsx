@@ -2,16 +2,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { useSetRecoilState } from "recoil";
-// 컴포넌트
 import ProfileImg from "../elem/ProfileImg";
 import MyDrupDown from "../components/HeaderDrupDown/MyDropDown/MyDrupDown";
 import AlarmDrupDown from "../components/HeaderDrupDown/AlarmDrupDown";
-//훅
 import { useHeaderApi } from "./useRepeatQuery";
-// 모듈
 import { addArticleState } from "../state/client/modal";
 import { rank } from "../state/server/rank";
-// 이미지
 import { ReactComponent as DownArrowSvg } from "../image/DownArrow.svg";
 
 const LoginHeader = () => {

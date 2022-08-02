@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// 이미지
 import { ReactComponent as UpSvg } from "../../../image/Up.svg";
 const CardTextPopular = ({ up }) => {
   return (

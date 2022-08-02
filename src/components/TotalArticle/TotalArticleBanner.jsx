@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-//이미지
 import bannerImg from "../../image/totalBanner.png";
 const TotalArticleBanner = React.memo(() => {
   return (

@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-// 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 import TotalArticleList from "../TotalArticle/TotalArticleList";
 import TotalPagenation from "../TotalArticle/TotalPagenation";
 import NotSearch from "./NotSearch";
 import { useGetSearchArticle } from "./useSearchArticleQuery";
-// 훅
 import { toastify } from "../../custom/toastify";
 
 const SearchArticleContent = ({ category, keyword, page }) => {

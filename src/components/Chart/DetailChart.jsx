@@ -6,6 +6,7 @@ import CandleChart from "./CandleChart";
 import LineChart from "./LineChart";
 import { showChart } from "../../state/client/modal";
 import { useChartQuery } from "./useChartQuery";
+import { toastify } from "../../custom/toastify";
 import { ReactComponent as MinusSvg } from "../../image/Reduction.svg";
 import { ReactComponent as LeftSvg } from "../../image/LeftChart.svg";
 import { ReactComponent as RightSvg } from "../../image/RightChart.svg";
@@ -41,6 +42,7 @@ const DetailChart = ({ stockName }) => {
       setChartStandard(0);
       setChartCount(data.chart.length);
       setChartMove(parseInt(data.chart.length / 3));
+      toastify.info("최대 입니다");
     }
   };
   // 축소
@@ -51,6 +53,7 @@ const DetailChart = ({ stockName }) => {
     } else {
       setChartCount(5);
       setChartMove(parseInt(2));
+      toastify.info("최대 입니다");
     }
   };
   // 왼쪽이동
@@ -59,6 +62,7 @@ const DetailChart = ({ stockName }) => {
       setChartStandard(chartStandard + chartMove);
     } else {
       setChartStandard(data.chart.length - chartCount);
+      toastify.info("최대 입니다");
     }
   };
   // 오른쪽 이동
@@ -67,6 +71,7 @@ const DetailChart = ({ stockName }) => {
       setChartStandard(chartStandard - chartMove);
     } else {
       setChartStandard(0);
+      toastify.info("최대 입니다");
     }
   };
 

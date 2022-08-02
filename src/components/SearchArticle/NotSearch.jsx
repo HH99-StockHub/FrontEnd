@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
-// 이미지
 import { ReactComponent as NotSvg } from "../../image/NotSearchArticle.svg";
 
 const NotSearch = () => {

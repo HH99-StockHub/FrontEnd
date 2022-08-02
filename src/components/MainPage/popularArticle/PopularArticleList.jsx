@@ -1,13 +1,10 @@
-//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
-//컴포넌트
 import CardTextPopular from "../common/CardTextPopular";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import Profile from "../common/Profile";
-// 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 import { toastify } from "../../../custom/toastify";
 

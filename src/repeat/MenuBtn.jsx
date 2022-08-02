@@ -1,10 +1,8 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-// 컴포넌트
 import AddArticleFixBtn from "../components/AddArticle/AddArticleFixBtn";
 import ChattingFixBtn from "../components/Chat/ChattingFixBtn";
-// 모듈
 import { loginState } from "../state/client/login";
 
 const MenuBtn = () => {

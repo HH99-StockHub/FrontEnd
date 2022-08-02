@@ -1,7 +1,5 @@
-//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 import styled from "styled-components";
-// 이미지
 import { ReactComponent as UpSvg } from "../../../image/Up.svg";
 import { ReactComponent as Medal1 } from "../../../image/GoldMedal.svg";
 import { ReactComponent as Medal2 } from "../../../image/SilverMedal.svg";

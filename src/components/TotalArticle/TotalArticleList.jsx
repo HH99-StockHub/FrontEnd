@@ -2,16 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
-
 import useSliceNum from "../../custom/sliceNum";
-// elem
 import ProfileImg from "../../elem/ProfileImg";
-// 이미지
 import { ReactComponent as UpSvg } from "../../image/Up.svg";
 import { ReactComponent as DownSvg } from "../../image/Down.svg";
 import { ReactComponent as Vector } from "../../image/Vector.svg";
 import { ReactComponent as Stock } from "../../image/UpStock.svg";
-// const TotalArticleList = ({ data }) => {
+
 const TotalArticleList = ({ data }) => {
   // onclick navigate 이벤트 버블링이 있어 하위 요소에 옵션으로 막아둠
   const navigate = useNavigate();

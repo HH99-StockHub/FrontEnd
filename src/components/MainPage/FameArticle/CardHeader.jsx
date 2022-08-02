@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// 이미지
 import Img from "../../../image/CardHeader.webp";
 const CardHeader = ({ title, nickname, userId }) => {
   return (
