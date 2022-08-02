@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import TotalArticleHeader from "../components/TotalArticle/Header/TotalArticleHeader";
 import Title from "../components/DetailArticle/collection/Title";
 import Writing from "../components/DetailArticle/collection/Writing";
@@ -58,9 +59,26 @@ const DetailArticle = () => {
                 {deleteBtn ? (
                   <Btn
                     onClick={() => {
-                      const data = { postId: id }; //게시글에 대한 데이터 넣기
-                      mutate(data);
-                      navigate(-1);
+                      Swal.fire({
+                        title: "게시글을 삭제 하시겠습니까?",
+                        text: "한 번 삭제된 게시글은 복구 할 수 없습니다.",
+                        icon: "warning",
+
+                        showCancelButton: true,
+                        confirmButtonColor: "var(--green1)",
+                        cancelButtonColor: "var(--gray2)",
+                        confirmButtonText: "삭제",
+                        cancelButtonText: "취소",
+
+                        reverseButtons: false, // 버튼 순서 거꾸로
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          Swal.fire("삭제가 완료됐습니다.", "", "success");
+                          const data = { postId: id }; //게시글에 대한 데이터 넣기
+                          mutate(data);
+                          navigate(-1);
+                        }
+                      });
                     }}
                   >
                     게시글 삭제
