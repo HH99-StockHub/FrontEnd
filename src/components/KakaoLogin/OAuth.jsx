@@ -2,17 +2,13 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-
-// 훅
 import { setCookie, getCookie } from "../../shared/Cookie";
 import { useLoginQuery } from "./useLoginQuery";
 import { toastify } from "../../custom/toastify";
 import { stompNotice } from "../../custom/stomp";
 import { useAlarmMutate } from "../../repeat/useRepeatQuery";
-//모듈
 import { loginState } from "../../state/client/login";
 import { alarmList } from "../../state/server/alarm";
-//이미지
 import LodingImg from "../../image/Loding.webp";
 
 const OAuth = () => {

@@ -1,11 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-
-// 컴포넌트
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 import TotalArticleList from "./TotalArticleList";
 import TotalPagenation from "./TotalPagenation";
-// 훅
 import { useTotalPageQuery } from "./useTotalPageQuery";
 
 const TotalArticleContent = ({ category, page }) => {

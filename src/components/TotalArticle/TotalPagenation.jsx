@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-// 훅
 import { toastify } from "../../custom/toastify";
-//이미지
 import { ReactComponent as Left } from "../../image/Left.svg";
 import { ReactComponent as Right } from "../../image/Right.svg";
 

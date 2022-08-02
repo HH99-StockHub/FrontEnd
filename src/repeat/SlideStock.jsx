@@ -1,14 +1,7 @@
-//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
-import dayjs from "dayjs";
 import React from "react";
 import styled, { keyframes } from "styled-components";
-// 컴포넌트
 import LoadingSpinner from "./LoadingSpinner";
-// 훅
 import { useHeaderApi } from "./useRepeatQuery";
-
-//이미지
-import { ReactComponent as UpArrowSvg } from "../image/UpArrow.svg";
 
 const SlideStock = React.memo(() => {
   const { data = { data: [] }, isLoading } = useHeaderApi.useGetSlideStock();

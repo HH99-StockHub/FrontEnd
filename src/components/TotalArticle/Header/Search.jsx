@@ -1,10 +1,7 @@
-//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-//훅
 import { toastify } from "../../../custom/toastify";
-// 이미지
 import { ReactComponent as SearchSvg } from "../../../image/Search.svg";
 
 const Search = () => {
