@@ -61,7 +61,7 @@ const DetailArticle = () => {
                     onClick={() => {
                       Swal.fire({
                         title: "게시글을 삭제 하시겠습니까?",
-                        text: "한 번 삭제된 게시글은 복구 할 수 없습니다.",
+                        text: "한 번 삭제된 게시글은 복구할 수 없습니다.",
                         icon: "warning",
 
                         showCancelButton: true,
