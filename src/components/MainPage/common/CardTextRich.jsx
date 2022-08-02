@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// 훅
 import useSliceNum from "../../../custom/sliceNum";
-// 이미지
 import { ReactComponent as UpStockSvg } from "../../../image/UpStock.svg";
 const CardTextRich = ({ stock }) => {
   const sliceNum = useSliceNum;

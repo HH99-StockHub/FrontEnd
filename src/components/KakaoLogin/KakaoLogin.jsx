@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { KAKAO_AUTH_URL } from "../../Auth/kakao";
-//카카오 로그인
 
 const KakaoLogin = () => {
   return (

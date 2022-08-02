@@ -1,18 +1,14 @@
-//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-//컴포넌트
 import FramPopularCard from "./FramPopularCard";
 import LoadingSpinner from "../../../repeat/LoadingSpinner";
 import CardHeader from "./CardHeader";
-// 쿼리 훅
 import { useMainPageQuery } from "../useMainPageQuery";
 import { toastify } from "../../../custom/toastify";
 
 const FramPopularArticle = () => {
   // useQuery
-
   const {
     data = [],
     isLoading,
