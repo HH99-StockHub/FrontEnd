@@ -14,7 +14,7 @@ const RichArticleList = () => {
     isLoading,
     isError,
   } = useMainPageQuery.useGetRichArticles();
-  const arr = [0, 1, 2, 3, 4, 5];
+  const arr = ["a", "b", "c", "d", "e", "f"];
   // media
   const isSmall = useMediaQuery({
     query: "(max-width: 700px)",
@@ -28,7 +28,7 @@ const RichArticleList = () => {
         <>
           {arr.slice(0, 4).map((v, l) => {
             return data[l] === undefined ? (
-              <NoCard>
+              <NoCard key={v}>
                 게시글을 작성하고 <br /> 수익왕에 도전하세요
               </NoCard>
             ) : (
@@ -51,7 +51,7 @@ const RichArticleList = () => {
         <>
           {arr.map((v, l) => {
             return data[l] === undefined ? (
-              <NoCard>
+              <NoCard key={v}>
                 게시글을 작성하고 <br /> 수익왕에 도전하세요
               </NoCard>
             ) : (

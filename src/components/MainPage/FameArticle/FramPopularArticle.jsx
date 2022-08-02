@@ -15,13 +15,13 @@ const FramPopularArticle = () => {
     isError,
   } = useMainPageQuery.useGetFamePopularArticle();
   if (isError) toastify.error("Best 인기글 불러오기를 실패했습니다.");
-  const arr = [0, 1, 2];
+  const arr = ["a", "b", "c"];
   return (
     <WrapPopular>
       {isLoading && <LoadingSpinner />}
       {arr.map((v, l) => {
         return data[l] === undefined ? (
-          <NoCard>
+          <NoCard key={v}>
             게시글을 작성하고 <br /> 인기글에 도전하세요
           </NoCard>
         ) : (

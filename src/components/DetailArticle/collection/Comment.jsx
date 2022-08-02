@@ -15,6 +15,7 @@ const Comment = ({ id }) => {
   const writeInput = React.useRef("");
   const { mutate } = useDetailArticleMutate.useWriteComment({
     onSuccess: (data) => {
+      console.log(data);
       if (data) {
         writeInput.current.value = "";
         queryClient.invalidateQueries(["CommentInquiry", id]);
