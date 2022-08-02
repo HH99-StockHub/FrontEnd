@@ -145,6 +145,7 @@ const Div = styled.div`
   max-width: 1240px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 100px;
   @media screen and (max-width: 1240px) {
     flex-direction: column;
     width: 90%;
