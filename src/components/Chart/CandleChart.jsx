@@ -131,7 +131,11 @@ const CandleChart = ({
         rotate: 0,
         formatter: function (val, l) {
           // x축 원하는데로 조작하기
-          return dayjs(val).format("MM/DD");
+          if (dayjs(new Date().format("YY")) === dayjs(val).format("YY")) {
+            return dayjs(val).format("MM/DD");
+          } else {
+            return dayjs(val).format("YY/MM/DD");
+          }
         },
         style: {
           // 하단 날짜 색

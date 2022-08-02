@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 import { useMediaQuery } from "react-responsive";
+import dayjs from "dayjs";
 import LoadingSpinner from "../../repeat/LoadingSpinner";
 import useSliceNum from "../../custom/sliceNum";
 import { useChartQuery } from "./useChartQuery";
@@ -101,7 +102,14 @@ const LineChart = ({ stockName }) => {
           offsetX: 4,
           rotate: 0,
           formatter: function (value) {
-            return `${value?.slice(4, 6)}/${value?.slice(6, 8)}`;
+            if (dayjs(new Date()).format("YY") == value?.slice(2, 4)) {
+              return `${value?.slice(4, 6)}/${value?.slice(6, 8)}`;
+            } else {
+              return `${value?.slice(2, 4)}/${value?.slice(
+                4,
+                6,
+              )}/${value?.slice(6, 8)}`;
+            }
           },
         },
       },
