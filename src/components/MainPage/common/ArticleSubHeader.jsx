@@ -2,12 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useSetRecoilState } from "recoil";
 import { useMediaQuery } from "react-responsive";
-// 훅
 import { toastify } from "../../../custom/toastify";
-// 모듈
 import { getCookie } from "../../../shared/Cookie";
 import { addArticleState } from "../../../state/client/modal";
-// 이미지
 import bannerImg from "../../../image/mainBanner.png";
 
 const ArticleSubHeader = React.memo(() => {

@@ -1,8 +1,6 @@
-//패키지 > 컴포넌트 > 커스텀 훅, CSS 컴포넌트 > 모듈(action creator) > CSS
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
-// 컴포넌트
 import HeaderCategory from "./HeaderCategory";
 import Search from "./Search";
 

@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import HelmetComponents from "../../repeat/HelmetComponents";
-// 컴포넌트
 import SearchArticleContent from "./SearchArticleContent";
 
 const SearchArticleList = () => {
