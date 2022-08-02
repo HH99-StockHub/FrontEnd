@@ -25,6 +25,7 @@ const Not404 = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-bottom: 100px;
 `;
 
 const HomeBt = styled.button`

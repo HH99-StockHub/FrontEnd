@@ -36,6 +36,7 @@ const WrapMainContent = styled.div`
   justify-content: center;
   gap: 64px;
   margin-top: 64px;
+  margin-bottom: 100px;
   @media screen and (max-width: 1260px) {
     gap: 44px;
   }
