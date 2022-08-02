@@ -7,9 +7,7 @@ import { candleChartDummy } from "../../Data/chartDummy";
 import useSliceNum from "../../custom/sliceNum";
 
 const CandleChart = ({
-  stockName,
   chartCount,
-  chartMove,
   chartStandard,
   data = candleChartDummy,
   isLoading,
