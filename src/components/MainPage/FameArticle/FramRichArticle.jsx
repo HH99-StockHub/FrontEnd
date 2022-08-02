@@ -15,14 +15,14 @@ const FramRichArticle = () => {
     isError,
   } = useMainPageQuery.useGetFameRichArticle();
   if (isError) toastify.error("Best 수익왕 불러오기를 실패했습니다.");
-  const arr = [0, 1, 2];
+  const arr = ["a", "b", "c"];
 
   return (
     <WrapRich>
       {isLoading && <LoadingSpinner />}
       {arr.map((v, l) => {
         return data[l] === undefined ? (
-          <NoCard>
+          <NoCard key={v}>
             게시글을 작성하고 <br /> 수익왕에 도전하세요
           </NoCard>
         ) : (
