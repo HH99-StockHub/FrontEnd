@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import dayjs from "dayjs";
@@ -10,6 +10,8 @@ import { chatSubscribeId, saveChat } from "../../state/server/chat";
 import { ReactComponent as XBtnSvg } from "../../image/XBtn.svg";
 
 const ChatText = ({ setChatState }) => {
+  // 메세지 하단으로 이동 상태
+  const [moreMsg, setMoreMsg] = useState(false);
   // recoil 채팅 데이터 저장하기
   const [chatList, setChatList] = useRecoilState(saveChat);
   // 구독 id
@@ -21,6 +23,13 @@ const ChatText = ({ setChatState }) => {
   const isSmall = useMediaQuery({
     query: "(max-width : 470px)",
   });
+
+  // 스크롤 이벤트
+  const scrollMsgBox = (e) => {
+    if (textBox.current.scrollTop > textBox.current.scrollHeight - 500) {
+      setMoreMsg(false);
+    }
+  };
 
   // 구독 data
   const token = getCookie("token");
@@ -36,6 +45,7 @@ const ChatText = ({ setChatState }) => {
       return `오전 ${nowHour}:${nowMin}`;
     }
   };
+
   // 구독하기
   useEffect(() => {
     const data = {
@@ -52,7 +62,12 @@ const ChatText = ({ setChatState }) => {
 
   // 채팅 저장하기
   useEffect(() => {
-    textBox.current.scrollTop = textBox.current.scrollHeight;
+    if (textBox.current.scrollTop < textBox.current.scrollHeight - 600) {
+      setMoreMsg(true);
+    } else {
+      textBox.current.scrollTop = textBox.current.scrollHeight;
+      setMoreMsg(false);
+    }
   }, [chatList]);
 
   return (
@@ -68,7 +83,7 @@ const ChatText = ({ setChatState }) => {
           </button>
         </ColseBtn>
       )}
-      <WrapText ref={textBox}>
+      <WrapText ref={textBox} onScroll={scrollMsgBox}>
         {chatList.length !== 0 ? (
           <>
             {chatList.map((v, l) => {
@@ -76,6 +91,18 @@ const ChatText = ({ setChatState }) => {
             })}
           </>
         ) : null}
+        {moreMsg && (
+          <MoreMsgBtn>
+            <button
+              onClick={() => {
+                textBox.current.scrollTop = textBox.current.scrollHeight;
+                setMoreMsg(false);
+              }}
+            >
+              새로운 메세지
+            </button>
+          </MoreMsgBtn>
+        )}
       </WrapText>
     </>
   );
@@ -110,4 +137,19 @@ const ColseBtn = styled.div`
   margin-bottom: 10px;
   display: flex;
   justify-content: flex-end;
+`;
+
+const MoreMsgBtn = styled.div`
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+  display: flex;
+  > button {
+    width: 60%;
+    border-radius: 26px;
+    height: 40px;
+    background-color: rgba(84, 186, 125, 0.7);
+    color: var(--white);
+    margin: 0 auto;
+  }
 `;
