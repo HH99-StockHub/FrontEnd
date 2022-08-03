@@ -6,7 +6,9 @@ import ChatText from "./ChatText";
 const ChatRoom = ({ setChatState }) => {
   return (
     <WrapChat>
-      <ChatText setChatState={setChatState} />
+      <div>
+        <ChatText setChatState={setChatState} />
+      </div>
       <ChatInput />
     </WrapChat>
   );
@@ -28,5 +30,8 @@ const WrapChat = styled.div`
     right: 10px;
     width: 90%;
     height: 90%;
+  }
+  > div:first-child {
+    position: relative;
   }
 `;
