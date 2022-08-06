@@ -146,4 +146,23 @@ https://github.com/HH99-StockHub/FrontEnd/wiki/%EB%94%94%EC%9E%90%EC%9D%B4%EB%84
 </details>
 
 
+## 유저 피드백 및 개선사항 
 
+<details markdown="1">
+  
+<summary>개선사항</summary>
+  
+* 초기 배포 후에 게시글이 없을 경우 너무 횡해 보인다는 피드백이 있어, 텍스트로 이룬 카드를 넣어 여백을 채웠습니다. 
+  ![gq](https://user-images.githubusercontent.com/97582834/183237173-5f376de9-0188-481b-951f-91807e25a6f2.JPG)
+
+* 차트에서 날짜 구분이 힘들다는 피드백이 있어, 전년도 날짜에는 연도를 추가했습니다.
+  ![h122](https://user-images.githubusercontent.com/97582834/183237198-22f97da9-c3be-4bf6-ad78-45104699c0d1.JPG)
+
+* 게시글을 검색했을 때 내용이 없으면 안내 문구 하나만 나오고 화면이 빈화면이라 불편하다는 피드백이 있어, 추가 안내 페이지를 만들었습니다. 
+  ![1234](https://user-images.githubusercontent.com/97582834/183237230-f07d3bfe-5098-4f14-933a-90f39fceef02.JPG)
+
+* 게시글 삭제 시 실수로 눌렀는데 어떤 확인조치 없이 삭제되는 경우가 있어, 한번 더 확인하는 절차를 추가했습니다. 
+  ![5123](https://user-images.githubusercontent.com/97582834/183237243-f130431c-a804-4b9e-ba0a-14df4985a3c6.JPG)
+
+
+</details>
