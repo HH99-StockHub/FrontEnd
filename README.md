@@ -86,6 +86,25 @@ https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
 <img src="https://img.shields.io/badge/route 53-F7A81B?style=for-the-badge&logo=route53&logoColor=white">
   <div/>
 
+<details markdown="1">
+<summary>기술 스텍 선정 이유</summary>
+  
+* CloudFront
+  * 가장 기본적인 이유는 https 환경으로 배포하기 위함입니다.
+  * 국내 주가만 보여주는 만큼 프로젝트에 타겟은 국내 성인입니다. 따라서 CloudFront CDN 서비스가 꼭 필요한 프로젝트는 아니라 생각했습니다. 
+그럼에도 CDN 서비스에 메리트가 크다는 점과 amplify , vercel 다양한 후보들 중 연결만 하면 자동으로 배포되는 환경과 다르게 github action을 이용해서 배포를 할 수 있다는 점에서 CloudFront를 선택하게 됐습니다.
+  
+* React-Query
+  
+  * 항해 전반적인 과정에서 사용했던 redux-thunk를 사용하지 않고, 새로운 기술 스택을 늘려보고 싶다는 욕심과 우하한테크세미나에서 React Query 영상을 보고 호기심을 갖게 됐습니다. 
+  * 초반 기획 당시 실시간 주가 데이터 등 **실시간**을 목표로 하고 있었기 때문에, store에 저장하는 것이 아닌, 유연한 refetch를 사용할 수 있는 query가 적절하다고 생각했습니다. 
+  
+* Recoil
+  
+  * 
+</details>
+  
+  
 ## 🔥  Trouble Shooting
 <details markdown="1">
 <summary>이슈 </summary>
