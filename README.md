@@ -2,8 +2,6 @@
 ![카카오배너](https://user-images.githubusercontent.com/97582834/182103465-5b03ff2a-89b1-41de-b333-a0f40b70f83f.jpg)
 
 
-
-
 ## 📆 프로젝트 소개
 Web Site https://stockhub.co.kr/
 
@@ -12,10 +10,25 @@ Stock Hub는 내가 선택한 종목에 대한 매수 의견을 공유하는 장
 사고 싶은 종목이 있는데, 내 생각이 맞는지 확신이 없다면 Stock Hub의 고수들에게 검증을 받아보시죠!
 숨어있던 방구석 애널리스트들이 마음껏 목소리를 내는 그날까지 화이팅입니다!
 
+
+
 ## 프로젝트 기간 및 환경 
 2022/06/24 ~ 2022/08/05 <br/>
 FrontEnd : React<br/>
 BackEnd : SpringBoot<br/>
+
+
+## 와이어프레임
+<details markdown="1">
+<summary>피그마 </summary>
+https://www.figma.com/file/xg1wpWqkAv4cK4DIYlfHjV/%ED%95%AD%ED%95%B499_StockHub?node-id=0%3A1
+</details>
+
+## 팀 노션
+<details markdown="1">
+<summary>노션 </summary>
+https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
+</details>
 
 
 ## 팀원소개
@@ -35,18 +48,6 @@ BackEnd : SpringBoot<br/>
 ## 서비스 아키텍처
 ![image](https://user-images.githubusercontent.com/105052690/182089297-8820db66-92b1-4f2b-91cc-269ef61f8e9d.png)
 
-## 와이어프레임
-<details markdown="1">
-<summary>피그마 </summary>
-https://www.figma.com/file/xg1wpWqkAv4cK4DIYlfHjV/%ED%95%AD%ED%95%B499_StockHub?node-id=0%3A1
-</details>
-
-## 팀 노션
-<details markdown="1">
-<summary>노션 </summary>
-https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
-</details>
-
 ## ⚙ 주요 기능
 - **게시글 작성/삭제**: KOSPI/KOSDAQ 상장 주식을 한 가지 선택하여 그 주식에 대한 매수 의견을 게시
 - **찬반 투표**: 타인의 게시글에 대해 찬성/반대의 투표를 행사 또는 수정행사 가능
@@ -65,7 +66,7 @@ https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
 - **알림 기능**: 인기글/수익왕 달성, 댓글, 찬반투표 등에 대한 알림
 - **채팅방**: 로그인한 유저들끼리 토론할 수 있는 채팅방
 
-## 기술스택
+## 기술스택 및 선정 이유
 
 #### :boom: Frontend
 <div>
@@ -86,6 +87,8 @@ https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
 <img src="https://img.shields.io/badge/route 53-F7A81B?style=for-the-badge&logo=route53&logoColor=white">
   <div/>
 
+  <br/>
+  
 <details markdown="1">
 <summary>기술 스텍 선정 이유</summary>
   
@@ -115,10 +118,10 @@ https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
 * sockJS, stomp
   * 처음 시도해보는 기능적 도전이었기에, 관련된 소스가 많은 라이브러리를 선택하려고 했습니다. spring과 알림이나 채팅과 같은 텍스트 소켓 연결은 stomp를 많이 사용하며, 지원하지 않는 브라우저에 경우 SockJS로 연결하여 사용한다는 내용을 봤고, 대부분의 예제 등이 stomp와 sockjs로 구현한 것을 확인하여 선택했습니다. 
   
- * axios
+* axios
   * 후보는 ajax, axios, fetch 3가지가 있었습니다. ajax는 Jquery를 사용할 때 정말 편하게 사용했지만, 순수 Ajax만을 사용할 때는 직관적이지 못하고 익숙하지 않아 제외했습니다. 
   * axios, fetch 둘 중에서 장 단점을 비교해 봤습니다. fetch는 브라우저에 내장되어 있기 때문에 따로 설치가 필요없고 axios에 비해 가볍다는 장점이 있엇고 axios는 자동으로 JSON데이터 형식으로 변환이 되며, 기본적으로 사용하기 더 편하고 기능이 많다는 장점이 있었습니다. 둘을 비교했을 때 react는 axios가 더 좋을 것 같다는 얘기도 많았고, 속도 차이에서 유의미한 크기에 차이가 있지 않은 결과를 보고, 익숙하고 사용하기 편한 axios를 선택했습니다.
-  * 
+  
   
 </details>
   
@@ -141,7 +144,6 @@ https://github.com/HH99-StockHub/FrontEnd/issues/122 도메인 주소와 S3 주�
 https://github.com/HH99-StockHub/FrontEnd/wiki/FE-:-Git-Flow Git-Flow<br/>
 https://github.com/HH99-StockHub/FrontEnd/wiki/FE-:-%EC%BD%94%EB%93%9C-%EC%BB%A8%EB%B2%A4%EC%85%98 FE 코드 컨벤션<br/>
 https://github.com/HH99-StockHub/FrontEnd/wiki/FE-%ED%9A%8C%EC%9D%98%EB%A1%9D FE 회의록<br/>
-https://github.com/HH99-StockHub/FrontEnd/wiki/%EB%94%94%EC%9E%90%EC%9D%B4%EB%84%88%EC%99%80-%EC%86%8C%ED%86%B5 디자이너님과의 회의<br/>
 
 </details>
 
