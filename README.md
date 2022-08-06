@@ -92,7 +92,7 @@ https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
 * CloudFront
   * 가장 기본적인 이유는 https 환경으로 배포하기 위함입니다.
   * 국내 주가만 보여주는 만큼 프로젝트에 타겟은 국내 성인입니다. 따라서 CloudFront CDN 서비스가 꼭 필요한 프로젝트는 아니라 생각했습니다. 
-그럼에도 CDN 서비스에 메리트가 크다는 점과 amplify , vercel 다양한 후보들 중 연결만 하면 자동으로 배포되는 환경과 다르게 github action을 이용해서 배포를 할 수 있다는 점에서 CloudFront를 선택하게 됐습니다.
+그럼에도 CDN 서비스에 메리트가 있다는 점과 amplify , vercel 다양한 후보들 중 연결만 하면 자동으로 배포되는 환경과 다르게 github action을 이용해서 배포를 할 수 있다는 점에서 하나 더 학습해보고 싶다는 욕심으로 CloudFront를 선택하게 됐습니다.
   
 * React-Query
   
@@ -113,8 +113,12 @@ https://swift-pelican-d17.notion.site/StockHub-3192bde33d57493da00ff60d3f3645a3
   * 프로젝트의 완성도를 높이기 위해 라이브러리를 선택하게됐고, candle 차트와 line 차트를 둘다 제공하고, 커스텀이 가능한 라이브러리를 선택 기준으로 잡고 서치 과정에서 docs가 잘 되어있으며 많은 옵션으로 커스텀하기 편리한 ApexChart를 선택하게 됐습니다. 
   
 * sockJS, stomp
-  * 처음 시도해보는 기능적 도전이었기에, 
+  * 처음 시도해보는 기능적 도전이었기에, 관련된 소스가 많은 라이브러리를 선택하려고 했습니다. spring과 알림이나 채팅과 같은 텍스트 소켓 연결은 stomp를 많이 사용하며, 지원하지 않는 브라우저에 경우 SockJS로 연결하여 사용한다는 내용을 봤고, 대부분의 예제 등이 stomp와 sockjs로 구현한 것을 확인하여 선택했습니다. 
   
+ * axios
+  * 후보는 ajax, axios, fetch 3가지가 있었습니다. ajax는 Jquery를 사용할 때 정말 편하게 사용했지만, 순수 Ajax만을 사용할 때는 직관적이지 못하고 익숙하지 않아 제외했습니다. 
+  * axios, fetch 둘 중에서 장 단점을 비교해 봤습니다. fetch는 브라우저에 내장되어 있기 때문에 따로 설치가 필요없고 axios에 비해 가볍다는 장점이 있엇고 axios는 자동으로 JSON데이터 형식으로 변환이 되며, 기본적으로 사용하기 더 편하고 기능이 많다는 장점이 있었습니다. 둘을 비교했을 때 react는 axios가 더 좋을 것 같다는 얘기도 많았고, 속도 차이에서 유의미한 크기에 차이가 있지 않은 결과를 보고, 익숙하고 사용하기 편한 axios를 선택했습니다.
+  * 
   
 </details>
   
